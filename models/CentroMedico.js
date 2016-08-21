@@ -3,8 +3,8 @@ var mongoose = require('mongoose');
 var CentroMedicoSchema = new mongoose.Schema({
 	nombre: String,
 	direccion: String,
-	horarios: [],
-	descripcion: [],
+	horarios: String,
+	descripcion: String,
 	imagenes: String,
 	mapa: String,
 });
