@@ -4,11 +4,31 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://admin:admin@ds161505.mlab.com:61505/proyectodaw', function(err)
+{
+  if (err) {
+    console.log("conexion error");
+  }else{
+    console.log("conexion no error");
+  }
+});
+
+
+require('./models/Paciente');
+
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+
+
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

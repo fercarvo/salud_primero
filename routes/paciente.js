@@ -2,15 +2,16 @@ var express = require('express');
 var router = express.Router();
 
 
-//CREANDO METODOS PARA EL API REST
-var mongoose = require('mongoose');
-var Paciente = mongoose.model('Paciente'); 
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+
+
+//CREANDO METODOS PARA EL API REST
+var mongoose = require('mongoose');
+var Paciente = mongoose.model('Paciente'); 
 
 //GET - listar pacientes
 router.get('/pacientes', function(req, res, next){
@@ -32,6 +33,3 @@ router.post('/paciente', function(req, res, next){
 		res.json(paciente);
 	})
 })
-
-
-module.exports = router;
