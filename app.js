@@ -18,6 +18,7 @@ mongoose.connect('mongodb://admin:admin@ds161505.mlab.com:61505/proyectodaw', fu
 require('./models/Paciente');
 require('./models/Examen');
 require('./models/Muestra');
+require('./models/CentroMedico');
 
 
 
@@ -25,7 +26,8 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var examenesRoutes = require('./routes/examenes');
 var pacientesRoutes = require('./routes/pacientes');
-var muestrasRoutes = require('./routes/muestras')
+var muestrasRoutes = require('./routes/muestras');
+var centrosMedRoutes = require('./routes/centrosMed');
 
 var app = express();
 
@@ -50,6 +52,7 @@ app.use('/', routes);
 app.use('/', examenesRoutes);
 app.use('/', pacientesRoutes);
 app.use('/', muestrasRoutes);
+app.use('/', centrosMedRoutes);
 app.use('/users', users);
 
 
