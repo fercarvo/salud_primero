@@ -32,6 +32,7 @@ router.put('/muestra/:id', function(req, res){
 		muestra.tipo = req.body.tipo;
 		muestra.nombre = req.body.nombre;
 		muestra.cod_barras= req.body.cod_barras;
+		muestra.recibido = req.body.recibido;
 
 		muestra.save(function(err){
 			if(err){

@@ -27,13 +27,6 @@ router.post('/centroMed', function(req, res, next){
 });
 
 
-nombre: String,
-	direccion: String,
-	horarios: [],
-	descripcion: [],
-	imagenes: String,
-	mapa: String,
-
 //Put
 router.put('/centroMed/:id', function(req, res){
 	CentroMedico.findById(req.params.id, function(err, centroMed){
