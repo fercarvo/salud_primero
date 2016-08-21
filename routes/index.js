@@ -13,6 +13,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+
+//API REST DE EXAMENES
 router.get('/examenes', function(req, res, next){
 	Examen.find(function(err, examenes){
 		if (err) {
@@ -34,8 +36,34 @@ router.post('/examen', function(req, res, next){
 	});
 });
 
+router.put('/examen/:id', function(req, res){
+	Examen.findById(req.params.id, function(err, examen){
+		examen.paciente = req.body.paciente;
+		examen.muestra = req.body.muestra;
+		examen.laboratorio = req.body.laboratorio;
+		examen.centroMedico = req.body.centroMedico;
+		examen.estado = req.body.estado;
 
-//GET - listar pacientes
+		examen.save(function(err){
+			if (err) {
+				res.send(err);
+			}
+			res.json(examen);
+		});
+	});
+});
+
+router.delete('/examen/:id', function(req, res){
+	Examen.findByIdAndRemove(req.params.id, function(err){
+		if(err){
+			res.send(err);
+		}
+		res.json({message: 'El examen se ha eliminado'})
+	})
+});
+
+
+//API REST DE PACIENTES
 router.get('/pacientes', function(req, res, next){
 	Paciente.find(function(err, pacientes){
 		if(err){
@@ -54,6 +82,35 @@ router.post('/paciente', function(req, res, next){
 		}
 		res.json(paciente);
 	});
+});
+
+router.put('/paciente/:id', function(req, res){
+	Paciente.findById(req.params.id, function(err, paciente){
+		paciente.nombre = req.body.nombre;
+		paciente.apellido = req.body.apellido;
+		paciente.cedula = req.body.cedula;
+		paciente.correo = req.body.correo;
+		paciente.direccion = req.body.direccion;
+		paciente.telefono = req.body.telefono;
+		paciente.foto = req.body.foto;
+		paciente.clave = req.body.clave;
+
+		paciente.save(function(err){
+			if (err) {
+				res.send(err);
+			}
+			res.json(paciente);
+		});
+	});
+});
+
+router.delete('/paciente/:id', function(req, res){
+	Paciente.findByIdAndRemove(req.params.id, function(err){
+		if(err){
+			res.send(err);
+		}
+		res.json({message: 'El paciente se ha eliminado'})
+	})
 });
 
 
