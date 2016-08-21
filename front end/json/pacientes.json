@@ -1,0 +1,19 @@
+[
+    {"Usuario":"paciente",
+    "Nombres":"Juan", 
+    "Apellidos":"Piguave", 
+    "Cedula":"09023451234", 
+    "Email":"jpiguav@algo.com", 
+    "Direccion":"algun lugar", 
+    "Telefono": "0991231234",
+    },
+    
+    {"Usuario":"paciente",
+     "Nombres":"Juan2", 
+     "Apellidos":"Piguave2", 
+     "Cedula":"09023451245", 
+     "Email":"jpiguav2@algo.com", 
+     "Direccion":"algun lugar2", 
+     "Telefono": "0991231222"
+    }
+]

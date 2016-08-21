@@ -1,0 +1,130 @@
+[
+    {
+        "nombre": "Centro Medico 1",
+        "ciudad": "Guayaquil",
+        "contacto": "0905081270",
+        "horarios": [
+            "Lunes: 08:00 - 20:00",
+            "Martes: 08:00 - 20:00",
+            "Miercoles: 08:00 - 20:00",
+            "Jueves: 08:00 - 19:30",
+            "Viernes: 08:00 - 18:30",
+            "Sabado: 9:00 - 16:00",
+            "Domingo: 10:00 - 14:30"
+        ],
+        "direccion": "calle1",
+        "Coordenadas":{
+            "Latitud":"-0.261168",
+            "Longitud":"-78.547066"
+        },
+        "Descripcion":[
+            "Examenes Generales",
+            "Tomografia",
+            "Resonancia Magnetica"
+        ],
+        "portada": "../Imagenes/miniatura.jpg",
+        "foto1": "../Imagenes/carrusel/cm1/0001.jpg",
+        "foto2": "../Imagenes/carrusel/cm1/0002.jpg",
+        "foto3": "../Imagenes/carrusel/cm1/0003.jpg",
+        "Coordenadas":{
+            "Latitud":"-0.261168",
+            "Longitud":"-78.547066"
+        }
+    },
+    {
+        "nombre": "Centro Medico 2",
+        "ciudad": "Guayaquil",
+        "contacto": "0905081270",
+        "horarios": [
+            "Lunes: 08:00 - 20:00",
+            "Martes: 08:00 - 20:00",
+            "Miercoles: 08:00 - 20:00",
+            "Jueves: 08:00 - 19:30",
+            "Viernes: 08:00 - 18:30",
+            "Sabado: 9:00 - 16:00",
+            "Domingo: 10:00 - 14:30"
+        ],
+        "direccion": "calle2",
+        "Coordenadas":{
+            "Latitud":"-0.261168",
+            "Longitud":"-78.547066"
+        },
+        "Descripcion":[
+            "Examenes Generales",
+            "Tomografia",
+            "Resonancia Magnetica"
+        ],
+        "portada": "../Imagenes/miniatura.jpg",
+        "foto1": "../Imagenes/carrusel/cm1/0001.jpg",
+        "foto2": "../Imagenes/carrusel/cm1/0002.jpg",
+        "foto3": "../Imagenes/carrusel/cm1/0003.jpg",
+        "Coordenadas":{
+            "Latitud":"-0.261168",
+            "Longitud":"-78.547066"
+        }
+    },
+    {
+        "nombre": "Centro Medico 3",
+        "ciudad": "Quito",
+        "contacto": "0905081270",
+        "horarios": [
+            "Lunes: 08:00 - 20:00",
+            "Martes: 08:00 - 20:00",
+            "Miercoles: 08:00 - 20:00",
+            "Jueves: 08:00 - 19:30",
+            "Viernes: 08:00 - 18:30",
+            "Sabado: 9:00 - 16:00",
+            "Domingo: 10:00 - 14:30"
+        ],
+        "direccion": "calle3",
+        "Coordenadas":{
+            "Latitud":"-0.261168",
+            "Longitud":"-78.547066"
+        },
+        "Descripcion":[
+            "Examenes Generales",
+            "Tomografia",
+            "Resonancia Magnetica"
+        ],
+        "portada": "../Imagenes/miniatura.jpg",
+        "foto1": "../Imagenes/carrusel/cm1/0001.jpg",
+        "foto2": "../Imagenes/carrusel/cm1/0002.jpg",
+        "foto3": "../Imagenes/carrusel/cm1/0003.jpg",
+        "Coordenadas":{
+            "Latitud":"-0.261168",
+            "Longitud":"-78.547066"
+        }
+    },
+    {
+        "nombre": "Centro Medico 4",
+        "ciudad": "Guayaquil",
+        "contacto": "0905081270",
+        "horarios": [
+            "Lunes: 08:00 - 23:00",
+            "Martes: 08:00 - 20:00",
+            "Miercoles: 08:00 - 20:00",
+            "Jueves: 08:00 - 20:30",
+            "Viernes: 08:00 - 20:30",
+            "Sabado: 9:00 - 14:00",
+            "Domingo: 10:00 - 12:30"
+        ],
+        "direccion": "algun lugar",
+        "Coordenadas":{
+            "Latitud":"-0.261168",
+            "Longitud":"-78.547066"
+        },
+        "Descripcion":[
+            "Examenes Generales",
+            "Tomografia",
+            "Resonancia Magnetica"
+        ],
+        "portada": "../Imagenes/miniatura.jpg",
+        "foto1": "../Imagenes/carrusel/cm1/0001.jpg",
+        "foto2": "../Imagenes/carrusel/cm1/0002.jpg",
+        "foto3": "../Imagenes/carrusel/cm1/0003.jpg",
+        "Coordenadas":{
+            "Latitud":"-0.261168",
+            "Longitud":"-78.547066"
+        }
+    }
+]

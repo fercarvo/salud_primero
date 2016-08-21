@@ -1,0 +1,9 @@
+[
+	{"fecha":"26/05/2016", "tipoExamen":"Sangre", "estado":"terminado", "link":"link"},
+	{"fecha":"20/04/2016", "tipoExamen":"Sangre", "estado":"en proceso", "link":"link"},
+	{"fecha":"04/02/2015", "tipoExamen":"Huesos", "estado":"en proceso", "link":"link"},
+	{"fecha":"30/01/2016", "tipoExamen":"Examen Raro", "estado":"terminado", "link":"link"},
+	{"fecha":"15/03/2016", "tipoExamen":"Orina", "estado":"terminado", "link":"link"},
+	{"fecha":"10/06/2015", "tipoExamen":"Sangre", "estado":"en proceso", "link":"link"},
+	{"fecha":"26/07/2015", "tipoExamen":"Huesos", "estado":"terminado", "link":"link"}
+]

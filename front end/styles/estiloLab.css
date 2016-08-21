@@ -1,0 +1,32 @@
+
+body{
+    /*background: rgba(93, 92, 97, 0.8);*/
+    background: url(../Imagenes/laboratorio.jpg) no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+#contenido{
+    margin-top: 40px;
+    margin-bottom: 50px;
+    /*background: rgba(93, 92, 97, 0.8);*/
+    color: white;
+}
+
+#contenido h3{
+    color: black;
+    font-weight: bold;
+}
+
+.muestras th{
+    background-color: cadetblue;
+    text-align: center;
+}
+
+.muestras td{
+    background-color: dimgrey;
+    text-align: center;
+    color: white;
+}

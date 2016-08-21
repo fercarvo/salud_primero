@@ -1,0 +1,10 @@
+[
+	{"descripcion":"Examen de Sangre", "codigo":"485648864", "estado":"Terminado"},
+	{"descripcion":"Examen Raro", "codigo":"848794687", "estado":"Terminado"},
+	{"descripcion":"Tomografia", "codigo":"456481348", "estado":"En proceso"},
+	{"descripcion":"Examen de Sangre", "codigo":"321567167", "estado":"Terminado"},
+	{"descripcion":"Radiografia", "codigo":"156456456", "estado":"En proceso"},
+	{"descripcion":"Resonancia", "codigo":"746548613", "estado":"Terminado"},
+	{"descripcion":"Examen de Sangre", "codigo":"335484156", "estado":"Terminado"},
+	{"descripcion":"Examen de DAW", "codigo":"101835483", "estado":"Terminado"}
+]
