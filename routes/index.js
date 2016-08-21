@@ -58,7 +58,7 @@ router.post('/paciente', function(req, res, next){
 
 
 /* metodos para CRUD en API REST: Muestras */
-var Muestras = mongoose.model('Muestras'); 
+var Muestras = mongoose.model('Muestra'); 
 
 //Get
 router.get('/muestras', function(req, res, next){
@@ -107,6 +107,9 @@ router.delete('/muestra/:id', function(req, res, next){
 		res.json({mensaje: 'la muestra se elimino'});
 	})
 })
+
+
+
 
 
 

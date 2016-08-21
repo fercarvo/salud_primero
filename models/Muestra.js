@@ -6,4 +6,4 @@ var MuestraSchema = new mongoose.Schema({
 	cod_barras: String
 });
 
-mongoose.model('Muestras', MuestraSchema);
+mongoose.model('Muestra', MuestraSchema);
