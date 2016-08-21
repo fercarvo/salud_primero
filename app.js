@@ -25,6 +25,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var examenesRoutes = require('./routes/examenes');
 var pacientesRoutes = require('./routes/pacientes');
+var muestrasRoutes = require('./routes/muestras')
 
 var app = express();
 
@@ -48,8 +49,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/', examenesRoutes);
 app.use('/', pacientesRoutes);
+app.use('/', muestrasRoutes);
 app.use('/users', users);
-
 
 
 // catch 404 and forward to error handler
