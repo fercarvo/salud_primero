@@ -4,11 +4,34 @@ var router = express.Router();
 
 //CREANDO METODOS PARA EL API REST
 var mongoose = require('mongoose');
-var Paciente = mongoose.model('Paciente'); 
+
+var Paciente = mongoose.model('Paciente');
+var Examen = mongoose.model('Examen'); 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
+});
+
+router.get('/examenes', function(req, res, next){
+	Examen.find(function(err, examenes){
+		if (err) {
+			return next(err);
+		}
+		res.json(examenes);
+	});
+});
+
+
+router.post('/examen', function(req, res, next){
+	var examen = new Examen(req.body);
+
+	examen.save(function(err, examen){
+		if (err) {
+			return next(err);
+		}
+		res.json(examen);
+	});
 });
 
 
@@ -19,8 +42,8 @@ router.get('/pacientes', function(req, res, next){
 			return next(err);
 		}
 		res.json(pacientes);
-	})
-})
+	});
+});
 
 router.post('/paciente', function(req, res, next){
 	var paciente = new Paciente(req.body);
@@ -30,8 +53,8 @@ router.post('/paciente', function(req, res, next){
 			return next(err);
 		}
 		res.json(paciente);
-	})
-})
+	});
+});
 
 
 /* metodos para CRUD en API REST: Muestras */
