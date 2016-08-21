@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Laboratorista = require('../models/Operario.js');
+var Laboratorista = require('../models/Laboratorista.js');
 var mongoose = require('mongoose');
 module.exports = router;
 
@@ -48,5 +48,5 @@ router.delete('/laboratorista/:id', function(req, res){
 			res.send(err);
 		}
 		res.json({message: 'El laboratorista se ha eliminado'});
-	})
+	});
 });

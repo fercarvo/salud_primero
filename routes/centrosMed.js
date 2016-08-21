@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
 var CentroMedico = require('../models/CentroMedico.js');
-module.exports = router; 
+var mongoose = require('mongoose');
+module.exports = router;
 
 //Get
 router.get('/centrosMed', function(req, res, next){
@@ -10,7 +10,7 @@ router.get('/centrosMed', function(req, res, next){
 		if(err){
 			return next(err);
 		}
-		res.json(CentroMedico);
+		res.json(centrosMed);
 	});
 });
 
@@ -34,7 +34,7 @@ router.put('/centroMed/:id', function(req, res){
 		centroMed.direccion = req.body.direccion;
 		centroMed.horarios = req.body.horarios;
 		centroMed.descripcion = req.body.descripcion;
-		centroMed.descripcion = req.body.imagenes;
+		centroMed.imagenes = req.body.imagenes;
 		centroMed.mapa = req.body.mapa;
 
 		centroMed.save(function(err){

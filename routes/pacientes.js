@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Examen = require('../models/Paciente.js');
+var Paciente = require('../models/Paciente.js');
 var mongoose = require('mongoose');
 module.exports = router;
 

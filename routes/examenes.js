@@ -51,4 +51,3 @@ router.delete('/examen/:id', function(req, res){
 		res.json({message: 'El examen se ha eliminado'});
 	});
 });
-

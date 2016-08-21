@@ -7,4 +7,4 @@ var MuestraSchema = new mongoose.Schema({
 	recibido: Boolean
 });
 
-mongoose.model('Muestra', MuestraSchema);
+module.exports = mongoose.model('Muestra', MuestraSchema);

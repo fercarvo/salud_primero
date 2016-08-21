@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://admin:admin@ds161505.mlab.com:61505/proyectodaw', function(err){
   if (err) {
+    return next(err);
     console.log("conexion error");
   }else{
     console.log("conexion no error");

@@ -9,4 +9,4 @@ var CentroMedicoSchema = new mongoose.Schema({
 	mapa: String,
 });
 
-mongoose.model('CentroMedico', CentroMedicoSchema);
+module.exports = mongoose.model('CentroMedico', CentroMedicoSchema);
