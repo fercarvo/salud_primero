@@ -18,6 +18,8 @@ mongoose.connect('mongodb://admin:admin@ds161505.mlab.com:61505/proyectodaw', fu
 require('./models/Paciente');
 require('./models/Examen');
 
+require('./models/Muestras');
+
 
 
 var routes = require('./routes/index');
