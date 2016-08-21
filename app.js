@@ -19,6 +19,9 @@ require('./models/Paciente');
 require('./models/Examen');
 require('./models/Muestra');
 require('./models/CentroMedico');
+require('./models/Operario');
+require('./models/Laboratorista');
+
 
 
 
@@ -28,6 +31,8 @@ var examenesRoutes = require('./routes/examenes');
 var pacientesRoutes = require('./routes/pacientes');
 var muestrasRoutes = require('./routes/muestras');
 var centrosMedRoutes = require('./routes/centrosMed');
+var operariosRoutes = require('./routes/operarios');
+var laboratoristasRoutes = require('./routes/laboratoristas');
 
 var app = express();
 
@@ -53,6 +58,8 @@ app.use('/', examenesRoutes);
 app.use('/', pacientesRoutes);
 app.use('/', muestrasRoutes);
 app.use('/', centrosMedRoutes);
+app.use('/', operariosRoutes);
+app.use('/', laboratoristasRoutes);
 app.use('/users', users);
 
 
