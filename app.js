@@ -6,8 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://admin:admin@ds161505.mlab.com:61505/proyectodaw', function(err)
-{
+mongoose.connect('mongodb://admin:admin@ds161505.mlab.com:61505/proyectodaw', function(err){
   if (err) {
     console.log("conexion error");
   }else{
@@ -17,6 +16,7 @@ mongoose.connect('mongodb://admin:admin@ds161505.mlab.com:61505/proyectodaw', fu
 
 
 require('./models/Paciente');
+require('./models/Examen');
 
 
 
