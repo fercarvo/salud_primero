@@ -32,7 +32,7 @@ var pacientesRoutes = require('./routes/pacientes');
 var muestrasRoutes = require('./routes/muestras');
 var centrosMedRoutes = require('./routes/centrosMed');
 var operariosRoutes = require('./routes/operarios');
-var laboratoristasRoutes = require('./routes/laboratorista');
+var laboratoristasRoutes = require('./routes/laboratoristas');
 
 var app = express();
 
