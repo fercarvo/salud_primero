@@ -1,11 +1,105 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Salud Primero S.A.</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        
+        
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+        
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+        
+        <link rel="stylesheet" href="../styles/styles.css">
+        
+        <style>
+            body {
+                /* Margin bottom by footer height */
+                padding-top: 45px;
+                margin-bottom: 60px;
+                background: url("../Imagenes/fondo.jpg") no-repeat center center;
+                background-size: cover;
+                background-attachment: fixed;
+                font-family: 'Ubuntu', sans-serif;
+            }
+        </style>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>-->
+
+
+    </head>
+    <body>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Salud Primero S.A.</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div id="contenido" class="container">
+            <div id="bienvenida" class="container-fluid">
+                <div class="principal col-md-12">
+                    <div class="panel-princ col-md-8">
+                        <div class="presentacion">
+                            <h1>Bienvenido</h1>
+                            <br>
+                            <p class="text-justify">Salud Primero S.A. Accede al Sistema y podr&aacute;s encontrar informaci&oacute;n sobre nuestros centros de salud y laboratorios afiliados. Consulta el estado de tus ex&aacute;menes realizados as&iacute; como los resultados de los mismos.</p>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="panel-princ col-md-4">
+                       <div class="login">
+                           <form role="form-signin">
+                               <h2 class="form-signin-heading">Ingresar</h2>
+                               <div class="form-group">
+                                   <label for="usr">Usuario:</label>
+                                   <input type="text" class="form-control" id="usr">
+                               </div>
+                               <div class="form-group">
+                                   <label for="pwd">Contraseña:</label>
+                                   <input type="password" class="form-control" id="pwd">
+                               </div>
+                               <div class="form-group">
+                                  <div class="radio">
+                                    <label><input type="radio" name="optradio">Usuario</label>
+                                  </div>
+                                  <div class="radio">
+                                    <label><input type="radio" name="optradio">Operario</label>
+                                  </div>
+                                  <div class="radio">
+                                    <label><input type="radio" name="optradio">Laboratorista</label>
+                                  </div>
+                               </div>
+                               <button type="button" class="btn btn-primary btn-block" onclick="window.open('paciente.html')">Aceptar</button>
+ 
+                           </form>       
+                       </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+           <div class="container-fluid">
+               <p class="copyright text-muted small">Copyright &copy; 2016. Todos los derechos reservados</p>              
+           </div>
+            
+        </footer>
+
+        
+    </body>
 </html>
+
+
