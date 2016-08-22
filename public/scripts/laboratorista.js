@@ -1,6 +1,18 @@
 function init(){
     var urlResultados = "../json/resultados.json";
     var n=1;
+
+
+
+
+
+
+
+
+
+
+
+    
     $.getJSON(urlResultados,function(respuesta){
         respuesta.forEach(function(resultado){
             var elemento = $("<tr>");

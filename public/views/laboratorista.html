@@ -23,7 +23,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>-->
-    <script type="text/javascript" src="../scripts/laboratorista.js"></script>
+    <!--<script type="text/javascript" src="../scripts/laboratorista.js"></script>-->
 
 </head>
 
@@ -43,11 +43,9 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!--<li class="active"><a href="#inicio">Inicio</a></li>-->
                     <li><a href="#muestras">Muestras</a></li>
-                    <li><a href="#resultados">Resultados <span class="sr-only">(current)</span></a></li>
                     <li><a href="index.html"><span class="glyphicon glyphicon-off"></span></a></li>
                 </ul>
             </div>
-            <!--/.nav-collapse -->
         </div>
     </nav>
     
@@ -56,26 +54,98 @@
         <div id="muestras" class="muestras container">
             <h3>Muestras</h3>
             <hr>
-            <table class="table table-bordered tabla-resultado">
+            <table class="table table-bordered tabla-resultado" id="tabla">
                 <tr class="text-center">
-                    <th>#</th>
-                    <th>Resultado</th>
-                    <th>Codigo</th>
-                    <th>Estado</th>
+                    <th>codigo</th>
+                    <th>Tipo</th>
+                    <th>Arrivó</th>
                 </tr>
             </table>
- 
         </div>    
     </section>
-    
-
-
     <footer class="footer">
         <div class="container">
             <p class="copyright text-muted small">Copyright &copy; 2016. Todos los derechos reservados</p>
         </div>
 
     </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.js"></script>
+    <script>
+    $(document).ready(function() {
+                    console.log("hola");
+                    var codTabla = "";
+                    $.ajax({
+                        type: 'GET', 
+                        url: '/muestras', 
+                        data: {}, 
+                        success: function(data){
+                            $.each(data, function(i, obj) {
+                                var id = obj._id;
+                                var tipo = obj.tipo ;
+                                var codigo = obj.cod_barras;
+                                var llego = obj.recibido;
+                                $( "#tabla" ).html(function() {
+                                    codTabla = codTabla + "<tr >\n";
+                                    codTabla = codTabla + "<td style='visibility:hidden;'>" + id + "</td>\n";
+                                    codTabla = codTabla + "<td >" + codigo + "</td>\n";
+                                    codTabla = codTabla + "<td >" + tipo + "</td>\n";
+                                    codTabla = codTabla + "<td >" + llego + "</td>\n";
+                                    codTabla = codTabla + "</tr>\n";
+                                    return codTabla;
+                                });                         
+                            });
+                        }
+                    });
+                });
+
+    /*
+        $(document).ready(function() {
+            $('.editarProyecto').click(function() {
+                 var userId = $(this).siblings('.userIdProyecto').text();               
+                $("input#inputNombre.form-control").val( $(this).siblings('.nombre').text() );
+                $("input#inputDescripcion.form-control").val( $(this).siblings('.descripcion').text() );
+                     
+               
+                $("#formUpdateProyecto").submit(function(e){
+                    e.preventDefault();
+                    var formData=$("#formUpdateProyecto").serialize()+'&'+$.param({Id:userId})+'&'+$.param({flag:"update"});
+                    var url = "ProyectosServlet";
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data:formData,
+                        success:function(){
+                            window.location = "proyecto.jsp";
+                    }
+                    });
+                });
+            });
+            $('.eliminarProyecto').click(function() {
+                
+               var userId = $(this).siblings('.userIdProyecto').text();
+               var url = "ProyectosServlet";
+               var elemento = $(this);
+               
+               $.ajax({
+                   type: "POST",
+                   url: url,
+                   data: {Id:userId,flag:"delete"},
+                   success:function(){
+                           elemento.parent().remove();                       
+      
+             }
+                   
+               });
+              
+              
+            });
+        });
+    */
+    </script>
+  </body>
+
 
 </body>
 
