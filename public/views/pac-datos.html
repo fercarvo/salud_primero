@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Centros M&eacute;dicos</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<title>Mis Datos</title>
 
-
-    <!-- Latest compiled and minified CSS -->
+	<!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
     <!-- Optional theme -->
@@ -17,7 +14,6 @@
     
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/estiloPac.css">
-    
     
     <style>
         body{
@@ -29,17 +25,10 @@
         }
     </style>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>-->
-    
-    <script type="text/javascript" src="../scripts/script.js"></script>
-    
-   
-
 </head>
-
+<div class="container">
+	
+</div>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -64,28 +53,44 @@
             <!--/.nav-collapse -->
         </div>
     </nav>
-    
-    <section id="contenido">
-        
-        <h2 class="container-fluid">Cargar Contenido</h2>
 
-        <div id="centros-medicos" class="articulo container">
-            <h3>Centros M&eacute;dicos</h3>
-            <hr>
+
+	<div id="datos-pac" class="articulo container">
+		<h3>Mis Datos</h3>
+        <hr>
+        <form class="datos-pac" role="form">
+        	<div class="form-group">
+            	<label for="name">Nombres:</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombres" required>
+			</div>
+                <div class="form-group">
+                    <label for="apellido">Apellidos:</label>
+                    <input type="text" class="form-control" id="apellido" placeholder="Ingrese apellidos" required>
+                </div>
+                <div class="form-group">
+                    <label for="id">C&eacute;dula:</label>
+                    <input type="text" class="form-control" id="cedula" placeholder="Ingrese número de identificación" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Ingrese email" required>
+                </div>
+                <div class="form-group">
+                    <label for="dir">Direcci&oacute;n:</label>
+                    <input type="text" class="form-control" id="dir" placeholder="Ingrese dirección" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Tel&eacute;fono:</label>
+                    <input type="tel" class="form-control" id="telf" placeholder="Ingrese Teléfono" required>
+                </div>
+                <div class="form-group">
+                    <label for="ciudad">Ciudad:</label>
+                    <input type="text" class="form-control" id="ciudad" placeholder="Ingrese Ciudad" required>
+                </div>
+
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
         </div>
-
-            
-    </section>
-    
-
-    
-
-    <footer class="footer">
-        <div class="container">
-            <p class="copyright text-muted small">Copyright &copy; 2016. Todos los derechos reservados</p>
-        </div>
-    </footer>
-
+	
 </body>
-
 </html>
