@@ -55,11 +55,18 @@
             <h3>Muestras</h3>
             <hr>
             <table class="table table-bordered tabla-resultado" id="tabla">
-                <tr class="text-center">
-                    <th>codigo</th>
-                    <th>Tipo</th>
-                    <th>Arrivó</th>
-                </tr>
+                <thead>
+                    <tr class="text-center">
+                        <th style="display:none;">id</th>
+                        <th >codigo</th>
+                        <th>Tipo</th>
+                        <th>Arrivó</th>
+                    </tr>    
+                </thead>
+                <tbody id= "tabla-body">
+                    
+                </tbody>
+                
             </table>
         </div>    
     </section>
@@ -73,9 +80,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.js"></script>
     <script>
-    $(document).ready(function() {
-                    console.log("hola");
-                    var codTabla = "";
+        $(document).ready(function() {
+                var codTabla = "";
                     $.ajax({
                         type: 'GET', 
                         url: '/muestras', 
@@ -86,19 +92,41 @@
                                 var tipo = obj.tipo ;
                                 var codigo = obj.cod_barras;
                                 var llego = obj.recibido;
-                                $( "#tabla" ).html(function() {
+                                $( "#tabla-body" ).html(function() {
                                     codTabla = codTabla + "<tr >\n";
-                                    codTabla = codTabla + "<td style='visibility:hidden;'>" + id + "</td>\n";
-                                    codTabla = codTabla + "<td >" + codigo + "</td>\n";
-                                    codTabla = codTabla + "<td >" + tipo + "</td>\n";
-                                    codTabla = codTabla + "<td >" + llego + "</td>\n";
+                                    codTabla = codTabla + "<td class='id' style='display:none;'>" + id + "</td>\n";
+                                    codTabla = codTabla + "<td class='codigo'>" + codigo + "</td>\n";
+                                    codTabla = codTabla + "<td class='tipo'>" + tipo + "</td>\n";
+                                    codTabla = codTabla + "<td class='llego'>" + llego + "</td>\n";
                                     codTabla = codTabla + "</tr>\n";
                                     return codTabla;
                                 });                         
                             });
                         }
                     });
+
+            $('.llego').click(function() {
+                console.log("clic"); 
+                var id = $(this).siblings('.id').text();
+                var codigo = $(this).siblings('.codigo').text();
+                var tipo = $(this).siblings('.tipo').text();
+                var url = "/muestra/" + id;
+                var llego = $(this).siblings('.tipo').text();
+                $.ajax({
+                    type: "PUT",
+                    url: url,
+                    data: {
+                        codigo: codigo,
+                        tipo: tipo,
+                        llego: !llego
+                     },
+                    success:function(data){
+                        $(this).val(!llego);
+                    }
                 });
+            });
+
+        });
 
     /*
         $(document).ready(function() {
