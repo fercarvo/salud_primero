@@ -5,7 +5,10 @@ var ExamenSchema = new mongoose.Schema({
 	muestra: String,
 	laboratorio: String,
 	centroMedico: String,
-	estado: String
+	parametro: String,
+	unidades: String,
+	resultado: String,
+	valores_referencia: String,
 });
 
 module.exports = mongoose.model('Examen', ExamenSchema);

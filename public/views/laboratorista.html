@@ -48,6 +48,7 @@
             <th>codigo</th>
             <th>tipo</th>
             <th>llego</th>
+            <th>examenes</th>
           </tr>
         </thead>
         <tbody id = "tabla-body">
@@ -154,16 +155,17 @@
                 data: {}, 
                 success: function(data){
                     $.each(data, function(i, obj) {
-                        var id = obj._id;
+                        var id_muestra = obj._id;
                         var tipo = obj.tipo ;
                         var codigo = obj.cod_barras;
                         var llego = obj.recibido;
                         $( "#tabla-body" ).html(function() {
                             codTabla = codTabla + "<tr >\n";
-                            codTabla = codTabla + "<td class='id' style='display:none;'>" + id + "</td>\n";
+                            codTabla = codTabla + "<td class='id_muestra' style='display:none;'>" + id_muestra + "</td>\n";
                             codTabla = codTabla + "<td class='codigo'>" + codigo + "</td>\n";
                             codTabla = codTabla + "<td class='tipo'>" + tipo + "</td>\n";
                             codTabla = codTabla + "<td class='llego'>" + llego + "</td>\n";
+                            codTabla = codTabla + "<td class='examenes'> examenes </td>\n";
                             
                             codTabla = codTabla + "</tr>\n";
                             return codTabla;
@@ -172,21 +174,49 @@
                 }
             });
 
+            $('body').on('click', '.examenes', function () {
+
+                var elemento = $(this);
+                var id_muestra = $(this).siblings('.id_muestra').text();
+
+                var url = "/muestra/" + id_muestra + "/examenes";
+                $.ajax({
+                    type: 'GET', 
+                    url: url, 
+                    data: {}, 
+                    success: function(data){
+                        $.each(data, function(i, obj) {
+                            var id = obj._id;
+                            var tipo = obj.tipo ;
+                            var codigo = obj.cod_barras;
+                            var llego = obj.recibido;
+                            $( "#tabla-body" ).html(function() {
+                                codTabla = codTabla + "<tr >\n";
+                                codTabla = codTabla + "<td class='id' style='display:none;'>" + id + "</td>\n";
+                                codTabla = codTabla + "<td class='codigo'>" + codigo + "</td>\n";
+                                codTabla = codTabla + "<td class='tipo'>" + tipo + "</td>\n";
+                                codTabla = codTabla + "<td class='llego'>" + llego + "</td>\n";
+                                codTabla = codTabla + "<td class='examenes'> examenes </td>\n";
+                                
+                                codTabla = codTabla + "</tr>\n";
+                                return codTabla;
+                            });                         
+                        });
+                    }
+                });
+            });
+
             $('body').on('click', '.llego', function () {
                 var elemento = $(this);
-                var id = $(this).siblings('.id').text();
-                var codigo = $(this).siblings('.codigo').text();
-                var tipo = $(this).siblings('.tipo').text();
-                var url = "/muestra/" + id;
-                var llego = !Boolean($(this).siblings('.llego').text());
+                var id_muestra = $(this).siblings('.id_muestra').text();
+                var url = "/muestra/" + id_muestra;
+                var llego = Boolean($(this).siblings('.llego').text());
                 
                 $.ajax({
-                    type:'PUT',
-                    url:url,
+                    type:'PATCH',
+                    url: url,
                     data: {
-                        cod_barras: codigo,
-                        tipo: tipo,
-                        recibido: llego
+                        recibido: !llego
                      },
                     success:function(data){
                     }

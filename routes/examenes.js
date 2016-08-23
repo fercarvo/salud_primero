@@ -33,6 +33,10 @@ router.put('/examen/:id', function(req, res){
 		examen.laboratorio = req.body.laboratorio;
 		examen.centroMedico = req.body.centroMedico;
 		examen.estado = req.body.estado;
+		examen.parametro = req.body.parametro;
+		examen.unidades = req.body.unidades;
+		examen.resultado = req.body.resultado;
+		examen.valores_referencia = req.body.valores_referencia;
 
 		examen.save(function(err){
 			if (err) {

@@ -51,3 +51,16 @@ router.delete('/muestra/:id', function(req, res, next){
 		res.json({mensaje: 'la muestra se elimino'});
 	});
 });
+
+
+router.patch('/muestra/:id', function(req, res){
+	Muestra.findById(req.params.id, function(err, muestra){
+		muestra.recibido = req.body.recibido;
+		muestra.save(function(err){
+			if(err){
+				res.send(err);
+			}
+			res.json(muestra);
+		});
+	});
+});
