@@ -68,7 +68,7 @@ router.delete('/examen/:id', function(req, res){
 
 
 router.patch('/examen/:id', function(req, res){
-
+	console.log(req.query.flag);
 	if (req.query.flag=="resultados") {
 		Examen.findById(req.params.id, function(err, examen){
 			examen.unidades = req.body.unidades;
@@ -91,6 +91,8 @@ router.patch('/examen/:id', function(req, res){
 				res.json(examen);
 			});
 		});	
+	} else {
+		res.send({error: "ingrese bien la URL"});
 	}
 
 
