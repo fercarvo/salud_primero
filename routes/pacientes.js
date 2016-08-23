@@ -14,6 +14,16 @@ router.get('/pacientes', function(req, res, next){
 	});
 });
 
+router.get('/paciente/:id/examenes', function(req, res, next){
+	Examen.find({paciente:req.params.id}, function(err, examenes){
+		if (err) {
+			return next(err);
+		}
+		res.json(examenes);
+	});
+});
+
+
 router.post('/paciente', function(req, res, next){
 	var paciente = new Paciente(req.body);
 
