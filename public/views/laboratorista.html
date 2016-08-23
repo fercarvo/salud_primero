@@ -71,7 +71,7 @@
             <th>editar</th>
           </tr>
         </thead>
-        <tbody id = "tabla-body">
+        <tbody id = "tabla-body-examenes">
           
         </tbody>
       </table>
@@ -174,38 +174,41 @@
                 }
             });
 
+            //metodo que al hacer clic en examenes de una muestra, carga todos los examenes de esta
             $('body').on('click', '.examenes', function () {
-
+                var html = "";
                 var elemento = $(this);
                 var id_muestra = $(this).siblings('.id_muestra').text();
-
                 var url = "/muestra/" + id_muestra + "/examenes";
+
                 $.ajax({
                     type: 'GET', 
                     url: url, 
                     data: {}, 
                     success: function(data){
                         $.each(data, function(i, obj) {
-                            var id = obj._id;
-                            var tipo = obj.tipo ;
-                            var codigo = obj.cod_barras;
-                            var llego = obj.recibido;
-                            $( "#tabla-body" ).html(function() {
-                                codTabla = codTabla + "<tr >\n";
-                                codTabla = codTabla + "<td class='id' style='display:none;'>" + id + "</td>\n";
-                                codTabla = codTabla + "<td class='codigo'>" + codigo + "</td>\n";
-                                codTabla = codTabla + "<td class='tipo'>" + tipo + "</td>\n";
-                                codTabla = codTabla + "<td class='llego'>" + llego + "</td>\n";
-                                codTabla = codTabla + "<td class='examenes'> examenes </td>\n";
-                                
-                                codTabla = codTabla + "</tr>\n";
-                                return codTabla;
+                            var id_examen = obj._id;
+                            var parametro = obj.parametro ;
+                            var unidades = obj.unidades;
+                            var resultado = obj.resultado;
+                            var valores_referencia = obj.valores_referencia;
+
+                            $( "#tabla-body-examenes" ).html(function() {
+                                html = html + "<tr >\n";
+                                html = html + "<td class='id_examen' style='display:none;'>" + id_examen + "</td>\n";
+                                html = html + "<td class='parametro'>" + parametro + "</td>\n";
+                                html = html + "<td class='unidades'>" + unidades + "</td>\n";
+                                html = html + "<td class='resultado'>" + resultado + "</td>\n";
+                                html = html + "<td class='valores_referencia'>" + valores_referencia + "</td>\n";
+                                html = html + "</tr>\n";
+                                return html;
                             });                         
                         });
                     }
                 });
             });
 
+            //FUNCION que al hacer click en la casilla de llego en una muestra, cambia a
             $('body').on('click', '.llego', function () {
                 var elemento = $(this);
                 var id_muestra = $(this).siblings('.id_muestra').text();

@@ -15,6 +15,16 @@ router.get('/examenes', function(req, res, next){
 });
 
 
+router.get('/muestra/:id/examenes', function(req, res, next){
+	Examen.find({muestra:req.params.id}, function(err, examenes){
+		if (err) {
+			return next(err);
+		}
+		res.json(examenes);
+	});
+});
+
+
 router.post('/examen', function(req, res, next){
 	var examen = new Examen(req.body);
 
