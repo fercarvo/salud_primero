@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Exo:400,500,500italic,400italic,600,600italic,700,700italic,800,800italic,300,300italic');
+@import url('http://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+body {
+    background: url("../images/fondo.jpg") no-repeat;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.login-form{
+    padding-top: 10%;
+    width:390px;
+}
+.login-title{font-family: 'Exo', sans-serif;text-align:center;color: white;}
+.login-userinput{margin-bottom: 10px;}
+.login-button{margin-top:10px;}
+.login-options{margin-bottom:0px;}
+.login-forgot{float: right;}
+
+
+#navbar li{
+    border-left: solid 1px;
+}
+#navbar li:first-child{
+    border-left: none;
+}
+
+nav li a span {
+    margin-right: 5px;
+}
+
+.usuarios {
+    width: 970px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.usuarios button {
+    margin-bottom: 10px;
+}
+
+.ui-autocomplete {
+  z-index: 215000000 !important;
+}
+#inputId{
+    display: none;
+}
+

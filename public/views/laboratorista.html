@@ -1,79 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Laboratorista</title>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <title>Administrador de Proyectos</title>
 
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.css"/>
+    <link rel="stylesheet" href="../styles/styles2.css">
+  </head>
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
-    
-    
-    <link rel="stylesheet" href="../styles/styles.css">
-    <link rel="stylesheet" href="../styles/estiloLab.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>-->
-    <!--<script type="text/javascript" src="../scripts/laboratorista.js"></script>-->
-
-</head>
-
-<body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Online Lab</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <!--<li class="active"><a href="#inicio">Inicio</a></li>-->
-                    <li><a href="#muestras">Muestras</a></li>
-                    <li><a href="index.html"><span class="glyphicon glyphicon-off"></span></a></li>
-                </ul>
-            </div>
+  <body>
+    <div id="errorLogin" class="alert alert-danger collapse" role="alert"></div>
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">AdmProyectos</a>
         </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Usuarios</a></li>
+            <li><a href="proyecto.jsp">Proyectos</a></li>
+            <li><a href="dashboard.jsp">Dashboard</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#about"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a></li>
+            <li><a href="index.jsp">Logout</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
     </nav>
-    
-    
-    <section id="contenido">
-        <div id="muestras" class="muestras container">
-            <h3>Muestras</h3>
-            <hr>
-            <table class="table table-bordered tabla-resultado" id="tabla">
-                <thead>
-                    <tr class="text-center">
-                        <th style="display:none;">id</th>
-                        <th >codigo</th>
-                        <th>Tipo</th>
-                        <th>Arrivó</th>
-                    </tr>    
-                </thead>
-                <tbody id= "tabla-body">
-                    
-                </tbody>
-                
-            </table>
-        </div>    
-    </section>
-    <footer class="footer">
-        <div class="container">
-            <p class="copyright text-muted small">Copyright &copy; 2016. Todos los derechos reservados</p>
+    <div class="container usuarios">
+      <h2>Laboratorista</h2>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalUsuarios">Agregar Usuario</button>
+      <table id="tablaUsuarios" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th style="display:none">id</th>
+            <th>codigo</th>
+            <th>tipo</th>
+            <th>llego</th>
+          </tr>
+        </thead>
+        <tbody id = "tabla-body">
+          
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="container examenes">
+      <h2>Examenes</h2>
+      <table id="tablaExamenes" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th style="display:none">id</th>
+            <th>parametro</th>
+            <th>unidades</th>
+            <th>resultado</th>
+            <th>valores de referencia</th>
+            <th>editar</th>
+          </tr>
+        </thead>
+        <tbody id = "tabla-body">
+          
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalUsuarios" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form id="formNuevoUser">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Ingresar Usuario</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputNombre" name="inputNombre" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <select class="form-control" id="selectRol" name="selectRol">
+                    <option value="Desarrollador">Desarrollador</option>
+                    <option value="Diseñador">Diseñador</option>
+                    <option value="Administrador">Administrador</option>
+                  </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Ingresar</button>
+            </div>
+          </form>
         </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modalUsuariosUpdate" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form id="formUpdateUser">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Actualizar Usuario</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="inputNombre" name="inputNombre" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <select class="form-control" id="selectRol" name="selectRol">
+                    <option value="Desarrollador">Desarrollador</option>
+                    <option value="Diseñador">Diseñador</option>
+                    <option value="Administrador">Administrador</option>
+                  </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Actualizar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+</div>
 
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -81,9 +147,63 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.js"></script>
     <script>
         $(document).ready(function() {
-                var codTabla = "";
-                    $.ajax({
-                        type: 'GET', 
+            var codTabla = "";
+            $.ajax({
+                type: 'GET', 
+                url: '/muestras', 
+                data: {}, 
+                success: function(data){
+                    $.each(data, function(i, obj) {
+                        var id = obj._id;
+                        var tipo = obj.tipo ;
+                        var codigo = obj.cod_barras;
+                        var llego = obj.recibido;
+                        $( "#tabla-body" ).html(function() {
+                            codTabla = codTabla + "<tr >\n";
+                            codTabla = codTabla + "<td class='id' style='display:none;'>" + id + "</td>\n";
+                            codTabla = codTabla + "<td class='codigo'>" + codigo + "</td>\n";
+                            codTabla = codTabla + "<td class='tipo'>" + tipo + "</td>\n";
+                            codTabla = codTabla + "<td class='llego'>" + llego + "</td>\n";
+                            
+                            codTabla = codTabla + "</tr>\n";
+                            return codTabla;
+                        });                         
+                    });
+                }
+            });
+
+            $('body').on('click', '.llego', function () {
+                var elemento = $(this);
+                var id = $(this).siblings('.id').text();
+                var codigo = $(this).siblings('.codigo').text();
+                var tipo = $(this).siblings('.tipo').text();
+                var url = "/muestra/" + id;
+                var llego = !Boolean($(this).siblings('.llego').text());
+                
+                $.ajax({
+                    type:'PUT',
+                    url:url,
+                    data: {
+                        cod_barras: codigo,
+                        tipo: tipo,
+                        recibido: llego
+                     },
+                    success:function(data){
+                    }
+                });
+            });
+
+        });
+
+
+            
+
+        
+
+    /*
+        $(document).ready(function() {
+                $.ajax({
+                        type: 'PUT', 
                         url: '/muestras', 
                         data: {}, 
                         success: function(data){
@@ -105,31 +225,9 @@
                         }
                     });
 
-            $('.llego').click(function() {
-                console.log("clic"); 
-                var id = $(this).siblings('.id').text();
-                var codigo = $(this).siblings('.codigo').text();
-                var tipo = $(this).siblings('.tipo').text();
-                var url = "/muestra/" + id;
-                var llego = $(this).siblings('.tipo').text();
-                $.ajax({
-                    type: "PUT",
-                    url: url,
-                    data: {
-                        codigo: codigo,
-                        tipo: tipo,
-                        llego: !llego
-                     },
-                    success:function(data){
-                        $(this).val(!llego);
-                    }
-                });
-            });
 
-        });
 
-    /*
-        $(document).ready(function() {
+
             $('.editarProyecto').click(function() {
                  var userId = $(this).siblings('.userIdProyecto').text();               
                 $("input#inputNombre.form-control").val( $(this).siblings('.nombre').text() );
