@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Administrador de Proyectos</title>
+    <title>Administrador de examenes</title>
 
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.css"/>
     <link rel="stylesheet" href="../styles/styles2.css">
@@ -23,24 +24,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">AdmProyectos</a>
+          <a class="navbar-brand" href="#">Administrador de examenes</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Usuarios</a></li>
-            <li><a href="proyecto.jsp">Proyectos</a></li>
-            <li><a href="dashboard.jsp">Dashboard</a></li>
+            <li class="active"><a href="#">Muestras</a></li>
+            <li><a href="#">Examenes</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#about"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a></li>
-            <li><a href="index.jsp">Logout</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a></li>
+            <li><a href="#">Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+
+
     <div class="container usuarios">
       <h2>Laboratorista</h2>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalUsuarios">Agregar Usuario</button>
       <table id="tablaUsuarios" class="table table-bordered table-striped">
         <thead>
           <tr>
@@ -77,70 +78,29 @@
       </table>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modalUsuarios" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <form id="formNuevoUser">
+    <!-- Modal de editar examen-->
+          <form id="formEditarExamen">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Ingresar Usuario</h4>
+              <h4 class="modal-title" id="titulo_form"></h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                  <input type="text" class="form-control" id="inputNombre" name="inputNombre" placeholder="Nombre">
+                  <input type="text" class="form-control" id="unidades" name="unidades" placeholder="Unidades" >
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Email">
+                  <input type="text" class="form-control" id="resultado" name="resultado" placeholder="Resultado">
                 </div>
                 <div class="form-group">
-                  <select class="form-control" id="selectRol" name="selectRol">
-                    <option value="Desarrollador">Desarrollador</option>
-                    <option value="Diseñador">Diseñador</option>
-                    <option value="Administrador">Administrador</option>
-                  </select>
+                  <input type="text" class="form-control" id="valores_referencia" name="valores_referencia" placeholder="Valores de referencia">
                 </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Ingresar</button>
+              <button type="submit" class="btn btn-primary">Aceptar</button>
             </div>
           </form>
-        </div>
-      </div>
-    </div>
 
-    <div class="modal fade" id="modalUsuariosUpdate" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <form id="formUpdateUser">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Actualizar Usuario</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="inputNombre" name="inputNombre" placeholder="Nombre">
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Email">
-                </div>
-                <div class="form-group">
-                  <select class="form-control" id="selectRol" name="selectRol">
-                    <option value="Desarrollador">Desarrollador</option>
-                    <option value="Diseñador">Diseñador</option>
-                    <option value="Administrador">Administrador</option>
-                  </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Actualizar</button>
-            </div>
-          </form>
-        </div>
-      </div>
-</div>
 
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -165,7 +125,7 @@
                             codTabla = codTabla + "<td class='codigo'>" + codigo + "</td>\n";
                             codTabla = codTabla + "<td class='tipo'>" + tipo + "</td>\n";
                             codTabla = codTabla + "<td class='llego'>" + llego + "</td>\n";
-                            codTabla = codTabla + "<td class='examenes'> examenes </td>\n";
+                            codTabla = codTabla + "<td class='examenes_muestra'> mostrar </td>\n";
                             
                             codTabla = codTabla + "</tr>\n";
                             return codTabla;
@@ -175,7 +135,7 @@
             });
 
             //metodo que al hacer clic en examenes de una muestra, carga todos los examenes de esta
-            $('body').on('click', '.examenes', function () {
+            $('body').on('click', '.examenes_muestra', function () {
                 var html = "";
                 var elemento = $(this);
                 var id_muestra = $(this).siblings('.id_muestra').text();
@@ -200,6 +160,7 @@
                                 html = html + "<td class='unidades'>" + unidades + "</td>\n";
                                 html = html + "<td class='resultado'>" + resultado + "</td>\n";
                                 html = html + "<td class='valores_referencia'>" + valores_referencia + "</td>\n";
+                                html = html + "<td class= 'editar'><button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalEditarExamen'>editar</button></td>\n";
                                 html = html + "</tr>\n";
                                 return html;
                             });                         
@@ -208,7 +169,7 @@
                 });
             });
 
-            //FUNCION que al hacer click en la casilla de llego en una muestra, cambia a
+            //FUNCION que al hacer click en la casilla de llego en una muestra, cambia a true
             $('body').on('click', '.llego', function () {
                 var elemento = $(this);
                 var id_muestra = $(this).siblings('.id_muestra').text();
@@ -225,83 +186,38 @@
                     }
                 });
             });
+ 
 
-        });
+            $('body').on('click', '.editar', function () {
+                var elemento = $(this);
+                var id_examen = elemento.siblings('.id_examen').text();
 
+                $("#titulo_form").text( "Examen de tipo " + elemento.siblings('.parametro').text() );
+                $("input#unidades.form-control").val( elemento.siblings('.unidades').text() );
+                $("input#resultado.form-control").val( elemento.siblings('.resultado').text() );
+                $("input#valores_referencia.form-control").val( elemento.siblings('.valores_referencia').text() );
 
-            
-
-        
-
-    /*
-        $(document).ready(function() {
-                $.ajax({
-                        type: 'PUT', 
-                        url: '/muestras', 
-                        data: {}, 
-                        success: function(data){
-                            $.each(data, function(i, obj) {
-                                var id = obj._id;
-                                var tipo = obj.tipo ;
-                                var codigo = obj.cod_barras;
-                                var llego = obj.recibido;
-                                $( "#tabla-body" ).html(function() {
-                                    codTabla = codTabla + "<tr >\n";
-                                    codTabla = codTabla + "<td class='id' style='display:none;'>" + id + "</td>\n";
-                                    codTabla = codTabla + "<td class='codigo'>" + codigo + "</td>\n";
-                                    codTabla = codTabla + "<td class='tipo'>" + tipo + "</td>\n";
-                                    codTabla = codTabla + "<td class='llego'>" + llego + "</td>\n";
-                                    codTabla = codTabla + "</tr>\n";
-                                    return codTabla;
-                                });                         
-                            });
+                $("#formEditarExamen").submit(function(event){
+                    var formData= $("#formEditarExamen").serialize();
+                    var url = "/examen/" + id_examen;
+                    $.ajax({
+                        type: "PATCH",
+                        url: url,
+                        data: formData,
+                        success:function(data){
+                            elemento.siblings('.unidades').text(data.unidades);
+                            elemento.siblings('.resultado').text(data.resultado);
+                            elemento.siblings('.valores_referencia').text(data.valores_referencia);
+                            
                         }
                     });
-
-
-
-
-            $('.editarProyecto').click(function() {
-                 var userId = $(this).siblings('.userIdProyecto').text();               
-                $("input#inputNombre.form-control").val( $(this).siblings('.nombre').text() );
-                $("input#inputDescripcion.form-control").val( $(this).siblings('.descripcion').text() );
-                     
-               
-                $("#formUpdateProyecto").submit(function(e){
-                    e.preventDefault();
-                    var formData=$("#formUpdateProyecto").serialize()+'&'+$.param({Id:userId})+'&'+$.param({flag:"update"});
-                    var url = "ProyectosServlet";
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data:formData,
-                        success:function(){
-                            window.location = "proyecto.jsp";
-                    }
-                    });
+                    //console.log(url);
+                    id_examen = ""
+                    return false;
                 });
-            });
-            $('.eliminarProyecto').click(function() {
-                
-               var userId = $(this).siblings('.userIdProyecto').text();
-               var url = "ProyectosServlet";
-               var elemento = $(this);
-               
-               $.ajax({
-                   type: "POST",
-                   url: url,
-                   data: {Id:userId,flag:"delete"},
-                   success:function(){
-                           elemento.parent().remove();                       
-      
-             }
-                   
-               });
-              
-              
-            });
+            });   
+
         });
-    */
     </script>
   </body>
 

@@ -65,3 +65,17 @@ router.delete('/examen/:id', function(req, res){
 		res.json({message: 'El examen se ha eliminado'});
 	});
 });
+
+router.patch('/examen/:id', function(req, res){
+	Examen.findById(req.params.id, function(err, examen){
+		examen.unidades = req.body.unidades;
+		examen.resultado = req.body.resultado;
+		examen.valores_referencia = req.body.valores_referencia;
+		examen.save(function(err){
+			if(err){
+				res.send(err);
+			}
+			res.json(examen);
+		});
+	});
+});
