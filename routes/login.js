@@ -4,8 +4,16 @@ var mongoose = require('mongoose');
 var Paciente = require('../models/Paciente.js');
 var Laboratorista = require('../models/Laboratorista.js');
 var Operario = require('../models/Operario.js');
+var session = require('client-sessions');
 module.exports = router;
 
+
+router.use(session({
+	cookieName: 'session',
+	secret: 'olakeasequeriendoverquehayaquioquehace:v',
+	duration: 30 * 60 * 1000,
+	activeDuration: 5 * 60 * 1000,
+}));
 
 
 router.post('/login', function(req, res, next){
@@ -16,7 +24,7 @@ router.post('/login', function(req, res, next){
 			if(err){
 				res.send(err);
 			}
-			//req.session.user = user;
+			req.session.user = user;
 			res.json(user);
 		});
 
@@ -25,7 +33,7 @@ router.post('/login', function(req, res, next){
 			if(err){
 				res.send(err);
 			}
-			//req.session.user = user;
+			req.session.user = user;
 			res.json(user);
 		});	
 
@@ -35,8 +43,34 @@ router.post('/login', function(req, res, next){
 			if(err){
 				res.send(err);
 			}
-			//req.session.user = user;
+			req.session.user = user;
 			res.json(user);
 		});
 	}
+});
+
+
+router.get('/islogin', function(req, res) {
+  if (req.session && req.session.user) { // Check if session exists
+    // lookup the user in the DB by pulling their email from the session
+    User.findOne({ email: req.session.user.email }, function (err, user) {
+      if (!user) {
+        // if the user isn't found in the DB, reset the session info and
+        // redirect the user to the login page
+        req.session.reset();
+        //res.redirect('/login');
+        req.send({error: "usted no esta logoneado"});
+      } else {
+        // expose the user to the template
+        res.locals.user = user;
+ 
+        // render the dashboard page
+        res.json({no_error: "usted esta logoneado",user: req.session.user.email});
+
+        //res.render('dashboard.jade');
+      }
+    });
+  } else {
+    res.json({error: "usted no esta logoneado"});
+  }
 });

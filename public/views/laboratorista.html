@@ -199,7 +199,7 @@
 
                 $("#formEditarExamen").submit(function(event){
                     var formData= $("#formEditarExamen").serialize();
-                    var url = "/examen/" + id_examen;
+                    var url = "/examen/" + id_examen + "?flag=resultados";
                     $.ajax({
                         type: "PATCH",
                         url: url,
