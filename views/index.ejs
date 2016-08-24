@@ -31,10 +31,6 @@
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <!-- Latest compiled and minified JavaScript -->
-        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>-->
-
-
     </head>
     <body>
         <!-- Fixed navbar -->
@@ -59,7 +55,7 @@
                     </div>
                     <div class="panel-princ col-md-4">
                        <div class="login">
-                           <form role="form-signin">
+                           <form role="form-signin" id="formLogin">
                                <h2 class="form-signin-heading">Ingresar</h2>
                                <div class="form-group">
                                    <label for="usr">Usuario:</label>
@@ -69,18 +65,16 @@
                                    <label for="pwd">Contraseña:</label>
                                    <input type="password" class="form-control" id="pwd">
                                </div>
-                               <div class="form-group">
-                                  <div class="radio">
-                                    <label><input type="radio" name="optradio">Usuario</label>
-                                  </div>
-                                  <div class="radio">
-                                    <label><input type="radio" name="optradio">Operario</label>
-                                  </div>
-                                  <div class="radio">
-                                    <label><input type="radio" name="optradio">Laboratorista</label>
-                                  </div>
-                               </div>
-                               <button type="button" class="btn btn-primary btn-block" onclick="window.open('paciente.html')">Aceptar</button>
+
+                                <div class="form-group">
+                                  <select class="form-control" id="selectRol" name="selectRol">
+                                    <option value="Usuario">Usuario</option>
+                                    <option value="Operario">Operario</option>
+                                    <option value="laboratorista">Laboratorista</option>
+                                  </select>
+                                </div>
+
+                               <button type="submit" class="btn btn-primary btn-block" id="aceptar">Aceptar</button>
  
                            </form>       
                        </div>
@@ -90,6 +84,43 @@
                 </div>
             </div>
         </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.js"></script>
+        <script>
+
+          $(document).ready(function() {
+            console.log("1");
+              $("#formLogin").submit(function(event){
+                console.log("2");
+
+                  var formData= $("#formLogin").serialize();
+                  console.log(formData);
+
+                  if (formData.selectRol=="Usuario") {
+                    $.ajax({
+                        type: "POST",
+                        url: "/paciente/?flag=login",
+                        data: formData,
+                        success:function(data){
+                            console.log(data);
+                            
+                        }
+                    });
+                    return false;
+
+                  } else if (tipo_usuario=="Operario") {
+
+                  } else {
+
+                  }
+                  return false;
+              });
+
+          });
+
+        </script>
         
         <footer class="footer">
            <div class="container-fluid">
