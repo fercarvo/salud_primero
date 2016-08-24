@@ -103,8 +103,4 @@ router.patch('/examen/:id', function(req, res){
 	} else {
 		res.send({error: "ingrese bien la URL"});
 	}
-
-
-
-	
 });
