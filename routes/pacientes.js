@@ -36,9 +36,6 @@ router.post('/paciente', function(req, res, next){
 });
 
 
-
-
-
 router.put('/paciente/:id', function(req, res){
 	Paciente.findById(req.params.id, function(err, paciente){
 		paciente.nombre = req.body.nombre;

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var bcrypt = require('bcryptjs');
 var mongoose = require('mongoose');
 var Paciente = require('../models/Paciente.js');
 var Laboratorista = require('../models/Laboratorista.js');
@@ -19,13 +20,21 @@ router.use(session({
 router.post('/login', function(req, res, next){
 
 	if (req.body.selectRol == "Operario") {
-		Operario.findOne({correo:req.body.correo, clave:req.body.clave }, function(err, user){
+		//clave: bcrypt.compareSync(req.body.clave, user.clave )
+		Operario.findOne({correo:req.body.correo}, function(err, user){
 
-			if(err){
+			if(err){ //si pasa un error entra aqui
 				res.send(err);
+			} else {
+				if (bcrypt.compareSync(req.body.clave, user.clave )) { //valida si la clave es correcta
+					req.session.user = user;
+					res.json(user);	
+				} else {
+					res.json({error: "usuario o clave incorrecta"});
+				}
 			}
-			req.session.user = user;
-			res.json(user);
+			
+			
 		});
 
 	} else if (req.body.selectRol == "Paciente") {
@@ -81,3 +90,4 @@ router.get('/logout', function(req, res) {
   req.session.reset();
   res.redirect('/');
 });
+

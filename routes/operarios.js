@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Operario = require('../models/Operario.js');
 var mongoose = require('mongoose');
+var bcrypt = require('bcryptjs');
 module.exports = router;
 
 
@@ -15,7 +16,15 @@ router.get('/operarios', function(req, res, next){
 });
 
 router.post('/operario', function(req, res, next){
-	var operario = new Operario(req.body);
+	var hash = bcrypt.hashSync(req.body.clave, bcrypt.genSaltSync(10));
+
+	var operario = new Operario({
+		nombre: req.body.nombre,
+		apellido: req.body.apellido,
+		cedula: req.body.cedula,
+		correo: req.body.correo,
+		clave: hash
+	});
 
 	operario.save(function(err, operario){
 		if (err) {
