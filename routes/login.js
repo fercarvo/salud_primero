@@ -4,17 +4,17 @@ var mongoose = require('mongoose');
 var Paciente = require('../models/Paciente.js');
 var Laboratorista = require('../models/Laboratorista.js');
 var Operario = require('../models/Operario.js');
-var session = require('client-sessions');
+//var session = require('client-sessions');
 module.exports = router;
 
-
+/*
 router.use(session({
 	cookieName: 'session',
 	secret: 'olakeasequeriendoverquehayaquioquehace:v',
 	duration: 30 * 60 * 1000,
 	activeDuration: 5 * 60 * 1000,
 }));
-
+*/
 
 router.post('/login', function(req, res, next){
 
@@ -53,6 +53,7 @@ router.post('/login', function(req, res, next){
 router.get('/islogin', function(req, res) {
   if (req.session && req.session.user) { // Check if session exists
     // lookup the user in the DB by pulling their email from the session
+    res.send("si existe");
     User.findOne({ email: req.session.user.email }, function (err, user) {
       if (!user) {
         // if the user isn't found in the DB, reset the session info and
@@ -73,4 +74,10 @@ router.get('/islogin', function(req, res) {
   } else {
     res.json({error: "usted no esta logoneado"});
   }
+});
+
+
+router.get('/logout', function(req, res) {
+  req.session.reset();
+  res.redirect('/');
 });

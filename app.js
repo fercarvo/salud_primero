@@ -39,6 +39,17 @@ var login = require('./routes/login');
 var app = express();
 
 
+var session = require('client-sessions');
+
+
+app.use(session({
+  cookieName: 'session',
+  secret: 'olakeasequeriendoverquehayaquioquehace:v',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+}));
+
+
 
 
 
