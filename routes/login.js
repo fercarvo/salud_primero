@@ -6,6 +6,7 @@ var Paciente = require('../models/Paciente.js');
 var Laboratorista = require('../models/Laboratorista.js');
 var Operario = require('../models/Operario.js');
 //var session = require('client-sessions');
+//var session = require('client-sessions');
 module.exports = router;
 
 /*
@@ -27,8 +28,10 @@ router.post('/login', function(req, res, next){
 				return res.send(err);
 			} else {
 				if (bcrypt.compareSync(req.body.clave, user.clave )) { //valida si la clave es correcta
+					//delete user.password;
 					req.session.user = user;
-					return res.json(user);	
+					//delete req.user.password;
+					return res.json(req.session.user);	
 				} else {
 					return res.json({error: "usuario o clave incorrecta"});
 				}
@@ -55,15 +58,18 @@ router.post('/login', function(req, res, next){
 			req.session.user = user;
 			return res.json(user);
 		});
+	} else {
+		return res.json({error: "ingrese bien la URL"});
 	}
 });
 
 
 router.get('/islogin', function(req, res) {
+	//res.json(session.user);
   if (req.session && req.session.user) { // Check if session exists
     // lookup the user in the DB by pulling their email from the session
-    User.findOne({ email: req.session.user.email }, function (err, user) {
-      if (!user || !err) {
+    Operario.findOne({ email: req.session.user.email }, function (err, user) {
+      if (!user) {
         // if the user isn't found in the DB, reset the session info and
         // redirect the user to the login page
         req.session.reset();
