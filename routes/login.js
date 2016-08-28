@@ -40,7 +40,7 @@ router.post('/login', function(req, res, next){
 						apellido: user.apellido
 					};
 					req.session.user = user_for_session;
-					return res.json(req.session.user);	
+					res.redirect('/views/paciente.html');	
 				} else {
 					return res.json({message: "usuario/clave incorrecta"});
 				}
@@ -59,7 +59,7 @@ router.post('/login', function(req, res, next){
 						apellido: user.apellido
 					};
 					req.session.user = user_for_session;
-					return res.json(req.session.user);	
+					res.redirect('/views/laboratorista.html');	
 				} else {
 					return res.json({message: "usuario/clave incorrecta"});
 				}

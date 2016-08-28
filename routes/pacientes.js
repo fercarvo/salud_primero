@@ -4,6 +4,7 @@ var Paciente = require('../models/Paciente.js');
 var Admin = require('../models/Admin.js');
 var Operario = require('../models/Operario.js');
 var mongoose = require('mongoose');
+var bcrypt = require('bcryptjs');
 module.exports = router;
 
 /*
@@ -61,7 +62,7 @@ router.post('/paciente', function(req, res, next){
 	API REST metodo, actualiza un paciente
 */
 router.put('/paciente/:id', function(req, res){
-	Operario.findOne({ _id: req.session.user._id }, function (err, user) { //Solo USUARIOS logoneados pueden usar este metodo para si mismos
+	Paciente.findOne({ _id: req.session.user._id }, function (err, user) { //Solo USUARIOS logoneados pueden usar este metodo para si mismos
 		if (!user || req.params.id!=req.session.user._id) { //se valida que sea paciente y sea el mismo que pretende editar
 			return res.send({error: "usuario no autorizado"});
 		} else {
@@ -88,6 +89,7 @@ router.put('/paciente/:id', function(req, res){
 		}	
 	});	
 });
+
 
 /*
 	API REST metodo, elimina un paciente
