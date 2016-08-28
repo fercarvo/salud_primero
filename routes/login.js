@@ -21,23 +21,22 @@ router.use(session({
 router.post('/login', function(req, res, next){
 
 	if (req.body.selectRol == "Operario") {
-		//clave: bcrypt.compareSync(req.body.clave, user.clave )
 		Operario.findOne({correo:req.body.correo}, function(err, user){
-
 			if(err){ //si pasa un error entra aqui
 				return res.send(err);
 			} else {
 				if (bcrypt.compareSync(req.body.clave, user.clave )) { //valida si la clave es correcta
-					//delete user.password;
-					req.session.user = user;
-					//delete req.user.password;
+					user_for_session = { //Para no guardar claves en cookie se crea este usuario temporal
+						_id: user._id,
+						nombre: user.nombre,
+						apellido: user.apellido
+					};
+					req.session.user = user_for_session;
 					return res.json(req.session.user);	
 				} else {
-					return res.json({error: "usuario o clave incorrecta"});
+					return res.json({message: "usuario/clave incorrecta"});
 				}
 			}
-			
-			
 		});
 
 	} else if (req.body.selectRol == "Paciente") {
@@ -59,34 +58,26 @@ router.post('/login', function(req, res, next){
 			return res.json(user);
 		});
 	} else {
-		return res.json({error: "ingrese bien la URL"});
+		return res.json({message: "ingrese bien la URL"});
 	}
 });
 
 
 router.get('/islogin', function(req, res) {
-	//res.json(session.user);
   if (req.session && req.session.user) { // Check if session exists
-    // lookup the user in the DB by pulling their email from the session
+    res.json(req.session.user);
+    /* para validar la entrada de un operario en otra pagina
     Operario.findOne({ email: req.session.user.email }, function (err, user) {
       if (!user) {
-        // if the user isn't found in the DB, reset the session info and
-        // redirect the user to the login page
         req.session.reset();
-        //res.redirect('/login');
         return req.send({error: "usted no esta logoneado"});
       } else {
-        // expose the user to the template
-        res.locals.user = user;
- 
-        // render the dashboard page
-        return res.json({no_error: "usted esta logoneado",user: req.session.user.email});
 
-        //res.render('dashboard.jade');
       }
     });
+    */
   } else {
-    return res.json({error: "usted no esta logoneado"});
+    return res.json({message: "usted no esta logoneado"});
   }
 });
 
@@ -94,5 +85,10 @@ router.get('/islogin', function(req, res) {
 router.get('/logout', function(req, res) {
   req.session.reset();
   res.redirect('/');
+});
+
+router.get('/operario', function(req, res) {
+  res.json(req.session.user);
+  //res.redirect('/');
 });
 
