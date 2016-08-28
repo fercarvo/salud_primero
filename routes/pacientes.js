@@ -15,24 +15,25 @@ router.get('/pacientes', function(req, res, next){
 });
 
 router.post('/paciente', function(req, res, next){	
-	if (req.query.flag=="nuevo") {
-		var paciente = new Paciente(req.body);
-		paciente.save(function(err, paciente){
-			if (err) {
-				return next(err);
-			}
-			res.json(paciente);
-		});
-	} else if (req.query.flag=="login") {
-		Paciente.find({correo:req.body.correo, clave:req.body.clave }, function(err, paciente){
-			if(err){
-				res.send(err);
-			}
-			res.json(paciente);
-		});	
-	} else {
-		res.send({error: "ingrese bien la URL"});
-	}
+	var hash = bcrypt.hashSync(req.body.clave, bcrypt.genSaltSync(10));
+
+	var paciente = new Paciente({
+		nombre: req.body.nombre,
+		apellido: req.body.apellido,
+		cedula: req.body.cedula,
+		correo: req.body.correo,
+		direccion: req.body.direccion,
+		telefono: req.body.telefono,
+		foto: req.body.foto,
+		clave: hash
+	});
+
+	Paciente.save(function(err, usr){
+		if (err) {
+			return next(err);
+		}
+		res.json(usr);
+	});
 });
 
 

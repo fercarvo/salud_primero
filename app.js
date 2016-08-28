@@ -53,7 +53,29 @@ app.use(session({
 }));
 
 
-
+app.use(function(req, res, next) {
+  //console.log("entra aqui");
+  if (req.session && req.session.user) {/*
+    Operario.findOne({ _id: req.session.user._id }, function (err, user) {
+      if (!user) {
+        req.session.reset();
+        //res.redirect('/index.ejs');
+        //return res.render('index.ejs');
+        res.render('index.ejs');
+        //next();
+      } else {
+        next();  
+      }
+    });*/
+    next()
+  } else {
+    if (req.url == "/login" || req.url == "/") {
+      next();
+    } else {
+      res.render("index.ejs");
+    }
+  }
+});
 
 
 

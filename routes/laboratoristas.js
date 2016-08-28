@@ -16,6 +16,7 @@ router.get('/laboratoristas', function(req, res, next){
 
 router.post('/laboratorista', function(req, res, next){
 	var hash = bcrypt.hashSync(req.body.clave, bcrypt.genSaltSync(10));
+
 	var laboratorista = new Laboratorista({
 		nombre: req.body.nombre,
 		apellido: req.body.apellido,
@@ -24,11 +25,11 @@ router.post('/laboratorista', function(req, res, next){
 		clave: hash
 	});
 
-	laboratorista.save(function(err, laboratorista){
+	laboratorista.save(function(err, usr){
 		if (err) {
 			return next(err);
 		}
-		res.json(laboratorista);
+		res.json(usr);
 	});
 });
 

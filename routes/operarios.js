@@ -26,11 +26,11 @@ router.post('/operario', function(req, res, next){
 		clave: hash
 	});
 
-	operario.save(function(err, operario){
+	Operario.save(function(err, usr){
 		if (err) {
 			return next(err);
 		}
-		res.json(operario);
+		res.json(usr);
 	});
 });
 
