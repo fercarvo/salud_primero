@@ -5,6 +5,16 @@ var mongoose = require('mongoose');
 module.exports = router;
 
 
+router.get('/laboratorista', function(req, res, next) {
+  res.render('laboratorista', { 
+  	nombre: req.session.user.nombre,
+  	apellido: req.session.user.apellido  
+  });
+});
+
+
+
+
 router.get('/laboratoristas', function(req, res, next){
 	Laboratorista.find(function(err, laboratoristas){
 		if(err){

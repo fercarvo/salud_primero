@@ -66,7 +66,7 @@ app.use(function(req, res, next) {
       next();
     } else {
       console.log("ERROR: inicie session primero");
-      res.render("index.ejs");
+      res.redirect("/");
     }
   }
 });

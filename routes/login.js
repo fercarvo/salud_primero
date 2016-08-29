@@ -14,16 +14,20 @@ router.post('/login', function(req, res, next){
 			if(err){ //si pasa un error entra aqui
 				return res.send(err);
 			} else {
-				if (bcrypt.compareSync(req.body.clave, user.clave )) { //valida si la clave es correcta
-					user_for_session = { //Para no guardar claves en cookie se crea este usuario temporal
-						_id: user._id,
-						nombre: user.nombre,
-						apellido: user.apellido
-					};
-					req.session.user = user_for_session;
-					res.redirect('/views/operario.html');
+				if (!user) {
+					return res.json({message: "usuario/clave incorrecta"});	
 				} else {
-					return res.json({message: "usuario/clave incorrecta"});
+					if (bcrypt.compareSync(req.body.clave, user.clave )) { //valida si la clave es correcta
+						user_for_session = { //Para no guardar claves en cookie se crea este usuario temporal
+							_id: user._id,
+							nombre: user.nombre,
+							apellido: user.apellido
+						};
+						req.session.user = user_for_session;
+						res.redirect('/operario');
+					} else {
+						return res.json({message: "usuario/clave incorrecta"});
+					}
 				}
 			}
 		});
@@ -33,16 +37,20 @@ router.post('/login', function(req, res, next){
 			if(err){ //si pasa un error entra aqui
 				return res.send(err);
 			} else {
-				if (bcrypt.compareSync(req.body.clave, user.clave )) { //valida si la clave es correcta
-					user_for_session = { //Para no guardar claves en cookie se crea este usuario temporal
-						_id: user._id,
-						nombre: user.nombre,
-						apellido: user.apellido
-					};
-					req.session.user = user_for_session;
-					res.redirect('/views/paciente.html');	
+				if (!user) {
+					return res.json({message: "usuario/clave incorrecta"});	
 				} else {
-					return res.json({message: "usuario/clave incorrecta"});
+					if (bcrypt.compareSync(req.body.clave, user.clave )) { //valida si la clave es correcta
+						user_for_session = { //Para no guardar claves en cookie se crea este usuario temporal
+							_id: user._id,
+							nombre: user.nombre,
+							apellido: user.apellido
+						};
+						req.session.user = user_for_session;
+						res.redirect('/paciente');	
+					} else {
+						return res.json({message: "usuario/clave incorrecta"});
+					}
 				}
 			}
 		});
@@ -52,17 +60,21 @@ router.post('/login', function(req, res, next){
 			if(err){ //si pasa un error entra aqui
 				return res.send(err);
 			} else {
-				if (bcrypt.compareSync(req.body.clave, user.clave )) { //valida si la clave es correcta
-					user_for_session = { //Para no guardar claves en cookie se crea este usuario temporal
-						_id: user._id,
-						nombre: user.nombre,
-						apellido: user.apellido
-					};
-					req.session.user = user_for_session;
-					res.redirect('/views/laboratorista.html');	
+				if (!user) {
+					return res.json({message: "usuario/clave incorrecta"});	
 				} else {
-					return res.json({message: "usuario/clave incorrecta"});
-				}
+					if (bcrypt.compareSync(req.body.clave, user.clave )) { //valida si la clave es correcta
+						user_for_session = { //Para no guardar claves en cookie se crea este usuario temporal
+							_id: user._id,
+							nombre: user.nombre,
+							apellido: user.apellido
+						};
+						req.session.user = user_for_session;
+						res.redirect('/laboratorista');	
+					} else {
+						return res.json({message: "usuario/clave incorrecta"});
+					}
+				}				
 			}
 		});
 	} else if (req.body.selectRol == "Admin") {
@@ -70,16 +82,20 @@ router.post('/login', function(req, res, next){
 			if(err){ //si pasa un error entra aqui
 				return res.send(err);
 			} else {
-				if (bcrypt.compareSync(req.body.clave, user.clave )) { //valida si la clave es correcta
-					user_for_session = { //Para no guardar claves en cookie se crea este usuario temporal
-						_id: user._id,
-						nombre: user.nombre,
-						apellido: user.apellido
-					};
-					req.session.user = user_for_session;
-					return res.json(req.session.user);	
+				if (!user) {
+					return res.json({message: "usuario/clave incorrecta"});	
 				} else {
-					return res.json({message: "usuario/clave incorrecta"});
+					if (bcrypt.compareSync(req.body.clave, user.clave )) { //valida si la clave es correcta
+						user_for_session = { //Para no guardar claves en cookie se crea este usuario temporal
+							_id: user._id,
+							nombre: user.nombre,
+							apellido: user.apellido
+						};
+						req.session.user = user_for_session;
+						return res.json(req.session.user);	
+					} else {
+						return res.json({message: "usuario/clave incorrecta"});
+					}
 				}
 			}
 		});
@@ -111,21 +127,5 @@ router.get('/islogin', function(req, res) {
 router.get('/logout', function(req, res) {
   req.session.reset();
   res.render('index.ejs');
-});
-
-router.get('/operario', function(req, res) {
-  res.render('operario.html');
-  //res.redirect('/');
-});
-
-router.get('/laboratorista', function(req, res) {
-  res.render('laboratorista.html');
-  //res.redirect('/');
-});
-
-router.get('/views/paciente.html', function(req, res) {
-  res.render('index.ejs');
-  //res.render('paciente.html');
-  //res.redirect('/');
 });
 

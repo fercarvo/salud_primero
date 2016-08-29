@@ -7,6 +7,22 @@ var bcrypt = require('bcryptjs');
 module.exports = router;
 
 
+
+router.get('/operario', function(req, res, next) {
+	Operario.findOne({ _id: req.session.user._id }, function (err, user) { //Solo Admins logoneados pueden usar este metodo
+		if (!user) {
+			return res.send({error: "usuario no autorizado"});
+		} else {
+			res.render('operario', { 
+			  	nombre: req.session.user.nombre,
+			  	apellido: req.session.user.apellido  
+		  	});
+		}	
+	});
+});
+
+
+
 router.get('/operarios', function(req, res, next){
 	Admin.findOne({ _id: req.session.user._id }, function (err, user) { //Solo Admins logoneados pueden usar este metodo
 		if (!user) {

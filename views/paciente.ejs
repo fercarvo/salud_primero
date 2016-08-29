@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Operarios</title>
+    <title>Centros M&eacute;dicos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -16,14 +16,27 @@
     <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
     
     <link rel="stylesheet" href="../styles/styles.css">
-    <link rel="stylesheet" href="../styles/estiloOpe.css">
-
+    <link rel="stylesheet" href="../styles/estiloPac.css">
+    
+    
+    <style>
+        body{
+            min-width: 330px;
+            /*background: url(Imagenes/"laboratorio.jpg") no-repeat center center;*/
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: 'Ubuntu', sans-serif;
+        }
+    </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>-->
-    <script type="text/javascript" src="../scripts/operario.js"></script>
+    
+    <script type="text/javascript" src="../scripts/script.js"></script>
+    
+   
 
 </head>
 
@@ -42,9 +55,10 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <!--<li class="active"><a href="#inicio">Inicio</a></li>-->
-                    <li><a href="#muestras">Muestras</a></li>
-                    <li><a href="#reportes">Reportes<span class="sr-only">(current)</span></a></li>
-                    <li><a href="index.html"><span class="glyphicon glyphicon-off"></span></a></li>
+                    <li><a href="#">Mis Ex&aacute;menes</a></li>
+                    <li><a href="#">Centros M&eacute;dicos</a></li>
+                    <li><a href="#">Mis Datos</a></li>
+                    <li><a href="/logout"><span class="glyphicon glyphicon-off"></span></a></li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -52,63 +66,24 @@
     </nav>
     
     <section id="contenido">
-        <div id="muestras" class="muestras container">
-            <h3>Muestras</h3>
-            <hr>
-            <table class="table table-bordered tabla-resultado">
-                <tr class="text-center">
-                    <th>#</th>
-                    <th>Descripción</th>
-                    <th>Código</th>
-                    <th>Estado</th>
-                </tr>
-            </table>
-            <!-- <div class="container resultados">
-                <!-- <table class="table table-bordered">
-                    <tr class="text-center">
-                        <th>C&oacute;digo</th>
-                        <th>Fecha</th>
-                        <th>Tipo de Examen</th>
-                        <th>Estado</th>
-                    </tr>
-                    <tr text-center>
-                        <td>sample a1</td>
-                        <td>sample b1</td>
-                        <td>sample c1</td>
-                        <td>sample d1</td>
-                    </tr>
-                    <tr text-center>
-                        <td>sample a1</td>
-                        <td>sample b1</td>
-                        <td>sample c1</td>
-                        <td>sample d1</td>
-                    </tr>
-                    <tr text-center>
-                        <td>sample a1</td>
-                        <td>sample b1</td>
-                        <td>sample c1</td>
-                        <td>sample d1</td>
-                    </tr>
-                </table>
-            </div> -->
-        </div>
         
-        
-        <div id="reportes" class="reportes container">
-            <h3>Reportes</h3>
+        <h2 class="container-fluid">Cargar Contenido</h2>
+
+        <div id="centros-medicos" class="articulo container">
+            <h3>Centros M&eacute;dicos</h3>
             <hr>
         </div>
+
+            
     </section>
-
-    
     
 
+    
 
     <footer class="footer">
         <div class="container">
             <p class="copyright text-muted small">Copyright &copy; 2016. Todos los derechos reservados</p>
         </div>
-
     </footer>
 
 </body>

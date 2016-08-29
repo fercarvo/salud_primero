@@ -7,6 +7,16 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 module.exports = router;
 
+
+
+router.get('/paciente', function(req, res, next) {
+  res.render('paciente', { 
+  	nombre: req.session.user.nombre,
+  	apellido: req.session.user.apellido  
+  });
+});
+
+
 /*
 	API REST metodo, obtiene todos los pacientes
 */
