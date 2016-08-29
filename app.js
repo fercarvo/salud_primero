@@ -24,7 +24,8 @@ require('./models/CentroMedico');
 require('./models/Operario');
 require('./models/Laboratorista');
 require('./models/Admin');
-
+require('./models/Imagen');
+require('./models/Horario');
 
 
 
