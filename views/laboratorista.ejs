@@ -14,7 +14,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   </head>
 
-  <body>
+  <body ng-app="myApp" ng-controller="cargar-muestras-controller">
     <div id="errorLogin" class="alert alert-danger collapse" role="alert"></div>
     <nav class="navbar navbar-inverse navbar-static-top">
       <div class="container">
@@ -41,7 +41,7 @@
     </nav>
 
 
-    <div class="container usuarios" ng-app="myApp" ng-controller="cargar-muestras-controller">
+    <div class="container usuarios" >
       <h2> Muestras </h2>
       <table id="tablaUsuarios" class="table table-bordered table-striped">
         <thead>
@@ -53,20 +53,20 @@
             <th>examenes</th>
           </tr>
         </thead>
-        <tbody id = "tabla-body">
+        <tbody>
             <tr ng-repeat="muestra in muestras">;
                 <td class="id_muestra" style="display:none;">{{muestra._id}}</td>
                 <td class="codigo">{{muestra.cod_barras}}</td>
                 <td class="tipo">{{muestra.tipo}}</td>
                 <td class="llego">{{muestra.recibido}}</td>
-                <td class="examenes_muestra" ng-click="examenes($event)">mostrar</td>
+                <td class="examenes_muestra" ng-click="cargarExamenes(muestra._id)">mostrar</td>
             </tr>
         </tbody>
       </table>
     </div>
 
 
-    <div class="container examenes" ng-app="myApp" ng-controller="cargar-examenes-controller">
+    <div class="container examenes">
       <h2>Examenes</h2>
       <table id="tablaExamenes" class="table table-bordered table-striped">
         <thead>
@@ -81,8 +81,8 @@
         </thead>
         <tbody id = "tabla-body-examenes">
             <tr ng-repeat="examen in examenes">
-                <td class="id_examen" style="display:none;"> {{examen._id}}  </td>
-                <td class="parametro"> {{examen.parametro}}  </td>
+                <td class="id_examen" style="display:none;">{{examen._id}}</td>
+                <td class="parametro"> {{examen.parametro}}</td>
                 <td class="unidades"> {{examen.unidades}}  </td>
                 <td class="resultado"> {{examen.resultado}}  </td>
                 <td class="valores_referencia"> {{examen.valores_referencia}}  </td>
@@ -93,7 +93,7 @@
     </div>
 
     <!-- Modal de editar examen-->
-          <form id="formEditarExamen" ng-app="myApp" ng-controller="submit-controller">
+          <form id="formEditarExamen" >
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title" id="titulo_form"></h4>
@@ -123,28 +123,34 @@
     <script>
             angular.module('myApp', [])
                 .controller('cargar-muestras-controller', function($scope, $http) {
+                    
+                    $scope.muestras = {}
+                    $scope.examenes = {}
+
                     $http.get("/muestras")
                         .then(function (response) {
                             $scope.muestras = response.data;
                         }
                     );
 
-                })
-                .controller('cargar-examenes-controller', function($scope, $http) {
-                    $scope.examenes = function($event) {
-                        var id = $event.currentTarget.siblings('.id_muestra');
+                    $scope.cargarExamenes = function(id) {
+                        //var id = $event.currentTarget.siblings('.id_muestra');
+                        console.log(id);
                         var url =  "/muestra/" + id + "/examenes";
 
                         $http.get(url)
                             .then(function (response) {
+                                //console.log(url);
+                                //console.log(response.data);
                                 $scope.examenes = response.data;
                             }
                         );
                     }
+
                 });
 
         $(document).ready(function() {
-            console.log("se cargo");
+            //console.log("se cargo");
             //metodo que al hacer clic en examenes de una muestra, carga todos los examenes de esta
             
             /*
