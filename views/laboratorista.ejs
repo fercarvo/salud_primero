@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.css"/>
     <link rel="stylesheet" href="../public/styles/styles2.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   </head>
 
   <body>
@@ -24,7 +25,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Laboratorista <%= nombre %> <%= apellido %></a>
+          <a class="navbar-brand" href="#">Laboratorista <%= nombre %> <%= apellido %> </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -40,7 +41,7 @@
     </nav>
 
 
-    <div class="container usuarios">
+    <div class="container usuarios" ng-app="myApp" ng-controller="cargar-muestras-controller">
       <h2> Muestras </h2>
       <table id="tablaUsuarios" class="table table-bordered table-striped">
         <thead>
@@ -53,18 +54,24 @@
           </tr>
         </thead>
         <tbody id = "tabla-body">
-          
+            <tr ng-repeat="muestra in muestras">;
+                <td class="id_muestra" style="display:none;">{{muestra._id}}</td>
+                <td class="codigo">{{muestra.cod_barras}}</td>
+                <td class="tipo">{{muestra.tipo}}</td>
+                <td class="llego">{{muestra.recibido}}</td>
+                <td class="examenes_muestra" ng-click="examenes($event)">mostrar</td>
+            </tr>
         </tbody>
       </table>
     </div>
 
 
-    <div class="container examenes">
+    <div class="container examenes" ng-app="myApp" ng-controller="cargar-examenes-controller">
       <h2>Examenes</h2>
       <table id="tablaExamenes" class="table table-bordered table-striped">
         <thead>
           <tr>
-            <th style="display:none">id</th>
+            <th style="display:none;">id</th>
             <th>parametro</th>
             <th>unidades</th>
             <th>resultado</th>
@@ -73,13 +80,20 @@
           </tr>
         </thead>
         <tbody id = "tabla-body-examenes">
-          
+            <tr ng-repeat="examen in examenes">
+                <td class="id_examen" style="display:none;"> {{examen._id}}  </td>
+                <td class="parametro"> {{examen.parametro}}  </td>
+                <td class="unidades"> {{examen.unidades}}  </td>
+                <td class="resultado"> {{examen.resultado}}  </td>
+                <td class="valores_referencia"> {{examen.valores_referencia}}  </td>
+                <td class= "editar"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditarExamen">editar</button></td>
+            </tr>
         </tbody>
       </table>
     </div>
 
     <!-- Modal de editar examen-->
-          <form id="formEditarExamen">
+          <form id="formEditarExamen" ng-app="myApp" ng-controller="submit-controller">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title" id="titulo_form"></h4>
@@ -107,35 +121,36 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.js"></script>
     <script>
-        $(document).ready(function() {
-            var codTabla = "";
-            $.ajax({
-                type: 'GET', 
-                url: '/muestras', 
-                data: {}, 
-                success: function(data){
-                    $.each(data, function(i, obj) {
-                        var id_muestra = obj._id;
-                        var tipo = obj.tipo ;
-                        var codigo = obj.cod_barras;
-                        var llego = obj.recibido;
-                        $( "#tabla-body" ).html(function() {
-                            codTabla = codTabla + "<tr >\n";
-                            codTabla = codTabla + "<td class='id_muestra' style='display:none;'>" + id_muestra + "</td>\n";
-                            codTabla = codTabla + "<td class='codigo'>" + codigo + "</td>\n";
-                            codTabla = codTabla + "<td class='tipo'>" + tipo + "</td>\n";
-                            codTabla = codTabla + "<td class='llego'>" + llego + "</td>\n";
-                            codTabla = codTabla + "<td class='examenes_muestra'> mostrar </td>\n";
-                            
-                            codTabla = codTabla + "</tr>\n";
-                            return codTabla;
-                        });                         
-                    });
-                }
-            });
+            angular.module('myApp', [])
+                .controller('cargar-muestras-controller', function($scope, $http) {
+                    $http.get("/muestras")
+                        .then(function (response) {
+                            $scope.muestras = response.data;
+                        }
+                    );
 
+                })
+                .controller('cargar-examenes-controller', function($scope, $http) {
+                    $scope.examenes = function($event) {
+                        var id = $event.currentTarget.siblings('.id_muestra');
+                        var url =  "/muestra/" + id + "/examenes";
+
+                        $http.get(url)
+                            .then(function (response) {
+                                $scope.examenes = response.data;
+                            }
+                        );
+                    }
+                });
+
+        $(document).ready(function() {
+            console.log("se cargo");
             //metodo que al hacer clic en examenes de una muestra, carga todos los examenes de esta
-            $('body').on('click', '.examenes_muestra', function () {
+            
+            /*
+            $('.examenes_muestra').click(function() {
+                console.log("entro al click");
+            //$('body').on('click', '.examenes_muestra', function () {
                 var html = "";
                 var elemento = $(this);
                 var id_muestra = $(this).siblings('.id_muestra').text();
@@ -168,6 +183,8 @@
                     }
                 });
             });
+
+            */
 
             //FUNCION que al hacer click en la casilla de llego en una muestra, cambia a true
             $('body').on('click', '.llego', function () {
