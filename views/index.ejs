@@ -1,100 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Salud Primero S.A.</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        
-        
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <head>
+    <meta charset="UTF-8">
+      <title>Salud Primero S.A.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
 
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-        
-        <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
-        
-        <link rel="stylesheet" href="../styles/styles.css">
-        
-        <style>
-            body {
-                /* Margin bottom by footer height */
-                padding-top: 45px;
-                margin-bottom: 60px;
-                background: url("../Imagenes/fondo.jpg") no-repeat center center;
-                background-size: cover;
-                background-attachment: fixed;
-                font-family: 'Ubuntu', sans-serif;
-            }
-        </style>
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    </head>
-    <body>
-        <!-- Fixed navbar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Salud Primero S.A.</a>
-                </div>
-            </div>
-        </nav>
-        
-        <div id="contenido" class="container">
-            <div id="bienvenida" class="container-fluid">
-                <div class="principal col-md-12">
-                    <div class="panel-princ col-md-8">
-                        <div class="presentacion">
-                            <h1>Bienvenido</h1>
-                            <br>
-                            <p class="text-justify">Salud Primero S.A. Accede al Sistema y podr&aacute;s encontrar informaci&oacute;n sobre nuestros centros de salud y laboratorios afiliados. Consulta el estado de tus ex&aacute;menes realizados as&iacute; como los resultados de los mismos.</p>
-                            <br>
-                        </div>
-                    </div>
-                    <div class="panel-princ col-md-4">
-                       <div class="login">
-                           <<form role="form-signin" id="formLogin" action="/login" method="post">
-                               <h2 class="form-signin-heading">Ingresar</h2>
-                               <div class="form-group">
-                                  <label for="correo">Correo:</label>
-                                  <input type="email" id="correo" name="correo" class="form-control" placeholder="Ingrese su correo" />
-                               </div>
-                               <div class="form-group">
-                                   <label for="clave" >clave:</label>
-                                   <input type="password" name="clave" class="form-control" id="clave">
-                               </div>
+  <body>
+    <div id="contenido" class="container">
+      <form role="form-signin" id="formLogin" action="/login" method="post">
 
-                                <div class="form-group">
-                                  <select class="form-control" id="selectRol" name="selectRol">
-                                    <option value="Paciente">Paciente</option>
-                                    <option value="Operario">Operario</option>
-                                    <option value="Laboratorista">Laboratorista</option>
-                                    <option value="Admin">Admin</option>
-                                  </select>
-                                </div>
+        <h2 class="form-signin-heading">Ingresar</h2>
 
-                               <button type="submit" class="btn btn-primary btn-block" id="aceptar">Aceptar</button>
- 
-                           </form>      
-                       </div>
-                        
-                    </div>
-                    
-                </div>
-            </div>
+        <div class="form-group">
+          <label for="correo">Correo:</label>
+          <input type="email" id="correo" name="correo" class="form-control" placeholder="Ingrese su correo" />
         </div>
-        
-        <footer class="footer">
-           <div class="container-fluid">
-               <p class="copyright text-muted small">Copyright &copy; 2016. Todos los derechos reservados</p>              
-           </div>
-            
-        </footer>
 
+        <div class="form-group">
+          <label for="clave" >clave:</label>
+          <input type="password" name="clave" class="form-control" id="clave">
+        </div>
+
+        <div class="form-group">
+          <select class="form-control" id="selectRol" name="selectRol">
+            <option value="Paciente">Paciente</option>
+            <option value="Operario">Operario</option>
+            <option value="Laboratorista">Laboratorista</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="aceptar">Aceptar</button>
         
-    </body>
+      </form>      
+    </div>
+
+    <footer class="footer">
+    </footer>
+  </body>
 </html>
 
 
