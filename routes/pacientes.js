@@ -5,6 +5,8 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 var login = require('../routes/login.js');
 
+var nodemailer = require('nodemailer');
+
 module.exports = router;
 
 
@@ -46,11 +48,31 @@ router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo O
 		clave: hash
 	});
 
+	
+	var transporter = nodemailer.createTransport('smtps://saludprimero.2016%40gmail.com:salud2016@smtp.gmail.com');
+    
+	var mailOptions = {
+    	from: "Admin <saludprimero.2016@gmail.com>",
+    	to: paciente.correo,
+    	subject: "Bienvenida",
+    	text: "prueba"
+    };
+
+
 	paciente.save(function(err, usr){
 		if (err) {
 			return next(err);
 		} else {
-			res.json(usr);
+			transporter.sendMail(mailOptions, function(error, respuesta){
+				if (error){
+					console.log(error);
+				}else{
+					res.send('correo enviado');
+					console.log(usr);
+					//res.json(usr);
+				}
+
+			});
 		}
 	});
 });

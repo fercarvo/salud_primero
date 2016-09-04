@@ -56,7 +56,7 @@ app.use(session({
   ephemeral: true
 }));
 
-
+/*
 app.use(function(req, res, next) {
   if (req.session && req.session.user) {
     next()
@@ -67,7 +67,7 @@ app.use(function(req, res, next) {
       res.redirect("/");
     }
   }
-});
+});*/
 
 
 
