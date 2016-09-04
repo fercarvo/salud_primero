@@ -57,7 +57,7 @@ app.use(session({
 }));
 
 
-app.use(function(req, res, next) {
+/*app.use(function(req, res, next) {
   if (req.session && req.session.user) {
     next()
   } else {
@@ -67,7 +67,7 @@ app.use(function(req, res, next) {
       res.redirect("/");
     }
   }
-});
+});*/
 
 
 

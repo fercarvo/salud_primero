@@ -1,147 +1,126 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
 
-html {
-    position: relative;
-    min-height: 100%;
+nav ul a,
+nav .brand-logo {
+  color: #444;
 }
 
-
-#contenido{
-    min-width:100%;
-    min-height:100%    
+main, footer {
+  padding-left: 300px;
 }
 
-#bienvenida{
-    max-width: 80%;
-    padding 2% 2% 2% 2%;
+p {
+  line-height: 2rem;
 }
 
-.container{
-    max-width: 100%;
+.button-collapse {
+  color: #26a69a;
 }
 
-.principal{
-    margin-top: 10%;
-    max-width: 100%;
-    background: rgba(31, 29, 29, 0.8);
-    padding: 30px 20px 30px 20px;
-    border-radius: 25px;
+.parallax-container {
+  min-height: 250px;
+  line-height: 0;
+  height: auto;
+  color: rgba(255,255,255,.9);
+}
+.parallax-container .section {
+  width: 100%;
 }
 
-.panel-princ{
-    align-self: center;
-    border-radius: 25px;
-    max-width: 100%;
-    text-shadow: 2px 2px #000;
-    color: #FFF;
-    font-size: 1.15em;
-}
-
-.presentacion{
-    font-size: 1.1em;
-    text-align: justify;
-}
-
-.login{
-    border-radius: 15px;
-    padding-top: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    box-shadow: 0px 0px 2px;
-    background-color: rgba(37, 72, 136, 0.8);
-}
-
-
-.footer {
+@media only screen and (max-width : 992px) {
+  main, footer {
+    padding-left: 0;
+  }
+  .parallax-container .section {
     position: absolute;
-    bottom: 0;
-    text-align: center;
-    padding: 20px 10px 20px 10px;
-    bottom: 0;
+    top: 40%;
+  }
+  #index-banner .section {
+    top: 10%;
+  }
+}
+
+@media only screen and (max-width : 600px) {
+  #index-banner .section {
+    top: 0;
+  }
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+
+footer.page-footer {
+  margin: 0;
+}
+
+.editBtn button{
+   width: 30%;
+   margin: 10px auto;
+}
+
+.todoList {
+    border: 1px solid LightBlue;
+    border-radius: 5px;
+    padding: 10px;
+    color: #454545;
+}
+
+.glyphicon-circle-arrow-up,
+.glyphicon-circle-arrow-down,
+.glyphicon-edit,
+.glyphicon-remove{
+    cursor: pointer
+}
+
+.item {
+    text-transform: capitalize;
+    border-bottom: 1px solid SteelBlue;
+    margin-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    color: #454545;
+}
+
+.item.ng-move,
+.item.ng-enter,
+.item.ng-leave {
+    transition: all linear 1s;
+}
+
+.item.ng-leave.ng-leave-active,
+.item.ng-move,
+.item.ng-enter {
+    opacity: 0;
+}
+
+.item.ng-leave,
+.item.ng-move.ng-move-active,
+.item.ng-enter.ng-enter-active {
+    opacity: 1;
+}
+
+
+.prioridad {
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+input[type='text'] {
+    margin-bottom: 15px;
+}
+
+button {
     width: 100%;
-    height: 50px;
-    text-align: center;
-    background: rgba(37, 72, 136, 0.8);
+    margin-top: 10px;
 }
-
-
-.footer container-fluid {
-    width: auto;
-    max-width: 680px;
-}
-.footer p{
-    color: white;
-    font-size: solid;
-}
-
-
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
-    width: 100%;
-    margin: auto;
-}
-
-
-
-
-
-
-/* para la seccion de centros medicos */
-.centros-medicos{
-    height: 250px;
-    width: 250px;
-    margin: auto;
-    -webkit-perspective: 700;
-    margin-bottom: 20px;
-    
-}
-
-.centro-med{
-    height: 100%;
-    width: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: 1.5s;
-}
-
-.centro-med:hover {
-    transform: rotateY(180deg);
-}
-
-.lado{
-    height: 100%;
-    width: 100%;
-    backface-visibility: hidden;
-    position: absolute;
-}
-
-.frente{
-    background: crimson;
-}
-
-
-.atras{
-    background: #f0f0f0;
-    transform: rotateY(180deg);
-}
-
-.frente img{
-    width: 100%;
-    height: 100%;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

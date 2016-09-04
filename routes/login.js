@@ -38,7 +38,9 @@ router.checkLaboratorista = function(req, res, next) {
 
 router.checkPaciente = function(req, res, next) {
 	Paciente.findOne({ _id: req.session.user._id }, function (err, user) { //Solo USUARIOS logoneados pueden usar este metodo para si mismos
-		if (!user || req.params.id!=req.session.user._id) { //se valida que sea paciente y sea el mismo que pretende editar
+		if (!user 
+		/*|| req.params.id!=req.session.user._id*/
+		) { //se valida que sea paciente y sea el mismo que pretende editar
 			return res.send({error: "SOLO PACIENTES, usted no esta autorizado"});
 			//console.log("usuario no autorizado");
 			//next();
