@@ -35,7 +35,11 @@ router.get('/pacientes', login.checkAdmin, function(req, res, next){ //Solo Admi
 	API REST metodo, crea un paciente
 */
 router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo OPERARIOS logoneados pueden usar este metodo
-	var hash = bcrypt.hashSync(req.body.clave, bcrypt.genSaltSync(10));
+	
+  	var clave_temp = Math.random().toString(36).slice(-8);//genera cadena aleatoria
+  	console.log(clave_temp);
+  	
+  	var hash = bcrypt.hashSync(clave_temp, bcrypt.genSaltSync(10));
 
 	var paciente = new Paciente({
 		nombre: req.body.nombre,
@@ -48,16 +52,16 @@ router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo O
 		clave: hash
 	});
 
-	
 	var transporter = nodemailer.createTransport('smtps://saludprimero.2016%40gmail.com:salud2016@smtp.gmail.com');
-    
+
+    var mensaje  = "Ud ha sido agregado como paciente, su usuario es su correo y su clave temporal es: " + clave_temp;
+  	
 	var mailOptions = {
     	from: "Admin <saludprimero.2016@gmail.com>",
     	to: paciente.correo,
     	subject: "Bienvenida",
-    	text: "prueba"
+    	text: mensaje
     };
-
 
 	paciente.save(function(err, usr){
 		if (err) {
@@ -68,7 +72,8 @@ router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo O
 					console.log(error);
 				}else{
 					res.send('correo enviado');
-					console.log(usr);
+					//console.log(mensaje);
+					//console.log(usr);
 					//res.json(usr);
 				}
 
