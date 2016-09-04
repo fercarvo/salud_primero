@@ -59,14 +59,11 @@ app.use(session({
 
 app.use(function(req, res, next) {
   if (req.session && req.session.user) {
-    console.log("tiene una session");
     next()
   } else {
-    if (req.url == "/login" || req.url == "/") {
-      console.log("Entrando al sistema");
+    if (req.url == "/login" || req.url == "/" || req.url == "/styles/styles.css" || req.url == "/Imagenes/fondo.jpg" ) {
       next();
     } else {
-      console.log("ERROR: inicie session primero");
       res.redirect("/");
     }
   }

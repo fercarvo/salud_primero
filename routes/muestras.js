@@ -2,10 +2,13 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Muestra = require('../models/Muestra.js');
+var login = require('../routes/login.js');
+
 module.exports = router; 
 
-//Get
-router.get('/muestras', function(req, res, next){
+
+//obtiene todas las muestras del sistema
+router.get('/muestras', login.checkLaboratorista, function(req, res, next){
 	Muestra.find(function(err, muestras){
 		if(err){
 			return next(err);
@@ -14,8 +17,8 @@ router.get('/muestras', function(req, res, next){
 	});
 });
 
-//Post
-router.post('/muestra', function(req, res, next){
+//crea una nueva muestra
+router.post('/muestra', login.checkOperario, function(req, res, next){
 	var muestra = new Muestra(req.body);
 
 	muestra.save(function(err, muestra){
@@ -26,8 +29,8 @@ router.post('/muestra', function(req, res, next){
 	});
 });
 
-//Put
-router.put('/muestra/:id', function(req, res){
+//actualiza una muestra
+router.put('/muestra/:id', login.checkOperario,function(req, res){
 	Muestra.findById(req.params.id, function(err, muestra){
 		muestra.tipo = req.body.tipo;
 		muestra.cod_barras= req.body.cod_barras;
@@ -43,7 +46,7 @@ router.put('/muestra/:id', function(req, res){
 });
 
 //Delete
-router.delete('/muestra/:id', function(req, res, next){
+router.delete('/muestra/:id', login.checkOperario, function(req, res, next){
 	Muestra.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			res.send(err);
@@ -53,7 +56,7 @@ router.delete('/muestra/:id', function(req, res, next){
 });
 
 
-router.patch('/muestra/:id', function(req, res){
+router.patch('/muestra/:id', login.checkOperario, function(req, res){
 	Muestra.findById(req.params.id, function(err, muestra){
 		muestra.recibido = req.body.recibido;
 		muestra.save(function(err){

@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var Laboratorista = require('../models/Laboratorista.js');
+var login = require('../routes/login.js');
 var mongoose = require('mongoose');
 module.exports = router;
 
 
-router.get('/laboratorista', function(req, res, next) {
+router.get('/laboratorista', login.checkLaboratorista, function(req, res, next) {
   res.render('laboratorista', { 
   	nombre: req.session.user.nombre,
   	apellido: req.session.user.apellido 
@@ -14,8 +15,7 @@ router.get('/laboratorista', function(req, res, next) {
 
 
 
-
-router.get('/laboratoristas', function(req, res, next){
+router.get('/laboratoristas', login.checkAdmin, function(req, res, next){
 	Laboratorista.find(function(err, laboratoristas){
 		if(err){
 			return next(err);
@@ -24,7 +24,7 @@ router.get('/laboratoristas', function(req, res, next){
 	});
 });
 
-router.post('/laboratorista', function(req, res, next){
+router.post('/laboratorista', login.checkAdmin, function(req, res, next){
 	var hash = bcrypt.hashSync(req.body.clave, bcrypt.genSaltSync(10));
 
 	var laboratorista = new Laboratorista({
@@ -43,7 +43,7 @@ router.post('/laboratorista', function(req, res, next){
 	});
 });
 
-router.put('/laboratorista/:id', function(req, res){
+router.put('/laboratorista/:id', login.checkAdmin,function(req, res){
 	Laboratorista.findById(req.params.id, function(err, laboratorista){
 		laboratorista.nombre = req.body.nombre;
 		laboratorista.apellido = req.body.apellido;
@@ -60,7 +60,7 @@ router.put('/laboratorista/:id', function(req, res){
 	});
 });
 
-router.delete('/laboratorista/:id', function(req, res){
+router.delete('/laboratorista/:id', login.checkAdmin, function(req, res){
 	Laboratorista.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			res.send(err);

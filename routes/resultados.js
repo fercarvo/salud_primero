@@ -2,10 +2,12 @@ var express = require('express');
 var router = express.Router();
 var Resultado = require('../models/Resultado.js');
 var mongoose = require('mongoose');
+var login = require('../routes/login.js');
+
 module.exports = router;
 
 //API REST DE EXAMENES
-router.get('/resultados', function(req, res, next){
+router.get('/resultados', login.checkAdmin,function(req, res, next){
 	Resultado.find(function(err, resultados){
 		if (err) {
 			return next(err);
@@ -15,7 +17,7 @@ router.get('/resultados', function(req, res, next){
 });
 
 
-router.get('/examen/:id/resultados', function(req, res, next){
+router.get('/examenes/:id/resultados', login.checkLaboratorista, function(req, res, next){
 	Resultado.find({examen:req.params.id}, function(err, resultados){
 		if (err) {
 			return next(err);
@@ -24,7 +26,7 @@ router.get('/examen/:id/resultados', function(req, res, next){
 	});
 });
 
-router.post('/resultado', function(req, res, next){
+router.post('/resultado', login.checkLaboratorista, function(req, res, next){
 	var resultado = new Resultado({
 		examen: req.body.examen,
 		parametro: req.body.parametro,
@@ -42,7 +44,7 @@ router.post('/resultado', function(req, res, next){
 	});
 });
 
-router.put('/resultado/:id', function(req, res){
+router.put('/resultados/:id', login.checkLaboratorista, function(req, res){
 	Resultado.findById(req.params.id, function(err, resultado){
 		resultado.parametro = req.body.parametro;
 		resultado.resultado = req.body.resultado;
@@ -58,11 +60,11 @@ router.put('/resultado/:id', function(req, res){
 	});
 });
 
-router.delete('/examen/:id', function(req, res){
-	Examen.findByIdAndRemove(req.params.id, function(err){
+router.delete('/resultados/:id', login.checkLaboratorista, function(req, res){
+	Resultado.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			res.send(err);
 		}
-		res.json({message: 'El examen se ha eliminado'});
+		res.json({message: 'El resultado se ha eliminado'});
 	});
 });

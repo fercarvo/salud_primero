@@ -2,10 +2,12 @@ var express = require('express');
 var router = express.Router();
 var Examen = require('../models/Examen.js');
 var mongoose = require('mongoose');
+var login = require('../routes/login.js');
 module.exports = router;
 
-//API REST DE EXAMENES
-router.get('/examenes', function(req, res, next){
+
+//Muestra todos los examenes del sistema
+router.get('/examenes', login.checkAdmin, function(req, res, next){
 	Examen.find(function(err, examenes){
 		if (err) {
 			return next(err);
@@ -14,8 +16,8 @@ router.get('/examenes', function(req, res, next){
 	});
 });
 
-
-router.get('/muestra/:id/examenes', function(req, res, next){
+//muestra todos los examenes de una muestra seleccionada
+router.get('/muestra/:id/examenes', login.checkLaboratorista, function(req, res, next){
 	Examen.find({muestra:req.params.id}, function(err, examenes){
 		if (err) {
 			return next(err);
@@ -24,7 +26,8 @@ router.get('/muestra/:id/examenes', function(req, res, next){
 	});
 });
 
-router.get('/paciente/:id/examenes', function(req, res, next){
+//Muestra todos los examenes de un paciente especifico
+router.get('/pacientes/:id/examenes', login.checkPaciente, function(req, res, next){
 	Examen.find({paciente:req.params.id}, function(err, examenes){
 		if (err) {
 			return next(err);
@@ -33,8 +36,8 @@ router.get('/paciente/:id/examenes', function(req, res, next){
 	});
 });
 
-
-router.post('/examen', function(req, res, next){
+//crea un examen
+router.post('/examen', login.checkOperario,function(req, res, next){
 	var examen = new Examen({
 		paciente: req.body.paciente,
 		muestra: req.body.muestra,
@@ -50,7 +53,7 @@ router.post('/examen', function(req, res, next){
 	});
 });
 
-router.put('/examen/:id', function(req, res){
+router.put('/examen/:id', login.checkOperario,function(req, res){
 	Examen.findById(req.params.id, function(err, examen){
 		examen.paciente = req.body.paciente;
 		examen.muestra = req.body.muestra;
@@ -65,7 +68,7 @@ router.put('/examen/:id', function(req, res){
 	});
 });
 
-router.delete('/examen/:id', function(req, res){
+router.delete('/examen/:id', login.checkOperario,function(req, res){
 	Examen.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			res.send(err);
