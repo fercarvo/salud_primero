@@ -1,0 +1,131 @@
+<!-- real header -->
+<nav class="white" role="navigation">
+  <div class="nav-wrapper container">
+    <a id="logo-container" href="#" class="brand-logo center">
+      <img src="imagenes/sans.jpg" style="margin-top: 0px" height="47px" width="230px" alt="logo">
+    </a>
+  </div>
+</nav>
+
+<div id="index-banner" class="parallax-container">
+  <div class="section no-pad-bot">
+    <div class="container">
+      <br><br>
+      <h1 class="header center teal-text text-lighten-2">Salud Primero</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">Bienvenidos</h5>
+        <!-- Modal Trigger -->
+        <a class="modal-trigger waves-effect waves-light btn" href="#modal1">LogIn</a>
+      </div>
+      <br><br>
+    </div>
+  </div>
+  <div parallax class="parallax"><img src="imagenes/fondo.jpg"></div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal grey">
+  <div class="modal-content">
+
+    <center>
+      <div class="section"></div>
+
+      <div class="container">
+        <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+          <form class="col s12" action="/login" method="post">
+            <div class='row'>
+              <div class='input-field col s12'>
+                <input class='validate' type='email' name='correo' id='correo' />
+                <label for='email'>Enter your email</label>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s12'>
+                <input class='validate' type='password' name='clave' id='clave' />
+                <label for='password'>Enter your password</label>
+              </div>
+              <label style='float: right;'>
+                <a class='pink-text' href='#!'><b>Forgot Password?</b></a>
+              </label>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s12'>
+                <select class="browser-default" id="selectRol" name="selectRol">
+                  <option value="Paciente">Paciente</option>
+                  <option value="Operario">Operario</option>
+                  <option value="Laboratorista">Laboratorista</option>
+                  <option value="Admin">Admin</option>
+                </select>
+              </div>
+            </div>
+
+            <br />
+            <center>
+              <div class='row'>
+                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect'>Login</button>
+              </div>
+            </center>
+          </form>
+        </div>
+      </div>
+    </center>
+  </div>
+</div>
+
+<div class="section">
+
+  <!--   Icon Section   -->
+  <div class="container row">
+    <div class="col s12 m4">
+      <div class="card">
+          <div class="card-image">
+            <img src="imagenes/main1.jpg">
+            <span class="card-title">Como Llegar</span>
+          </div>
+          <div class="card-content">
+            <p>I am a very simple card. I am good at containing small bits of information.
+            I am convenient because I require little markup to use effectively.</p>
+          </div>
+          <div class="card-action">
+            <a href="#">This is a link</a>
+          </div>
+        </div>
+    </div>
+
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-image">
+          <img src="imagenes/main2.jpg">
+          <span class="card-title">Salud Primero</span>
+        </div>
+        <div class="card-content">
+          <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-image">
+          <img src="imagenes/main3.jpg">
+          <span class="card-title">Acerca De</span>
+        </div>
+        <div class="card-content">
+          <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
