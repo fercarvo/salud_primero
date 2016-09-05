@@ -73,7 +73,6 @@ angular.module('appMuestras',['ui.router'])
 	.controller('ctrlEditar',function($scope, $state, $http, dataService){
         $scope.examenes = {};
         id = dataService.getProperty();
-        console.log($scope.data);
         var url =  "/muestra/" + id + "/examenes";
 
 		$http.get(url)
@@ -82,8 +81,15 @@ angular.module('appMuestras',['ui.router'])
                 //console.log(response.data);
                 $scope.examenes = response.data;
             }
-        );})
+        );
 
+        $scope.abrir = function(){
+        	$('#modal1').openModal();
+        };
+        $scope.openAdd = function(){
+        	$('#modal2').openModal();
+        };
+        })
 
 $(document).ready(function() {
     //console.log("se cargo");
