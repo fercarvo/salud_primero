@@ -26,7 +26,7 @@ require('./models/Laboratorista');
 require('./models/Admin');
 require('./models/Imagen');
 require('./models/Horario');
-require('./models/Laboratorio.js');
+require('./models/Laboratorio');
 
 
 
