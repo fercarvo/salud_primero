@@ -1,0 +1,48 @@
+<div class="container examenes">
+  <h2>Examenes</h2>
+  <table id="tablaExamenes" class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th style="display:none;">id</th>
+        <th>parametro</th>
+        <th>unidades</th>
+        <th>resultado</th>
+        <th>valores de referencia</th>
+        <th>editar</th>
+      </tr>
+    </thead>
+    <tbody id = "tabla-body-examenes">
+        <tr ng-repeat="examen in examenes">
+            <td class="id_examen" style="display:none;">{{examen._id}}</td>
+            <td class="parametro"> {{examen.parametro}}</td>
+            <td class="unidades"> {{examen.unidades}}  </td>
+            <td class="resultado"> {{examen.resultado}}  </td>
+            <td class="valores_referencia"> {{examen.valores_referencia}}  </td>
+            <td class= "editar"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditarExamen">editar</button></td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal de editar examen-->
+<form id="formEditarExamen" >
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="titulo_form"></h4>
+  </div>
+  <div class="modal-body">
+      <div class="form-group">
+        <input type="text" class="form-control" id="unidades" name="unidades" placeholder="Unidades" >
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="resultado" name="resultado" placeholder="Resultado">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="valores_referencia" name="valores_referencia" placeholder="Valores de referencia">
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="submit" class="btn btn-primary">Aceptar</button>
+  </div>
+</form>

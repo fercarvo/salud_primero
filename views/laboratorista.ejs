@@ -5,243 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Administrador de examenes</title>
+    <title>Salud Primero - Laboratorista</title>
 
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.css"/>
-    <link rel="stylesheet" href="../public/styles/styles2.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!-- CSS  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="styles/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="styles/styles.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+      <!-- Angular views -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.1/angular-materialize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
+    <script type="text/javascript" src="scripts/lview.js"></script>
   </head>
 
-  <body ng-app="myApp" ng-controller="cargar-muestras-controller">
+  <body ng-app="appMuestras">
     <div id="errorLogin" class="alert alert-danger collapse" role="alert"></div>
-    <nav class="navbar navbar-inverse navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Laboratorista <%= nombre %> <%= apellido %> </a>
+    
+
+    <header class="container">
+      <% include user/sideLaboratorista %>
+    </header>
+
+    <main>
+        <% include app/header %>
+        <div id="index-banner" class="parallax-container">
+          <div class="section no-pad-bot">
+            <div class="container">
+              <br><br>
+              <h1 class="header center indigo-text text-lighten-2">Administrador de Examenes</h1>
+              <br><br>
+            </div>
+          </div>
+          <div class="parallax"><img src="imagenes/main2.jpg"></div>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Muestras</a></li>
-            <li><a href="#">Examenes</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a></li>
-            <li><a href="#">Logout</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
 
+        <ui-view></ui-view>
 
-    <div class="container usuarios" >
-      <h2> Muestras </h2>
-      <table id="tablaUsuarios" class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            <th style="display:none">id</th>
-            <th>codigo</th>
-            <th>tipo</th>
-            <th>llego</th>
-            <th>examenes</th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="muestra in muestras">;
-                <td class="id_muestra" style="display:none;">{{muestra._id}}</td>
-                <td class="codigo">{{muestra.cod_barras}}</td>
-                <td class="tipo">{{muestra.tipo}}</td>
-                <td class="llego">{{muestra.recibido}}</td>
-                <td class="examenes_muestra" ng-click="cargarExamenes(muestra._id)">mostrar</td>
-            </tr>
-        </tbody>
-      </table>
-    </div>
+    </main>
 
-
-    <div class="container examenes">
-      <h2>Examenes</h2>
-      <table id="tablaExamenes" class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            <th style="display:none;">id</th>
-            <th>parametro</th>
-            <th>unidades</th>
-            <th>resultado</th>
-            <th>valores de referencia</th>
-            <th>editar</th>
-          </tr>
-        </thead>
-        <tbody id = "tabla-body-examenes">
-            <tr ng-repeat="examen in examenes">
-                <td class="id_examen" style="display:none;">{{examen._id}}</td>
-                <td class="parametro"> {{examen.parametro}}</td>
-                <td class="unidades"> {{examen.unidades}}  </td>
-                <td class="resultado"> {{examen.resultado}}  </td>
-                <td class="valores_referencia"> {{examen.valores_referencia}}  </td>
-                <td class= "editar"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditarExamen">editar</button></td>
-            </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Modal de editar examen-->
-          <form id="formEditarExamen" >
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="titulo_form"></h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="unidades" name="unidades" placeholder="Unidades" >
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" id="resultado" name="resultado" placeholder="Resultado">
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" id="valores_referencia" name="valores_referencia" placeholder="Valores de referencia">
-                </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Aceptar</button>
-            </div>
-          </form>
-
-
+    <footer class="page-footer indigo">
+        <% include app/footer %>
     </footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="scripts/materialize.js"></script>
+    <script src="scripts/init.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.js"></script>
-    <script>
-            angular.module('myApp', [])
-                .controller('cargar-muestras-controller', function($scope, $http) {
-                    
-                    $scope.muestras = {}
-                    $scope.examenes = {}
-
-                    $http.get("/muestras")
-                        .then(function (response) {
-                            $scope.muestras = response.data;
-                        }
-                    );
-
-                    $scope.cargarExamenes = function(id) {
-                        //var id = $event.currentTarget.siblings('.id_muestra');
-                        console.log(id);
-                        var url =  "/muestra/" + id + "/examenes";
-
-                        $http.get(url)
-                            .then(function (response) {
-                                //console.log(url);
-                                //console.log(response.data);
-                                $scope.examenes = response.data;
-                            }
-                        );
-                    }
-
-                });
-
-        $(document).ready(function() {
-            //console.log("se cargo");
-            //metodo que al hacer clic en examenes de una muestra, carga todos los examenes de esta
-            
-            /*
-            $('.examenes_muestra').click(function() {
-                console.log("entro al click");
-            //$('body').on('click', '.examenes_muestra', function () {
-                var html = "";
-                var elemento = $(this);
-                var id_muestra = $(this).siblings('.id_muestra').text();
-                var url = "/muestra/" + id_muestra + "/examenes";
-
-                $.ajax({
-                    type: 'GET', 
-                    url: url, 
-                    data: {}, 
-                    success: function(data){
-                        $.each(data, function(i, obj) {
-                            var id_examen = obj._id;
-                            var parametro = obj.parametro ;
-                            var unidades = obj.unidades;
-                            var resultado = obj.resultado;
-                            var valores_referencia = obj.valores_referencia;
-
-                            $( "#tabla-body-examenes" ).html(function() {
-                                html = html + "<tr >\n";
-                                html = html + "<td class='id_examen' style='display:none;'>" + id_examen + "</td>\n";
-                                html = html + "<td class='parametro'>" + parametro + "</td>\n";
-                                html = html + "<td class='unidades'>" + unidades + "</td>\n";
-                                html = html + "<td class='resultado'>" + resultado + "</td>\n";
-                                html = html + "<td class='valores_referencia'>" + valores_referencia + "</td>\n";
-                                html = html + "<td class= 'editar'><button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalEditarExamen'>editar</button></td>\n";
-                                html = html + "</tr>\n";
-                                return html;
-                            });                         
-                        });
-                    }
-                });
-            });
-
-            */
-
-            //FUNCION que al hacer click en la casilla de llego en una muestra, cambia a true
-            $('body').on('click', '.llego', function () {
-                var elemento = $(this);
-                var id_muestra = $(this).siblings('.id_muestra').text();
-                var url = "/muestra/" + id_muestra;
-                var llego = Boolean($(this).siblings('.llego').text());
-                
-                $.ajax({
-                    type:'PATCH',
-                    url: url,
-                    data: {
-                        recibido: !llego
-                     },
-                    success:function(data){
-                    }
-                });
-            });
- 
-
-            $('body').on('click', '.editar', function () {
-                var elemento = $(this);
-                var id_examen = elemento.siblings('.id_examen').text();
-
-                $("#titulo_form").text( "Examen de tipo " + elemento.siblings('.parametro').text() );
-                $("input#unidades.form-control").val( elemento.siblings('.unidades').text() );
-                $("input#resultado.form-control").val( elemento.siblings('.resultado').text() );
-                $("input#valores_referencia.form-control").val( elemento.siblings('.valores_referencia').text() );
-
-                $("#formEditarExamen").submit(function(event){
-                    var formData= $("#formEditarExamen").serialize();
-                    var url = "/examen/" + id_examen + "?flag=resultados";
-                    $.ajax({
-                        type: "PATCH",
-                        url: url,
-                        data: formData,
-                        success:function(data){
-                            elemento.siblings('.unidades').text(data.unidades);
-                            elemento.siblings('.resultado').text(data.resultado);
-                            elemento.siblings('.valores_referencia').text(data.valores_referencia);
-                            
-                        }
-                    });
-                    //console.log(url);
-                    id_examen = ""
-                    return false;
-                });
-            });   
-
-        });
-    </script>
   </body>
 
 
