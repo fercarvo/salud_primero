@@ -19,7 +19,6 @@ router.post('/laboratorio', function(req, res, next){
 	var lab = new Laboratorio({
 		nombre: req.body.nombre,
 		direccion: req.body.direccion
-		}
 	});
 
 	lab.save(function(err, laboratorio){
