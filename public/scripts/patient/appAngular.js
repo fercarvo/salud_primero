@@ -16,24 +16,56 @@ angular.module('appPatient',['ui.router'])
 			});
 		$urlRouterProvider.otherwise('centros');
 	})
-	.factory('comun',function($http){
-		var comun = {}
-		comun.tareas = [];/*{
-			nombre: 'Comprar comida',
-			prioridad: '2'
-		},{
-			nombre: 'Pasear al perro',
-			prioridad: '1'
-		}]*/
+      .factory('comun', function($http){
+            
+            var comun = {};
+            comun.centros = {};
+            comun.datos= {};
+            comun.examenes = {};
 
+            comun.centros.cargar = function(){
+                  return $http.get('/centrosMed')
+                  .success(function(data){
+                        angular.copy(data, comun.centros)
+                        return comun.centros
+                  })
+            }
+            /*      
+            comun.datos.cargar = function(){
+                  return $http.get('/paciente/datos')
+                  .success(function(data){
+                        angular.copy(data, comun.datos)
+                        return comun.datos
+                  })
+            }
+
+            comun.datos.update = function(paciente){
+                  return $http.put('/paciente/' +'paciente._id')
+                        .success(function(data){
+                        var indice = comun.datos.indexOf(datos);
+                        comun.datos[indice] = data;
+            })
+
+            comun.examenes.cargar = function(){
+                  return $http.get('/pacientes/:id/examenes')
+                  .success(function(data){
+                        angular.copy(data, comun.examenes)
+                        return comun.examenes
+                  })
+            }
+            */
+            
+        }
+      })
+      /*
 		comun.tarea = {};
 
 		/*comun.eliminar = function(tarea){
 			var indice = comun.tareas.indexOf(tarea);
 			comun.tareas.splice(indice, 1);
-		}*/
+		}
 
-		/*Seccion de metodos remotos*/
+		/*Seccion de metodos remotos
 		comun.getAll = function(){
 			return $http.get('/tareas')
 			.success(function(data){
@@ -66,8 +98,9 @@ angular.module('appPatient',['ui.router'])
 		}
 
 		return comun;
-	})
+	})*/
 	.controller('ctrlCentros',function($scope, $state, comun){
+            console.log("controlador centros");
 		cargarCentrosMed();
 	})
     
