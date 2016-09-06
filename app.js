@@ -59,8 +59,6 @@ app.use(session({
 }));
 
 app.use(function(req, res, next) {
-
-app.use(function(req, res, next) {
   if (req.session && req.session.user) {
     console.log("esta logoneado");
     next();
@@ -68,7 +66,7 @@ app.use(function(req, res, next) {
     if (req.url == "/login" || req.url == "/" || req.url == "/styles/styles.css" || req.url == "/Imagenes/fondo.jpg" ) {
       next();
     } else {
-      console.log();
+      console.log("no esta logoneado");
       next(); // esto no va
       //res.redirect("/"); esto si va
     }
