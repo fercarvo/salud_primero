@@ -1,44 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8">
-      <title>Salud Primero S.A.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+  	<!-- CSS  -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="styles/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="styles/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+	<!-- Angular views -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.1/angular-materialize.min.js"></script>
   </head>
 
   <body>
-    <div id="contenido" class="container">
-      <form role="form-signin" id="formLogin" action="/login" method="post">
-
-        <h2 class="form-signin-heading">Ingresar</h2>
-
-        <div class="form-group">
-          <label for="correo">Correo:</label>
-          <input type="email" id="correo" name="correo" class="form-control" placeholder="Ingrese su correo" />
-        </div>
-
-        <div class="form-group">
-          <label for="clave" >clave:</label>
-          <input type="password" name="clave" class="form-control" id="clave">
-        </div>
-
-        <div class="form-group">
-          <select class="form-control" id="selectRol" name="selectRol">
-            <option value="Paciente">Paciente</option>
-            <option value="Operario">Operario</option>
-            <option value="Laboratorista">Laboratorista</option>
-            <option value="Admin">Admin</option>
-          </select>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-block" id="aceptar">Aceptar</button>
-        
-      </form>      
-    </div>
-
-    <footer class="footer">
-    </footer>
+  	<main>
+		<% include app/login %>
+	</main>
+	<footer class="page-footer teal">
+		<% include app/footer %>
+	</footer>
+	<!--  Scripts-->
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="scripts/materialize.js"></script>
+	<script src="scripts/init.js"></script>
   </body>
 </html>
-
-
