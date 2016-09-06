@@ -4,9 +4,10 @@
     <title>Salud Primero - Operario</title>    
     <% include app/scripts %>
     <script type="text/javascript" src="scripts/operario.js"></script>
+    <script type="text/javascript" src="scripts/operator/appAngular.js"></script>
   </head>
 
-  <body>
+  <body ng-app="appOperator">
     <div id="errorLogin" class="alert alert-danger collapse" role="alert"></div>
 
     <header class="container">
@@ -15,11 +16,15 @@
 
     <main>
       <% include app/header %>
+      <div class="container">
+        <ui-view></ui-view>
+      </div>
     </main>
 
     <footer class="page-footer red darken-1">
       <% include app/footer %>
     </footer>
+
     <!--  Scripts-->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="scripts/materialize.js"></script>

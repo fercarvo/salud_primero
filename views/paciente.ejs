@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <title>Salud Primero - Paciente </title>
+        <% include app/scripts %>
+        <link rel="stylesheet" href="styles/estiloPac.css">
+        <script type="text/javascript" src="scripts/patient/appAngular.js"></script>
+    </head>
 
-<head>
-    <title>Salud Primero - Paciente </title>
-    <% include app/scripts %>
-    <link rel="stylesheet" href="styles/estiloPac.css">
-    <script type="text/javascript" src="scripts/script.js"></script>
-</head>
-
-<body>
+<body ng-app="appPatient">
     <div id="errorLogin" class="alert alert-danger collapse" role="alert"></div>
     <header class="container">
       <% include user/sidePaciente %>
@@ -20,22 +19,17 @@
           <div class="section no-pad-bot">
             <div class="container">
               <br><br>
-              <h1 class="header center indigo-text text-lighten-2"><%= nombre %> <%= apellido %></h1>
+              <h1 class="header center teal-text text-lighten-2"><%= nombre %> <%= apellido %></h1>
               <br><br>
             </div>
           </div>
           <div class="parallax"><img src="imagenes/main3.jpg"></div>
         </div>
 
-        <ui-view></ui-view>
+        <div class="container">
+          <ui-view></ui-view>
+        </div>
         
-        <section id="contenido">
-            <h2 class="container-fluid">Cargar Contenido</h2>
-            <div id="centros-medicos" class="articulo container">
-                <h3>Centros M&eacute;dicos</h3>
-                <hr>
-            </div>
-        </section>
     </main>
     <footer class="page-footer teal">
         <% include app/footer %>
