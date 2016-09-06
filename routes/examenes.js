@@ -36,7 +36,7 @@ router.get('/pacientes/:id/examenes', login.checkPaciente, function(req, res, ne
 	});
 });
 
-//crea un examen
+//crea una muestra para agregar un examen
 router.post('/examen', login.checkOperario,function(req, res, next){
 	var examen = new Examen({
 		paciente: req.body.paciente,
