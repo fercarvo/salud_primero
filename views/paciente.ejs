@@ -5,41 +5,40 @@
         <% include app/scripts %>
         <link rel="stylesheet" href="styles/estiloPac.css">
         <script type="text/javascript" src="scripts/patient/appAngular.js"></script>
+        <script type="text/javascript" src="scripts/script.js"></script>
     </head>
 
-<body ng-app="appPatient">
-    <div id="errorLogin" class="alert alert-danger collapse" role="alert"></div>
-    <header class="container">
-      <% include user/sidePaciente %>
-    </header>
-
-    <main>
-        <% include app/header %>
-        <div id="index-banner" class="parallax-container">
-          <div class="section no-pad-bot">
-            <div class="container">
-              <br><br>
-              <h1 class="header center teal-text text-lighten-2"><%= nombre %> <%= apellido %></h1>
-              <br><br>
+    <body ng-app="appPatient">
+        <div id="errorLogin" class="alert alert-danger collapse" role="alert"></div>
+        <header class="container">
+          <% include user/sidePaciente %>
+        </header>
+        <main>
+            <% include app/header %>
+            <div id="index-banner" class="parallax-container">
+              <div class="section no-pad-bot">
+                <div class="container">
+                  <br><br>
+                  <h1 class="header center teal-text text-lighten-2"><%= nombre %> <%= apellido %></h1>
+                  <br><br>
+                </div>
+              </div>
+              <div class="parallax"><img src="imagenes/main3.jpg"></div>
             </div>
-          </div>
-          <div class="parallax"><img src="imagenes/main3.jpg"></div>
-        </div>
 
-        <div class="container">
-          <ui-view></ui-view>
-        </div>
-        
-    </main>
-    <footer class="page-footer teal">
-        <% include app/footer %>
-    </footer>
-    <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="scripts/materialize.js"></script>
-    <script src="scripts/init.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.js"></script>
-</body>
-
+            <div class="container">
+              <ui-view></ui-view>
+            </div>
+            
+        </main>
+        <footer class="page-footer teal">
+            <% include app/footer %>
+        </footer>
+        <!--  Scripts-->
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="scripts/materialize.js"></script>
+        <script src="scripts/init.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.js"></script>
+    </body>
 </html>
