@@ -12,20 +12,9 @@ angular.module('appMuestras',['ui.router'])
 				controller: 'ctrlEditar'
 			})
 		$urlRouterProvider.otherwise('muestra');})
-	.service('dataService', function() {
-	  // private variable
-	  var _dataObj = 0;
-
-	  return {
-            getProperty: function () {
-                return _dataObj;
-            },
-            setProperty: function(value) {
-                _dataObj = value;
-            }
-        };})
 	.factory('comun',function($http){
 		var comun = {}
+        
 		comun.muestras = [];
 		comun.muestra = {};
 
@@ -38,7 +27,8 @@ angular.module('appMuestras',['ui.router'])
 			})
 		};
 
-		comun.add = function(muestra){
+		/*
+        comun.add = function(muestra){
 			return $http.post('/muestras', muestra)
 			.success(function(muestra){
 				comun.muestras.push(muestra);
@@ -53,6 +43,7 @@ angular.module('appMuestras',['ui.router'])
 			})
 		}
 
+
 		comun.delete = function(muestra){
 			return $http.delete('/muestras/'+ muestra._id)
 			.success(function(){
@@ -60,6 +51,7 @@ angular.module('appMuestras',['ui.router'])
 				comun.muestras.splice(indice, 1);
 			})
 		}
+        */
 		return comun;})
 	.controller('ctrlCargar', function($scope, $state, dataService, comun) {
         comun.getAll();

@@ -16,6 +16,16 @@ router.get('/paciente', login.checkPaciente, function(req, res, next) {
 });
 
 
+router.get('/paciente/datos', login.checkPaciente, function(req, res){
+	Paciente.findOne({ _id: req.session.user._id }, function (err, user) { //Solo pacientes logoneados pueden usar este metodo
+		if (!user) {
+			return res.send({error: "USTED NO ES PACIENTE"});
+		} else {
+			res.json(user);
+		}	
+	});
+});
+
 
 /*
 	API REST metodo, obtiene todos los pacientes
