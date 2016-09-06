@@ -14,8 +14,10 @@ module.exports = router;
 router.checkAdmin = function (req, res, next) {
 	Admin.findOne({ _id: req.session.user._id }, function (err, user) { //Solo Admins logoneados pueden usar este metodo
 		if (!user) {
-			return res.send({error: "SOLO ADMINS, usted no esta autorizado"});
-			//console.log("usuario no autorizado");
+			console.log("usuario NO autorizado");
+			next();
+			//return res.send({error: "SOLO ADMINS, usted no esta autorizado"});
+
 		} else {
 			console.log("usuario autorizado");
 			next();
@@ -24,26 +26,28 @@ router.checkAdmin = function (req, res, next) {
 }
 
 router.checkLaboratorista = function(req, res, next) {
+	next();
 	Laboratorista.findOne({ _id: req.session.user._id }, function (err, user) { //
 		if (!user) {
-			return res.send({error: "SOLO LABORATORISTAS, usted no esta autorizado"});
-			//console.log("usuario no autorizado");
-			//next();
+			console.log("usuario NO autorizado");
+			next();
+			//return res.send({error: "SOLO LABORATORISTAS, usted no esta autorizado"});
+
 		} else {
 			console.log("usuario autorizado");
 			next();
-		}	
+		}		
 	});
 }
 
 router.checkPaciente = function(req, res, next) {
 	Paciente.findOne({ _id: req.session.user._id }, function (err, user) { //Solo USUARIOS logoneados pueden usar este metodo para si mismos
 		if (!user 
-		/*|| req.params.id!=req.session.user._id*/
+		//|| req.params.id!=req.session.user._id
 		) { //se valida que sea paciente y sea el mismo que pretende editar
-			return res.send({error: "SOLO PACIENTES, usted no esta autorizado"});
-			//console.log("usuario no autorizado");
-			//next();
+			//return res.send({error: "SOLO PACIENTES, usted no esta autorizado"});
+			console.log("usuario NO autorizado");
+			next();
 		} else {
 			console.log("usuario autorizado");
 			next();
@@ -54,13 +58,14 @@ router.checkPaciente = function(req, res, next) {
 router.checkOperario = function(req, res, next) {
 	Operario.findOne({ _id: req.session.user._id }, function (err, user) { //Solo Admins logoneados pueden usar este metodo
 		if (!user) {
-			return res.send({error: "SOLO OPERARIOS, usted no esta autorizado"});
-			//console.log("usuario NO autorizado");
-			//next();
+			console.log("usuario NO autorizado");
+			next();
+			//return res.send({error: "SOLO ADMINS, usted no esta autorizado"});
+
 		} else {
 			console.log("usuario autorizado");
 			next();
-		}		
+		}			
 	});
 }
 
