@@ -34,6 +34,39 @@ router.get('/pacientes', login.checkAdmin, function(req, res, next){ //Solo Admi
 /*
 	API REST metodo, crea un paciente
 */
+
+
+/*
+//restablecer contraseña
+router.put('/paciente/reset-password/:id', function(req,res,next){
+
+	Paciente.findById(req.params.id, function(err, paciente){
+	var clave_nueva = Math.random().toString(36).slice(-8);//genera cadena aleatoria
+	var hash = bcrypt.hashSync(clave_temp, bcrypt.genSaltSync(10));
+
+	var transporter = nodemailer.createTransport('smtps://saludprimero.2016%40gmail.com:salud2016@smtp.gmail.com');
+
+    var mensaje  = "Se ha reestablecido su contraseña. Su contraseña nueva es:"+ clave_nueva;
+  	
+	var mailOptions = {
+    	from: "Admin <saludprimero.2016@gmail.com>",
+    	to: paciente.correo,
+    	subject: "Reestablecimiento de Contraseña",
+    	text: mensaje
+    };
+
+    paciente.clave = hash;
+
+	paciente.save(function(err){
+		if (err) {
+			res.send(err);
+		} else {
+			res.json(paciente);
+		}
+	});
+});
+*/
+
 router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo OPERARIOS logoneados pueden usar este metodo
 	
   	var clave_temp = Math.random().toString(36).slice(-8);//genera cadena aleatoria
