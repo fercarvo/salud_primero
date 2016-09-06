@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Operarios</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/estiloOpe.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../scripts/operario.js"></script>
+
+</head>
+    
+<body>
+    <div>
+        <form id="formularioCrearPaciente" method="post" action="/paciente">
+            <fieldset>
+                <legend>Agregar Paciente</legend>
+                Usuario: <input type="email" name="correo" placeholder="Ingrese correo electr&oacute;nico" require/><br />
+                Nombres: <input type="text" name="Nombres" placeholder="Ingrese nombres" require/><br />
+                Apellidos: <input type="text" name="Apellidos" placeholder="Ingrese apellidos" require/><br />
+                Cedula: <input type="text" name="Cedula" placeholder="Ingrese c&eacute;dula" require/><br />
+                Direccion: <input type="text" name="Direccion" placeholder="Ingrese direcci&oacute; paciente" require/><br />
+                Teléfono: <input type="text" name="telefono" placeholder="Ingrese tel&eacute;fono" require/><br />
+                <input type="submit" value="Enviar">
+                <input type="reset" value="Borrar">
+            </fieldset>
+        </form>
+    </div>
+    
+    <div>
+        <form id="formularioCrearMuestra" method="post" action="/paciente">
+            <fieldset>
+                <legend>Actualice sus datos</legend>
+                Nombres: <input type="text" name="nombre" placeholder="Ingrese sus nombres" require/><br />
+                Apellidos: <input type="text" name="apellido" placeholder="Ingrese sus apellidos" require/><br />
+                C&eacute;dula: <input type="text" name="cedula" placeholder="Ingrese su c&eacute;dula" require/><br />
+                Direcci&oacute;n: <input type="text" name="direccion" placeholder="Ingrese su direcci&oacute;" require/><br />
+                Tel&eacute;fono: <input type="text" name="telefono" placeholder="Ingrese su tel&eacute;fono" require/><br />
+                Foto: <input type="file" name="foto" accept=image/* require/><br />
+                <input type="submit" value="Enviar">
+                <input type="reset" value="Borrar">
+            </fieldset>
+        </form>
+    </div>
+    
+        *****paciente.nombre = req.body.nombre;
+		paciente.apellido = req.body.apellido;
+		paciente.cedula = req.body.cedula;
+		paciente.correo = req.body.correo;
+		paciente.direccion = req.body.direccion;
+		paciente.telefono = req.body.telefono;
+		paciente.foto = req.body.foto;
+		paciente.clave = hash;
+    </body>
+</html>

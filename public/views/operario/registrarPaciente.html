@@ -1,8 +1,14 @@
-<div class="section no-pad-bot">
-  <div class="container">
-    <div class="row center">
-      <form class="col s12" id="formularioCrearPaciente" action="/paciente" method="post">
-        <h4>Actualice sus Datos</h4>
+<section id="contenido">
+    <h4>Registrar Nuevo Paciente</h4>
+    <br>
+        <form class="col s12" id="formularioCrearPaciente" action="/paciente" method="post">
+            <div class='row'>
+              <div class='input-field col s12'>
+                <input class='validate' type='email' name='correo' id='correo' require/>
+                <label for='email'>Ingrese correo electr&oacute;nico</label>
+              </div>
+            </div>
+
             <div class='row'>
               <div class='input-field col s12'>
                 <input type="text" name="Nombres" require/>
@@ -41,11 +47,9 @@
             <br />
             <center>
               <div class='row'>
-                <button type='submit' name='btn_login' class='col s4 btn btn-large waves-effect'>Enviar</button>
-                <button type='reset' name='btn_login' class='col s4 right btn btn-large waves-effect'>Borrar</button>
+                <button type='submit' name='btn_login' class='col s4 btn red darken-1  btn-large waves-effect'>Enviar</button>
+                <button type='reset' name='btn_login' class='col s4 right red darken-1 btn btn-large waves-effect'>Borrar</button>
               </div>
             </center>
           </form>
-    </div>
-  </div>
-</div>
+</section>
