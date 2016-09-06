@@ -92,47 +92,6 @@ angular.module('appMuestras',['ui.router'])
         })
 
 $(document).ready(function() {
-    //console.log("se cargo");
-    //metodo que al hacer clic en examenes de una muestra, carga todos los examenes de esta
-    
-    /*
-    $('.examenes_muestra').click(function() {
-        console.log("entro al click");
-    //$('body').on('click', '.examenes_muestra', function () {
-        var html = "";
-        var elemento = $(this);
-        var id_muestra = $(this).siblings('.id_muestra').text();
-        var url = "/muestra/" + id_muestra + "/examenes";
-
-        $.ajax({
-            type: 'GET', 
-            url: url, 
-            data: {}, 
-            success: function(data){
-                $.each(data, function(i, obj) {
-                    var id_examen = obj._id;
-                    var parametro = obj.parametro ;
-                    var unidades = obj.unidades;
-                    var resultado = obj.resultado;
-                    var valores_referencia = obj.valores_referencia;
-
-                    $( "#tabla-body-examenes" ).html(function() {
-                        html = html + "<tr >\n";
-                        html = html + "<td class='id_examen' style='display:none;'>" + id_examen + "</td>\n";
-                        html = html + "<td class='parametro'>" + parametro + "</td>\n";
-                        html = html + "<td class='unidades'>" + unidades + "</td>\n";
-                        html = html + "<td class='resultado'>" + resultado + "</td>\n";
-                        html = html + "<td class='valores_referencia'>" + valores_referencia + "</td>\n";
-                        html = html + "<td class= 'editar'><button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalEditarExamen'>editar</button></td>\n";
-                        html = html + "</tr>\n";
-                        return html;
-                    });                         
-                });
-            }
-        });
-    });
-
-    */
 
     //FUNCION que al hacer click en la casilla de llego en una muestra, cambia a true
     $('body').on('click', '.llego', function () {

@@ -4,6 +4,7 @@ var MuestraSchema = new mongoose.Schema({
 	tipo: String,
 	cod_barras: String,
 	recibido: {type:Boolean, default:false},
+	paciente: String,
 	laboratorio: String,
 	centro: String,
 	fecha: {type:Date, default:Date.now}

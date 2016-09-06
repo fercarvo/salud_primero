@@ -23,7 +23,7 @@ router.post('/muestra', login.checkOperario, function(req, res, next){
 	var muestra = new Muestra({
 		tipo: req.body.tipo,
 		cod_barras: req.body.cod_barras,
-		//recibido: req.body.recibido,
+		paciente: req.body.paciente,
 		laboratorio: req.body.laboratorio,
 		centro: req.body.centro
 	});
@@ -40,9 +40,9 @@ router.post('/muestra', login.checkOperario, function(req, res, next){
 //actualiza una muestra
 router.put('/muestra/:id', login.checkOperario,function(req, res){
 	Muestra.findById(req.params.id, function(err, muestra){
-		muestra.tipo = req.body.tipo;
-		muestra.cod_barras= req.body.cod_barras;
-		muestra.recibido = req.body.recibido;
+		muestra.paciente = req.body.paciente;
+		//muestra.cod_barras= req.body.cod_barras;
+		//muestra.recibido = req.body.recibido;
 
 		muestra.save(function(err){
 			if(err){

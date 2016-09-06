@@ -9,7 +9,8 @@ module.exports = router;
 router.get('/laboratorista', login.checkLaboratorista, function(req, res, next) {
   res.render('laboratorista', { 
   	nombre: req.session.user.nombre,
-  	apellido: req.session.user.apellido 
+  	apellido: req.session.user.apellido,
+  	tipo: req.session.user.tipo
   });
 });
 
