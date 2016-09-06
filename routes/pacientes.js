@@ -15,6 +15,8 @@ router.get('/paciente', login.checkPaciente, function(req, res, next) {
   });
 });
 
+
+
 /*
 	API REST metodo, obtiene todos los pacientes
 */
