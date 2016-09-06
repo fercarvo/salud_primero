@@ -67,6 +67,31 @@ router.put('/paciente/reset-password/:id', function(req,res,next){
 });
 */
 
+router.post('/super-paciente', login.checkAdmin, function(req, res, next){ //Solo OPERARIOS logoneados pueden usar este metodo
+	  	
+  	var hash = bcrypt.hashSync(req.body.clave, bcrypt.genSaltSync(10));
+
+	var paciente = new Paciente({
+		nombre: req.body.nombre,
+		apellido: req.body.apellido,
+		cedula: req.body.cedula,
+		correo: req.body.correo,
+		direccion: req.body.direccion,
+		telefono: req.body.telefono,
+		foto: req.body.foto,
+		clave: hash
+	});
+
+	paciente.save(function(err, usr){
+		if (err) {
+			return next(err);
+		} else {
+			res.json(usr);	
+		}	
+	});
+});
+
+
 router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo OPERARIOS logoneados pueden usar este metodo
 	
   	var clave_temp = Math.random().toString(36).slice(-8);//genera cadena aleatoria
@@ -102,14 +127,10 @@ router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo O
 		} else {
 			transporter.sendMail(mailOptions, function(error, respuesta){
 				if (error){
-					console.log(error);
+					res.send(error);
 				}else{
 					res.send('correo enviado');
-					//console.log(mensaje);
-					//console.log(usr);
-					//res.json(usr);
 				}
-
 			});
 		}
 	});
