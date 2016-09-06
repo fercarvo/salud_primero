@@ -14,8 +14,6 @@ router.get('/laboratorista', login.checkLaboratorista, function(req, res, next) 
   });
 });
 
-
-
 router.get('/laboratoristas', login.checkAdmin, function(req, res, next){
 	Laboratorista.find(function(err, laboratoristas){
 		if(err){

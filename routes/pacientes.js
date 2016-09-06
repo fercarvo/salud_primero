@@ -4,13 +4,11 @@ var Paciente = require('../models/Paciente.js');
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 var login = require('../routes/login.js');
-
 var nodemailer = require('nodemailer');
 
 module.exports = router;
 
-
-router.get('/paciente', login.checkPaciente,function(req, res, next) {
+router.get('/paciente', login.checkPaciente, function(req, res, next) {
   res.render('paciente', { 
   	nombre: req.session.user.nombre,
   	apellido: req.session.user.apellido  
@@ -32,7 +30,7 @@ router.get('/paciente/datos', login.checkPaciente, function(req, res){
 /*
 	API REST metodo, obtiene todos los pacientes
 */
-router.get('/pacientes', login.checkAdmin, function(req, res, next){ //Solo Admins logoneados pueden usar este metodo
+router.get('/pacientes', login.checkAdmin, function(req, res, next){ 
 	Paciente.find(function(err, pacientes){
 		if(err){
 			return next(err);
