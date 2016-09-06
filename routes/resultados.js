@@ -7,7 +7,7 @@ var login = require('../routes/login.js');
 module.exports = router;
 
 //API REST DE EXAMENES
-router.get('/resultados', login.checkAdmin,function(req, res, next){
+router.get('/resultados', login.checkAdmin, function(req, res, next){
 	Resultado.find(function(err, resultados){
 		if (err) {
 			return next(err);

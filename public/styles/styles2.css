@@ -1,47 +1,73 @@
-@import url('https://fonts.googleapis.com/css?family=Exo:400,500,500italic,400italic,600,600italic,700,700italic,800,800italic,300,300italic');
-@import url('http://fonts.googleapis.com/css?family=Montserrat:400,700');
-
 body {
-    background: url("../imagenes/fondo.jpg") no-repeat;
-    font-family: 'Montserrat', sans-serif;
+    padding-top: 50px;
 }
 
-.login-form{
-    padding-top: 10%;
-    width:390px;
-}
-.login-title{font-family: 'Exo', sans-serif;text-align:center;color: white;}
-.login-userinput{margin-bottom: 10px;}
-.login-button{margin-top:10px;}
-.login-options{margin-bottom:0px;}
-.login-forgot{float: right;}
-
-
-#navbar li{
-    border-left: solid 1px;
-}
-#navbar li:first-child{
-    border-left: none;
+.container {
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    padding: 20px;
+    top: 20px;
+    -webkit-box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-nav li a span {
-    margin-right: 5px;
+.prioridad {
+    margin-left: 5px;
+    margin-right: 10px;
 }
 
-.usuarios {
-    width: 970px;
-    background-color: white;
-    border-radius: 10px;
+input[type='text'] {
+    margin-bottom: 15px;
 }
 
-.usuarios button {
-    margin-bottom: 10px;
+button {
+    width: 100%;
+    margin-top: 10px;
 }
 
-.ui-autocomplete {
-  z-index: 215000000 !important;
-}
-#inputId{
-    display: none;
+.editBtn button{
+	 width: 30%;
+	 margin: 10px auto;
 }
 
+.todoList {
+    border: 1px solid LightBlue;
+    border-radius: 5px;
+    padding: 10px;
+    color: #454545;
+}
+
+.glyphicon-circle-arrow-up,
+.glyphicon-circle-arrow-down,
+.glyphicon-edit,
+.glyphicon-remove{
+    cursor: pointer
+}
+
+.item {
+    text-transform: capitalize;
+    border-bottom: 1px solid SteelBlue;
+    margin-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    color: #454545;
+}
+
+.item.ng-move,
+.item.ng-enter,
+.item.ng-leave {
+    transition: all linear 1s;
+}
+
+.item.ng-leave.ng-leave-active,
+.item.ng-move,
+.item.ng-enter {
+    opacity: 0;
+}
+
+.item.ng-leave,
+.item.ng-move.ng-move-active,
+.item.ng-enter.ng-enter-active {
+    opacity: 1;
+}

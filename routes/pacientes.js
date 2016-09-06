@@ -31,6 +31,64 @@ router.get('/pacientes', login.checkAdmin, function(req, res, next){
 /*
 	API REST metodo, crea un paciente
 */
+
+
+/*
+//restablecer contraseña
+router.put('/paciente/reset-password/:id', function(req,res,next){
+
+	Paciente.findById(req.params.id, function(err, paciente){
+	var clave_nueva = Math.random().toString(36).slice(-8);//genera cadena aleatoria
+	var hash = bcrypt.hashSync(clave_temp, bcrypt.genSaltSync(10));
+
+	var transporter = nodemailer.createTransport('smtps://saludprimero.2016%40gmail.com:salud2016@smtp.gmail.com');
+
+    var mensaje  = "Se ha reestablecido su contraseña. Su contraseña nueva es:"+ clave_nueva;
+  	
+	var mailOptions = {
+    	from: "Admin <saludprimero.2016@gmail.com>",
+    	to: paciente.correo,
+    	subject: "Reestablecimiento de Contraseña",
+    	text: mensaje
+    };
+
+    paciente.clave = hash;
+
+	paciente.save(function(err){
+		if (err) {
+			res.send(err);
+		} else {
+			res.json(paciente);
+		}
+	});
+});
+*/
+
+router.post('/super-paciente', login.checkAdmin, function(req, res, next){ //Solo OPERARIOS logoneados pueden usar este metodo
+	  	
+  	var hash = bcrypt.hashSync(req.body.clave, bcrypt.genSaltSync(10));
+
+	var paciente = new Paciente({
+		nombre: req.body.nombre,
+		apellido: req.body.apellido,
+		cedula: req.body.cedula,
+		correo: req.body.correo,
+		direccion: req.body.direccion,
+		telefono: req.body.telefono,
+		foto: req.body.foto,
+		clave: hash
+	});
+
+	paciente.save(function(err, usr){
+		if (err) {
+			return next(err);
+		} else {
+			res.json(usr);	
+		}	
+	});
+});
+
+
 router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo OPERARIOS logoneados pueden usar este metodo
 	
   	var clave_temp = Math.random().toString(36).slice(-8);//genera cadena aleatoria
@@ -66,14 +124,10 @@ router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo O
 		} else {
 			transporter.sendMail(mailOptions, function(error, respuesta){
 				if (error){
-					console.log(error);
+					res.send(error);
 				}else{
 					res.send('correo enviado');
-					//console.log(mensaje);
-					//console.log(usr);
-					//res.json(usr);
 				}
-
 			});
 		}
 	});
