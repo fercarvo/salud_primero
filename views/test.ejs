@@ -43,7 +43,7 @@
     </div>
     
     <div>
-        <form id="formularioCrearMuestra" method="post" action="/paciente">
+        <form id="formularioActualizarPaciente" method="put" action="/paciente/:id">
             <fieldset>
                 <legend>Actualice sus datos</legend>
                 Nombres: <input type="text" name="nombre" placeholder="Ingrese sus nombres" require/><br />
@@ -58,13 +58,32 @@
         </form>
     </div>
     
-        *****paciente.nombre = req.body.nombre;
-		paciente.apellido = req.body.apellido;
-		paciente.cedula = req.body.cedula;
-		paciente.correo = req.body.correo;
-		paciente.direccion = req.body.direccion;
-		paciente.telefono = req.body.telefono;
-		paciente.foto = req.body.foto;
-		paciente.clave = hash;
+    <div>
+        <form id="formularioCrearMuestra" method="post" action="/examen">
+            <fieldset>
+                <legend>Agregar una muestra</legend>
+                Paciente: <input list="pctes" name="paciente">
+                <datalist id="pctes">
+                    <option value="Lenin Tenecela">
+                    <option value="Guido Duchi">
+                    <option value="Paciente1">
+                </datalist>
+                Muestra: <input list="muestras" name="muestra">
+                <datalist id="muestras">
+                    <option value="Sangre">
+                    <option value="Orina">
+                    <option value="Heces">
+                </datalist>
+                Nombre: <input type="text" name="nombre" require/><br />
+                <input type="submit" value="Enviar">
+                <input type="reset" value="Borrar">
+            </fieldset>
+        </form>
+    </div>
+    
+    paciente: req.body.paciente,
+		muestra: req.body.muestra,
+		nombre: req.body.nombre
+    
     </body>
 </html>
