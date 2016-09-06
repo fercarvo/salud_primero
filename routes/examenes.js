@@ -39,7 +39,7 @@ router.get('/pacientes/:id/examenes', login.checkPaciente, function(req, res, ne
 //crea un examen
 router.post('/examen', login.checkOperario,function(req, res, next){
 	var examen = new Examen({
-		paciente: req.body.paciente,
+		//paciente: req.body.paciente,
 		muestra: req.body.muestra,
 		nombre: req.body.nombre
 	});
@@ -55,7 +55,7 @@ router.post('/examen', login.checkOperario,function(req, res, next){
 
 router.put('/examen/:id', login.checkOperario,function(req, res){
 	Examen.findById(req.params.id, function(err, examen){
-		examen.paciente = req.body.paciente;
+		//examen.paciente = req.body.paciente;
 		examen.muestra = req.body.muestra;
 		examen.nombre = req.body.nombre;
 
