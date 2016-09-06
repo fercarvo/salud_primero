@@ -73,7 +73,7 @@ angular.module('appPatient',['ui.router'])
     
 
 function cargarCentrosMed(){
-    $.getJSON("../json/centrosMed.json", function(data){
+    $.getJSON("json/centrosMed.json", function(data){
         $.each(data,function(i){
             var nombre = data[i].nombre;
             var ciudad = data[i].ciudad;
