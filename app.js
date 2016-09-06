@@ -26,6 +26,7 @@ require('./models/Laboratorista');
 require('./models/Admin');
 require('./models/Imagen');
 require('./models/Horario');
+require('./models/Laboratorio');
 
 
 
@@ -35,6 +36,7 @@ var examenesRoutes = require('./routes/examenes');
 var pacientesRoutes = require('./routes/pacientes');
 var muestrasRoutes = require('./routes/muestras');
 var centrosMedRoutes = require('./routes/centrosMed');
+var laboratoriosRoutes = require('./routes/laboratorios');
 var operariosRoutes = require('./routes/operarios');
 var laboratoristasRoutes = require('./routes/laboratoristas');
 var adminsRoutes = require('./routes/admins');
@@ -56,18 +58,20 @@ app.use(session({
   ephemeral: true
 }));
 
-
-/*app.use(function(req, res, next) {
+app.use(function(req, res, next) {
   if (req.session && req.session.user) {
-    next()
+    console.log("esta logoneado");
+    next();
   } else {
     if (req.url == "/login" || req.url == "/" || req.url == "/styles/styles.css" || req.url == "/Imagenes/fondo.jpg" ) {
       next();
     } else {
-      res.redirect("/");
+      console.log("no esta logoneado");
+      next(); // esto no va
+      //res.redirect("/"); esto si va
     }
   }
-});*/
+});
 
 
 
@@ -88,6 +92,7 @@ app.use('/', examenesRoutes);
 app.use('/', pacientesRoutes);
 app.use('/', muestrasRoutes);
 app.use('/', centrosMedRoutes);
+app.use('/', laboratoriosRoutes);
 app.use('/', operariosRoutes);
 app.use('/', laboratoristasRoutes);
 app.use('/', adminsRoutes);
