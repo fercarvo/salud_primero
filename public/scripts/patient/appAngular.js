@@ -5,14 +5,6 @@ angular.module('appPatient',['ui.router'])
 				url: '/centros',
 				templateUrl: 'views/paciente/centros.html',
 				controller:'ctrlCentros'
-			})
-			.state('datos',{
-				url: '/datos/{id}',
-				templateUrl: 'views/paciente/datos.html'
-			})
-			.state('examenes',{
-				url: '/examenes/{id}',
-				templateUrl: 'views/paciente/examenes.html'
 			});
 		$urlRouterProvider.otherwise('centros');
 	})
@@ -100,6 +92,7 @@ angular.module('appPatient',['ui.router'])
 		return comun;
 	})*/
 	.controller('ctrlCentros',function($scope, $state, comun){
+            comun.centros.cargar();
             console.log("controlador centros");
 		cargarCentrosMed();
 	})
