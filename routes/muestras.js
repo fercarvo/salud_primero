@@ -19,13 +19,21 @@ router.get('/muestras', login.checkLaboratorista, function(req, res, next){
 
 //crea una nueva muestra
 router.post('/muestra', login.checkOperario, function(req, res, next){
-	var muestra = new Muestra(req.body);
 
-	muestra.save(function(err, muestra){
-		if(err){
+	var muestra = new Muestra({
+		tipo: req.body.tipo,
+		cod_barras: req.body.cod_barras,
+		//recibido: req.body.recibido,
+		laboratorio: req.body.laboratorio,
+		centro: req.body.centro
+	});
+
+	muestra.save(function(err, mues){
+		if (err) {
 			return next(err);
+		} else {
+			res.json(mues);
 		}
-		res.json(muestra);
 	});
 });
 
