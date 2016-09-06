@@ -12,20 +12,9 @@ angular.module('appMuestras',['ui.router'])
 				controller: 'ctrlEditar'
 			})
 		$urlRouterProvider.otherwise('muestra');})
-	.service('dataService', function() {
-	  // private variable
-	  var _dataObj = 0;
-
-	  return {
-            getProperty: function () {
-                return _dataObj;
-            },
-            setProperty: function(value) {
-                _dataObj = value;
-            }
-        };})
 	.factory('comun',function($http){
 		var comun = {}
+        
 		comun.muestras = [];
 		comun.muestra = {};
 
