@@ -27,6 +27,7 @@ require('./models/Admin');
 require('./models/Imagen');
 require('./models/Horario');
 require('./models/Laboratorio');
+require('./models/Resultado');
 
 
 
@@ -40,6 +41,7 @@ var laboratoriosRoutes = require('./routes/laboratorios');
 var operariosRoutes = require('./routes/operarios');
 var laboratoristasRoutes = require('./routes/laboratoristas');
 var adminsRoutes = require('./routes/admins');
+var resultadosRoutes = require('./routes/resultados');
 var login = require('./routes/login');
 
 var app = express();
@@ -97,6 +99,7 @@ app.use('/', operariosRoutes);
 app.use('/', laboratoristasRoutes);
 app.use('/', adminsRoutes);
 app.use('/', login);
+app.use('/', resultadosRoutes);
 app.use('/users', users);
 
 
