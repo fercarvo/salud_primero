@@ -2,8 +2,20 @@
 <html lang="en">
     <head>
         <title>Salud Primero - Paciente </title>
-        <!-- <% include app/scripts %> -->
+        <% include app/scripts %>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    
+        <link rel="stylesheet" href="styles/styles.css">
         <link rel="stylesheet" href="styles/estiloPac.css">
+    
+
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
         <script type="text/javascript" src="scripts/patient/appAngular.js"></script>
@@ -16,19 +28,7 @@
         </header>
         <main>
             <% include app/header %>
-            <div id="index-banner" class="parallax-container">
-              <div class="section no-pad-bot">
-                <div class="container">
-                  <br><br>
-                  <h1 class="header center teal-text text-lighten-2"><%= nombre %> <%= apellido %></h1>
-                  <br><br>
-                </div>
-              </div>
-              <div class="parallax"><img src="imagenes/main3.jpg"></div>
-            </div>
-
-            <div class="container">
-              <h6>contenido dinamico</h6>
+            <div class="container-fluid">
               <ui-view></ui-view>
             </div>
             

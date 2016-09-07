@@ -17,7 +17,7 @@ angular.module('appPatient', ['ui.router'])
                 controller: 'ctrlExamenes'
             });
 
-        $urlRouterProvider.otherwise('datos');
+        $urlRouterProvider.otherwise('centros');
     })
     .factory('comun', function($http) {
         var comun = {};
@@ -52,28 +52,19 @@ angular.module('appPatient', ['ui.router'])
         }
         return comun;
     })
-    .controller('ctrlCentros', function($scope, $state, comun) {
-
-        //$scope.tarea = {}
-        // $scope.tareas = [];
-        comun.getCentros();
-        $scope.centros = comun.centros_med;
-        
-    })
-     .controller('ctrlDatos', function($scope, $state, comun) {
+    .controller('ctrlDatos', function($scope, $state, comun) {
         comun.getDatos();
         $scope.datos = comun.datos;
         
     })
     .controller('ctrlExamenes', function($scope, $state, comun) {
         //cargarCentrosMed();
-        function nueva(){
-            alert("hola");
-
-        }
-        nueva();
         comun.getExamenes();
         $scope.examenes = comun.examenes;  
     })
+    .controller('ctrlCentros', function($scope, $state, comun) {
 
+        comun.getCentros();
+        $scope.centros = comun.centros_med;
 
+    })

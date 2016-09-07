@@ -1,8 +1,52 @@
-<div class="todoList bg-info">
+
+<div class="container">
     <h4>Centros Medicos</h4>
-    <div class="item" ng-repeat="centro in centros">
-        <span>
-            <a href="#" > Centro: {{centro.nombre}} </a> 
-        </span>
+
+    <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="centro in centros">
+    <div class="contenedor">
+        <div class="centro-med">
+            <div class="lado frente">
+                <img src="{{centro.portada}}" alt="imagen"> 
+            </div>   
+            <div class="lado atras lado atras panel panel-default">
+                <div class="panel-heading tarjeta-titulo">
+                    <h4 class="text-center panel-title">{{centro.nombre}}</h4>
+                </div>
+                <div class="panel-body text-center">
+                    <h6 class="text-center">{{centro.descripcion}}</h6>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalCentro{{centro.nombre}}">Más Información</button>
+                </div>
+            </div>
+        </div>    
     </div>
+        
+    </div>    
 </div>
+
+<!--
+
+<div class="item" ng-repeat="centro in centros">
+    <span>
+        <a href="#"> Centro: {{centro.nombre}} </a> 
+            
+    </span>
+</div>
+<div class="centro-med" >
+            <div class="lado frente">
+                
+            </div>
+            <div class="text-center lado atras panel panel-default">
+                <div class="panel-heading tarjeta-titulo">
+                    <h4 class="text-center panel-title">{{centro.nombre}}</h4>
+                </div>
+                <div class="panel-body text-center">
+                    <h6 class="text-center">{{centro.descripcion}}</h6>
+                </div>
+                <div class="panel-footer">
+                    <h6 class="text-center">{{centro.ciudad}}</h6>
+                </div>
+            </div>       
+        </div>
+-->
