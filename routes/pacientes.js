@@ -27,6 +27,9 @@ router.get('/paciente/datos', login.checkPaciente, function(req, res){
 });
 
 
+
+
+
 /*
 	API REST metodo, obtiene todos los pacientes
 */

@@ -1,0 +1,23 @@
+<div class="section no-pad-bot">
+  <div class="container">
+    <div class="row center">
+      <div>
+
+        <form id="formularioActualizarPaciente" method="put" action="/paciente/:id">
+            <fieldset>
+                <legend>Actualice sus datos</legend>
+                Nombres: <input type="text" name="nombre" placeholder="Ingrese sus nombres" value = "{{datos.nombre}}" require/><br />
+                Apellidos: <input type="text" name="apellido" placeholder="Ingrese sus apellidos" value = "{{datos.apellido}}" require/><br />
+                C&eacute;dula: <input type="text" name="cedula" placeholder="Ingrese su c&eacute;dula" value = "{{datos.cedula}}" require/><br />
+                Direcci&oacute;n: <input type="text" name="direccion" placeholder="Ingrese su direcci&oacute;" value = "{{datos.direccion}}" require/><br />
+                Tel&eacute;fono: <input type="text" name="telefono" placeholder="Ingrese su tel&eacute;fono" value = "{{datos.telefono}}" require/><br />
+                <input type="submit" value="Enviar">
+                <input type="reset" value="Cancelar">
+            </fieldset>
+        </form>
+
+
+    </div>
+    </div>
+  </div>
+</div>

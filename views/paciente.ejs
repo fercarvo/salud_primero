@@ -2,10 +2,11 @@
 <html lang="en">
     <head>
         <title>Salud Primero - Paciente </title>
-        <% include app/scripts %>
+        <!-- <% include app/scripts %> -->
         <link rel="stylesheet" href="styles/estiloPac.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
         <script type="text/javascript" src="scripts/patient/appAngular.js"></script>
-        <script type="text/javascript" src="scripts/script.js"></script>
     </head>
 
     <body ng-app="appPatient">
@@ -27,6 +28,7 @@
             </div>
 
             <div class="container">
+              <h6>contenido dinamico</h6>
               <ui-view></ui-view>
             </div>
             

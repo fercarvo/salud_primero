@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var ExamenSchema = new mongoose.Schema({
-	//paciente: String,
+	paciente: String,
 	muestra: String,
 	nombre: String,
 });

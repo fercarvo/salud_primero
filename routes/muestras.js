@@ -75,3 +75,5 @@ router.patch('/muestra/:id', login.checkOperario, function(req, res){
 		});
 	});
 });
+
+

@@ -9,6 +9,10 @@ var CentroMedicoSchema = new mongoose.Schema({
 		longitud: String
 	},
 	descripcion: String,
+	portada: String,
+	foto1: String,
+	foto2: String,
+	foto3: String
 });
 
 module.exports = mongoose.model('CentroMedico', CentroMedicoSchema);
