@@ -8,6 +8,16 @@ var CentroMedicoSchema = new mongoose.Schema({
 		latitud: String,
 		longitud: String
 	},
+	horario: {
+		lunes: String,
+        martes: String,
+        miercoles: String,
+        jueves: String,
+        viernes: String,
+        sabado: String,
+        domingo: String
+	},
+
 	descripcion: String,
 	portada: String,
 	foto1: String,

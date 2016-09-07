@@ -63,9 +63,18 @@
     font-weight: bold;
 }
 
+.panel-body.horarios{
+    padding-top: 0;
+    padding-bottom: 0;
+}
 
-
-
+.dia{
+    margin-bottom: -1px;
+    margin-top: 4px;
+}
+.info{
+    margin-top: 5px;
+}
 
 
 

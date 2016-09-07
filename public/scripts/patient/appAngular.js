@@ -28,6 +28,7 @@ angular.module('appPatient', ['ui.router'])
 
         /***Sección de métodos remotos***/
         comun.getCentros = function(){
+
             return $http.get('/centrosMed')
             .success(function(data){
                 angular.copy(data, comun.centros_med)
