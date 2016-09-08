@@ -1,4 +1,4 @@
-angular.module('appPatient', ['ui.router'])
+angular.module('appPatient', ['ui.router','ui.grid', 'ui.grid.selection','ui.grid.exporter'])
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('centros', {
@@ -98,7 +98,10 @@ angular.module('appPatient', ['ui.router'])
     .controller('ctrlExamenes', function($scope, $state, comun) {
         //cargarCentrosMed();
         comun.getExamenes();
-        $scope.examenes = comun.examenes;  
+        $scope.examenes = comun.examenes;
+        $scope.gridOptions = function(){
+            enableGridMenu: true;
+        }
     })
     .controller('ctrlCentros', function($scope, $state, comun) {
 
@@ -123,9 +126,7 @@ angular.module('appPatient', ['ui.router'])
         $(document).ready(function(){
             $('.carousel').carousel();
         });
-<<<<<<< HEAD
-    });
-}
+    })
 
 
 
@@ -133,7 +134,7 @@ angular.module('appPatient', ['ui.router'])
 /*angular.module('appExportarToPDF',['ui.router']
     .controller('exportarToPdf',function($scope)){
                 
-                }*/
+                }
 
 (function(){
     //export html table to pdf, excel and doc format directive
@@ -174,4 +175,4 @@ $scope.exportAction = function(){
 
     })
 
->>>>>>> wjvelez
+>>>>>>> wjvelez*/
