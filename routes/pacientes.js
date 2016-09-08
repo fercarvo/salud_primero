@@ -46,15 +46,6 @@ router.put('/paciente/datos', login.checkPaciente, function(req, res){
 });
 
 
-
-
-
-
-
-
-
-
-
 /*
 	API REST metodo, obtiene todos los pacientes
 */
@@ -176,6 +167,7 @@ router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo O
 /*
 	API REST metodo, actualiza un paciente
 */
+
 router.put('/paciente/:id', login.checkPaciente, function(req, res){ //Solo USUARIOS logoneados pueden usar este metodo para si mismos
 	var hash = bcrypt.hashSync(req.body.clave, bcrypt.genSaltSync(10));
 

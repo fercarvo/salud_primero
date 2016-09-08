@@ -23,9 +23,10 @@ angular.module('appPatient', ['ui.router'])
         var comun = {};
 
         comun.centros_med = [];
-        comun.datos = [];
+        comun.datos = {};
         comun.examenes = [];
 
+        nuevosDatos = {};
         /***Sección de métodos remotos***/
         comun.getCentros = function(){
 
@@ -44,6 +45,15 @@ angular.module('appPatient', ['ui.router'])
             })
         }
 
+        
+        comun.updateDatos = function(nuevosDatos){
+            return $http.put('/paciente/datos/', nuevosDatos)
+            .success(function(data){
+                var indice = comun.datos.indexOf(nuevosDatos);
+                comun.datos[indice] = data;
+            })
+        }
+
         comun.getExamenes = function(){
             return $http.get('/paciente/examenes')
             .success(function(data){
@@ -54,9 +64,20 @@ angular.module('appPatient', ['ui.router'])
         return comun;
     })
     .controller('ctrlDatos', function($scope, $state, comun) {
+
         comun.getDatos();
         $scope.datos = comun.datos;
+        //$scope.nuevos = comun.nuevosDatos;
         
+
+        $scope.actualizar = function() {
+           comun.updateDatos($scope.datos);
+           $state.go('centros');
+            
+        }
+        $scope.regresar = function() {
+            $state.go('centros');    
+        }
     })
     .controller('ctrlExamenes', function($scope, $state, comun) {
         //cargarCentrosMed();
