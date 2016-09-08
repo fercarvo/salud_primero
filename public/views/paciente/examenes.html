@@ -22,7 +22,8 @@ table tr:nth-child(even) {
     <div class="row center">
       <h5 class="header col s12 light">Mis Ex&aacute;menes</h5>
         <div>
-        <table class="responsive-table" id="tntGridServices" ui-grid="gridOptions" ui-grid-selection ui-grid-exporter> <!-- Tabla pura en html
+        <table class="responsive-table" id="tntGridServices" ui-grid="gridOptions" ui-grid-selection ui-grid-exporter> 
+        <!-- Tabla pura en html
         a) Fecha de la toma de la muestra.
         b) Exámenes a realizarse contra la muestra medica.
         c) Estado: Recién se ha ingresado al sistema, la muestra está en proceso de análisis del
@@ -36,9 +37,9 @@ table tr:nth-child(even) {
                 <th>Estado</th>
                 <th>Descargar</th>
             </tr>
-            <tr>
-                <td>Celda 1</td>
-                <td>Celda 2</td>
+            <tr ng-repeat="exam in examenes">
+                <td>{{exa.fecha}}</td>
+                <td>{{exa.estado}}</td>
                 <td>Celda 3</td>
                 <td>Celda 4</td>
             </tr>

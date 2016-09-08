@@ -1,4 +1,4 @@
-angular.module('appPatient', ['ui.router','ui.grid', 'ui.grid.selection','ui.grid.exporter'])
+angular.module('appPatient', ['ui.router'])
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('centros', {
@@ -87,7 +87,7 @@ angular.module('appPatient', ['ui.router','ui.grid', 'ui.grid.selection','ui.gri
 
         $scope.actualizar = function() {
            comun.updateDatos($scope.datos);
-           $state.go('datos');
+           $state.go('centros');
             
         }
         $scope.regresar = function() {
@@ -99,6 +99,7 @@ angular.module('appPatient', ['ui.router','ui.grid', 'ui.grid.selection','ui.gri
         //cargarCentrosMed();
         comun.getExamenes();
         $scope.examenes = comun.examenes;
+
     })
     .controller('ctrlCentros', function($scope, $state, comun) {
 
