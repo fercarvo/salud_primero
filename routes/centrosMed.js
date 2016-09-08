@@ -16,6 +16,19 @@ router.get('/centrosMed', function(req, res, next){
 	});
 });
 
+
+//obtiene la informacion de un centro medico especifico
+router.get('/centroMed/:id', function(req, res, next){
+	CentroMedico.findById(req.params.id, function(err, centroMed){
+		centroMed.save(function(err){
+			if(err){
+				res.send(err);
+			}
+			res.json(centroMed);
+		});
+	});
+});
+
 //Post
 router.post('/centroMed', function(req, res, next){
 	var centro = new CentroMedico({
