@@ -20,6 +20,8 @@ angular.module('appOperator',['ui.router'])
 	.controller('ctrlRegp',function($scope, $state, $http){
 		$scope.nuevo_paciente = {};
         $scope.pacientes = {};
+        $scope.laboratorios = {};
+        $scope.centros = {};
         $scope.editar_paciente = {};
         $scope.disEditPaciente = true;
 
@@ -43,11 +45,7 @@ angular.module('appOperator',['ui.router'])
               $scope.pacientes.push(response.data);
                     
             })
-            $http.get("/pacientes")
-	            .then(function (response) {
-	                $scope.pacientes = response.data;
-	            }
-	        );
+            $state.go('RegistrarPaciente');
             $scope.nuevo_paciente = {};
 
         }
@@ -57,11 +55,7 @@ angular.module('appOperator',['ui.router'])
             $scope.editar_paciente = paciente;
             $scope.disEditPaciente = false;
             $('#modal1').openModal();
-            $http.get("/pacientes")
-	            .then(function (response) {
-	                $scope.pacientes = response.data;
-	            }
-	        );
+            $state.go('RegistrarPaciente');
         };
 
 
@@ -80,11 +74,7 @@ angular.module('appOperator',['ui.router'])
                 $scope.disEditPaciente = true; //se desactiva el formulario de editar para evitar caida del servidor
             }, function (error) {
             });
-            $http.get("/pacientes")
-	            .then(function (response) {
-	                $scope.pacientes = response.data;
-	            }
-	        );
+            $('#modal1').closeModal();
         };
 
         $scope.delete = function ( pid ) {
@@ -144,11 +134,7 @@ angular.module('appOperator',['ui.router'])
                 $scope.disEditMuestra = true; //se desactiva el formulario de editar para evitar caida del servidor
             }, function (error) {
             });
-            $http.get("/muestras")
-            .then(function (response) {
-                $scope.muestras = response.data;
-	            }
-	        );
+            $state.go('RegistrarMuestra');
         };
 
         //Se crea un paciente
@@ -164,12 +150,7 @@ angular.module('appOperator',['ui.router'])
                     
             })
                 $scope.nuevo_muestra = {};
-            $http.get("/muestras")
-            .then(function (response) {
-                $scope.muestras = response.data;
-	            }
-	        );
-
+            $state.go('RegistrarMuestra');
         }
 
         $scope.deleteMuestra = function ( pid ) {
@@ -190,11 +171,7 @@ angular.module('appOperator',['ui.router'])
             $scope.disEditMuestra = false;
             $scope.activarInfo();
             $('#modal1').openModal();
-            $http.get("/muestras")
-            .then(function (response) {
-                $scope.muestras = response.data;
-	            }
-	        );
+            $state.go('RegistrarMuestra');
         };
 
         $('.collapsible').collapsible({
