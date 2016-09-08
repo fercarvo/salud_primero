@@ -1,8 +1,49 @@
-<div class="container">
-    <h4>Examenes</h4>
-    <div class="item" ng-repeat="examen in examenes">
-        <span>
-            <h4> Examen: {{examen.nombre}} <span class="glyphicon glyphicon-download-alt">Descargar</span></h4> 
-        </span>
+
+<style>
+h5 {
+    border-bottom: 3px solid #cc9900;
+    color: #996600;
+    font-size: 30px;
+}
+table, th , td  {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+}
+table tr:nth-child(odd) {
+    background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+    background-color: #ffffff;
+}
+</style>
+<div class="section no-pad-bot" >
+  <div class="container" >
+    <div class="row center">
+      <h5 class="header col s12 light">Mis Ex&aacute;menes</h5>
+        <div>
+        <table class="responsive-table" id="tntGridServices" ui-grid="gridOptions" ui-grid-selection ui-grid-exporter> <!-- Tabla pura en html
+        a) Fecha de la toma de la muestra.
+        b) Exámenes a realizarse contra la muestra medica.
+        c) Estado: Recién se ha ingresado al sistema, la muestra está en proceso de análisis del
+        laboratorio, o los resultados están listos. ( Sea creativo para mostrar esta parte)
+        d) Link para descargar el pdf con los resultados. El cual deberá ser generado una vez que
+        los resultados hayan sido ingresados (revisar la librería pdfmake ).-->
+            <caption>Mis Ex&aacute;menes</caption>
+            <tr>
+                <th>Fecha</th>
+                <th>Examen</th>
+                <th>Estado</th>
+                <th>Descargar</th>
+            </tr>
+            <tr>
+                <td>Celda 1</td>
+                <td>Celda 2</td>
+                <td>Celda 3</td>
+                <td>Celda 4</td>
+            </tr>
+        </table>
+        </div>
     </div>
+</div>
 </div>

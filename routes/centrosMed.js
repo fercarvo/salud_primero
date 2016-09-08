@@ -6,7 +6,7 @@ var Imagen = require('../models/Imagen.js');
 var mongoose = require('mongoose');
 module.exports = router;
 
-//Get
+//Get 
 router.get('/centrosMed', function(req, res, next){
 	CentroMedico.find(function(err, centrosMed){
 		if(err){

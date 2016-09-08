@@ -17,6 +17,8 @@
     "morgan": "~1.7.0",
     "nodemailer": "^2.5.0",
     "nodemailer-smtp-transport": "^2.6.0",
-    "serve-favicon": "~2.3.0"
+    "pdfmake": "^0.1.18",
+    "serve-favicon": "~2.3.0",
+    "ui-grid": "0.0.0"
   }
 }

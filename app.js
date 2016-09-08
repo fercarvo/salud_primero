@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var pdfmake = require('pdfmake');
 mongoose.Promise = global.Promise; //esta linea es porque salia un advertencia de monggose
 
 mongoose.connect('mongodb://admin:admin@ds161505.mlab.com:61505/proyectodaw', function(err){

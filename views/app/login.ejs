@@ -7,6 +7,7 @@
   </div>
 </nav>
 
+
 <div id="index-banner" class="parallax-container">
   <div class="section no-pad-bot">
     <div class="container">
@@ -26,7 +27,6 @@
 <!-- Modal Structure -->
 <div id="modal1" class="modal grey">
   <div class="modal-content">
-
     <center>
       <div class="section"></div>
 
@@ -63,13 +63,60 @@
             <center>
               <div class='row'>
                 <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect'>Login</button>
-              </div>
+              </div>              
             </center>
           </form>
         </div>
       </div>
-    </center>
+    </center>      
   </div>
+</div>
+
+<div id="modalPcte" class="modal grey">
+    <div class="modal-content" >
+        <center>
+          <div class="section"></div>
+            <div class="container">
+                <div class="z-depth-1 red lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+                    <p>Paciente: Permite ver</p>
+                    <p>Centros M&eacute;dicos: Presenta informaci&oacute;n de los centros médicos (Nombre; Direcci&oacute;n; Descripci&oacute;n; Horarios; Galer&iacute;a de im&aacute;genes;	Mapa)</p>
+                    <p>Mis ex&aacute;menes: Presenta informaci&oacute;n de los ex&aacute;menes (Fecha; Ex&aacute;menes a realizarse; Estado -Ingresado o Recibido-; pdf con los resultados)</p>
+                    <p>Mis Datos: Permite editar datos personales (Nombres; Apellidos; C&eacute;dula; email; Direcci&oacute;n; Tel&eacute;fono; Foto; Contraseña)</p>
+                </div>
+          </div>
+    </center> 
+    </div>
+</div>
+
+<div id="modalOp" class="modal grey">
+    <div class="modal-content" >
+        <center>
+          <div class="section"></div>
+            <div class="container">
+                <div class="z-depth-1 blue lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+                    <p>Operario: Cuando el usuario que ingresa es un operario puede realizar las siguientes opciones:</p>
+                    <p>Registrar Paciente. Permite consultar, crear, modificar y eliminar un paciente donde se ingresa información básica (Nombres; Apellidos; C&eacute;dula; Correo electr&oacute;nico -este es el usuario del paciente-). Se genera la clave del usuario al registrar al paciente, la cual es enviada al correo.</p>
+                    <p>Registrar muestra. Permite ingresar, editar y eliminar una muestra médica donde se registra: Paciente del listado del sistema. Si no existe, deberá crear un nuevo paciente. Centro Médico donde se recibió la muestra médica. Laboratorio encargado de analizar la muestra. Tipo de Muestra recibida (sangre, orina, heces) Exámenes a realizar contra la muestra (dependen de la muestra). Código de barras, generado automáticamente.</p>
+                    <p>Gráficos Estadísticos. Permite visualizar: Gráfico tipo pastel del total de muestras médicas asignadas por laboratorio y Gráfico tipo barras del total de muestras médicas mensuales por laboratorio, de acuerdo al rango de meses ingresado</p>
+                </div>
+          </div>
+    </center> 
+    </div>
+</div>
+
+<div id="modalLab" class="modal grey">
+    <div class="modal-content" >
+        <center>
+          <div class="section"></div>
+            <div class="container">
+                <div class="z-depth-1 green lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+                    <p>Laboratorista: Cuando el usuario que ingresa es un laboratorista puede realizar las siguientes opciones</p>
+                    <p>Muestras M&eacute;dicas, que permite marcar cuando una muestra m&eacute;dica fue recibida con &eacute;xito en el laboratorio.</p>
+                    <p>Ingresar resultados del análisis de una muestra. Visualiza una tabla por cada tipo de examen que se va a realizar contra la muestra. Cada tabla presenta los parámetros del examen realizado de acuerdo al siguiente esquema: Parámetro; Unidades; Resultado; Valores de referencia.</p>
+                </div>
+          </div>
+    </center> 
+    </div>
 </div>
 
 <div class="section">
@@ -80,14 +127,16 @@
       <div class="card">
           <div class="card-image">
             <img src="imagenes/main1.jpg">
-            <span class="card-title">Como Llegar</span>
+            <span class="card-title">Gu&iacute;a R&aacute;pida Paciente</span>
           </div>
           <div class="card-content">
-            <p>I am a very simple card. I am good at containing small bits of information.
-            I am convenient because I require little markup to use effectively.</p>
+              <p><u><b>Paciente:</b></u> Permite</p>
+              <p>Centros M&eacute;dicos</p>
+              <p>Mis ex&aacute;menes</p>
+              <p>Mis Datos</p>
           </div>
           <div class="card-action">
-            <a href="#">This is a link</a>
+              <a class="modal-trigger waves-effect waves-light btn" href="#modalPcte">Gu&iacute;a Completa</a>
           </div>
         </div>
     </div>
@@ -96,14 +145,16 @@
       <div class="card">
         <div class="card-image">
           <img src="imagenes/main2.jpg">
-          <span class="card-title">Salud Primero</span>
+          <span class="card-title">Gu&iacute;a R&aacute;pida Operario</span>
         </div>
         <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
+              <p><u><b>Operario: </b></u>Permite</p>
+              <p>Registrar Paciente</p>
+              <p>Registrar Muestra</p>
+              <p>Consultar Gr&aacute;ficos Estad&iacute;sticos</p>
+          </div>
         <div class="card-action">
-          <a href="#">This is a link</a>
+          <a class="modal-trigger waves-effect waves-light btn" href="#modalOp">Gu&iacute;a Completa</a>
         </div>
       </div>
     </div>
@@ -112,14 +163,16 @@
       <div class="card">
         <div class="card-image">
           <img src="imagenes/main3.jpg">
-          <span class="card-title">Acerca De</span>
+          <span class="card-title">Gu&iacute;a R&aacute;pida Laboratorista</span>
         </div>
         <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
+          <p><b><u>Laboratorista:</u></b> Permite</p>
+              <p>Ver muestras m&eacute;dicas</p>
+            <p>Ingresar resultados de ex&aacute;menes</p>
+            <p>Visualizar tablas de los resultados</p>
         </div>
         <div class="card-action">
-          <a href="#">This is a link</a>
+          <a class="modal-trigger waves-effect waves-light btn" href="#modalLab">Gu&iacute;a Completa</a>
         </div>
       </div>
     </div>

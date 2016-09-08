@@ -1,4 +1,4 @@
-angular.module('appPatient', ['ui.router'])
+angular.module('appPatient', ['ui.router','ui.grid', 'ui.grid.selection','ui.grid.exporter'])
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('centros', {
@@ -98,7 +98,7 @@ angular.module('appPatient', ['ui.router'])
     .controller('ctrlExamenes', function($scope, $state, comun) {
         //cargarCentrosMed();
         comun.getExamenes();
-        $scope.examenes = comun.examenes;  
+        $scope.examenes = comun.examenes;
     })
     .controller('ctrlCentros', function($scope, $state, comun) {
 
@@ -128,4 +128,5 @@ angular.module('appPatient', ['ui.router'])
 
         $('.carousel.carousel-slider').carousel({full_width: true},{time_constant: 200},{interval: 300});
     })
+
 
