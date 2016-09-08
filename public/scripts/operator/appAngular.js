@@ -99,6 +99,7 @@ angular.module('appOperator',['ui.router'])
         $('.collapsible').collapsible({
 	      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
 	    });
+
 	})
 	.controller('ctrlRegm',function($scope, $state, $http){
 	    $scope.pacientes = {};
@@ -199,4 +200,6 @@ angular.module('appOperator',['ui.router'])
         $('.collapsible').collapsible({
 	      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
 	    });
+
+        $('#tabol').DataTable();
 	})
