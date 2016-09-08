@@ -17,7 +17,7 @@ router.get('/resultados', login.checkAdmin, function(req, res, next){
 });
 
 
-router.get('/examen/:id/resultados', login.checkLaboratorista, function(req, res, next){
+router.get('/examenes/:id/resultados', login.checkLaboratorista, function(req, res, next){
 	Resultado.find({examen:req.params.id}, function(err, resultados){
 		if (err) {
 			return next(err);
@@ -44,7 +44,7 @@ router.post('/resultado', login.checkLaboratorista, function(req, res, next){
 	});
 });
 
-router.put('/resultado/:id', login.checkLaboratorista, function(req, res){
+router.put('/resultados/:id', login.checkLaboratorista, function(req, res){
 	Resultado.findById(req.params.id, function(err, resultado){
 		resultado.parametro = req.body.parametro;
 		resultado.resultado = req.body.resultado;
@@ -60,7 +60,7 @@ router.put('/resultado/:id', login.checkLaboratorista, function(req, res){
 	});
 });
 
-router.delete('/resultado/:id', login.checkLaboratorista, function(req, res){
+router.delete('/resultados/:id', login.checkLaboratorista, function(req, res){
 	Resultado.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			res.send(err);

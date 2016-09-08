@@ -40,11 +40,9 @@ router.post('/muestra', login.checkOperario, function(req, res, next){
 //actualiza una muestra
 router.put('/muestra/:id', login.checkOperario,function(req, res){
 	Muestra.findById(req.params.id, function(err, muestra){
-		muestra.tipo = req.body.tipo;
-		muestra.cod_barras = req.body.cod_barras;
 		muestra.paciente = req.body.paciente;
-		muestra.laboratorio = req.body.laboratorio;
-		muestra.centro = req.body.centro;
+		//muestra.cod_barras= req.body.cod_barras;
+		//muestra.recibido = req.body.recibido;
 
 		muestra.save(function(err){
 			if(err){

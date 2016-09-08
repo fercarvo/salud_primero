@@ -26,8 +26,24 @@ router.get('/paciente/datos', login.checkPaciente, function(req, res){
 	});
 });
 
+router.put('/paciente/datos', login.checkPaciente, function(req, res){
 
+	Paciente.findOne({ _id: req.session.user._id }, function(err, paciente){
+		paciente.nombre = req.body.nombre;
+		paciente.apellido = req.body.apellido;
+		paciente.cedula = req.body.cedula;
+		paciente.direccion = req.body.direccion;
+		paciente.telefono = req.body.telefono;
 
+		paciente.save(function(err){
+			if (err) {
+				res.send(err);
+			} else {
+				res.json(paciente);
+			}
+		});
+	});
+});
 
 
 /*
@@ -151,8 +167,9 @@ router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo O
 /*
 	API REST metodo, actualiza un paciente
 */
-router.put('/paciente/:id', login.checkPaciente, function(req, res, nest){ //Solo USUARIOS logoneados pueden usar este metodo para si mismos
-	//var hash = bcrypt.hashSync(req.body.clave, bcrypt.genSaltSync(10));
+
+router.put('/paciente/:id', login.checkPaciente, function(req, res){ //Solo USUARIOS logoneados pueden usar este metodo para si mismos
+	var hash = bcrypt.hashSync(req.body.clave, bcrypt.genSaltSync(10));
 
 	Paciente.findById(req.params.id, function(err, paciente){
 		paciente.nombre = req.body.nombre;
@@ -162,15 +179,14 @@ router.put('/paciente/:id', login.checkPaciente, function(req, res, nest){ //Sol
 		paciente.direccion = req.body.direccion;
 		paciente.telefono = req.body.telefono;
 		paciente.foto = req.body.foto;
-		//paciente.clave = hash;
-
+		paciente.clave = hash;
 
 		paciente.save(function(err){
 			if (err) {
-				return next(err);
+				res.send(err);
 			} else {
-				res.json(paciente);	
-			}	
+				res.json(paciente);
+			}
 		});
 	});
 });

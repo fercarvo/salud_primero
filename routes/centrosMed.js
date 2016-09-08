@@ -16,6 +16,19 @@ router.get('/centrosMed', function(req, res, next){
 	});
 });
 
+
+//obtiene la informacion de un centro medico especifico
+router.get('/centroMed/:id', function(req, res, next){
+	CentroMedico.findById(req.params.id, function(err, centroMed){
+		centroMed.save(function(err){
+			if(err){
+				res.send(err);
+			}
+			res.json(centroMed);
+		});
+	});
+});
+
 //Post
 router.post('/centroMed', function(req, res, next){
 	var centro = new CentroMedico({
@@ -27,6 +40,17 @@ router.post('/centroMed', function(req, res, next){
 			latitud: req.body.latitud,
 			longitud: req.body.longitud
 		},
+
+		horario: {
+			lunes: req.body.lunes,
+			martes: req.body.martes,
+			miercoles: req.body.miercoles,
+			jueves: req.body.jueves,
+			viernes: req.body.viernes,
+			sabado: req.body.sabado,
+			domingo: req.body.domingo
+		},
+
 		portada: req.body.portada,
 		foto1: req.body.foto1,
 		foto2: req.body.foto2,
@@ -52,6 +76,13 @@ router.put('/centroMed/:id', function(req, res){
 		centroMed.descripcion = req.body.descripcion;
 		centroMed.coordenadas.latitud = req.body.latitud;
 		centroMed.coordenadas.longitud = req.body.longitud;
+		centroMed.horario.lunes= req.body.lunes,
+		centroMed.horario.martes= req.body.martes,
+		centroMed.horario.miercoles= req.body.miercoles,
+		centroMed.horario.jueves= req.body.jueves,
+		centroMed.horario.viernes= req.body.viernes,
+		centroMed.horario.sabado= req.body.sabado,
+		centroMed.horario.domingo= req.body.domingo,
 		centroMed.portada = req.body.portada;
 		centroMed.foto1 = req.body.foto1;
 		centroMed.foto2 = req.body.foto2;
@@ -77,7 +108,7 @@ router.delete('/centroMed/:id', function(req, res, next){
 });
 
 
-
+/*
 router.get('/centroMed/:id/horarios', function(req, res, next){
 	Horario.find({centro_id: req.params.id}, function(err, centros){
 		if (err) { return next(err); }
@@ -167,3 +198,4 @@ router.get('/horarios', function(req, res, next){
 		res.json(horarios);
 	});
 });
+*/
