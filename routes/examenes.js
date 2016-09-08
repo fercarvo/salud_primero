@@ -26,6 +26,16 @@ router.get('/muestra/:id/examenes', login.checkLaboratorista, function(req, res,
 	});
 });
 
+router.get('/paciente/examenes', login.checkPaciente, function(req, res){
+	Examen.find({ paciente: req.session.user._id }, function (err, user) { //Solo pacientes logoneados pueden usar este metodo
+		if (!user) {
+			return res.send({error: "USTED NO ES PACIENTE"});
+		} else {
+			res.json(user);
+		}	
+	});
+});
+
 //Muestra todos los examenes de un paciente especifico
 router.get('/pacientes/:id/examenes', login.checkPaciente, function(req, res, next){
 	Examen.find({paciente:req.params.id}, function(err, examenes){

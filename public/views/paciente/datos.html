@@ -2,20 +2,21 @@
   <div class="container">
     <div class="row center">
       <div>
-          
-        <form id="formularioActualizarPaciente" method="put" action="/paciente/:id">
+
+        <form id="formularioActualizarPaciente">
             <fieldset>
                 <legend>Actualice sus datos</legend>
-                Nombres: <input type="text" name="nombre" placeholder="Ingrese sus nombres" require/><br />
-                Apellidos: <input type="text" name="apellido" placeholder="Ingrese sus apellidos" require/><br />
-                C&eacute;dula: <input type="text" name="cedula" placeholder="Ingrese su c&eacute;dula" require/><br />
-                Direcci&oacute;n: <input type="text" name="direccion" placeholder="Ingrese su direcci&oacute;" require/><br />
-                Tel&eacute;fono: <input type="text" name="telefono" placeholder="Ingrese su tel&eacute;fono" require/><br />
-                Foto: <input type="file" name="foto" accept=image/* require/><br />
-                <input type="submit" value="Enviar">
-                <input type="reset" value="Borrar">
+                Nombres: <input type="text" name="nombre" placeholder="Ingrese sus nombres" ng-model="datos.nombre" value="{{datos.nombre}}" require/><br />
+                Apellidos: <input type="text" name="apellido" placeholder="Ingrese sus apellidos" ng-model="datos.apellido" value="{{datos.nombre}}" require/><br />
+                C&eacute;dula: <input type="text" name="cedula" placeholder="Ingrese su c&eacute;dula" ng-model="datos.cedula" value="{{datos.nombre}}" require/><br />
+                Direcci&oacute;n: <input type="text" name="direccion" placeholder="Ingrese su direcci&oacute;" ng-model="datos.direccion" value="{{datos.nombre}}" require/><br />
+                Tel&eacute;fono: <input type="text" name="telefono" placeholder="Ingrese su tel&eacute;fono"  ng-model="datos.telefono" value="{{datos.nombre}}" require/><br />
+                <button type="button" class="btn btn-primary" ng-click="actualizar()">Enviar</button>
+                <button type="button" class="btn btn-primary" ng-click="regresar()">Regresar</button>
             </fieldset>
         </form>
+
+
     </div>
     </div>
   </div>
