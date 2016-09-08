@@ -17,18 +17,22 @@ table tr:nth-child(even) {
     background-color: #ffffff;
 }
 </style>
-<div class="section no-pad-bot" >
-  <div class="container" >
+<div ng-controller="TNTIndexController as indexController">
+      <div id="tntGridServices" ui-grid="gridOptions" ui-grid-selection ui-grid-exporter class=grid></div>
+    </div>
+<!-- 
+<div class="section no-pad-bot">
+  <div class="container">
     <div class="row center">
       <h5 class="header col s12 light">Mis Ex&aacute;menes</h5>
         <div>
-        <table class="responsive-table" id="tntGridServices" ui-grid="gridOptions" ui-grid-selection ui-grid-exporter> <!-- Tabla pura en html
+        <table class="responsive-table"> <!-- Tabla pura en html
         a) Fecha de la toma de la muestra.
         b) Exámenes a realizarse contra la muestra medica.
         c) Estado: Recién se ha ingresado al sistema, la muestra está en proceso de análisis del
         laboratorio, o los resultados están listos. ( Sea creativo para mostrar esta parte)
         d) Link para descargar el pdf con los resultados. El cual deberá ser generado una vez que
-        los resultados hayan sido ingresados (revisar la librería pdfmake ).-->
+        los resultados hayan sido ingresados (revisar la librería pdfmake ).
             <caption>Mis Ex&aacute;menes</caption>
             <tr>
                 <th>Fecha</th>
@@ -46,3 +50,5 @@ table tr:nth-child(even) {
 
     </div>
 </div>
+    </div>
+</div>-->

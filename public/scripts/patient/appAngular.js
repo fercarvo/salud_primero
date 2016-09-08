@@ -1,4 +1,4 @@
-angular.module('appPatient', ['ui.router','ui.grid', 'ui.grid.selection','ui.grid.exporter'])
+angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.grid.exporter'])
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('centros', {
@@ -98,13 +98,9 @@ angular.module('appPatient', ['ui.router','ui.grid', 'ui.grid.selection','ui.gri
     .controller('ctrlExamenes', function($scope, $state, comun) {
         //cargarCentrosMed();
         comun.getExamenes();
-        $scope.examenes = comun.examenes;
-        $scope.gridOptions = function(){
-            enableGridMenu: true;
-        }
+        $scope.examenes = comun.examenes;  
     })
     .controller('ctrlCentros', function($scope, $state, comun) {
-
         comun.getCentros();
         $scope.centros = comun.centros_med;
         $scope.actual = {};
@@ -127,52 +123,26 @@ angular.module('appPatient', ['ui.router','ui.grid', 'ui.grid.selection','ui.gri
             $('.carousel').carousel();
         });
     })
-
-
-
-
-/*angular.module('appExportarToPDF',['ui.router']
-    .controller('exportarToPdf',function($scope)){
-                
-                }
-
-(function(){
-    //export html table to pdf, excel and doc format directive
-    var exportTable = function(){
-        var link = function($scope, elm, attr){
-            $scope.$on(‘export-pdf’, function(e, d){
-                elm.tableExport({type:’pdf’, escape:’false’});
-            });
-            $scope.$on(‘export-excel’, function(e, d){
-                elm.tableExport({type:’excel’, escape:false});
-            });
-            $scope.$on(‘export-doc’, function(e, d){
-                elm.tableExport({type: ‘doc’, escape:false});
-            });
+    .controller('TNTIndexController', function ($scope, comun) {
+        $scope.gridOptions = {
+            enableGridMenu: true
         }
-        return {
-            restrict: ‘C’,
-            link: link
-        }
-    }
-    angular.module(‘CustomDirectives’, [])
-        .directive(‘exportTable’, exportTable);
-})();
-
-//controlador
-$scope.exportAction = function(){
-    switch($scope.export_action){
-        case ‘pdf’: $scope.$broadcast(‘export-pdf’, {});
-            break;
-        case ‘excel’: $scope.$broadcast(‘export-excel’, {});
-            break;
-        case ‘doc’: $scope.$broadcast(‘export-doc’, {});
-            break;
-        default: console.log(‘no event caught’);
-    }
-}
-=======
-
+        comun.getDatos();
+        $scope.gridOptions.data = [{"nombre":comun.datos.nombre,"apellido":comun.datos.apellido,"examenes":comun.datos.examenes}];
+        //$scope.datos = comun.datos;
+        /*$scope.gridOptions.data =[{
+            "cliente": "Globalia (Air Europa)",
+            "proyecto": "Metodologías ágiles y soporte al desarrollo",
+            "tags": "agilismo, iOS"
+        },
+        {
+            "cliente": "Tinsa",
+            "proyecto": "Implantación de metodologías ágiles",
+            "tags": "agilismo"
+        },
+        {
+            "cliente": "Casa del Libro",
+            "proyecto": "TAGUS",
+            "tags": "agilismo, plataforma eReader"
+        }];*/
     })
-
->>>>>>> wjvelez*/
