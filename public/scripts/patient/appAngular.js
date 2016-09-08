@@ -79,7 +79,7 @@ angular.module('appPatient', ['ui.router'])
         return comun;
     })
     .controller('ctrlDatos', function($scope, $state, comun) {
-
+        
         comun.getDatos();
         $scope.datos = comun.datos;
         //$scope.nuevos = comun.nuevosDatos;
@@ -87,11 +87,11 @@ angular.module('appPatient', ['ui.router'])
 
         $scope.actualizar = function() {
            comun.updateDatos($scope.datos);
-           $state.go('centros');
+           $state.go('datos');
             
         }
         $scope.regresar = function() {
-            $state.go('modal');    
+            $state.go('centros');    
         }
 
     })
@@ -111,6 +111,8 @@ angular.module('appPatient', ['ui.router'])
             $state.go('modal');
         }
 
+        $('.parallax').parallax();
+
     })
     .controller('ctrlModal', function($scope, $state, comun) {
         //cargarCentrosMed();
@@ -120,9 +122,10 @@ angular.module('appPatient', ['ui.router'])
             comun.mostrarInfo($scope.actual);
         }
 
-        $(document).ready(function(){
-            $('.carousel').carousel();
-        });
+        $scope.abrir = function(){
+            $('#modal1').openModal();
+        }
 
+        $('.carousel.carousel-slider').carousel({full_width: true},{time_constant: 200},{interval: 300});
     })
 
