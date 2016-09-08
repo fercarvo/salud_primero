@@ -1,81 +1,94 @@
-<div class="container examenes">
-  <h2>Examen</h2>
-  <table id="tablaExamenes" class="table table-bordered table-striped">
+<div class="container examenes" ng-repeat="examen in examenes">
+  <div class="row center">  
+    <h2 class="col s4">{{examen.nombre}} </h2>
+    <div ng-click="setExamen(examen._id)" class="col s4 right" style="padding-top:30px">
+      <a class="btn-floating btn-large waves-effect waves-light red">
+        <i class="large material-icons">add</i>
+      </a>
+    </div>
+  </div>
+  <table class="table table-bordered table-striped">
     <thead>
       <tr>
-        <th style="display:none;">id</th>
         <th>parametro</th>
         <th>unidades</th>
         <th>resultado</th>
         <th>valores de referencia</th>
         <th>editar</th>
+        <th>delete</th>
       </tr>
     </thead>
     <tbody id = "tabla-body-examenes">
-        <tr ng-repeat="examen in examenes">
-            <td class="id_examen" style="display:none;">{{examen._id}}</td>
-            <td class="parametro"> {{examen.parametro}}</td>
-            <td class="unidades"> {{examen.unidades}}  </td>
-            <td class="resultado"> {{examen.resultado}}  </td>
-            <td class="valores_referencia"> {{examen.valores_referencia}}  </td>
-            <td class= "editar"><button type="button" class="btn btn-primary" data-toggle="modal" ng-click="abrir()" data-target="#modalEditarExamen">editar</button></td>
+        <tr ng-repeat="resultado in examen.resultados">
+            <td class="parametro"> {{resultado.parametro}}</td>
+            <td class="unidades"> {{resultado.unidades}}  </td>
+            <td class="resultado"> {{resultado.resultado}}  </td>
+            <td class="valores_referencia"> {{resultado.valores_referencia}}  </td>
+            <td class= "editar"><button type="button" class="glyphicon glyphicon-edit" ng-click="editar($parent.$index, $index)"></button></td>
+            <td class= "eliminar"><button type="button" class="glyphicon glyphicon-remove-circle" ng-click="delete($parent.$index, $index)"></button></td>
         </tr>
     </tbody>
   </table>
 </div>
 
+<hr>
+
 <!-- Modal Structure -->
 <div id="modal1" class="modal bottom-sheet">
   <div class="modal-content">
-    <!-- Modal de editar examen-->
-    <form id="formEditarExamen" >
-      <div class="modal-body">
-          <div class="form-group">
-            <input type="text" class="form-control" id="unidades" name="unidades" placeholder="Unidades" >
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="resultado" name="resultado" placeholder="Resultado">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="valores_referencia" name="valores_referencia" placeholder="Valores de referencia">
-          </div>
-      </div>
-      <div class="row modal-footer">
-        <button type="button" class="btn col s4  red accent-4 left btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn col s4 btn-primary">Aceptar</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<div ng-click="openAdd()" class="fixed-action-btn" style="bottom: 55px; right: 55px;">
-  <a class="btn-floating btn-large red">
-    <i class="large material-icons">add</i>
-  </a>
-</div>
-
-  <!-- Modal Structure -->
-  <div id="modal2" class="modal modal-fixed-footer">
-    <div class="modal-content">
-      <form id="formEditarExamen" >
-      <div class="modal-body">
-          <div class="form-group">
-            <input type="text" class="form-control" id="parametro" name="parametro" placeholder="Parametro" >
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="unidades" name="unidades" placeholder="Unidades" >
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="resultado" name="resultado" placeholder="Resultado">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="valores_referencia" name="valores_referencia" placeholder="Valores de referencia">
-          </div>
-      </div>
-      <div class="row modal-footer" style="right:1px">
-        <button type="button" class="btn col s4  red accent-4 left btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn col s4 btn-primary">Aceptar</button>
-      </div>
-    </form>
+      <!-- Modal de editar resultado-->
+    <div>
+      <form > 
+        <div class="modal-body">
+            <div class="form-group">
+              <input type="text" class="form-control" name="parametro" ng-model="edita.parametro">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="unidades" ng-model="edita.unidades">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="resultado" ng-model="edita.resultado">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="valores_referencia" ng-model="edita.valores_referencia">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" ng-click="put(edita)">Actualizar </button>
+        </div>
+      </form>
     </div>
   </div>
+</div>
+
+
+  <!-- Modal Structure -->
+  <div id="modal2" class="modal modal">
+    <div class="modal-content">
+      <div>
+        <form > 
+            <div class="modal-body">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="examen" ng-model="examen_id" readonly>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="parametro" ng-model="nuevo_resultado.parametro" placeholder="Parametro">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="unidades" ng-model="nuevo_resultado.unidades" placeholder="Unidades">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="resultado" ng-model="nuevo_resultado.resultado" placeholder="Resultado">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="valores_referencia" ng-model="nuevo_resultado.valores_referencia" placeholder="Valores de referencia">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" ng-disabled="isDisabled" ng-click="agregar()">Crear</button>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+

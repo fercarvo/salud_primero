@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container">
     <h4>Centros Medicos</h4>
 
@@ -11,11 +12,42 @@
                     <div class="panel-heading tarjeta-titulo">
                         <h4 class="text-center panel-title titulo">{{centro.nombre}}</h4>
                     </div>
+=======
+<div id="index-banner" class="parallax-container">
+  <div class="section no-pad-bot">
+    <div class="container">
+      <br><br>
+      <h1 class="header center teal-text text-lighten-2">Salud Primero</h1>
+      <br><br>
+    </div>
+  </div>
+  <div class="parallax"><img src="imagenes/main3.jpg"></div>
+</div>
+
+<div class="container">
+    <h4>Centros Medicos</h4>
+    <hr>
+
+    <div class="col-xs-12 col-sm-6" style="padding-bottom:40px" ng-repeat="centro in centros">
+        <div class="contenedor">
+            <div style="height:310px"  class="centro-med">
+                <div class="lado frente">
+                    <div style="height:294px; width:270px; " class="card">
+                        <div style="height:294px;" class="card-image">
+                            <img src="{{centro.portada}}" alt="imagen"> 
+                            <span class="card-title">{{centro.nombre}}</span>
+                        </div> 
+
+                    </div>
+                </div>  
+                <div class="lado atras lado atras panel panel-default">
+>>>>>>> arreglo
                     <div class="panel-body horarios text-center">
                         <p dia text-center small>Horarios</p>
                         <p ng-repeat="dia in centro.horario" class="dia text-center small">{{dia}}</p>
                     </div>
                     <button type="button" class="btn btn-primary btn-block info" ng-click="procesar(centro)">Más Información</button>
+<<<<<<< HEAD
                     
                 </div>
             </div>
@@ -24,3 +56,11 @@
         
     </div>    
 </div>
+=======
+                </div>
+            </div>
+        </div>    
+    </div>
+
+</div>
+>>>>>>> arreglo

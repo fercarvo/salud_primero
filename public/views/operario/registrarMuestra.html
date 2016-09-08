@@ -1,0 +1,110 @@
+<h4>Administrador de Muestras Medicas</h4>
+<hr>
+<ul ng-click="activarInfo()" class="collapsible" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">add</i>Crear Muestra</div>
+      <div class="collapsible-body" style="padding-left:20px;padding-right:20px">
+        <form> 
+              <div class="modal-body">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="tipo" ng-model="nuevo_muestra.tipo" placeholder="tipo" required>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="cod_barras" ng-model="nuevo_muestra.cod_barras" placeholder="cod_barras" required>
+                  </div>
+
+                  <div class="form-group input-field col s12" >
+                    <select name="paciente" ng-model="nuevo_muestra.paciente">
+                      <option ng-repeat="paciente in pacientes" value="{{paciente._id}}"> {{paciente.nombre}} {{paciente.apellido}}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group input-field col s12" >
+                    <select name="laboratorio" ng-model="nuevo_muestra.laboratorio">
+                      <option ng-repeat="laboratorio in laboratorios" value="{{laboratorio._id}}"> {{laboratorio.nombre}}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group input-field col s12" >
+                    <select name="centro" ng-model="nuevo_muestra.centro">
+                      <option ng-repeat="centro in centros" value="{{centro._id}}"> {{centro.nombre}} </option>
+                    </select>
+                  </div>
+
+              </div>
+              <div class="modal-footer row">
+                <button type="reset" class="btn btn-default col s4">Cancelar</button>
+                <button type="submit" class="btn btn-primary col s4 right" ng-click="agregarMuestra()">Crear</button>
+              </div>
+            </form>
+      </div>
+    </li>
+    <li>
+        <div class="collapsible-header large active"><i class="material-icons">label</i>Muestras</div>
+        <div class="collapsible-body" style="padding-left:20px;padding-right:20px">
+            <table id="teibol" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>tipo</th>
+                  <th>cod_barras</th>
+                  <th>recibido</th>
+                  <th>fecha</th>
+                  <th>editar</th>
+                  <th>delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="muestra in muestras">;
+                      <td class="tipo"> {{ muestra.tipo }} </td>
+                      <td class="cod_barras"> {{ muestra.cod_barras }} </td>
+                      <td class="recibido"> {{ muestra.recibido }} </td>
+                      <td class="fecha"> {{ muestra.fecha }} </td>
+                      <td class= "editMuestra"><button type="button" class="glyphicon glyphicon-edit" data-toggle="modal" ng-click="editMuestra($index)"></button></td>
+                      <td class= "eliminarMuestra"><button type="button" class="glyphicon glyphicon-remove-circle" ng-click="deleteMuestra($index)"></button></td>
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+    </li>
+</ul>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal bottom-sheet">
+  <div class="modal-content">
+      <!-- Modal de editar resultado-->
+    <div>
+      <form > 
+      <div class="modal-body">
+          <div class="form-group">
+            <input type="text" class="form-control" name="tipo" ng-model="editar_muestra.tipo" placeholder="tipo" required>
+          </div>
+          <div class="form-group hide">
+            <input type="text" class="form-control" name="cod_barras" ng-model="editar_muestra.cod_barras" placeholder="cod_barras" required>
+          </div>
+          
+          <div class="form-group" >
+            <select name="paciente" ng-model="editar_muestra.paciente">
+              <option ng-repeat="paciente in pacientes" value="{{paciente._id}}"> {{paciente.nombre}} {{paciente.apellido}}</option>
+            </select>
+          </div>
+
+          <div class="form-group" >
+            <select name="laboratorio" ng-model="editar_muestra.laboratorio">
+              <option ng-repeat="laboratorio in laboratorios" value="{{laboratorio._id}}"> {{laboratorio.nombre}}</option>
+            </select>
+          </div>
+
+          <div class="form-group" >
+            <select name="centro" ng-model="editar_muestra.centro">
+              <option ng-repeat="centro in centros" value="{{centro._id}}"> {{centro.nombre}} </option>
+            </select>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-disabled="disEditMuestra" ng-click="putMuestra()">Aceptar</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>

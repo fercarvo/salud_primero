@@ -1,95 +1,182 @@
 angular.module('appOperator',['ui.router'])
 	.config(function($stateProvider, $urlRouterProvider){
 		$stateProvider
-			.state('regp',{
+			.state('RegistrarPaciente',{
 				url: '/RegistrarPaciente',
-				templateUrl: 'views/operario/regp.html',
+				templateUrl: 'views/operario/registrarPaciente.html',
 				controller:'ctrlRegp'
 			})
-			.state('regm',{
+			.state('RegistrarMuestra',{
 				url: '/RegistrarMuestra',
-				templateUrl: 'views/operario/regm.html',
-                controller:'ctrlRegm'
+				templateUrl: 'views/operario/registrarMuestra.html',
+                        controller:'ctrlRegm'
 			})
-			.state('reportes',{
+			.state('Reportes',{
 				url: '/Reportes',
-				templateUrl: 'views/operario/reportes.html',
-                controller:'ctrlRep'
+				templateUrl: 'views/operario/reportes.html'
 			});
-		$urlRouterProvider.otherwise('regp');
+		$urlRouterProvider.otherwise('RegistrarPaciente');
 	})
-	.factory('comun',function($http){
-		var comun = {}
-		comun.tareas = [];/*{
-			nombre: 'Comprar comida',
-			prioridad: '2'
-		},{
-			nombre: 'Pasear al perro',
-			prioridad: '1'
-		}]*/
+	.controller('ctrlRegp',function($scope, $state, $http){
+		$scope.nuevo_paciente = {};
+        $scope.pacientes = {};
+        $scope.laboratorios = {};
+        $scope.centros = {};
+        $scope.editar_paciente = {};
+        $scope.disEditPaciente = true;
 
-		comun.tarea = {};
+        $http.get("/pacientes")
+            .then(function (response) {
+                $scope.pacientes = response.data;
+            }
+        );
 
-		/*comun.eliminar = function(tarea){
-			var indice = comun.tareas.indexOf(tarea);
-			comun.tareas.splice(indice, 1);
-		}*/
+		//Se crea un paciente
+        $scope.agregar = function() {
+            $http.post("/paciente", {
+                nombre: $scope.nuevo_paciente.nombre,
+                apellido: $scope.nuevo_paciente.apellido,
+                correo: $scope.nuevo_paciente.correo,
+                cedula: $scope.nuevo_paciente.cedula,
+                direccion: $scope.nuevo_paciente.direccion,
+                telefono: $scope.nuevo_paciente.telefono,
+                foto: $scope.nuevo_paciente.foto
+            }).success(function(response){
+              $scope.pacientes.push(response.data);
+                    
+            })
+            $state.go('RegistrarPaciente');
+            $scope.nuevo_paciente = {};
 
-		/*Seccion de metodos remotos*/
-		comun.getAll = function(){
-			return $http.get('/tareas')
-			.success(function(data){
-				angular.copy(data, comun.tareas);
-				return comun.tareas
-			})
-		};
+        }
 
-		comun.add = function(tarea){
-			return $http.post('/tarea', tarea)
-			.success(function(tarea){
-				comun.tareas.push(tarea);
-			})
-		}
+        $scope.editar = function ( pid ) {
+            var paciente = $scope.pacientes[pid];
+            $scope.editar_paciente = paciente;
+            $scope.disEditPaciente = false;
+            $('#modal1').openModal();
+            $state.go('RegistrarPaciente');
+        };
 
-		comun.update = function(tarea){
-			return $http.put('/tarea/'+ tarea._id, tarea)
-			.success(function(data){
-				var indice = comun.tareas.indexOf(tarea);
-				comun.tareas[indice] = data;
-			})
-		}
 
-		comun.delete = function(tarea){
-			return $http.delete('/tarea/'+ tarea._id)
-			.success(function(){
-				var indice = comun.tareas.indexOf(tarea);
-				comun.tareas.splice(indice, 1);
-			})
-		}
+        $scope.put = function () {
+            $http.put("/paciente/" + $scope.editar_paciente._id, { 
+                nombre: $scope.editar_paciente.nombre,
+                apellido: $scope.editar_paciente.apellido,
+                correo: $scope.editar_paciente.correo,
+                cedula: $scope.editar_paciente.cedula,
+                direccion: $scope.editar_paciente.direccion,
+                telefono: $scope.editar_paciente.telefono,
+                foto: $scope.editar_paciente.foto 
+            }
+            ).success(function (response) {
+                $scope.editar_paciente = {}; //se resetea la variable editar paciente para que no se siga editando
+                $scope.disEditPaciente = true; //se desactiva el formulario de editar para evitar caida del servidor
+            }, function (error) {
+            });
+            $('#modal1').closeModal();
+        };
 
-		return comun;
+        $scope.delete = function ( pid ) {
+            var paciente = $scope.pacientes[pid];
+            $http.delete("/paciente/"+ paciente._id)
+                .then(function () {
+                    $scope.pacientes.splice(pid, 1);
+                });
+        };
+
+        
+        $('.collapsible').collapsible({
+	      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+	    });
+
 	})
-	.controller('ctrlRegp',function($scope, $state, comun){
-		init();
+	.controller('ctrlRegm',function($scope, $state, $http){
+	    $scope.pacientes = {};
+        $scope.laboratorios = {};
+        $scope.centros = {};
+
+        $http.get("/muestras")
+            .then(function (response) {
+                $scope.muestras = response.data;
+            }
+        );
+
+        $http.get("/pacientes")
+            .then(function (response) {
+                $scope.pacientes = response.data;
+            }
+        );
+
+        $http.get("/laboratorios")
+            .then(function (response) {
+                $scope.laboratorios = response.data;
+            }
+        );
+
+        $http.get("/centrosMed")
+            .then(function (response) {
+                $scope.centros = response.data;
+            }
+        );
+
+
+        $scope.putMuestra = function () {
+            $http.put("/muestra/" + $scope.editar_muestra._id, { 
+                tipo: $scope.editar_muestra.tipo,
+                cod_barras: $scope.editar_muestra.cod_barras,
+                paciente: $scope.editar_muestra.paciente,
+                laboratorio: $scope.editar_muestra.laboratorio,
+                centro: $scope.editar_muestra.centro,
+            }
+            ).success(function (response) {
+                $scope.editar_muestra = {}; //se resetea la variable editar paciente para que no se siga editando
+                $scope.disEditMuestra = true; //se desactiva el formulario de editar para evitar caida del servidor
+            }, function (error) {
+            });
+            $state.go('RegistrarMuestra');
+        };
+
+        //Se crea un paciente
+        $scope.agregarMuestra = function() {
+            $http.post("/muestra", {
+                tipo: $scope.nuevo_muestra.tipo,
+                cod_barras: $scope.nuevo_muestra.cod_barras,
+                paciente: $scope.nuevo_muestra.paciente,
+                laboratorio: $scope.nuevo_muestra.laboratorio,
+                centro: $scope.nuevo_muestra.centro,
+            }).success(function(response){
+              $scope.muestras.push(response.data);
+                    
+            })
+                $scope.nuevo_muestra = {};
+            $state.go('RegistrarMuestra');
+        }
+
+        $scope.deleteMuestra = function ( pid ) {
+            var muestra = $scope.muestras[pid];
+            $http.delete("/muestra/"+ muestra._id)
+                .then(function () {
+                    $scope.muestras.splice(pid, 1);
+                });
+        };
+
+        $scope.activarInfo = function(){
+        	$('select').material_select();
+        }
+
+        $scope.editMuestra = function ( pid ) {
+            var muestra = $scope.muestras[pid];
+            $scope.editar_muestra = muestra;
+            $scope.disEditMuestra = false;
+            $scope.activarInfo();
+            $('#modal1').openModal();
+            $state.go('RegistrarMuestra');
+        };
+
+        $('.collapsible').collapsible({
+	      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+	    });
+
+        $('#tabol').DataTable();
 	})
-	.controller('ctrlRegm',function($scope, $state, comun){
-	    init();
-	})
-	.controller('ctrlRep',function($scope, $state, comun){
-	    	
-	})
-function init(){
-    var urlResultados = "json/muestrasRegistradas.json";
-    var n=1;
-    $.getJSON(urlResultados,function(respuesta){
-        respuesta.forEach(function(muestra){
-            var elemento = $("<tr>");
-            elemento.append("<td>" + n + "</td>");
-            elemento.append("<td>" + muestra.descripcion + "</td>");
-            elemento.append("<td>" + muestra.codigo + "</td>");
-            elemento.append("<td>" + muestra.estado + "</td>");
-            $(".tabla-resultado").append(elemento);
-            n=n+1;
-        });
-    });
-}

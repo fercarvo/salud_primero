@@ -1,22 +1,21 @@
-<div class="container usuarios">
+<div class="container usuarios" >
   <h2> Muestras </h2>
+  <hr>
   <table id="tablaUsuarios" class="table table-bordered table-striped">
     <thead>
       <tr>
-        <th style="display:none">id</th>
-        <th>codigo</th>
-        <th>tipo</th>
-        <th>llego</th>
-        <th>examenes</th>
+        <th class="center">codigo</th>
+        <th class="center">tipo</th>
+        <th class="center">llego</th>
+        <th class="center" >examenes</th>
       </tr>
     </thead>
     <tbody>
         <tr ng-repeat="muestra in muestras">;
-            <td class="id_muestra" style="display:none;">{{muestra._id}}</td>
             <td class="codigo">{{muestra.cod_barras}}</td>
             <td class="tipo">{{muestra.tipo}}</td>
             <td class="llego">{{muestra.recibido}}</td>
-            <td class="examenes_muestra" ng-click="cargarExamenes(muestra._id)">mostrar</td>
+            <td class="center examenes_muestra" ng-click="cargarExamenes(muestra._id)"><i class="waves-effect waves-teal btn-flat">Mostrar</i></td>
         </tr>
     </tbody>
   </table>
