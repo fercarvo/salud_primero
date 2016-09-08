@@ -26,7 +26,11 @@ router.post('/centroMed', function(req, res, next){
 		coordenadas: {
 			latitud: req.body.latitud,
 			longitud: req.body.longitud
-		}
+		},
+		portada: req.body.portada,
+		foto1: req.body.foto1,
+		foto2: req.body.foto2,
+		foto3: req.body.foto3,
 	});
 
 	centro.save(function(err, centro){
@@ -48,6 +52,10 @@ router.put('/centroMed/:id', function(req, res){
 		centroMed.descripcion = req.body.descripcion;
 		centroMed.coordenadas.latitud = req.body.latitud;
 		centroMed.coordenadas.longitud = req.body.longitud;
+		centroMed.portada = req.body.portada;
+		centroMed.foto1 = req.body.foto1;
+		centroMed.foto2 = req.body.foto2;
+		centroMed.foto3 = req.body.foto3;
 
 		centroMed.save(function(err){
 			if(err){

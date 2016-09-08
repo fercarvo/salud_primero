@@ -26,6 +26,16 @@ router.get('/muestra/:id/examenes', login.checkLaboratorista, function(req, res,
 	});
 });
 
+router.get('/paciente/examenes', login.checkPaciente, function(req, res){
+	Examen.find({ paciente: req.session.user._id }, function (err, user) { //Solo pacientes logoneados pueden usar este metodo
+		if (!user) {
+			return res.send({error: "USTED NO ES PACIENTE"});
+		} else {
+			res.json(user);
+		}	
+	});
+});
+
 //Muestra todos los examenes de un paciente especifico
 router.get('/pacientes/:id/examenes', login.checkPaciente, function(req, res, next){
 	Examen.find({paciente:req.params.id}, function(err, examenes){
@@ -36,10 +46,10 @@ router.get('/pacientes/:id/examenes', login.checkPaciente, function(req, res, ne
 	});
 });
 
-//crea un examen
+//crea una muestra para agregar un examen
 router.post('/examen', login.checkOperario,function(req, res, next){
 	var examen = new Examen({
-		paciente: req.body.paciente,
+		//paciente: req.body.paciente,
 		muestra: req.body.muestra,
 		nombre: req.body.nombre
 	});
@@ -55,7 +65,7 @@ router.post('/examen', login.checkOperario,function(req, res, next){
 
 router.put('/examen/:id', login.checkOperario,function(req, res){
 	Examen.findById(req.params.id, function(err, examen){
-		examen.paciente = req.body.paciente;
+		//examen.paciente = req.body.paciente;
 		examen.muestra = req.body.muestra;
 		examen.nombre = req.body.nombre;
 
