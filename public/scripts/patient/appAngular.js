@@ -1,4 +1,6 @@
-angular.module('appPatient', ['ui.router'])
+
+angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.grid.exporter'])
+
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('centros', {
@@ -102,7 +104,6 @@ angular.module('appPatient', ['ui.router'])
 
     })
     .controller('ctrlCentros', function($scope, $state, comun) {
-
         comun.getCentros();
         $scope.centros = comun.centros_med;
         $scope.actual = {};
@@ -128,6 +129,31 @@ angular.module('appPatient', ['ui.router'])
         }
 
         $('.carousel.carousel-slider').carousel({full_width: true},{time_constant: 200},{interval: 300});
+        $(document).ready(function(){
+            $('.carousel').carousel();
+        });
     })
-
+    .controller('TNTIndexController', function ($scope, comun) {
+        $scope.gridOptions = {
+            enableGridMenu: true
+        }
+        comun.getDatos();
+        $scope.gridOptions.data = [{"nombre":comun.datos.nombre,"apellido":comun.datos.apellido,"examenes":comun.datos.examenes}];
+        //$scope.datos = comun.datos;
+        /*$scope.gridOptions.data =[{
+            "cliente": "Globalia (Air Europa)",
+            "proyecto": "Metodologías ágiles y soporte al desarrollo",
+            "tags": "agilismo, iOS"
+        },
+        {
+            "cliente": "Tinsa",
+            "proyecto": "Implantación de metodologías ágiles",
+            "tags": "agilismo"
+        },
+        {
+            "cliente": "Casa del Libro",
+            "proyecto": "TAGUS",
+            "tags": "agilismo, plataforma eReader"
+        }];*/
+    })
 
