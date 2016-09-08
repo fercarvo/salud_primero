@@ -169,7 +169,6 @@ router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo O
 */
 
 router.put('/paciente/:id', login.checkPaciente, function(req, res){ //Solo USUARIOS logoneados pueden usar este metodo para si mismos
-	var hash = bcrypt.hashSync(req.body.clave, bcrypt.genSaltSync(10));
 
 	Paciente.findById(req.params.id, function(err, paciente){
 		paciente.nombre = req.body.nombre;
@@ -179,7 +178,6 @@ router.put('/paciente/:id', login.checkPaciente, function(req, res){ //Solo USUA
 		paciente.direccion = req.body.direccion;
 		paciente.telefono = req.body.telefono;
 		paciente.foto = req.body.foto;
-		paciente.clave = hash;
 
 		paciente.save(function(err){
 			if (err) {

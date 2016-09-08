@@ -84,8 +84,7 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
         
         comun.getDatos();
         $scope.datos = comun.datos;
-        //$scope.nuevos = comun.nuevosDatos;
-        
+        //$scope.nuevos = comun.nuevosDatos;        
 
         $scope.actualizar = function() {
            comun.updateDatos($scope.datos);
@@ -133,12 +132,21 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
             $('.carousel').carousel();
         });
     })
-    .controller('TNTIndexController', function ($scope, comun) {
+    .controller('TNTIndexController', function ($scope, $state, comun) {
         $scope.gridOptions = {
             enableGridMenu: true
         }
         comun.getDatos();
-        $scope.gridOptions.data = [{"nombre":comun.datos.nombre,"apellido":comun.datos.apellido,"examenes":comun.datos.examenes}];
+        $scope.datos = comun.datos;
+
+        console.log(comun.datos.nombre);
+
+        /*
+        $scope.gridOptions.data = [{
+            "nombre": {{nom}},
+            "apellido":comun.datos.apellido,
+            "examenes":comun.datos.examenes
+        }];*/
         //$scope.datos = comun.datos;
         /*$scope.gridOptions.data =[{
             "cliente": "Globalia (Air Europa)",
