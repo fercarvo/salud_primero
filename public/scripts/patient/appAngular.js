@@ -79,55 +79,6 @@ angular.module('appPatient', ['ui.router'])
         return comun;
     })
     .controller('ctrlDatos', function($scope, $state, comun) {
-<<<<<<< HEAD
-
-        comun.getDatos();
-        $scope.datos = comun.datos;
-        //$scope.nuevos = comun.nuevosDatos;
-        
-
-        $scope.actualizar = function() {
-           comun.updateDatos($scope.datos);
-           $state.go('centros');
-            
-        }
-        $scope.regresar = function() {
-            $state.go('modal');    
-        }
-
-    })
-    .controller('ctrlExamenes', function($scope, $state, comun) {
-        //cargarCentrosMed();
-        comun.getExamenes();
-        $scope.examenes = comun.examenes;  
-    })
-    .controller('ctrlCentros', function($scope, $state, comun) {
-
-        comun.getCentros();
-        $scope.centros = comun.centros_med;
-        $scope.actual = {};
-
-        $scope.procesar = function(actual) {
-            comun.actual = actual;
-            $state.go('modal');
-        }
-
-    })
-    .controller('ctrlModal', function($scope, $state, comun) {
-        //cargarCentrosMed();
-        $scope.actual = comun.actual; 
-
-        $scope.informacion = function(){
-            comun.mostrarInfo($scope.actual);
-        }
-
-        $(document).ready(function(){
-            $('.carousel').carousel();
-        });
-
-    })
-
-=======
         
         comun.getDatos();
         $scope.datos = comun.datos;
@@ -178,4 +129,3 @@ angular.module('appPatient', ['ui.router'])
         $('.carousel.carousel-slider').carousel({full_width: true},{time_constant: 200},{interval: 300});
     })
 
->>>>>>> arreglo

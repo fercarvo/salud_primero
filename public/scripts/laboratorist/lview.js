@@ -1,70 +1,4 @@
 angular.module('appMuestras',['ui.router'])
-<<<<<<< HEAD
-	.config(function($stateProvider, $urlRouterProvider){
-		$stateProvider
-			.state('muestra',{
-				url: '/muestra',
-				templateUrl: 'views/laboratorista/muestra.html',
-				controller: 'ctrlCargar'
-			})
-			.state('editar',{
-				url: '/editar/{id}',
-				templateUrl: 'views/laboratorista/editar.html',
-				controller: 'ctrlEditar'
-			})
-		$urlRouterProvider.otherwise('muestra');})
-	.factory('comun',function($http){
-		var comun = {}
-        
-		comun.muestras = [];
-		comun.muestra = {};
-
-		/*Seccion de metodos remotos*/
-		comun.getAll = function(){
-			return $http.get('/muestras')
-			.success(function(data){
-				angular.copy(data, comun.muestras);
-				return comun.muestras
-			})
-		};
-
-		/*
-        comun.add = function(muestra){
-			return $http.post('/muestras', muestra)
-			.success(function(muestra){
-				comun.muestras.push(muestra);
-			})
-		}
-
-		comun.update = function(muestra){
-			return $http.put('/muestras/'+ muestra._id, muestra)
-			.success(function(data){
-				var indice = comun.muestras.indexOf(muestra);
-				comun.muestras[indice] = data;
-			})
-		}
-
-
-		comun.delete = function(muestra){
-			return $http.delete('/muestras/'+ muestra._id)
-			.success(function(){
-				var indice = comun.muestras.indexOf(muestra);
-				comun.muestras.splice(indice, 1);
-			})
-		}
-        */
-		return comun;})
-	.controller('ctrlCargar', function($scope, $state, dataService, comun) {
-        comun.getAll();
-        $scope.muestras = comun.muestras;
-
-        $scope.cargarExamenes = function(id) {
-        	dataService.setProperty(id);
-        	console.log(dataService.getProperty());
-            $state.go('editar');
-        }})
-	.controller('ctrlEditar',function($scope, $state, $http, dataService){
-=======
     .config(function($stateProvider, $urlRouterProvider){
         $stateProvider
             .state('muestra',{
@@ -92,7 +26,6 @@ angular.module('appMuestras',['ui.router'])
         };})
     .controller('ctrlCargar', function($scope, $state, $http, dataService) {
         $scope.muestras = {};
->>>>>>> arreglo
         $scope.examenes = {};
         $scope.edita = {};
         $scope.examen_id = "";
@@ -221,8 +154,6 @@ angular.module('appMuestras',['ui.router'])
     })
 
 $(document).ready(function() {
-<<<<<<< HEAD
-=======
 
 //FUNCION que al hacer click en la casilla de llego en una muestra, cambia a true
 $('body').on('click', '.llego', function () {
@@ -242,7 +173,6 @@ $('body').on('click', '.llego', function () {
     });
 });
 
->>>>>>> arreglo
 
 $('body').on('click', '.editar', function () {
     var elemento = $(this);

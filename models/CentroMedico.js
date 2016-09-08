@@ -17,10 +17,6 @@ var CentroMedicoSchema = new mongoose.Schema({
         sabado: String,
         domingo: String
 	},
-<<<<<<< HEAD
-
-=======
->>>>>>> arreglo
 	descripcion: String,
 	portada: String,
 	foto1: String,
