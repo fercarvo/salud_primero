@@ -55,5 +55,3 @@ router.delete('/laboratorio/:id', function(req, res, next){
 		res.json({mensaje: 'el Laboratorio se elimino'});
 	});
 });
-
-
