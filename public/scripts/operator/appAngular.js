@@ -13,7 +13,8 @@ angular.module('appOperator',['ui.router'])
 			})
 			.state('Reportes',{
 				url: '/Reportes',
-				templateUrl: 'views/operario/reportes.html'
+				templateUrl: 'views/operario/reportes.html',
+                controller:'ctrlReporte'
 			});
 		$urlRouterProvider.otherwise('RegistrarPaciente');
 	})
@@ -91,6 +92,9 @@ angular.module('appOperator',['ui.router'])
 	    });
 
 	})
+    .controller('ctrlReporte',function($scope, $state, $http){
+
+    })
 	.controller('ctrlRegm',function($scope, $state, $http){
 	    $scope.pacientes = {};
         $scope.laboratorios = {};
