@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var pdfmake = require('pdfmake');
 mongoose.Promise = global.Promise; //esta linea es porque salia un advertencia de monggose
 
-mongoose.connect('mongodb://admin:admin@ds161505.mlab.com:61505/proyectodaw', function(err){
+mongoose.connect('mongodb://dawadmin:admin@ds161505.mlab.com:61505/proyectodaw', function(err){
   if (err) {
     return next(err);
     console.log("conexion error");
