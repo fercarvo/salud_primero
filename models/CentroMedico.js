@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var CentroMedicoSchema = new mongoose.Schema({
+var CentroSchema = new mongoose.Schema({
 	nombre: String,
 	ciudad: String,
 	direccion: String,
@@ -8,20 +9,10 @@ var CentroMedicoSchema = new mongoose.Schema({
 		latitud: String,
 		longitud: String
 	},
-	horario: {
-		lunes: String,
-        martes: String,
-        miercoles: String,
-        jueves: String,
-        viernes: String,
-        sabado: String,
-        domingo: String
-	},
+	horarios: [{ type: Schema.ObjectId, ref: 'Horario' }],
 	descripcion: String,
 	portada: String,
-	foto1: String,
-	foto2: String,
-	foto3: String
+	fotos: [{ type: Schema.ObjectId, ref: 'Imagen' }],
 });
 
-module.exports = mongoose.model('CentroMedico', CentroMedicoSchema);
+module.exports = mongoose.model('Centro', CentroSchema);

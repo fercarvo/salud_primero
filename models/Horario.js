@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var HorarioSchema = new mongoose.Schema({
-	centro_id: String,
+	centro_id: { type: Schema.ObjectId, ref: 'CentroMedico' },
 	horario: String
 });
 

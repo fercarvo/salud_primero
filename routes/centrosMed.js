@@ -8,13 +8,16 @@ module.exports = router;
 
 //Get 
 router.get('/centrosMed', function(req, res, next){
-	CentroMedico.find(function(err, centrosMed){
+	CentroMedico.find()
+	.populate('horarios')
+	.exec(function(err, centrosMed){
 		if(err){
 			return next(err);
 		}
 		res.json(centrosMed);
 	});
 });
+
 
 
 //obtiene la informacion de un centro medico especifico
@@ -40,21 +43,7 @@ router.post('/centroMed', function(req, res, next){
 			latitud: req.body.latitud,
 			longitud: req.body.longitud
 		},
-
-		horario: {
-			lunes: req.body.lunes,
-			martes: req.body.martes,
-			miercoles: req.body.miercoles,
-			jueves: req.body.jueves,
-			viernes: req.body.viernes,
-			sabado: req.body.sabado,
-			domingo: req.body.domingo
-		},
-
 		portada: req.body.portada,
-		foto1: req.body.foto1,
-		foto2: req.body.foto2,
-		foto3: req.body.foto3,
 	});
 
 	centro.save(function(err, centro){
@@ -108,7 +97,7 @@ router.delete('/centroMed/:id', function(req, res, next){
 });
 
 
-/*
+
 router.get('/centroMed/:id/horarios', function(req, res, next){
 	Horario.find({centro_id: req.params.id}, function(err, centros){
 		if (err) { return next(err); }
@@ -122,13 +111,19 @@ router.post('/centroMed/:id/horario', function(req, res, next){
 		horario: req.body.horario
 	});
 
-	horario.save(function(err, horario){
-		if (err) {
-			return next(err);
-		} else {
-			res.json(horario);
-		}
+	CentroMedico.findById(req.params.id, function(err, centroMed){
+		centroMed.horarios.push(horario);
+		centroMed.save();
+		horario.save(function(err, horario){
+			if (err) {
+				return next(err);
+			} else {
+				res.json(horario);
+			}
+		});
+
 	});
+
 });
 
 router.delete('/horario/:id', function(req, res, next){
@@ -190,7 +185,21 @@ router.get('/imagenes', function(req, res, next){
 	});
 });
 
+router.get('/populate/horarios', function(req, res, next){
+
+	Horario.find()
+	.populate('centro_id')
+	.exec(function(err, horarios){
+		if(err){
+			return next(err);
+		}
+		res.json(horarios);
+	});
+});
+
+
 router.get('/horarios', function(req, res, next){
+
 	Horario.find(function(err, horarios){
 		if(err){
 			return next(err);
@@ -198,4 +207,3 @@ router.get('/horarios', function(req, res, next){
 		res.json(horarios);
 	});
 });
-*/
