@@ -21,7 +21,7 @@ router.get('/centrosMed', login.checkLaboratorista ,function(req, res, next){
 });
 
 
-
+/*
 //obtiene la informacion de un centro medico especifico
 router.get('/centroMed/:id', function(req, res, next){
 	CentroMedico.find({_id: req.params.id})
@@ -36,6 +36,7 @@ router.get('/centroMed/:id', function(req, res, next){
 		});
 	});
 });
+*/
 
 //Post
 router.post('/centroMed', function(req, res, next){

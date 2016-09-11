@@ -17,6 +17,7 @@ var MuestraSchema = new mongoose.Schema({
 		type: Schema.ObjectId, 
 		ref: 'Centro',
 		required: true },
+	examenes : [{ type: Schema.ObjectId, ref: 'Examen' }],
 	fecha: {type:Date, default:Date.now}
 });
 

@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Muestra = require('../models/Muestra.js');
+var Centro = require('../models/CentroMedico.js');
+var Laboratorio = require('../models/Laboratorio.js');
+var Paciente = require('../models/Paciente.js');
 var login = require('../routes/login.js');
 
 module.exports = router; 
@@ -28,17 +31,18 @@ router.post('/muestra', login.checkOperario, function(req, res, next){
 		_centro: req.body._centro
 	});
 
-	Centro.findById(req.params._centro, function(err, centro){
-		centro.muestras.push(muestra);
-		centro.save();
-	});
-	
-	Laboratorio.findById(req.params._laboratorio, function(err, lab){
+	Laboratorio.findOne({_id: req.body._laboratorio}, function(err, lab){
 		lab.muestras.push(muestra);
 		lab.save();
 	});
 
-	Paciente.findById(req.params._, function(err, paciente){
+	Centro.findOne({_id: req.body._centro}, function(err, centro){
+		
+		centro.muestras.push(muestra);
+		centro.save();
+	});
+
+	Paciente.findOne({_id: req.body._paciente}, function(err, paciente){
 		paciente.muestras.push(muestra);
 		paciente.save();
 	});

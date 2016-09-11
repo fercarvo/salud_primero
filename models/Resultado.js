@@ -1,7 +1,11 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var ResultadoSchema = new mongoose.Schema({
-	examen: String,
+	_examen: { 
+		type: Schema.ObjectId, 
+		ref: 'Examen',
+		required: true },
 	parametro: String,
 	unidades: String,
 	resultado: String,

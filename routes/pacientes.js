@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Paciente = require('../models/Paciente.js');
+var Muestra = require('../models/Muestra.js');
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 var login = require('../routes/login.js');
@@ -26,18 +27,56 @@ router.get('/paciente/datos', login.checkPaciente, function(req, res){
 	});
 });
 
-router.get('/paciente/examenes', login.checkPaciente, function(req, res){
-	Examen.find({ paciente: req.session.user._id }, function (err, user) { //Solo pacientes logoneados pueden usar este metodo
-		if (!user) {
-			return res.send({error: "USTED NO ES PACIENTE"});
+router.get('/paciente/muestras/examenes', login.checkPaciente, function(req, res){
+
+	Paciente.find({ _id: req.session.user._id })
+	.populate('muestras')
+	.exec(function(err, paciente){
+		if(err){
+			return next(err);
+		}
+	});
+
+	Muestra.populate( paciente, {
+		path: 'muestras.examenes',
+	    //select: 'name',
+	    model: Examen
+	}, function(err, muestras){
+		if(err){
+			return next(err);
 		} else {
-			res.json(user);
-		}	
+			res.json(paciente);
+		}
+	});
+
+});
+
+
+router.get('/paciente/:id/muestras/examenes', login.checkPaciente, function(req, res){
+
+	Muestra.find({ _paciente: req.params.id })
+	.populate('examenes')
+	.exec(function(err, docs){
+
+		var options = {
+			path: 'examenes.resultados',
+			model: 'Resultado'
+		};
+
+		if(err){
+			return next(err);
+		} else {
+			Paciente.populate(docs, options, function(err, muestras){
+				res.json(muestras);
+			});
+			
+		}
+		
+
 	});
 });
 
 router.put('/paciente/datos', login.checkPaciente, function(req, res){
-
 	Paciente.findOne({ _id: req.session.user._id }, function(err, paciente){
 		paciente.nombre = req.body.nombre;
 		paciente.apellido = req.body.apellido;

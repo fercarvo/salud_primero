@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Resultado = require('../models/Resultado.js');
+var Examen = require('../models/Examen.js');
 var mongoose = require('mongoose');
 var login = require('../routes/login.js');
 
@@ -28,20 +29,31 @@ router.get('/examenes/:id/resultados', login.checkLaboratorista, function(req, r
 
 router.post('/resultado', login.checkLaboratorista, function(req, res, next){
 	var resultado = new Resultado({
-		examen: req.body.examen,
+		_examen: req.body._examen,
 		parametro: req.body.parametro,
 		resultado: req.body.resultado,
 		valores_referencia: req.body.valores_referencia,
 		unidades: req.body.unidades
 	});
 
-	resultado.save(function(err, resultado){
-		if (err) {
-			return next(err);
+
+	Examen.findOne({ _id: req.body._examen}, function(err, examen){
+		if (!examen) {
+			res.json({mensaje: "_examen no existe"});
 		} else {
-			res.json(resultado);
-		}
+			examen.resultados.push(resultado);
+			examen.save();
+
+			resultado.save(function(err, doc){
+				if (err) {
+					return next(err);
+				} else {
+					res.json(doc);
+				}
+			});
+		}		
 	});
+
 });
 
 router.put('/resultados/:id', login.checkLaboratorista, function(req, res){
@@ -60,11 +72,20 @@ router.put('/resultados/:id', login.checkLaboratorista, function(req, res){
 	});
 });
 
-router.delete('/resultados/:id', login.checkLaboratorista, function(req, res){
+router.delete('/resultado/:id', login.checkLaboratorista, function(req, res){
 	Resultado.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			res.send(err);
 		}
 		res.json({message: 'El resultado se ha eliminado'});
+	});
+});
+
+router.delete('/resultados', login.checkLaboratorista, function(req, res){
+	Resultado.remove({}, function(err){
+		if(err){
+			res.send(err);
+		}
+		res.json({message: 'Todos los resultados se han eliminado'});
 	});
 });
