@@ -10,6 +10,7 @@ module.exports = router;
 router.get('/centrosMed', function(req, res, next){
 	CentroMedico.find()
 	.populate('horarios')
+	.populate('fotos')
 	.exec(function(err, centrosMed){
 		if(err){
 			return next(err);
@@ -149,17 +150,22 @@ router.get('/centroMed/:id/imagenes', function(req, res, next){
 
 router.post('/centroMed/:id/imagen', function(req, res, next){
 	var imagen = new Imagen({
-		objeto_id: req.params.id,
+		_centro: req.params.id,
 		ruta: req.body.ruta
 	});
 
-	imagen.save(function(err, imagen){
-		if (err) {
-			return next(err);
-		} else {
-			res.json(imagen);
-		}
+	CentroMedico.findById(req.params.id, function(err, centroMed){
+		centroMed.fotos.push(imagen);
+		centroMed.save();
+		imagen.save(function(err, doc){
+			if (err) {
+				return next(err);
+			} else {
+				res.json(doc);
+			}
+		});
 	});
+
 });
 
 router.delete('/imagen/:id', function(req, res, next){

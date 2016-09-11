@@ -1,7 +1,11 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var ImagenSchema = new mongoose.Schema({
-	objeto_id: String,
+	_centro: { 
+		type: Schema.ObjectId, 
+		ref: 'Centro',
+		required: true },
 	ruta: String
 });
 
