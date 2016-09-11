@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Examen = require('../models/Examen.js');
+var Muestra = require('../models/Muestra.js');
 var mongoose = require('mongoose');
 var login = require('../routes/login.js');
 module.exports = router;
@@ -9,7 +10,6 @@ module.exports = router;
 //Muestra todos los examenes del sistema
 router.get('/examenes', login.checkAdmin, function(req, res, next){
 	Examen.find()
-	.populate('_paciente')
 	.populate('_muestra')
 	.exec(function(err, document){
 		if(err){
@@ -46,16 +46,24 @@ router.get('/pacientes/:id/examenes', login.checkPaciente, function(req, res, ne
 //crea una muestra para agregar un examen
 router.post('/examen', login.checkOperario,function(req, res, next){
 	var examen = new Examen({
-		//paciente: req.body.paciente,
-		muestra: req.body.muestra,
+		_muestra: req.body._muestra,
 		nombre: req.body.nombre
 	});
 
-	examen.save(function(err, examen){
-		if (err) {
-			return next(err);
+	//se actualiza la lista de ecamenes en muestra
+	Muestra.findOne({_id: req.body._muestra}, function(err, muestra){
+		if (!muestra) {
+			res.json({mensaje: "la muestra no existe"});
 		} else {
-			res.json(examen);
+			muestra.examenes.push(examen);
+			muestra.save();
+			examen.save(function(err, doc){
+				if (err) {
+					return next(err);
+				} else {
+					res.json(doc);
+				}
+			});	
 		}
 	});
 });
