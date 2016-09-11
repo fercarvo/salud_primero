@@ -18,21 +18,21 @@
         <div class="contenedor">
             <div style="height:310px"  class="centro-med">
                 <div class="lado frente">
-                    <div style="height:294px; width:270px; " class="card">
-                        <div style="height:294px;" class="card-image">
+                    <div class="card">
+                        <div class="card-image">
                             <img src="{{centro.portada}}" alt="imagen"> 
                             <span class="card-title">{{centro.nombre}}</span>
                         </div> 
 
                     </div>
                 </div>  
-                <div class="lado atras lado atras panel panel-default">
+                <div class="lado atras panel panel-default">
                     <div class="panel-body horarios text-center">
                         <p dia text-center small>Horarios</p>
                         <p ng-repeat="dia in centro.horarios" class="dia text-center small">{{dia.horario}}</p>
                     </div>
                     <button type="button" class="btn btn-primary btn-block info
-                    modal-trigger waves-effect waves-light btn cyan darken-2" href="#modalInfo" ng-click="abrir()">Más Información</button>
+                    modal-trigger waves-effect waves-light btn cyan darken-2" href="#modalInfo" ng-click="procesar(centro)">Más Información</button>
                 </div>
             </div>
         </div>
@@ -43,9 +43,9 @@
               <div class="section"></div>
                 <div class="container">
                     <div class="z-depth-1 red lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
-                        <h3 class="white-text">{{centro.nombre}}</h3>
-                        <h3 class="white-text">{{centro.ciudad}}</h4>
-                        <h3 class="white-text">{{centro.direccion}}</h4>
+                        <h3 class="white-text">{{actual.nombre}}</h3>
+                        <h3 class="white-text">{{actual.ciudad}}</h4>
+                        <h3 class="white-text">{{actual.direccion}}</h4>
                         <div class="carousel carousel-slider center teal" data-indicators="true">
                             <div class="carousel-item white white-text">
                               <img src="{{actual.foto1}}">

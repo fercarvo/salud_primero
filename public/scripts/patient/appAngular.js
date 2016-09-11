@@ -83,8 +83,7 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
 
         $scope.actualizar = function() {
            comun.updateDatos($scope.datos);
-           $state.go('centros');
-            
+           $state.go('centros');            
         }
         $scope.regresar = function() {
             $state.go('centros');    
@@ -103,6 +102,7 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
         $scope.actual = {};
 
         $scope.procesar = function(actual) {
+            $('#modalInfo').openModal();
             comun.actual = actual;
             $scope.actual = comun.actual;
         }
@@ -112,11 +112,6 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
         }
 
         $('.parallax').parallax();
-
-        $scope.abrir = function(){
-            $('#modalInfo').openModal();
-        }
-
 
         $('.carousel.carousel-slider').carousel({full_width: true},{time_constant: 200},{interval: 300});
         $(document).ready(function(){
