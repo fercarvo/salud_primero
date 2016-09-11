@@ -23,9 +23,11 @@ router.get('/muestras', login.checkLaboratorista, function(req, res, next){
 //crea una nueva muestra
 router.post('/muestra', login.checkOperario, function(req, res, next){
 
+	var cod_barras = Math.floor(Math.random() * (99999999 - 11111111 + 1)) + 11111111;//genera cadena aleatoria
+
 	var muestra = new Muestra({
 		tipo: req.body.tipo,
-		cod_barras: req.body.cod_barras,
+		cod_barras: cod_barras,
 		_paciente: req.body._paciente,
 		_laboratorio: req.body._laboratorio,
 		_centro: req.body._centro

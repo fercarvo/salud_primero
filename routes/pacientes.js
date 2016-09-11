@@ -28,32 +28,27 @@ router.get('/paciente/datos', login.checkPaciente, function(req, res){
 });
 
 router.get('/paciente/muestras/examenes', login.checkPaciente, function(req, res){
+	Muestra.find({ _paciente: req.session.user._id })
+	.populate('examenes')
+	.exec(function(err, docs){
 
-	Paciente.find({ _id: req.session.user._id })
-	.populate('muestras')
-	.exec(function(err, paciente){
-		if(err){
-			return next(err);
-		}
-	});
+		var options = {
+			path: 'examenes.resultados',
+			model: 'Resultado'
+		};
 
-	Muestra.populate( paciente, {
-		path: 'muestras.examenes',
-	    //select: 'name',
-	    model: Examen
-	}, function(err, muestras){
 		if(err){
 			return next(err);
 		} else {
-			res.json(paciente);
+			Paciente.populate(docs, options, function(err, muestras){
+				res.json(muestras);
+			});
 		}
 	});
-
 });
 
 
 router.get('/paciente/:id/muestras/examenes', login.checkPaciente, function(req, res){
-
 	Muestra.find({ _paciente: req.params.id })
 	.populate('examenes')
 	.exec(function(err, docs){
@@ -69,10 +64,7 @@ router.get('/paciente/:id/muestras/examenes', login.checkPaciente, function(req,
 			Paciente.populate(docs, options, function(err, muestras){
 				res.json(muestras);
 			});
-			
 		}
-		
-
 	});
 });
 
