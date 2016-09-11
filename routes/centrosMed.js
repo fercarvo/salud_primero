@@ -8,15 +8,6 @@ module.exports = router;
 
 //Get 
 router.get('/centrosMed', function(req, res, next){
-	CentroMedico.find(function(err, centrosMed){
-		if(err){
-			return next(err);
-		}
-		res.json(centrosMed);
-	});
-});
-
-router.get('/populate/centrosMed', function(req, res, next){
 	CentroMedico.find()
 	.populate('horarios')
 	.exec(function(err, centrosMed){
@@ -26,6 +17,7 @@ router.get('/populate/centrosMed', function(req, res, next){
 		res.json(centrosMed);
 	});
 });
+
 
 
 //obtiene la informacion de un centro medico especifico

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var CentroMedicoSchema = new mongoose.Schema({
+var CentroSchema = new mongoose.Schema({
 	nombre: String,
 	ciudad: String,
 	direccion: String,
@@ -15,4 +15,4 @@ var CentroMedicoSchema = new mongoose.Schema({
 	fotos: [{ type: Schema.ObjectId, ref: 'Imagen' }],
 });
 
-module.exports = mongoose.model('CentroMedico', CentroMedicoSchema);
+module.exports = mongoose.model('Centro', CentroSchema);
