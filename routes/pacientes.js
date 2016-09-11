@@ -26,6 +26,16 @@ router.get('/paciente/datos', login.checkPaciente, function(req, res){
 	});
 });
 
+router.get('/paciente/examenes', login.checkPaciente, function(req, res){
+	Examen.find({ paciente: req.session.user._id }, function (err, user) { //Solo pacientes logoneados pueden usar este metodo
+		if (!user) {
+			return res.send({error: "USTED NO ES PACIENTE"});
+		} else {
+			res.json(user);
+		}	
+	});
+});
+
 router.put('/paciente/datos', login.checkPaciente, function(req, res){
 
 	Paciente.findOne({ _id: req.session.user._id }, function(err, paciente){
@@ -195,6 +205,16 @@ router.put('/paciente/:id', login.checkPaciente, function(req, res){ //Solo USUA
 */
 router.delete('/paciente/:id', login.checkAdmin, function(req, res){ //Solo Admins logoneados pueden usar este metodo
 	Paciente.findByIdAndRemove(req.params.id, function(err){
+		if(err){
+			res.send(err);
+		} else {
+			res.json({message: 'El paciente se ha eliminado'});	
+		}
+	});
+});
+
+router.delete('/pacientes', login.checkAdmin, function(req, res){ //Solo Admins logoneados pueden usar este metodo
+	Paciente.remove({}, function(err){
 		if(err){
 			res.send(err);
 		} else {

@@ -23,16 +23,31 @@ router.post('/muestra', login.checkOperario, function(req, res, next){
 	var muestra = new Muestra({
 		tipo: req.body.tipo,
 		cod_barras: req.body.cod_barras,
-		paciente: req.body.paciente,
-		laboratorio: req.body.laboratorio,
-		centro: req.body.centro
+		_paciente: req.body._paciente,
+		_laboratorio: req.body._laboratorio,
+		_centro: req.body._centro
 	});
 
-	muestra.save(function(err, mues){
+	Centro.findById(req.params._centro, function(err, centroMed){
+		centroMed.fotos.push(muestra);
+		centroMed.save();
+	});
+	
+	Laboratorio.findById(req.params._laboratorio, function(err, lab){
+		lab.fotos.push(muestra);
+		lab.save();
+	});
+
+	Paciente.findById(req.params._, function(err, paciente){
+		paciente.fotos.push(muestra);
+		paciente.save();
+	});
+
+	muestra.save(function(err, doc){
 		if (err) {
 			return next(err);
 		} else {
-			res.json(mues);
+			res.json(doc);
 		}
 	});
 });

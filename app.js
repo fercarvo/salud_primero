@@ -70,7 +70,7 @@ app.use(function(req, res, next) {
       next();
     } else {
       console.log("no esta logoneado");
-      next(); // esto no va
+      res.json({mensaje: 'no esta logoneado'});
       //res.redirect("/"); esto si va
     }
   }

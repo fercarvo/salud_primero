@@ -44,8 +44,8 @@ router.checkPaciente = function(req, res, next) {
 		if (!user 
 		//|| req.params.id!=req.session.user._id
 		) { //se valida que sea paciente y sea el mismo que pretende editar
-			//return res.send({error: "SOLO PACIENTES, usted no esta autorizado"});
 			console.log("usuario NO autorizado para usar este metodo");
+			//return res.send({error: "SOLO PACIENTES, usted no esta autorizado"});
 			next();
 		} else {
 			console.log("usuario autorizado");

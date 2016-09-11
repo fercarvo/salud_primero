@@ -13,6 +13,7 @@ var CentroSchema = new mongoose.Schema({
 	descripcion: String,
 	portada: String,
 	fotos: [{ type: Schema.ObjectId, ref: 'Imagen' }],
+	muestras: [{ type: Schema.ObjectId, ref: 'Muestra' }]
 });
 
 module.exports = mongoose.model('Centro', CentroSchema);

@@ -4,10 +4,11 @@ var CentroMedico = require('../models/CentroMedico.js');
 var Horario = require('../models/Horario.js');
 var Imagen = require('../models/Imagen.js');
 var mongoose = require('mongoose');
+var login = require('../routes/login.js');
 module.exports = router;
 
 //Get 
-router.get('/centrosMed', function(req, res, next){
+router.get('/centrosMed', login.checkLaboratorista ,function(req, res, next){
 	CentroMedico.find()
 	.populate('horarios')
 	.populate('fotos')
@@ -25,6 +26,7 @@ router.get('/centrosMed', function(req, res, next){
 router.get('/centroMed/:id', function(req, res, next){
 	CentroMedico.find({_id: req.params.id})
 	.populate('horarios')
+	.populate('fotos')
 	.exec(function(err, centroMed){
 		centroMed.save(function(err){
 			if(err){
@@ -59,7 +61,7 @@ router.post('/centroMed', function(req, res, next){
 });
 
 
-//Put
+/*
 router.put('/centroMed/:id', function(req, res){
 	CentroMedico.findById(req.params.id, function(err, centroMed){
 		centroMed.nombre = req.body.nombre;
@@ -88,6 +90,7 @@ router.put('/centroMed/:id', function(req, res){
 		});
 	});
 });
+*/
 
 //Delete
 router.delete('/centroMed/:id', function(req, res, next){
@@ -100,13 +103,15 @@ router.delete('/centroMed/:id', function(req, res, next){
 });
 
 
-
+/*
 router.get('/centroMed/:id/horarios', function(req, res, next){
 	Horario.find({centro_id: req.params.id}, function(err, centros){
 		if (err) { return next(err); }
 		res.json(centros);
 	});
 });
+*/
+
 
 router.post('/centroMed/:id/horario', function(req, res, next){
 	var horario = new Horario({
@@ -129,6 +134,7 @@ router.post('/centroMed/:id/horario', function(req, res, next){
 
 });
 
+
 router.delete('/horario/:id', function(req, res, next){
 	Horario.findOneAndRemove({_id: req.params.id}, function(err, horario){
 		if (err) { 
@@ -143,12 +149,14 @@ router.delete('/horario/:id', function(req, res, next){
 	});
 });
 
+/*
 router.get('/centroMed/:id/imagenes', function(req, res, next){
 	Imagen.find({objeto_id: req.params.id}, function(err, imagenes){
 		if (err) { return next(err); }
 		res.json(imagenes);
 	});
 });
+*/
 
 router.post('/centroMed/:id/imagen', function(req, res, next){
 	var imagen = new Imagen({
@@ -193,22 +201,11 @@ router.get('/imagenes', function(req, res, next){
 	});
 });
 
-router.get('/populate/horarios', function(req, res, next){
 
+router.get('/horarios', function(req, res, next){
 	Horario.find()
 	.populate('centro_id')
 	.exec(function(err, horarios){
-		if(err){
-			return next(err);
-		}
-		res.json(horarios);
-	});
-});
-
-
-router.get('/horarios', function(req, res, next){
-
-	Horario.find(function(err, horarios){
 		if(err){
 			return next(err);
 		}

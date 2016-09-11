@@ -8,33 +8,30 @@ module.exports = router;
 
 //Muestra todos los examenes del sistema
 router.get('/examenes', login.checkAdmin, function(req, res, next){
-	Examen.find(function(err, examenes){
-		if (err) {
+	Examen.find()
+	.populate('_paciente')
+	.populate('_muestra')
+	.exec(function(err, document){
+		if(err){
 			return next(err);
 		}
-		res.json(examenes);
+		res.json(document);
 	});
 });
 
 //muestra todos los examenes de una muestra seleccionada
 router.get('/muestra/:id/examenes', login.checkLaboratorista, function(req, res, next){
-	Examen.find({muestra:req.params.id}, function(err, examenes){
-		if (err) {
+	Examen.find({ _muestra: req.params.id})
+	.populate('_paciente')
+	.populate('_muestra')
+	.exec(function(err, documents){
+		if(err){
 			return next(err);
 		}
-		res.json(examenes);
+		res.json(documents);
 	});
 });
 
-router.get('/paciente/examenes', login.checkPaciente, function(req, res){
-	Examen.find({ paciente: req.session.user._id }, function (err, user) { //Solo pacientes logoneados pueden usar este metodo
-		if (!user) {
-			return res.send({error: "USTED NO ES PACIENTE"});
-		} else {
-			res.json(user);
-		}	
-	});
-});
 
 //Muestra todos los examenes de un paciente especifico
 router.get('/pacientes/:id/examenes', login.checkPaciente, function(req, res, next){
