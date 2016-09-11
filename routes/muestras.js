@@ -28,18 +28,18 @@ router.post('/muestra', login.checkOperario, function(req, res, next){
 		_centro: req.body._centro
 	});
 
-	Centro.findById(req.params._centro, function(err, centroMed){
-		centroMed.fotos.push(muestra);
-		centroMed.save();
+	Centro.findById(req.params._centro, function(err, centro){
+		centro.muestras.push(muestra);
+		centro.save();
 	});
 	
 	Laboratorio.findById(req.params._laboratorio, function(err, lab){
-		lab.fotos.push(muestra);
+		lab.muestras.push(muestra);
 		lab.save();
 	});
 
 	Paciente.findById(req.params._, function(err, paciente){
-		paciente.fotos.push(muestra);
+		paciente.muestras.push(muestra);
 		paciente.save();
 	});
 
@@ -78,6 +78,14 @@ router.delete('/muestra/:id', login.checkOperario, function(req, res, next){
 	});
 });
 
+router.delete('/muestras', login.checkOperario, function(req, res, next){
+	Muestra.remove({}, function(err){
+		if(err){
+			res.send(err);
+		}
+		res.json({mensaje: 'las muestras se eliminaron'});
+	});
+});
 
 router.patch('/muestra/:id', login.checkOperario, function(req, res){
 	Muestra.findById(req.params.id, function(err, muestra){

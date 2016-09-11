@@ -10,7 +10,7 @@ var PacienteSchema = new mongoose.Schema({
 	telefono: String,
 	foto: String,
 	clave: String,
-	examenes: [{ type: Schema.ObjectId, ref: 'Examen'}]
+	muestras: [{ type: Schema.ObjectId, ref: 'Muestra'}]
 });
 
 module.exports = mongoose.model('Paciente', PacienteSchema);
