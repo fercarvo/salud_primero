@@ -17,11 +17,6 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
                 url: '/examenes',
                 templateUrl: 'views/paciente/examenes.html',
                 controller: 'ctrlExamenes'
-            })
-            .state('modal', {
-                url: '/modal',
-                templateUrl: 'views/paciente/modal.html',
-                controller: 'ctrlModal'
             });
 
         $urlRouterProvider.otherwise('centros');
@@ -88,8 +83,7 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
 
         $scope.actualizar = function() {
            comun.updateDatos($scope.datos);
-           $state.go('centros');
-            
+           $state.go('centros');            
         }
         $scope.regresar = function() {
             $state.go('centros');    
@@ -108,29 +102,22 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
         $scope.actual = {};
 
         $scope.procesar = function(actual) {
+            $('#modalInfo').openModal();
             comun.actual = actual;
-            $state.go('modal');
+            $scope.actual = comun.actual;
         }
-
-        $('.parallax').parallax();
-
-    })
-    .controller('ctrlModal', function($scope, $state, comun) {
-        //cargarCentrosMed();
-        $scope.actual = comun.actual; 
 
         $scope.informacion = function(){
             comun.mostrarInfo($scope.actual);
         }
 
-        $scope.abrir = function(){
-            $('#modal1').openModal();
-        }
+        $('.parallax').parallax();
 
         $('.carousel.carousel-slider').carousel({full_width: true},{time_constant: 200},{interval: 300});
         $(document).ready(function(){
             $('.carousel').carousel();
         });
+
     })
     .controller('TNTIndexController', function ($scope, $state, comun) {
         $scope.gridOptions = {
