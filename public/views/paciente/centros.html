@@ -1,4 +1,4 @@
-<div id="index-banner" class="parallax-container">
+<!--<div id="index-banner" class="parallax-container">
   <div class="section no-pad-bot">
     <div class="container">
       <br><br>
@@ -8,12 +8,14 @@
   </div>
   <div class="parallax"><img src="imagenes/main3.jpg"></div>
 </div>
+-->
 
 <div class="container">
-    <h4>Centros Medicos</h4>
+    <h4 text-center>Centros Medicos</h4>
     <hr>
-
-    <div class="col-xs-12 col-sm-6" style="padding-bottom:40px" ng-repeat="centro in centros">
+    <input type="search" name="busqueda" ng-model="busqueda" placeholder="Buscar Centro M&eacute;dico">
+        
+    <div class="col-xs-12 col-sm-6" style="padding-bottom:40px" ng-repeat="centro in centros | filter:{nombre:busqueda}">
 
         <div class="contenedor">
             <div style="height:310px"  class="centro-med">
