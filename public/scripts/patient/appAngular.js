@@ -32,15 +32,6 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
         comun.actual = {};
         /***Sección de métodos remotos***/
 
-
-        comun.mostrarInfo = function(cm){
-            return $http.get('/centroMed/' + cm._id)
-            .success(function(data){
-                angular.copy(data, comun.centros_med)
-                return comun.centros_med
-            })
-        }
-
         comun.getCentros = function(){
             return $http.get('/centrosMed')
             .success(function(data){
@@ -95,28 +86,20 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
         comun.getExamenes();
         $scope.examenes = comun.examenes;
 
+
     })
     .controller('ctrlCentros', function($scope, $state, comun) {
         comun.getCentros();
         $scope.centros = comun.centros_med;
         $scope.actual = {};
 
-        $scope.procesar = function(actual) {
-            $('#modalInfo').openModal();
-            comun.actual = actual;
-            $scope.actual = comun.actual;
-        }
-
-        $scope.informacion = function(){
-            comun.mostrarInfo($scope.actual);
-        }
-
         $('.parallax').parallax();
 
-        $('.carousel.carousel-slider').carousel({full_width: true},{time_constant: 200},{interval: 300});
-        $(document).ready(function(){
-            $('.carousel').carousel();
-        });
+        $scope.procesar = function(actual) {
+            $('#modalInfo').openModal();             
+            comun.actual = actual;
+            $scope.actual = comun.actual;          
+        }       
 
     })
     .controller('TNTIndexController', function ($scope, $state, comun) {

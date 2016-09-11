@@ -3,13 +3,18 @@
     <head>
         <title>Salud Primero - Paciente </title>
         <% include app/scripts %>
-        <link rel="stylesheet" href="styles/estiloPac.css">
+        
         <script type="text/javascript" src="scripts/patient/appAngular.js"></script>
-
-        <script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
+        <!--<script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>-->
         <script src="http://ui-grid.info/release/ui-grid.js"></script>
+        
         <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
         <link rel="stylesheet" href="main.css" type="text/css">
+        <link rel="stylesheet" href="styles/estiloPac.css">
         
     </head>
 
@@ -20,7 +25,6 @@
         </header>
         <main>
             <% include app/header %>
-
             <div>
               <ui-view></ui-view>
             </div>
