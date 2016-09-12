@@ -18,7 +18,7 @@ angular.module('appOperator',['ui.router'])
 			});
 		$urlRouterProvider.otherwise('RegistrarPaciente');
 	})
-	.controller('activarInfo',function($scope, $state, $http){
+	.controller('ctrlRegp',function($scope, $state, $http){
 		$scope.nuevo_paciente = {};
         $scope.pacientes = {};
         $scope.laboratorios = {};
@@ -41,14 +41,15 @@ angular.module('appOperator',['ui.router'])
                 cedula: $scope.nuevo_paciente.cedula,
                 direccion: $scope.nuevo_paciente.direccion,
                 telefono: $scope.nuevo_paciente.telefono,
-                foto: $scope.nuevo_paciente.foto
             }).success(function(response){
-              $scope.pacientes.push(response.data);
+                $scope.pacientes.push($scope.nuevo_paciente);
+                Materialize.toast('Se Creó el paciente satisfactoriamente', 3000, 'rounded');
+                
+                $scope.nuevo_paciente = {};
+                $scope.$apply();
                     
-            })
-            $state.go('RegistrarPaciente');
-            $scope.nuevo_paciente = {};
-
+            });
+            
         }
 
         $scope.editar = function ( pid ) {
@@ -67,22 +68,24 @@ angular.module('appOperator',['ui.router'])
                 correo: $scope.editar_paciente.correo,
                 cedula: $scope.editar_paciente.cedula,
                 direccion: $scope.editar_paciente.direccion,
-                telefono: $scope.editar_paciente.telefono,
-                foto: $scope.editar_paciente.foto 
+                telefono: $scope.editar_paciente.telefono
             }
-            ).success(function (response) {
+            ).success(function (data) {
                 $scope.editar_paciente = {}; //se resetea la variable editar paciente para que no se siga editando
                 $scope.disEditPaciente = true; //se desactiva el formulario de editar para evitar caida del servidor
+                $('#modal1').closeModal();
+                Materialize.toast(data.message, 3000, 'rounded')
             }, function (error) {
             });
-            $('#modal1').closeModal();
+            
         };
 
         $scope.delete = function ( pid ) {
             var paciente = $scope.pacientes[pid];
             $http.delete("/paciente/"+ paciente._id)
-                .then(function () {
+                .success(function (data) {
                     $scope.pacientes.splice(pid, 1);
+                    Materialize.toast(data.message, 3000, 'rounded')
                 });
         };
 

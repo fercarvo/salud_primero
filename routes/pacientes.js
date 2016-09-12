@@ -152,7 +152,6 @@ router.post('/super-paciente', login.checkAdmin, function(req, res, next){ //Sol
 		correo: req.body.correo,
 		direccion: req.body.direccion,
 		telefono: req.body.telefono,
-		foto: req.body.foto,
 		clave: hash
 	});
 
@@ -203,7 +202,7 @@ router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo O
 				if (error){
 					res.send(error);
 				}else{
-					res.send('correo enviado');
+					res.json(usr);
 				}
 			});
 		}
@@ -223,13 +222,12 @@ router.put('/paciente/:id', login.checkPaciente, function(req, res){ //Solo USUA
 		paciente.correo = req.body.correo;
 		paciente.direccion = req.body.direccion;
 		paciente.telefono = req.body.telefono;
-		paciente.foto = req.body.foto;
 
 		paciente.save(function(err){
 			if (err) {
 				res.send(err);
 			} else {
-				res.json(paciente);
+				res.json({message: 'El paciente se editó '});
 			}
 		});
 	});

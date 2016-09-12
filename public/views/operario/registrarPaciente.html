@@ -1,6 +1,6 @@
 <h4>Administrador de Pacientes</h4>
 <hr>
-<ul ng-click="activarInfo()" class="collapsible" data-collapsible="accordion">
+<ul class="collapsible" data-collapsible="accordion">
     <li>
       <div class="collapsible-header"><i class="material-icons">add</i>Nuevo Paciente</div>
       <div class="collapsible-body" style="padding-left:20px;padding-right:20px">
@@ -43,7 +43,6 @@
               <th>cedula</th>
               <th>direccion</th>
               <th>telefono</th>
-              <!--<th>foto</th>-->
               <th>editar</th>
               <th>eliminar</th>
             </tr>
@@ -55,9 +54,8 @@
                   <td class="cedula" > {{ paciente.cedula }} </td>
                   <td class="direccion"> {{ paciente.direccion }} </td>
                   <td class="telefono" > {{ paciente.telefono }} </td>
-                  <!--<td class="foto"> {{ paciente.foto }} </td>-->
-                  <td class= "editar"><button type="button" class="glyphicon glyphicon-edit" data-toggle="modal" ng-click="editar($index)"></button></td>
-                  <td class= "eliminar"><button type="button" class="glyphicon glyphicon-remove-circle" ng-click="delete($index)"></button></td>
+                  <td class= "editar"><button type="button" style="border:none;background:none" class="small material-icons" href="#modal1" ng-click="editar($index)">mode_edit</button></td>
+                  <td class= "eliminar"><button type="button" style="border:none;background:none" class="small material-icons" ng-click="delete($index)">delete</button></td>
               </tr>
           </tbody>
         </table>
@@ -66,38 +64,34 @@
 </ul>
 
 <!-- Modal Structure -->
-<div id="modal1" class="modal bottom-sheet">
-  <div class="modal-content">
-      <!-- Modal de editar resultado-->
-    <div>
-      <form > 
-              <div class="modal-body">
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="nombre" ng-model="editar_paciente.nombre" placeholder="Nombre">
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="apellido" ng-model="editar_paciente.apellido" placeholder="Apellido">
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="cedula" ng-model="editar_paciente.cedula" placeholder="Cedula">
-                  </div>
-                  <div class="form-group">
-                    <input type="email" class="form-control" name="correo" ng-model="editar_paciente.correo" placeholder="Correo" readonly>
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="direccion" ng-model="editar_paciente.direccion" placeholder="Direccion">
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="telefono" ng-model="editar_paciente.telefono" placeholder="Telefono">
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="foto" ng-model="editar_paciente.foto" placeholder="Foto">
-                  </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" ng-disabled="disEditPaciente" ng-click="put()">Editar</button>
-              </div>
-            </form>
+
+<div id="modal1" class="modal modal-fixed-footer">
+  <form >
+
+    <div class="modal-content">
+        <div class="form-group">
+          <input type="text" class="form-control" name="nombre" ng-model="editar_paciente.nombre" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="apellido" ng-model="editar_paciente.apellido" placeholder="Apellido">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="cedula" ng-model="editar_paciente.cedula" placeholder="Cedula">
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" name="correo" ng-model="editar_paciente.correo" placeholder="Correo" readonly>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="direccion" ng-model="editar_paciente.direccion" placeholder="Direccion">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="telefono" ng-model="editar_paciente.telefono" placeholder="Telefono">
+        </div>
     </div>
-  </div>
+
+    <div class="modal-footer">
+      <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" ng-disabled="disEditPaciente" ng-click="put()">Editar</button>
+    </div>
+
+  </form>
 </div>
