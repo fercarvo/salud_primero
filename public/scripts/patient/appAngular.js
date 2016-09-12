@@ -26,7 +26,7 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
 
         comun.centros_med = [];
         comun.datos = {};
-        comun.muestras = [];
+        comun.examenes = [];
 
         nuevosDatos = {};
         comun.actual = {};
@@ -57,11 +57,11 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
             })
         }
 
-        comun.getmuestras = function(){
-            return $http.get('/paciente/muestras/examenes')
+        comun.getExamenes = function(){
+            return $http.get('/paciente/examenes')
             .success(function(data){
-                angular.copy(data, comun.muestras)
-                return comun.muestras
+                angular.copy(data, comun.examenes)
+                return comun.examenes
             })
         }
         return comun;
@@ -82,9 +82,9 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
 
     })
     .controller('ctrlExamenes', function($scope, $state, comun) {
-        comun.getmuestras();
-        $scope.muestras = comun.muestras;
-        console.log($scope.muestras);
+        comun.getExamenes();
+        $scope.examenes = comun.examenes;
+        //console.log($scope.examenes);
 
 
     })

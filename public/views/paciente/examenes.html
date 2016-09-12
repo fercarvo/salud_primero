@@ -10,14 +10,12 @@
             </tr>
         </thead>
         <tbody>
-            <div  ng-repeat="muestra in muestras">
-                <tr ng-repeat="examen in muestra.examenes">
-                    <td>{{examen.nombre}}</td>
-                    <td>{{muestra.fecha}}</td>
-                    <td>Estado</td>
-                    <td>Resultados</td>
-                </tr>    
-            </div>
+            <tr ng-repeat="examen in examenes">
+                <td>{{examen.nombre}}</td>
+                <td>{{examen._muestra.fecha}}</td>
+                <td>Estado</td>
+                <td>Resultados</td>
+            </tr>    
         </tbody>
     </table>
 </div>

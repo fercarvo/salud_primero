@@ -83,6 +83,8 @@ router.put('/paciente/datos', login.checkPaciente, function(req, res){
 			if (err) {
 				res.send(err);
 			} else {
+				req.session.user.nombre = paciente.nombre;
+				req.session.user.apellido = paciente.apellido;
 				res.json(paciente);
 			}
 		});
