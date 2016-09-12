@@ -1,22 +1,29 @@
+<h4 style="padding-left:35px">Mis Examenes</h4>
+<hr>
+<ul >
+    <li>
+        <div style="padding-left:35px;padding-right:35px">
+        <div ><input type="search" name="busqueda" ng-model="busqueda" placeholder="Buscar examen medico"></div>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Examen</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Resultados</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="examen in examenes | filter:{nombre:busqueda}">;
+                        <td > {{ examen.nombre }} </td>
+                        <td > {{examen._muestra.fecha}}</td>
+                        <td > Estado</td>
+                        <td ><button type="button" class="small material-icons">view_list</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </li>
+</ul>
 
-<div class="container">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Examen</th>
-                <th>Fecha</th>
-                <th>Estado</th>
-                <th>Resultados</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="examen in examenes">
-                <td>{{examen.nombre}}</td>
-                <td>{{examen._muestra.fecha}}</td>
-                <td>Estado</td>
-                <td>Resultados</td>
-            </tr>    
-        </tbody>
-    </table>
-</div>
 

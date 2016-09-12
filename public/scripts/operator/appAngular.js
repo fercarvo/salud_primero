@@ -18,7 +18,7 @@ angular.module('appOperator',['ui.router'])
 			});
 		$urlRouterProvider.otherwise('RegistrarPaciente');
 	})
-	.controller('ctrlRegp',function($scope, $state, $http){
+	.controller('activarInfo',function($scope, $state, $http){
 		$scope.nuevo_paciente = {};
         $scope.pacientes = {};
         $scope.laboratorios = {};
