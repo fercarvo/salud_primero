@@ -14,9 +14,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="examen in examenes | filter:{nombre:busqueda}">;
+                    <tr ng-repeat="examen in examenes | filter:{nombre:busqueda}">
                         <td > {{ examen.nombre }} </td>
-                        <td > {{examen._muestra.fecha}}</td>
+                        <td > {{examen._muestra.fecha | date:'MM/dd/yyyy'}}</td>
                         <td > Estado</td>
                         <td ><button type="button" class="small material-icons">view_list</button></td>
                     </tr>
