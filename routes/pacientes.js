@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Paciente = require('../models/Paciente.js');
 var Muestra = require('../models/Muestra.js');
+var Examen = require('../models/Examen.js');
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 var login = require('../routes/login.js');
@@ -27,6 +28,28 @@ router.get('/paciente/datos', login.checkPaciente, function(req, res){
 	});
 });
 
+//Metodo PRO que retorna todos los examenes del paciente logoneado
+router.get('/paciente/examenes', login.checkPaciente, function(req, res){
+	Examen
+		.find({})
+		.populate( '_muestra', null, { _paciente: { $in: req.session.user._id } } )
+		.exec(function(err, docs) {
+
+			docs = docs.filter(function(doc) {
+				return doc._muestra; // Retorna solo los que tienen un parametro no null en _muestra
+			});
+
+			if(err){
+				return next(err);
+			} else {
+				res.json(docs);	
+			}
+
+		});
+
+});
+
+//Metodo PRO que retorna todas las muestras con todos los examenes del paciente logoneado
 router.get('/paciente/muestras/examenes', login.checkPaciente, function(req, res){
 	Muestra.find({ _paciente: req.session.user._id })
 	.populate('examenes')
@@ -47,26 +70,6 @@ router.get('/paciente/muestras/examenes', login.checkPaciente, function(req, res
 	});
 });
 
-
-router.get('/paciente/:id/muestras/examenes', login.checkPaciente, function(req, res){
-	Muestra.find({ _paciente: req.params.id })
-	.populate('examenes')
-	.exec(function(err, docs){
-
-		var options = {
-			path: 'examenes.resultados',
-			model: 'Resultado'
-		};
-
-		if(err){
-			return next(err);
-		} else {
-			Paciente.populate(docs, options, function(err, muestras){
-				res.json(muestras);
-			});
-		}
-	});
-});
 
 router.put('/paciente/datos', login.checkPaciente, function(req, res){
 	Paciente.findOne({ _id: req.session.user._id }, function(err, paciente){
