@@ -179,7 +179,6 @@ router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo O
 		correo: req.body.correo,
 		direccion: req.body.direccion,
 		telefono: req.body.telefono,
-		foto: req.body.foto,
 		clave: hash
 	});
 
@@ -200,7 +199,8 @@ router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo O
 		} else {
 			transporter.sendMail(mailOptions, function(error, respuesta){
 				if (error){
-					res.send(error);
+					//res.send(error);
+					res.json(usr);
 				}else{
 					res.json(usr);
 				}

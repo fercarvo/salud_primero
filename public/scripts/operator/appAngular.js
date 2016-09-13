@@ -42,9 +42,9 @@ angular.module('appOperator',['ui.router'])
                 direccion: $scope.nuevo_paciente.direccion,
                 telefono: $scope.nuevo_paciente.telefono,
             }).success(function(response){
-                $scope.pacientes.push($scope.nuevo_paciente);
+
+                $scope.pacientes.push(response);
                 Materialize.toast('Se Creó el paciente satisfactoriamente', 3000, 'rounded');
-                
                 $scope.nuevo_paciente = {};
                 $scope.$apply();
                     
@@ -57,7 +57,6 @@ angular.module('appOperator',['ui.router'])
             $scope.editar_paciente = paciente;
             $scope.disEditPaciente = false;
             $('#modal1').openModal();
-            $state.go('RegistrarPaciente');
         };
 
 
@@ -102,6 +101,10 @@ angular.module('appOperator',['ui.router'])
 	    $scope.pacientes = {};
         $scope.laboratorios = {};
         $scope.centros = {};
+        $scope.muestras = {};
+        $scope.tipos = ["sangre","heces","orina"];
+        $scope.editar_muestra = {};
+        $scope.nuevo_muestra = {};
 
         $http.get("/muestras")
             .then(function (response) {
@@ -131,7 +134,6 @@ angular.module('appOperator',['ui.router'])
         $scope.putMuestra = function () {
             $http.put("/muestra/" + $scope.editar_muestra._id, { 
                 tipo: $scope.editar_muestra.tipo,
-                cod_barras: $scope.editar_muestra.cod_barras,
                 paciente: $scope.editar_muestra.paciente,
                 laboratorio: $scope.editar_muestra.laboratorio,
                 centro: $scope.editar_muestra.centro,
@@ -139,32 +141,35 @@ angular.module('appOperator',['ui.router'])
             ).success(function (response) {
                 $scope.editar_muestra = {}; //se resetea la variable editar paciente para que no se siga editando
                 $scope.disEditMuestra = true; //se desactiva el formulario de editar para evitar caida del servidor
-            }, function (error) {
+                $('#modal1').closeModal();
+                Materialize.toast(data.message, 3000, 'rounded')
             });
-            $state.go('RegistrarMuestra');
         };
 
-        //Se crea un paciente
-        $scope.agregarMuestra = function() {
+        //Se crea una muestra
+        $scope.agregarMuestra = function(muestra) {
+            console.log($scope.nuevo_muestra);
+
             $http.post("/muestra", {
                 tipo: $scope.nuevo_muestra.tipo,
-                cod_barras: $scope.nuevo_muestra.cod_barras,
-                paciente: $scope.nuevo_muestra.paciente,
-                laboratorio: $scope.nuevo_muestra.laboratorio,
-                centro: $scope.nuevo_muestra.centro,
+                paciente: $scope.nuevo_muestra.paciente._id,
+                laboratorio: $scope.nuevo_muestra.laboratorio._id,
+                centro: $scope.nuevo_muestra.centro._id
+
             }).success(function(response){
-              $scope.muestras.push(response.data);
-                    
-            })
+                $scope.muestras.push(response);
+                Materialize.toast('Se Creó una muestra satisfactoriamente', 3000, 'rounded');
                 $scope.nuevo_muestra = {};
-            $state.go('RegistrarMuestra');
-        }
+                $scope.$apply();  
+            });
+        };
 
         $scope.deleteMuestra = function ( pid ) {
             var muestra = $scope.muestras[pid];
             $http.delete("/muestra/"+ muestra._id)
-                .then(function () {
+                .success(function (response) {
                     $scope.muestras.splice(pid, 1);
+                    Materialize.toast(response.message, 3000, 'rounded');
                 });
         };
 
@@ -178,7 +183,26 @@ angular.module('appOperator',['ui.router'])
             $scope.disEditMuestra = false;
             $scope.activarInfo();
             $('#modal1').openModal();
-            $state.go('RegistrarMuestra');
+        };
+
+        $scope.cargarPaciente = function (i){
+            var paciente = $scope.pacientes[i];
+            $scope.nuevo_muestra.paciente = paciente;
+        }
+
+        $scope.cargarCentro = function (i){
+            var centro = $scope.centros[i];
+            $scope.nuevo_muestra.centro = centro;
+        }
+
+        $scope.cargarLaboratorio = function (i){
+            var laboratorio = $scope.laboratorios[i];
+            $scope.nuevo_muestra.laboratorio = laboratorio;
+        }
+
+        $scope.setTipo = function(obj){
+            var tipo = $scope.tipo[obj];
+            console.log(tipo);
         };
 
         $('.collapsible').collapsible({

@@ -28,30 +28,29 @@ router.post('/muestra', login.checkOperario, function(req, res, next){
 	var muestra = new Muestra({
 		tipo: req.body.tipo,
 		cod_barras: cod_barras,
-		_paciente: req.body._paciente,
-		_laboratorio: req.body._laboratorio,
-		_centro: req.body._centro
+		_paciente: req.body.paciente,
+		_laboratorio: req.body.laboratorio,
+		_centro: req.body.centro
 	});
 
-	Laboratorio.findOne({_id: req.body._laboratorio}, function(err, lab){
+	Laboratorio.findOne({_id: req.body.laboratorio}, function(err, lab){
 		lab.muestras.push(muestra);
 		lab.save();
 	});
 
-	Centro.findOne({_id: req.body._centro}, function(err, centro){
-		
+	Centro.findOne({_id: req.body.centro}, function(err, centro){
 		centro.muestras.push(muestra);
 		centro.save();
 	});
 
-	Paciente.findOne({_id: req.body._paciente}, function(err, paciente){
+	Paciente.findOne({_id: req.body.paciente}, function(err, paciente){
 		paciente.muestras.push(muestra);
 		paciente.save();
 	});
 
 	muestra.save(function(err, doc){
 		if (err) {
-			return next(err);
+			return res.json(err);
 		} else {
 			res.json(doc);
 		}
@@ -61,15 +60,16 @@ router.post('/muestra', login.checkOperario, function(req, res, next){
 //actualiza una muestra
 router.put('/muestra/:id', login.checkOperario,function(req, res){
 	Muestra.findById(req.params.id, function(err, muestra){
-		muestra.paciente = req.body.paciente;
-		//muestra.cod_barras= req.body.cod_barras;
-		//muestra.recibido = req.body.recibido;
+		muestra._paciente = req.body.paciente;
+		muestra._laboratorio= req.body.laboratorio;
+		muestra._centro = req.body.centro;
+		muestra.tipo = req.body.tipo;
 
 		muestra.save(function(err){
 			if(err){
 				res.send(err);
 			}
-			res.json(muestra);
+			res.json({message: 'La muestra se edito'});
 		});
 	});
 });
@@ -80,7 +80,7 @@ router.delete('/muestra/:id', login.checkOperario, function(req, res, next){
 		if(err){
 			res.send(err);
 		}
-		res.json({mensaje: 'la muestra se elimino'});
+		res.json({message: 'la muestra se elimino'});
 	});
 });
 
@@ -89,7 +89,7 @@ router.delete('/muestras', login.checkOperario, function(req, res, next){
 		if(err){
 			res.send(err);
 		}
-		res.json({mensaje: 'las muestras se eliminaron'});
+		res.json({mensagee: 'las muestras se eliminaron'});
 	});
 });
 

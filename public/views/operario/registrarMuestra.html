@@ -6,39 +6,34 @@
       <div class="collapsible-body" style="padding-left:20px;padding-right:20px">
         <form> 
               <div class="modal-body">
+
+                  <div class="form-group col s12" >
+                    <select ng-init="nuevo_muestra.tipo = tipos[0]" ng-options="tipo for tipo in tipos" ng-model="nuevo_muestra.tipo">
+                    </select>
+                  </div>
+
+
                   <div class="form-group">
-                    <input type="text" class="form-control" name="tipo" ng-model="nuevo_muestra.tipo" placeholder="tipo" required>
+                    <input type="text" class="form-control" value="{{nuevo_muestra.paciente.nombre}}" readonly>
                   </div>
+
                   <div class="form-group">
-                    <input type="text" class="form-control" name="cod_barras" ng-model="nuevo_muestra.cod_barras" placeholder="cod_barras" required>
+                    <input type="text" class="form-control" value="{{nuevo_muestra.laboratorio.nombre}}" readonly>
                   </div>
 
-                  <div class="form-group input-field col s12" >
-                    <select name="paciente" ng-model="nuevo_muestra.paciente">
-                      <option ng-repeat="paciente in pacientes" value="{{paciente._id}}"> {{paciente.nombre}} {{paciente.apellido}}</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group input-field col s12" >
-                    <select name="laboratorio" ng-model="nuevo_muestra.laboratorio">
-                      <option ng-repeat="laboratorio in laboratorios" value="{{laboratorio._id}}"> {{laboratorio.nombre}}</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group input-field col s12" >
-                    <select name="centro" ng-model="nuevo_muestra.centro">
-                      <option ng-repeat="centro in centros" value="{{centro._id}}"> {{centro.nombre}} </option>
-                    </select>
+                  <div class="form-group">
+                    <input type="text" class="form-control" value="{{nuevo_muestra.centro.nombre}}" readonly>
                   </div>
 
               </div>
               <div class="modal-footer row">
-                <button type="reset" class="btn btn-default col s4">Cancelar</button>
-                <button type="submit" class="btn btn-primary col s4 right" ng-click="agregarMuestra()">Crear</button>
+                <button type="reset" class="btn btn-default col s4 right">Cancelar</button>
+                <button type="submit" class="btn btn-primary col s4 " ng-click="agregarMuestra(nuevo_muestra)">Crear</button>
               </div>
             </form>
       </div>
     </li>
+
     <li>
         <div class="collapsible-header large active"><i class="material-icons">label</i>Muestras</div>
         <div class="collapsible-body" style="padding-left:20px;padding-right:20px">
@@ -59,13 +54,61 @@
                       <td class="cod_barras"> {{ muestra.cod_barras }} </td>
                       <td class="recibido"> {{ muestra.recibido }} </td>
                       <td class="fecha"> {{ muestra.fecha }} </td>
-                      <td class= "editMuestra"><button type="button" class="glyphicon glyphicon-edit" data-toggle="modal" ng-click="editMuestra($index)"></button></td>
-                      <td class= "eliminarMuestra"><button type="button" class="glyphicon glyphicon-remove-circle" ng-click="deleteMuestra($index)"></button></td>
+
+                      <td class= "editMuestra"><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="editMuestra($index)">mode_edit</button></td>
+                      <td class= "eliminarMuestra"><button type="button" style="border:none;background:none" class="small material-icons" ng-click="deleteMuestra($index)">delete</button></td>
                   </tr>
               </tbody>
             </table>
         </div>
     </li>
+
+    <li>
+        <div class="collapsible-header large active"><i class="material-icons">label</i>Modal Cargar Pacientes</div>
+        <div class="collapsible-body" style="padding-left:20px;padding-right:20px">
+        <div ><input type="search" name="busqueda" ng-model="busqueda.$" placeholder="Buscar paciente por nombre"></div>
+            <table id="teibol" class="table table-bordered table-striped">
+              <tbody>
+                  <tr ng-repeat="paciente in pacientes | filter:busqueda"">
+                      <td > {{ paciente.nombre }} {{paciente.apellido}} </td>
+                      <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarPaciente($index)">mode_edit</button></td>
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+    </li>
+
+    <li>
+        <div class="collapsible-header large active"><i class="material-icons">label</i>Modal Cargar Laboratorio</div>
+        <div class="collapsible-body" style="padding-left:20px;padding-right:20px">
+        <div ><input type="search" name="busqueda" ng-model="busqueda.$" placeholder="Buscar laboratoio"></div>
+            <table id="teibol" class="table table-bordered table-striped">
+              <tbody>
+                  <tr ng-repeat="laboratorio in laboratorios | filter:busqueda"">
+                      <td > {{ laboratorio.nombre }} </td>
+                      <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarLaboratorio($index)">mode_edit</button></td>
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+    </li>
+
+    <li>
+        <div class="collapsible-header large active"><i class="material-icons">label</i>Modal Cargar Centro</div>
+        <div class="collapsible-body" style="padding-left:20px;padding-right:20px">
+        <div ><input type="search" name="busqueda" ng-model="busqueda.$" placeholder="Buscar Centro Medico"></div>
+            <table id="teibol" class="table table-bordered table-striped">
+              <tbody>
+                  <tr ng-repeat="centro in centros | filter:busqueda"">
+                      <td > {{ centro.nombre }} </td>
+                      <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarCentro($index)">mode_edit</button></td>
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+    </li>
+
+
 </ul>
 
 <!-- Modal Structure -->
@@ -107,4 +150,7 @@
     </form>
     </div>
   </div>
+
 </div>
+
+
