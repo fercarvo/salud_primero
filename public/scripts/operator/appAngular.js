@@ -188,22 +188,39 @@ angular.module('appOperator',['ui.router'])
         $scope.cargarPaciente = function (i){
             var paciente = $scope.pacientes[i];
             $scope.nuevo_muestra.paciente = paciente;
+            $('#modalPac').closeModal();
         }
 
         $scope.cargarCentro = function (i){
             var centro = $scope.centros[i];
             $scope.nuevo_muestra.centro = centro;
+            $('#modalCentro').closeModal();
         }
 
         $scope.cargarLaboratorio = function (i){
             var laboratorio = $scope.laboratorios[i];
             $scope.nuevo_muestra.laboratorio = laboratorio;
+            $('#modalLab').closeModal();
         }
 
         $scope.setTipo = function(obj){
             var tipo = $scope.tipo[obj];
             console.log(tipo);
         };
+
+        $scope.modalPaciente = function(){
+            $('#modalPac').openModal();
+        };
+
+        $scope.modalLaboratorio = function(){
+            $('#modalLab').openModal();
+        };
+
+        $scope.modalCentroMed = function(){
+            $('#modalCentro').openModal();
+        };
+
+
 
         $('.collapsible').collapsible({
 	      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
