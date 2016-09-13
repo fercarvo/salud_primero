@@ -185,20 +185,20 @@ angular.module('appOperator',['ui.router'])
             $('#modal1').openModal();
         };
 
-        $scope.cargarPaciente = function (i){
-            var paciente = $scope.pacientes[i];
+        $scope.cargarPaciente = function (paciente){
+            //var paciente = $scope.pacientes[i];
             $scope.nuevo_muestra.paciente = paciente;
             $('#modalPac').closeModal();
         }
 
-        $scope.cargarCentro = function (i){
-            var centro = $scope.centros[i];
+        $scope.cargarCentro = function (centro){
+            //var centro = $scope.centros[i];
             $scope.nuevo_muestra.centro = centro;
             $('#modalCentro').closeModal();
         }
 
-        $scope.cargarLaboratorio = function (i){
-            var laboratorio = $scope.laboratorios[i];
+        $scope.cargarLaboratorio = function (laboratorio){
+            //var laboratorio = $scope.laboratorios[i];
             $scope.nuevo_muestra.laboratorio = laboratorio;
             $('#modalLab').closeModal();
         }

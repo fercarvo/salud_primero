@@ -115,7 +115,7 @@
     <tbody>
       <tr ng-repeat="paciente in pacientes | filter:busqueda"">
         <td > {{ paciente.nombre }} {{paciente.apellido}} </td>
-        <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarPaciente($index)">done</button></td>
+        <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarPaciente(paciente)">done</button></td>
       </tr>
     </tbody>
   </table>
@@ -128,7 +128,7 @@
     <tbody>
       <tr ng-repeat="laboratorio in laboratorios | filter:busqueda"">
         <td > {{ laboratorio.nombre }} </td>
-        <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarLaboratorio($index)">done</button></td>
+        <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarLaboratorio(laboratorio)">done</button></td>
       </tr>
     </tbody>
   </table>
@@ -141,7 +141,7 @@
       <tbody>
         <tr ng-repeat="centro in centros | filter:busqueda"">
           <td > {{ centro.nombre }} </td>
-          <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarCentro($index)">done</button></td>
+          <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarCentro(centro)">done</button></td>
         </tr>
       </tbody>
     </table>
