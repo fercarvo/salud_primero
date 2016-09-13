@@ -1,6 +1,6 @@
 <h4>Administrador de Pacientes</h4>
 <hr>
-<ul class="collapsible" data-collapsible="accordion">
+<ul class="collapsible popout" data-collapsible="accordion">
     <li>
       <div class="collapsible-header"><i class="material-icons">add</i>Nuevo Paciente</div>
       <div class="collapsible-body" style="padding-left:20px;padding-right:20px">
@@ -55,8 +55,8 @@
                   <td class="cedula" > {{ paciente.cedula }} </td>
                   <td class="direccion"> {{ paciente.direccion }} </td>
                   <td class="telefono" > {{ paciente.telefono }} </td>
-                  <td class= "editar"><button type="button" style="border:none;background:none" class="small material-icons" href="#modal1" ng-click="editar($index)">mode_edit</button></td>
-                  <td class= "eliminar"><button type="button" style="border:none;background:none" class="small material-icons" ng-click="delete($index)">delete</button></td>
+                  <td class= "editar"><button type="button" style="border:none;background:none" class="small material-icons" ng-click="editarPaciente(paciente)">mode_edit</button></td>
+                  <td class= "eliminar"><button type="button" style="border:none;background:none" class="small material-icons" ng-click="eliminarPaciente(paciente)">delete</button></td>
               </tr>
           </tbody>
         </table>
@@ -66,7 +66,7 @@
 
 <!-- Modal Structure -->
 
-<div id="modal1" class="modal modal-fixed-footer">
+<div id="modalEditarPaciente" class="modal">
   <form >
 
     <div class="modal-content">
@@ -91,7 +91,7 @@
     </div>
 
     <div class="modal-footer">
-      <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" ng-disabled="disEditPaciente" ng-click="put()">Editar</button>
+      <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="putPaciente()">Editar</button>
     </div>
 
   </form>

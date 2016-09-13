@@ -1,30 +1,29 @@
 angular.module('appOperator',['ui.router'])
 	.config(function($stateProvider, $urlRouterProvider){
 		$stateProvider
-			.state('RegistrarPaciente',{
-				url: '/RegistrarPaciente',
-				templateUrl: 'views/operario/registrarPaciente.html',
-				controller:'ctrlRegp'
+			.state('pacientes',{
+				url: '/pacientes',
+				templateUrl: 'views/operario/pacientes.html',
+				controller:'controllerPacientes'
 			})
-			.state('RegistrarMuestra',{
-				url: '/RegistrarMuestra',
-				templateUrl: 'views/operario/registrarMuestra.html',
-                        controller:'ctrlRegm'
+			.state('muestras',{
+				url: '/muestra',
+				templateUrl: 'views/operario/muestras.html',
+                controller:'controllerMuestras'
 			})
-			.state('Reportes',{
-				url: '/Reportes',
+			.state('reportes',{
+				url: '/reportes',
 				templateUrl: 'views/operario/reportes.html',
-                controller:'ctrlReporte'
+                controller:'controllerReportes'
 			});
-		$urlRouterProvider.otherwise('RegistrarPaciente');
+		$urlRouterProvider.otherwise('pacientes');
 	})
-	.controller('ctrlRegp',function($scope, $state, $http){
+	.controller('controllerPacientes',function($scope, $state, $http){
 		$scope.nuevo_paciente = {};
         $scope.pacientes = {};
         $scope.laboratorios = {};
         $scope.centros = {};
         $scope.editar_paciente = {};
-        $scope.disEditPaciente = true;
 
         $http.get("/pacientes")
             .then(function (response) {
@@ -52,15 +51,13 @@ angular.module('appOperator',['ui.router'])
             
         }
 
-        $scope.editar = function ( pid ) {
-            var paciente = $scope.pacientes[pid];
+        $scope.editarPaciente = function ( paciente ) {
             $scope.editar_paciente = paciente;
-            $scope.disEditPaciente = false;
-            $('#modal1').openModal();
+            $('#modalEditarPaciente').openModal();
         };
 
 
-        $scope.put = function () {
+        $scope.putPaciente = function () {
             $http.put("/paciente/" + $scope.editar_paciente._id, { 
                 nombre: $scope.editar_paciente.nombre,
                 apellido: $scope.editar_paciente.apellido,
@@ -71,16 +68,14 @@ angular.module('appOperator',['ui.router'])
             }
             ).success(function (data) {
                 $scope.editar_paciente = {}; //se resetea la variable editar paciente para que no se siga editando
-                $scope.disEditPaciente = true; //se desactiva el formulario de editar para evitar caida del servidor
-                $('#modal1').closeModal();
+                $('#modalEditarPaciente').closeModal();
                 Materialize.toast(data.message, 3000, 'rounded')
             }, function (error) {
             });
             
         };
 
-        $scope.delete = function ( pid ) {
-            var paciente = $scope.pacientes[pid];
+        $scope.eliminarPaciente = function ( paciente ) {
             $http.delete("/paciente/"+ paciente._id)
                 .success(function (data) {
                     $scope.pacientes.splice(pid, 1);
@@ -94,10 +89,10 @@ angular.module('appOperator',['ui.router'])
 	    });
 
 	})
-    .controller('ctrlReporte',function($scope, $state, $http){
+    .controller('controllerReportes',function($scope, $state, $http){
 
     })
-	.controller('ctrlRegm',function($scope, $state, $http){
+	.controller('controllerMuestras',function($scope, $state, $http){
 	    $scope.pacientes = {};
         $scope.laboratorios = {};
         $scope.centros = {};
@@ -164,8 +159,8 @@ angular.module('appOperator',['ui.router'])
             });
         };
 
-        $scope.deleteMuestra = function ( pid ) {
-            var muestra = $scope.muestras[pid];
+        $scope.eliminarMuestra = function ( muestra ) {
+            //var muestra = $scope.muestras[pid];
             $http.delete("/muestra/"+ muestra._id)
                 .success(function (response) {
                     $scope.muestras.splice(pid, 1);
@@ -173,16 +168,13 @@ angular.module('appOperator',['ui.router'])
                 });
         };
 
-        $scope.activarInfo = function(){
-        	$('select').material_select();
-        }
 
-        $scope.editMuestra = function ( pid ) {
-            var muestra = $scope.muestras[pid];
+
+        $scope.editarMuestra = function ( muestra ) {
             $scope.editar_muestra = muestra;
             $scope.disEditMuestra = false;
-            $scope.activarInfo();
-            $('#modal1').openModal();
+            //$scope.activarInfo();
+            $('#modalEditarMuestra').openModal();
         };
 
         $scope.cargarPaciente = function (paciente){
@@ -220,7 +212,9 @@ angular.module('appOperator',['ui.router'])
             $('#modalCentro').openModal();
         };
 
-
+        $scope.activarSelect = function(){
+            $('select').material_select();
+        }
 
         $('.collapsible').collapsible({
 	      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
