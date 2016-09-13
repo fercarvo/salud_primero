@@ -1,22 +1,34 @@
-<div class="container usuarios" >
-  <h2> Muestras </h2>
-  <hr>
-  <table id="tablaUsuarios" class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th class="center">codigo</th>
-        <th class="center">tipo</th>
-        <th class="center">llego</th>
-        <th class="center" >examenes</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="muestra in muestras">
-            <td class="codigo">{{muestra.cod_barras}}</td>
-            <td class="tipo">{{muestra.tipo}}</td>
-            <td class="llego">{{muestra.recibido}}</td>
-            <td class="center examenes_muestra" ng-click="cargarExamenes(muestra._id)"><i class="waves-effect waves-teal btn-flat">Mostrar</i></td>
-        </tr>
-    </tbody>
-  </table>
-</div>
+<h4>Administrador de Muestras Medicas</h4>
+<hr>
+<ul ng-click="activarInfo()" class="collapsible" data-collapsible="accordion">
+    <li>
+        <div class="collapsible-header large active"><i class="material-icons">label</i>Muestras</div>
+        <div class="collapsible-body" style="padding-left:20px;padding-right:20px">
+        <div ><input type="search" name="busqueda" ng-model="busqueda.$" placeholder="Buscar muestras medicas"></div>
+            <table id="teibol" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>tipo</th>
+                  <th>cod_barras</th>
+                  <th>Llego muestra</th>
+                  <th>fecha</th>
+                  <th>examenes</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="muestra in muestras | filter:busqueda"">
+                      <td > {{ muestra.tipo }} </td>
+                      <td > {{ muestra.cod_barras }} </td>
+                      <td >
+                        <input type="checkbox" id="{{muestra._id}}" class="filled-in" ng-model="checked" ng-disabled="checked" />
+                        <label for="{{muestra._id}}"></label> 
+                      </td>
+                      <td > {{ muestra.fecha | date:'MM/dd/yyyy'}} </td>
+                      <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarExamenes(muestra._id)">mode_edit</button></td>
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+    </li>
+
+</ul>

@@ -42,6 +42,10 @@ angular.module('appMuestras',['ui.router'])
             $state.go('editar');
         }
 
+        $('.collapsible').collapsible({
+          accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+        });
+
     })
     .controller('ctrlEditar',function($scope, $state, $http, dataService){
 
