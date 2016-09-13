@@ -78,7 +78,7 @@ angular.module('appOperator',['ui.router'])
         $scope.eliminarPaciente = function ( paciente ) {
             $http.delete("/paciente/"+ paciente._id)
                 .success(function (data) {
-                    $scope.pacientes.splice(pid, 1);
+                    $scope.pacientes.splice($scope.pacientes.indexOf(paciente), 1);
                     Materialize.toast(data.message, 3000, 'rounded')
                 });
         };
@@ -163,7 +163,7 @@ angular.module('appOperator',['ui.router'])
             //var muestra = $scope.muestras[pid];
             $http.delete("/muestra/"+ muestra._id)
                 .success(function (response) {
-                    $scope.muestras.splice(pid, 1);
+                    $scope.muestras.splice($scope.muestras.indexOf(muestra), 1);
                     Materialize.toast(response.message, 3000, 'rounded');
                 });
         };

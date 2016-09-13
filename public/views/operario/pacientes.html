@@ -68,8 +68,7 @@
 
 <div id="modalEditarPaciente" class="modal">
   <form >
-
-    <div class="modal-content">
+    <div class="container-fluid center">
         <div class="form-group">
           <input type="text" class="form-control" name="nombre" ng-model="editar_paciente.nombre" placeholder="Nombre">
         </div>
@@ -88,11 +87,10 @@
         <div class="form-group">
           <input type="text" class="form-control" name="telefono" ng-model="editar_paciente.telefono" placeholder="Telefono">
         </div>
+        <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="putPaciente()">Editar</button>
     </div>
 
-    <div class="modal-footer">
-      <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="putPaciente()">Editar</button>
-    </div>
+    
 
   </form>
 </div>
