@@ -4,7 +4,6 @@ var Schema = mongoose.Schema;
 var MuestraSchema = new mongoose.Schema({
 	tipo: String,
 	cod_barras: String,
-	recibido: {type:Boolean, default:false},
 	_paciente: { 
 		type: Schema.ObjectId, 
 		ref: 'Paciente',
@@ -17,6 +16,7 @@ var MuestraSchema = new mongoose.Schema({
 		type: Schema.ObjectId, 
 		ref: 'Centro',
 		required: true },
+	estado : {type: String, default:"registrada"},
 	examenes : [{ type: Schema.ObjectId, ref: 'Examen' }],
 	fecha: {type:Date, default:Date.now}
 });

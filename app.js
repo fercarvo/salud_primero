@@ -54,8 +54,8 @@ var session = require('client-sessions');
 app.use(session({
   cookieName: 'session',
   secret: 'olakeasequeriendoverquehayaquioquehace:v',
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000,
+  duration: 60 * 60 * 1000,
+  activeDuration: 60 * 60 * 1000,
   httpOnly: true,
   //secure: true,
   ephemeral: true
