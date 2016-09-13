@@ -57,9 +57,9 @@ router.post('/muestra', login.checkOperario, function(req, res, next){
 	});
 });
 
-//actualiza una muestra
+//Se actualiza una mueestra medica
 router.put('/muestra/:id', login.checkOperario,function(req, res){
-	Muestra.findById(req.params.id, function(err, muestra){
+	Muestra.findOne({ _id: req.params.id}, function(err, muestra){
 		muestra._paciente = req.body.paciente;
 		muestra._laboratorio= req.body.laboratorio;
 		muestra._centro = req.body.centro;
@@ -74,7 +74,7 @@ router.put('/muestra/:id', login.checkOperario,function(req, res){
 	});
 });
 
-//Delete
+//Se elimina una muestra medica
 router.delete('/muestra/:id', login.checkOperario, function(req, res, next){
 	Muestra.findByIdAndRemove(req.params.id, function(err){
 		if(err){
@@ -84,6 +84,7 @@ router.delete('/muestra/:id', login.checkOperario, function(req, res, next){
 	});
 });
 
+//Metodo que elimina todas las muestras medicas
 router.delete('/muestras', login.checkOperario, function(req, res, next){
 	Muestra.remove({}, function(err){
 		if(err){
@@ -93,9 +94,23 @@ router.delete('/muestras', login.checkOperario, function(req, res, next){
 	});
 });
 
-router.patch('/muestra/:id', login.checkOperario, function(req, res){
-	Muestra.findById(req.params.id, function(err, muestra){
-		muestra.recibido = req.body.recibido;
+//metodo que cambia el estado de una muestra a "en proceso"
+router.put('/muestra/:id/proceso', login.checkOperario, function(req, res){
+	Muestra.findOne({_id: req.params.id}, function(err, muestra){
+		muestra.estado = "en proceso";
+		muestra.save(function(err){
+			if(err){
+				res.send(err);
+			}
+			res.json(muestra);
+		});
+	});
+});
+
+//metodo que cambia el estado de una muestra a "finalizado"
+router.put('/muestra/:id/finalizado', login.checkOperario, function(req, res){
+	Muestra.findOne({_id: req.params.id}, function(err, muestra){
+		muestra.estado = "finalizado";
 		muestra.save(function(err){
 			if(err){
 				res.send(err);
