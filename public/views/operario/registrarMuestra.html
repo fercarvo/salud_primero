@@ -8,21 +8,21 @@
               <div class="modal-body">
 
                   <div class="form-group col s12" >
-                    <select ng-init="nuevo_muestra.tipo = tipos[0]" ng-options="tipo for tipo in tipos" ng-model="nuevo_muestra.tipo">
+                    Tipo de muestra <select ng-init="nuevo_muestra.tipo = tipos[0]" ng-options="tipo for tipo in tipos" ng-model="nuevo_muestra.tipo">
                     </select>
                   </div>
 
 
                   <div class="form-group">
-                    <input type="text" class="form-control" value="{{nuevo_muestra.paciente.nombre}}" readonly>
+                    Paciente <input style="border:none" type="text" class="form-control" value="{{nuevo_muestra.paciente.nombre}} {{nuevo_muestra.paciente.apellido}}" readonly>
                   </div>
 
                   <div class="form-group">
-                    <input type="text" class="form-control" value="{{nuevo_muestra.laboratorio.nombre}}" readonly>
+                    Laboratorio <input style="border:none" type="text" class="form-control" value="{{nuevo_muestra.laboratorio.nombre}}" readonly>
                   </div>
 
                   <div class="form-group">
-                    <input type="text" class="form-control" value="{{nuevo_muestra.centro.nombre}}" readonly>
+                    Centro Medico <input style="border:none" type="text" class="form-control" value="{{nuevo_muestra.centro.nombre}}" readonly>
                   </div>
 
               </div>
@@ -37,6 +37,7 @@
     <li>
         <div class="collapsible-header large active"><i class="material-icons">label</i>Muestras</div>
         <div class="collapsible-body" style="padding-left:20px;padding-right:20px">
+        <div ><input type="search" name="busqueda" ng-model="busqueda.$" placeholder="Buscar muestras medicas"></div>
             <table id="teibol" class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -49,11 +50,11 @@
                 </tr>
               </thead>
               <tbody>
-                  <tr ng-repeat="muestra in muestras">
+                  <tr ng-repeat="muestra in muestras | filter:busqueda"">
                       <td class="tipo"> {{ muestra.tipo }} </td>
                       <td class="cod_barras"> {{ muestra.cod_barras }} </td>
                       <td class="recibido"> {{ muestra.recibido }} </td>
-                      <td class="fecha"> {{ muestra.fecha }} </td>
+                      <td class="fecha"> {{ muestra.fecha | date:'MM/dd/yyyy'}} </td>
 
                       <td class= "editMuestra"><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="editMuestra($index)">mode_edit</button></td>
                       <td class= "eliminarMuestra"><button type="button" style="border:none;background:none" class="small material-icons" ng-click="deleteMuestra($index)">delete</button></td>
