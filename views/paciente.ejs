@@ -20,7 +20,7 @@
 
     <body ng-app="appPatient">
         <div id="errorLogin" class="alert alert-danger collapse" role="alert"></div>
-        <header class="container">
+        <header class="container"  ng-controller="ctrlDatos">
           <% include user/sidePaciente %>
         </header>
         <main>
@@ -30,7 +30,7 @@
             </div>
             
         </main>
-        <footer class="page-footer teal">
+        <footer class="page-footer cyan darken-2">
             <% include app/footer %>
         </footer>
         <!--  Scripts-->

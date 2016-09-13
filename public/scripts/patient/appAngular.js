@@ -77,6 +77,8 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
            $state.go('centros');            
         }
         $scope.regresar = function() {
+            comun.getDatos();
+            $scope.datos = comun.datos;
             $state.go('centros');    
         }
 
