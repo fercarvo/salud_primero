@@ -24,6 +24,7 @@ router.get('/muestra/:id/examenes', login.checkLaboratorista, function(req, res,
 	Examen.find({ _muestra: req.params.id})
 	.populate('_paciente')
 	.populate('_muestra')
+	.populate('muestras')
 	.exec(function(err, documents){
 		if(err){
 			return next(err);
@@ -46,12 +47,12 @@ router.get('/pacientes/:id/examenes', login.checkPaciente, function(req, res, ne
 //crea una muestra para agregar un examen
 router.post('/examen', login.checkOperario,function(req, res, next){
 	var examen = new Examen({
-		_muestra: req.body._muestra,
+		_muestra: req.body.muestra,
 		nombre: req.body.nombre
 	});
 
 	//se actualiza la lista de ecamenes en muestra
-	Muestra.findOne({_id: req.body._muestra}, function(err, muestra){
+	Muestra.findOne({_id: req.body.muestra}, function(err, muestra){
 		if (!muestra) {
 			res.json({mensaje: "la muestra no existe"});
 		} else {
