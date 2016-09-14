@@ -3,12 +3,12 @@ angular.module('appMuestras',['ui.router'])
         $stateProvider
             .state('muestras',{
                 url: '/muestras',
-                templateUrl: 'views/laboratorista/muestra.html',
+                templateUrl: 'views/laboratorista/muestras.html',
                 controller: 'controllerMuestras'
             })
             .state('examenes',{
                 url: '/examenes',
-                templateUrl: 'views/laboratorista/editar.html',
+                templateUrl: 'views/laboratorista/examenes.html',
                 controller: 'controllerExamenes'
             })
         $urlRouterProvider.otherwise('muestras');
