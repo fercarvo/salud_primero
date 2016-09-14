@@ -17,6 +17,7 @@ var MuestraSchema = new mongoose.Schema({
 		ref: 'Centro',
 		required: true },
 	estado : {type: String, default:"registrada"},
+	observacion : {type: String, default:" "},
 	examenes : [{ type: Schema.ObjectId, ref: 'Examen' }],
 	fecha: {type:Date, default:Date.now}
 });

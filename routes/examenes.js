@@ -24,7 +24,7 @@ router.get('/muestra/:id/examenes', login.checkLaboratorista, function(req, res,
 	Examen.find({ _muestra: req.params.id})
 	.populate('_paciente')
 	.populate('_muestra')
-	.populate('muestras')
+	.populate('resultados')
 	.exec(function(err, documents){
 		if(err){
 			return next(err);

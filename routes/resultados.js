@@ -39,7 +39,7 @@ router.post('/resultado', login.checkLaboratorista, function(req, res, next){
 
 	Examen.findOne({ _id: req.body._examen}, function(err, examen){
 		if (!examen) {
-			res.json({mensaje: "_examen no existe"});
+			res.json({message: "_examen no existe"});
 		} else {
 			examen.resultados.push(resultado);
 			examen.save();

@@ -99,27 +99,53 @@ router.delete('/muestras', login.checkOperario, function(req, res, next){
 });
 
 //metodo que cambia el estado de una muestra a "en proceso"
-router.put('/muestra/:id/proceso', login.checkOperario, function(req, res){
+router.put('/muestra/:id/observacion', login.checkOperario, function(req, res){
+	Muestra.findOne({_id: req.params.id}, function(err, muestra){
+		muestra.observacion = req.body.observacion;
+		muestra.save(function(err){
+			if(err){
+				res.send(err);
+			}
+			res.json({message: 'Se actualiza la observacion de la muestra'});
+		});
+	});
+});
+
+//metodo que cambia el estado de una muestra a "en proceso"
+router.put('/muestra/:id/estado/registrada', login.checkOperario, function(req, res){
+	Muestra.findOne({_id: req.params.id}, function(err, muestra){
+		muestra.estado = "registrada";
+		muestra.save(function(err){
+			if(err){
+				res.send(err);
+			}
+			res.json({message: 'Muestra REGISTRADA'});
+		});
+	});
+});
+
+//metodo que cambia el estado de una muestra a "en proceso"
+router.put('/muestra/:id/estado/proceso', login.checkOperario, function(req, res){
 	Muestra.findOne({_id: req.params.id}, function(err, muestra){
 		muestra.estado = "en proceso";
 		muestra.save(function(err){
 			if(err){
 				res.send(err);
 			}
-			res.json(muestra);
+			res.json({message: 'Muestra EN PROCESO'});
 		});
 	});
 });
 
 //metodo que cambia el estado de una muestra a "finalizado"
-router.put('/muestra/:id/finalizado', login.checkOperario, function(req, res){
+router.put('/muestra/:id/estado/finalizado', login.checkOperario, function(req, res){
 	Muestra.findOne({_id: req.params.id}, function(err, muestra){
 		muestra.estado = "finalizado";
 		muestra.save(function(err){
 			if(err){
 				res.send(err);
 			}
-			res.json(muestra);
+			res.json({message: 'Muestra FINALIZADA'});
 		});
 	});
 });
