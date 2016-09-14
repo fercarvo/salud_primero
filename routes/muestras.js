@@ -12,7 +12,11 @@ module.exports = router;
 
 //obtiene todas las muestras del sistema
 router.get('/muestras', login.checkLaboratorista, function(req, res, next){
-	Muestra.find(function(err, muestras){
+	Muestra.find()
+	.populate('_paciente')
+	.populate('_laboratorio')
+	.populate('_centro')
+	.exec(function(err, muestras){
 		if(err){
 			return next(err);
 		}

@@ -172,7 +172,7 @@ angular.module('appOperator',['ui.router'])
 
         $scope.editarMuestra = function ( muestra ) {
             $scope.editar_muestra = muestra;
-            $scope.disEditMuestra = false;
+            //$scope.disEditMuestra = false;
             //$scope.activarInfo();
             $('#modalEditarMuestra').openModal();
         };
