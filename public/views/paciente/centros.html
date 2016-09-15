@@ -11,21 +11,28 @@
 -->
 
 <div class="container">
-    <h4 text-center>Centros Medicos</h4>
+    <h4 class="text-center">Centros M&eacute;dicos</h4>
     <hr>
     <input type="search" name="busqueda" ng-model="busqueda" placeholder="Buscar Centro M&eacute;dico">
         
     <div class="col-xs-12 col-sm-6" style="padding-bottom:40px" ng-repeat="centro in centros | filter:{nombre:busqueda}">
 
         <div class="contenedor">
-            <div style="height:310px"  class="centro-med">
-                <div class="lado frente">
-                    <div style="height:294px; width:270px; " class="card">
-                        <div style="height:294px;" class="card-image">
-                            <img src="{{centro.portada}}" alt="imagen"> 
-                            <span class="card-title">{{centro.nombre}}</span>
-                        </div> 
-                    </div>
+            <div class="centro-med">
+                <div class="lado frente panel panel-default">
+                  <div class="panel-heading tarjeta-titulo">
+                    {{centro.nombre}}
+                  </div>
+                  <img src="{{centro.portada}}" alt="imagen"> 
+                  
+                  
+                    <!--<div style="height:270px; width:270px; " class="card">
+                        <div style="height:270px;" class="card-image">-->
+                      
+                  
+                            
+                        <!--</div> 
+                    </div>-->
                 </div>  
                 <div class="lado atras panel panel-default">
                     <div class="panel-body horarios text-center">
@@ -38,8 +45,7 @@
                 
             </div>
             <div class="modal" id="modalInfo">
-                <div class="modal-content">
-                    <h6>{{actual.nombre}}</h6>
+                    <h4 class="text-center indigo-text">{{actual.nombre}}</h4>
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
                        
                       <ol class="carousel-indicators">
@@ -64,10 +70,6 @@
                         <span class="sr-only">Next</span>
                       </a>
                     </div>
-
-                    
-                        
-                </div>
             </div>
         </div>
 

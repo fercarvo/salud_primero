@@ -101,7 +101,11 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
             $('#modalInfo').openModal();             
             comun.actual = actual;
             $scope.actual = comun.actual;          
-        }       
+        }
+
+
+        $('.carousel.carousel-slider').carousel({full_width: true});
+              
 
     })
     .controller('TNTIndexController', function ($scope, $state, comun) {

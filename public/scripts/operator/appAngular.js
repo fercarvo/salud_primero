@@ -7,7 +7,7 @@ angular.module('appOperator',['ui.router'])
 				controller:'controllerPacientes'
 			})
 			.state('muestras',{
-				url: '/muestra',
+				url: '/muestras',
 				templateUrl: 'views/operario/muestras.html',
                 controller:'controllerMuestras'
 			})
@@ -98,8 +98,14 @@ angular.module('appOperator',['ui.router'])
         $scope.centros = {};
         $scope.muestras = {};
         $scope.tipos = ["sangre","heces","orina"];
+        $scope.select_tipo = "";
         $scope.editar_muestra = {};
         $scope.nuevo_muestra = {};
+
+        $scope.seleccionar = function(obj){
+            alert(obj);
+            $state.go('reportes');
+        }
 
         $http.get("/muestras")
             .then(function (response) {
@@ -136,7 +142,7 @@ angular.module('appOperator',['ui.router'])
             ).success(function (response) {
                 $scope.editar_muestra = {}; //se resetea la variable editar paciente para que no se siga editando
                 $scope.disEditMuestra = true; //se desactiva el formulario de editar para evitar caida del servidor
-                $('#modal1').closeModal();
+                $('#modalEditarMuestra').closeModal();
                 Materialize.toast(data.message, 3000, 'rounded')
             });
         };

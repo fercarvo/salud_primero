@@ -40,7 +40,8 @@
 
 .frente img{
     width: 100%;
-    height: 100%;
+    height: 85%;
+    position: relative;
 }
 
 
@@ -61,6 +62,8 @@
 .panel-heading.tarjeta-titulo{
     color: dodgerblue;
     font-weight: bold;
+    float: inherit;
+    text-align: center;
 }
 
 .panel-body.horarios{
@@ -85,7 +88,8 @@
 
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
-    width: 100%;
+    width: 80%;
+    /*height: 100%;*/
     margin: auto;
 }
 
@@ -99,14 +103,11 @@
     text-align: center;
 }
 
-.resultados td{
-    background-color: dimgrey;
-    text-align: center;
-    color: white;
-}
-
 #modalInfo{
     width:80%;
     height:100%;
-    margin-top:-15px
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:10px;
+    margin-top:-10px;
 }
