@@ -1,90 +1,25 @@
-<!--
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/data.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  </head>
-  <body >
-    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<h4 class="text-center">Gr&aacute;ficos Estad&iacute;sticos</h4>
+<hr>
+<ul class="collapsible popout" data-collapsible="accordion" ng-controller="controllerReportes">
+    <li>
+      <div class="collapsible-header large active">Por Mes</div>
+        <div class="collapsible-body">
+            <div class="center">
+                <nvd3 options="options" data="data"></nvd3>
+            </div>
+        </div>
+    </li>
+    <li>
+      <div class="collapsible-header large active">Pie</div>
+        <div class="collapsible-body">
+            <div class="center">
+                <nvd3 options="options" data="data"></nvd3>
+            </div>
+        </div>
+    </li>
 
-    <table id="datatable">
-        <thead>
-            <tr>
-                <th></th>
-                <th>interlab</th>
-                <th>Grupo Kenedy</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th>Enero</th>
-                <td>3</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <th>Febrero</th>
-                <td>2</td>
-                <td>0</td>
-            </tr>
-        </tbody>
-    </table>
-    <script>
 
-        $(function () {
-            $('#container').highcharts({
-                data: {
-                    table: 'datatable'
-                },
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: 'Data extracted from a HTML table in the page'
-                },
-                yAxis: {
-                    allowDecimals: false,
-                    title: {
-                        text: 'Units'
-                    }
-                },
-                tooltip: {
-                    formatter: function () {
-                        return '<b>' + this.series.name + '</b><br/>' +
-                            this.point.y + ' ' + this.point.name.toLowerCase();
-                    }
-                }
-            });
-        });
+</ul>
 
-    </script>
-  </body>
-</html>
--->
 
-<h2>holaaaa</h2>
 
-<div ng-controller="controllerReportes">
-    <nvd3 options="options" data="data"></nvd3>
-</div>
-<!--
-<script>
-  var datos = [135, 100, 150, 125, 225, 175];
-  var config = { columnWidth: 45, columnGap: 5, margin: 10, height: 235 };
- 
-  d3.select("svg")
-      .selectAll("rect")
-      .data(datos)
-    .enter().append("rect")
-      .attr("width", config.columnWidth)
-      .attr("x", function(d,i) {
-         return config.margin + i * (config.columnWidth + config.columnGap)
-       })
-      .attr("y", function(d,i) { return config.height - d })
-      .attr("height", function(d,i) { return d });
-</script>
--->
