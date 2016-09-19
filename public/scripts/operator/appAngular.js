@@ -11,14 +11,19 @@ angular.module('appOperator',['ui.router', 'nvd3'])
 				templateUrl: 'views/operario/muestras.html',
                 controller:'controllerMuestras'
 			})
-			.state('reportes',{
-				url: '/reportes',
-				templateUrl: 'views/operario/reportes.html',
-                controller:'controllerReportes'
-			});
+            .state('reportesMensuales',{
+                url: '/reportesMensuales',
+                templateUrl: 'views/operario/muestras-mensuales.html',
+                controller:'controllerReportesMensuales'
+            })
+            .state('reportesTotales',{
+                url: '/reportesTotales',
+                templateUrl: 'views/operario/muestras-totales.html',
+                controller:'controllerReportesTotales'
+            });
 		$urlRouterProvider.otherwise('pacientes');
 	})
-	.controller('controllerPacientes',function($scope, $state, $http){
+	.controller('controllerPacientes', function($scope, $state, $http){
 		$scope.nuevo_paciente = {};
         $scope.pacientes = {};
         $scope.laboratorios = {};
@@ -89,11 +94,7 @@ angular.module('appOperator',['ui.router', 'nvd3'])
 	    });
 
 	})
-    .controller('controllerReportes',function($scope, $state, $http){
-        $('.collapsible').collapsible({
-          accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-        });
-        
+    .controller('controllerReportesMensuales', function($scope, $state, $http){
         $scope.options = {
             chart: {
                 type: 'multiBarChart',
@@ -166,6 +167,48 @@ angular.module('appOperator',['ui.router', 'nvd3'])
         }];
 
     })
+    .controller('controllerReportesTotales', function($scope, $state, $http){
+        $scope.options = {
+            chart: {
+                type: 'pieChart',
+                height: 450,
+                x: function(d){return d.key;},
+                y: function(d){return d.y;},
+                showLabels: true,
+                duration: 500,
+                labelThreshold: 0.01,
+                labelSunbeamLayout: true,
+                legend: {
+                    margin: {
+                        top: 5,
+                        right: 35,
+                        bottom: 5,
+                        left: 0
+                    }
+                }
+            }
+        };
+
+        $scope.data = [
+            {
+                key: "One",
+                y: 5
+            },
+            {
+                key: "Two",
+                y: 2
+            },
+            {
+                key: "Three",
+                y: 9
+            },
+            {
+                key: "Four",
+                y: 7
+            }
+        ];
+    })
+
 	.controller('controllerMuestras',function($scope, $state, $http){
 	    $scope.pacientes = {};
         $scope.laboratorios = {};
