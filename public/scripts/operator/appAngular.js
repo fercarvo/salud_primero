@@ -169,6 +169,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
             }]
         }];
 
+
     })
     .controller('controllerReportesTotales', function($scope, $state, $http){
         $scope.options = {
@@ -299,7 +300,6 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
                     Materialize.toast(response.message, 3000, 'rounded');
                 });
         };
-
 
 
         $scope.editarMuestra = function ( muestra ) {

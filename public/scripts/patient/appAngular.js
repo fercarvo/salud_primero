@@ -95,14 +95,11 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
         $scope.centros = comun.centros_med;
         $scope.actual = {};
 
-        $('.parallax').parallax();
-
         $scope.procesar = function(actual) {
             $('#modalInfo').openModal();             
             comun.actual = actual;
             $scope.actual = comun.actual;          
         }
-
 
         $('.carousel.carousel-slider').carousel({full_width: true});
               
