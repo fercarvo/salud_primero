@@ -7,16 +7,16 @@
         <form> 
               <div class="modal-body">
 
-                  <div class="form-group col s12">
-                    <select ng-model="select_tipo">
+                  <div class="form-group col s12" ng-controller="DemoCtrl as ctrl">
+                    <!--<select ng-model="select_tipo">
                       <option ng-repeat="tipo in tipos"></option>
                     </select>
                     <input type="text" ng-model="select_tipo">
                     <h6>dijo: {{selec_tipo}}</h6>
+                    -->
                   </div>
+
                   
-
-
                   <div class="form-group">
                     Paciente <input style="border:none" type="text" class="form-control" value="{{nuevo_muestra.paciente.nombre}} {{nuevo_muestra.paciente.apellido}}" readonly ng-click="modalPaciente()">
                   </div>
@@ -78,9 +78,23 @@
     <div>
       <form> 
                   <div class="form-group col s12" >
-                    Tipo de muestra <select ng-init="editar_muestra.tipo = tipos[0]" ng-options="tipo for tipo in tipos" ng-model="editar_muestra.tipo">
-                    </select>
+                    <!--Tipo de muestra <select ng-init="editar_muestra.tipo = tipos[0]" ng-options="tipo for tipo in tipos" ng-model="editar_muestra.tipo">
+                    </select> -->
+                    <div class="select-box" ng-if="ctrl.appendToBodyDemo.present">
+                    <h3>Selectize theme</h3>
+                    <p>Selected: {{sel_tm}}</p>
+                    <ui-select ng-model="sel_tm" theme="selectize" ng-disabled="ctrl.disabled" style="width: 300px;" title="Choose a tipo" append-to-body="true">
+                      <ui-select-match placeholder="Select or search a tipo in the list...">{{$select.selected.name}}</ui-select-match>
+                      <ui-select-choices repeat="tipo in ctrl.countries | filter: $select.search">
+                        <span ng-bind-html="tipo.name | highlight: $select.search"></span>
+                        <small ng-bind-html="tipo.code | highlight: $select.search"></small>
+                      </ui-select-choices>
+                    </ui-select>
+                    <p class="alert alert-info positioned">The select dropdown menu should be displayed above this element.</p>
                   </div>
+                  </div>
+
+                  
 
                   <div class="form-group">
                     Paciente <input style="border:none" type="text" class="form-control" value="{{editar_muestra._paciente.nombre}} {{editar_muestra._paciente.apellido}}" readonly ng-click="modalPaciente()">
