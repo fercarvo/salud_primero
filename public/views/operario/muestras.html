@@ -7,15 +7,16 @@
         <form> 
               <div class="modal-body">
 
-                  <div class="form-group col s12">
-                    <select ng-model="select_tipo">
-                      <option ng-repeat="tipo in tipos"></option>
-                    </select>
-                    <input type="text" ng-model="select_tipo">
-                    <h6>dijo: {{selec_tipo}}</h6>
-                  </div>
+                  <ui-select ng-model="nuevo_muestra.tipo.value">
+                      <ui-select-match>
+                          <span ng-bind="$select.nuevo_muestra.tipo"></span>
+                      </ui-select-match>
+                      <ui-select-choices repeat="tipo in tipos track by tipo">
+                          <span ng-bind="tipo"></span>
+                      </ui-select-choices>
+                  </ui-select>
                   
-
+                  <h6>dijo: {{nuevo_muestra.tipo.value}}</h6>
 
                   <div class="form-group">
                     Paciente <input style="border:none" type="text" class="form-control" value="{{nuevo_muestra.paciente.nombre}} {{nuevo_muestra.paciente.apellido}}" readonly ng-click="modalPaciente()">

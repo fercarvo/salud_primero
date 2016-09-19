@@ -1,4 +1,4 @@
-angular.module('appOperator',['ui.router'])
+angular.module('appOperator',['ui.router', 'ui.select', 'ngSanitize'])
 	.config(function($stateProvider, $urlRouterProvider){
 		$stateProvider
 			.state('pacientes',{
@@ -24,6 +24,9 @@ angular.module('appOperator',['ui.router'])
         $scope.laboratorios = {};
         $scope.centros = {};
         $scope.editar_paciente = {};
+
+
+
 
         $http.get("/pacientes")
             .then(function (response) {
@@ -97,10 +100,15 @@ angular.module('appOperator',['ui.router'])
         $scope.laboratorios = {};
         $scope.centros = {};
         $scope.muestras = {};
-        $scope.tipos = ["sangre","heces","orina"];
-        $scope.select_tipo = "";
+
+
         $scope.editar_muestra = {};
         $scope.nuevo_muestra = {};
+
+
+        $scope.tipos = ["sangre","heces","orina"];
+
+        $scope.nuevo_muestra.tipo = { value: $scope.tipos[0] };
 
         $scope.seleccionar = function(obj){
             alert(obj);
@@ -153,7 +161,7 @@ angular.module('appOperator',['ui.router'])
             console.log($scope.nuevo_muestra);
 
             $http.post("/muestra", {
-                tipo: $scope.nuevo_muestra.tipo,
+                tipo: $scope.nuevo_muestra.tipo.value,
                 paciente: $scope.nuevo_muestra.paciente._id,
                 laboratorio: $scope.nuevo_muestra.laboratorio._id,
                 centro: $scope.nuevo_muestra.centro._id
