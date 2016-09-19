@@ -133,17 +133,18 @@ angular.module('appOperator',['ui.router'])
 
 
         $scope.putMuestra = function () {
+            console.log($scope.editar_muestra);
             $http.put("/muestra/" + $scope.editar_muestra._id, { 
                 tipo: $scope.editar_muestra.tipo,
-                paciente: $scope.editar_muestra.paciente,
-                laboratorio: $scope.editar_muestra.laboratorio,
-                centro: $scope.editar_muestra.centro,
+                paciente: $scope.editar_muestra._paciente,
+                laboratorio: $scope.editar_muestra._laboratorio,
+                centro: $scope.editar_muestra._centro,
             }
             ).success(function (response) {
                 $scope.editar_muestra = {}; //se resetea la variable editar paciente para que no se siga editando
                 $scope.disEditMuestra = true; //se desactiva el formulario de editar para evitar caida del servidor
                 $('#modalEditarMuestra').closeModal();
-                Materialize.toast(data.message, 3000, 'rounded')
+                Materialize.toast(response.message, 3000, 'rounded')
             });
         };
 
@@ -186,18 +187,21 @@ angular.module('appOperator',['ui.router'])
         $scope.cargarPaciente = function (paciente){
             //var paciente = $scope.pacientes[i];
             $scope.nuevo_muestra.paciente = paciente;
+            $scope.editar_muestra._paciente = paciente;
             $('#modalPac').closeModal();
         }
 
         $scope.cargarCentro = function (centro){
             //var centro = $scope.centros[i];
             $scope.nuevo_muestra.centro = centro;
+            $scope.editar_muestra._centro = centro;
             $('#modalCentro').closeModal();
         }
 
         $scope.cargarLaboratorio = function (laboratorio){
             //var laboratorio = $scope.laboratorios[i];
             $scope.nuevo_muestra.laboratorio = laboratorio;
+            $scope.editar_muestra._laboratorio = laboratorio;
             $('#modalLab').closeModal();
         }
 

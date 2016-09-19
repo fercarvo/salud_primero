@@ -71,15 +71,14 @@
 </ul>
 
 <!-- Modales -->
-<div id="modalEditarMuestra" class="modal">
-  <div class="modal-content">
-      <!-- Modal de editar resultado-->
+<div id="modalEditarMuestra" class="modal" style="padding-left:20px;padding-right:20px;padding-top:10px;margin-top:-10px">
+    <!-- Modal de editar muestra-->
+    <div class="container-fluid center">
+    <h5 class="text-center indigo-text">Editar Muestra</h5>
     <div>
       <form> 
-          <div class="modal-body">
-
                   <div class="form-group col s12" >
-                    Tipo de muestra <select ng-init="editar_muestra.tipo = tipos[-1]" ng-options="tipo for tipo in tipos" ng-model="editar_muestra.tipo">
+                    Tipo de muestra <select ng-init="editar_muestra.tipo = tipos[0]" ng-options="tipo for tipo in tipos" ng-model="editar_muestra.tipo">
                     </select>
                   </div>
 
@@ -94,15 +93,11 @@
                   <div class="form-group">
                     Centro Medico <input style="border:none" type="text" class="form-control" value="{{editar_muestra._centro.nombre}}" readonly ng-click="modalCentroMed()">
                   </div>
-
-              </div>             
-      <div class="modal-footer">
         <button type="submit" class="btn btn-primary" ng-disabled="disEditMuestra" ng-click="putMuestra()">Aceptar</button>
-      </div>
+
     </form>
     </div>
-  </div>
-
+    </div>
 </div>
 
 <div class="modal" id="modalPac" style="padding-left:20px;padding-right:20px;padding-top:10px;margin-top:-10px">
