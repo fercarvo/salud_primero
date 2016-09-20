@@ -1,4 +1,4 @@
-<h4 class="text-center">Administrador de Muestras Medicas</h4>
+<h4 class="text-center teal-text">Muestras M&eacute;dicas</h4>
 <hr>
 <ul ng-click="activarInfo()" class="collapsible" data-collapsible="accordion">
     <li>
@@ -8,26 +8,26 @@
             <table id="teibol" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>tipo</th>
-                  <th>cod_barras</th>
-                  <th>Estado</th>
-                  <th>fecha</th>
-                  <th>examenes</th>
+                  <th class="text-center">Tipo</th>
+                  <th class="text-center">Cod_barras</th>
+                  <th class="text-center">Estado</th>
+                  <th class="text-center">Fecha</th>
+                  <th class="text-center">Exámenes</th>
                 </tr>
               </thead>
               <tbody>
                   <tr ng-repeat="muestra in muestras | filter:busqueda"">
-                      <td > {{ muestra.tipo }} </td>
-                      <td > {{ muestra.cod_barras }} </td>
-                      <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="estado(muestra)">comment</button></td>  
+                      <td class="text-center"> {{ muestra.tipo }} </td>
+                      <td class="text-center"> {{ muestra.cod_barras }} </td>
+                      <td class="text-center"><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="estado(muestra)">comment</button></td>  
                       <!--
                       <td >
                         <input type="checkbox" id="{{muestra._id}}" class="filled-in" ng-model="checked" ng-disabled="checked" />
                         <label for="{{muestra._id}}"></label> 
                       </td>
                       -->
-                      <td > {{ muestra.fecha | date:'MM/dd/yyyy'}} </td>
-                      <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarExamenes(muestra)">view_list</button></td>
+                      <td class="text-center"> {{ muestra.fecha | date:'MM/dd/yyyy'}} </td>
+                      <td class="text-center"><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarExamenes(muestra)">view_list</button></td>
                   </tr>
               </tbody>
             </table>
