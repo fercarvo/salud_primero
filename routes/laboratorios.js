@@ -27,6 +27,44 @@ router.get('/Laboratorios/muestras/:desde/:hasta', login.checkOperario, function
 	});
 });
 
+
+router.get('/Laboratorios/muestras/2/:desde/:hasta', login.checkOperario, function(req, res, next){
+	var desde = new Date(req.params.desde);
+	var hasta = new Date(req.params.hasta);
+
+	var resultados = [];
+
+	console.log(desde);
+	//console.log(desde.getMonth());
+	console.log(hasta);
+	//console.log(hasta.getMonth());
+	for (var i = desde.getMonth() + 1 ; i <= hasta.getMonth() + 1; i++) {
+		console.log(i);
+		Laboratorio.find({})
+		.populate('muestras',null, {fecha: {$gte: "2016-"+i+"-01", $lt: "2016-"+i+"-31"}})
+		.exec(function(err, docs){
+			if(err){
+				return res.send(err);
+			}
+
+			resultados.push(docs);
+			//console.log(resultados);
+			console.log(hasta.getMonth()-desde.getMonth()+1);
+			if (resultados.length == (hasta.getMonth()-desde.getMonth()+1) ) {
+				return res.json(resultados);
+			}
+		});		
+	}
+
+	console.log(resultados);
+
+});
+
+
+
+
+
+
 //Post
 router.post('/laboratorio', function(req, res, next){
 	var lab = new Laboratorio({
