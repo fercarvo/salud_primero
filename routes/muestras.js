@@ -24,6 +24,19 @@ router.get('/muestras', login.checkLaboratorista, function(req, res, next){
 	});
 });
 
+router.get('/muestra/:id', login.checkLaboratorista, function(req, res, next){
+	Muestra.find({_id: req.params.id})
+	.populate('_paciente')
+	.populate('_laboratorio')
+	.populate('_centro')
+	.exec(function(err, doc){
+		if(err){
+			return next(err);
+		}
+		res.json(doc);
+	});
+});
+
 //crea una nueva muestra
 router.post('/muestra', login.checkOperario, function(req, res, next){
 
@@ -80,10 +93,8 @@ router.put('/muestra/:id', login.checkOperario,function(req, res){
 
 //Se elimina una muestra medica
 router.delete('/muestra/:id', login.checkOperario, function(req, res, next){
-	Muestra.findByIdAndRemove(req.params.id, function(err){
-		if(err){
-			res.send(err);
-		}
+	Muestra.findOne({ _id: req.params.id}, function(err, muestra){
+		muestra.remove();
 		res.json({message: 'la muestra se elimino'});
 	});
 });

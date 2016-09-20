@@ -150,6 +150,15 @@ router.delete('/horario/:id', function(req, res, next){
 	});
 });
 
+router.delete('/centrosMed', function(req, res, next){
+	CentroMedico.remove({}, function(err){
+		if(err){
+			res.send(err);
+		}
+		res.json({mensagee: 'Todos los centros medicos se eliminaron'});
+	});
+});
+
 /*
 router.get('/centroMed/:id/imagenes', function(req, res, next){
 	Imagen.find({objeto_id: req.params.id}, function(err, imagenes){

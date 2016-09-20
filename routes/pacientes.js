@@ -252,7 +252,7 @@ router.delete('/pacientes', login.checkAdmin, function(req, res){ //Solo Admins 
 		if(err){
 			res.send(err);
 		} else {
-			res.json({message: 'El paciente se ha eliminado'});	
+			res.json({message: 'Los pacientes se han eliminado'});	
 		}
 	});
 });
