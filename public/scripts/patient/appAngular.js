@@ -47,8 +47,7 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
                 return comun.datos
             })
         }
-
-        
+  
         comun.updateDatos = function(nuevosDatos){
             return $http.put('/paciente/datos/', nuevosDatos)
             .success(function(data){
@@ -87,8 +86,6 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
         comun.getExamenes();
         $scope.examenes = comun.examenes;
         //console.log($scope.examenes);
-
-
     })
     .controller('ctrlCentros', function($scope, $state, comun) {
         comun.getCentros();
