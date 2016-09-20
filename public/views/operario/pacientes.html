@@ -39,24 +39,24 @@
           <table class="table table-striped table-bordered">
           <thead>
             <tr>
-              <th>nombre</th>
-              <th>correo</th>
-              <th>cedula</th>
-              <th>direccion</th>
-              <th>telefono</th>
-              <th>editar</th>
-              <th>eliminar</th>
+              <th class="text-center">nombre</th>
+              <th class="text-center">correo</th>
+              <th class="text-center">cedula</th>
+              <th class="text-center">direccion</th>
+              <th class="text-center">telefono</th>
+              <th class="text-center">editar</th>
+              <th class="text-center">eliminar</th>
             </tr>
           </thead>
           <tbody>
               <tr ng-repeat="paciente in pacientes | filter:busqueda">
-                  <td class="nombre"> {{ paciente.nombre }} {{ paciente.apellido }}</td>
-                  <td class="correo"> {{ paciente.correo }} </td>
-                  <td class="cedula" > {{ paciente.cedula }} </td>
-                  <td class="direccion"> {{ paciente.direccion }} </td>
-                  <td class="telefono" > {{ paciente.telefono }} </td>
-                  <td class= "editar"><button type="button" style="border:none;background:none" class="small material-icons" ng-click="editarPaciente(paciente)">mode_edit</button></td>
-                  <td class= "eliminar"><button type="button" style="border:none;background:none" class="small material-icons" ng-click="eliminarPaciente(paciente)">delete</button></td>
+                  <td class="text-center nombre"> {{ paciente.nombre }} {{ paciente.apellido }}</td>
+                  <td class="text-center correo"> {{ paciente.correo }} </td>
+                  <td class="text-center cedula" > {{ paciente.cedula }} </td>
+                  <td class="text-center direccion"> {{ paciente.direccion }} </td>
+                  <td class="text-center telefono" > {{ paciente.telefono }} </td>
+                  <td class="text-center editar"><button type="button" style="border:none;background:none" class="small material-icons" ng-click="editarPaciente(paciente)">mode_edit</button></td>
+                  <td class="text-center eliminar"><button type="button" style="border:none;background:none" class="small material-icons" ng-click="eliminarPaciente(paciente)">delete</button></td>
               </tr>
           </tbody>
         </table>
