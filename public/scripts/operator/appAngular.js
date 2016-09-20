@@ -23,14 +23,13 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
             });
 		$urlRouterProvider.otherwise('pacientes');
 	})
+
 	.controller('controllerPacientes', function($scope, $state, $http){
 		$scope.nuevo_paciente = {};
         $scope.pacientes = {};
         $scope.laboratorios = {};
         $scope.centros = {};
         $scope.editar_paciente = {};
-
-
 
 
         $http.get("/pacientes")
@@ -97,6 +96,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
 	    });
 
 	})
+
     .controller('controllerReportesMensuales', function($scope, $state, $http){
         $scope.options = {
             chart: {
@@ -171,6 +171,25 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
 
     })
     .controller('controllerReportesTotales', function($scope, $state, $http){
+
+        $scope.laboratorios = {}; //Todos los laboratorios tal y como llegan de la BDD
+        $scope.data = []; //laboratorios en formato [{key: nombreLaboratorio, y: numeroMuestras},...]
+
+        //funcion que carga los laboratorios de la BDD
+        $http.get("/laboratorios")
+            .then(function (response) {
+                $scope.laboratorios = response.data;
+                $scope.cargarData();
+            }
+        );
+
+
+        $scope.cargarData = function() {
+            angular.forEach($scope.laboratorios, function(lab){
+                $scope.data.push({key: lab.nombre, y: lab.muestras.length});
+            });
+        };
+
         $scope.options = {
             chart: {
                 type: 'pieChart',
@@ -191,25 +210,6 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
                 }
             }
         };
-
-        $scope.data = [
-            {
-                key: "One",
-                y: 5
-            },
-            {
-                key: "Two",
-                y: 2
-            },
-            {
-                key: "Three",
-                y: 9
-            },
-            {
-                key: "Four",
-                y: 7
-            }
-        ];
     })
 
 	.controller('controllerMuestras',function($scope, $state, $http){

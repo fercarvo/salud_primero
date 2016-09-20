@@ -55,3 +55,12 @@ router.delete('/laboratorio/:id', function(req, res, next){
 		res.json({mensaje: 'el Laboratorio se elimino'});
 	});
 });
+
+router.delete('/laboratorios', function(req, res, next){
+	Laboratorio.remove({}, function(err){
+		if(err){
+			res.send(err);
+		}
+		res.json({mensagee: 'los laboratorios se eliminaron'});
+	});
+});
