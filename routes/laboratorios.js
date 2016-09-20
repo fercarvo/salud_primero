@@ -34,32 +34,12 @@ router.get('/Laboratorios/muestras/2/:desde/:hasta', login.checkOperario, functi
 
 	var resultados = [];
 
-	/*
-	for (var j = desde.getYear(); j < hasta.getYear() + 1; j++) {
-		for (var i = desde.getMonth() + 1 ; i <= hasta.getMonth() + 2; i++) {
-			console.log(i);
-			console.log(j);
-			console.log("\n\n");
-			Laboratorio.find({})
-			.populate('muestras',null, {fecha: {$gte: (j-100+2000)+"-"+i+"-01", $lt: (j-100+2000)+"-"+i+"-31"}})
-			.exec(function(err, docs){
-				if(err){
-					return res.send(err);
-				}
-				resultados.push(docs);
-
-				if (resultados.length == hasta.getMonth() + 2) {
-					return res.json(resultados);
-				}
-			});		
-		}	
-	}
-	*/
-	console.log(resultados);
 	console.log(desde);
+	//console.log(desde.getMonth());
 	console.log(hasta);
-	for (var i = desde.getMonth() + 1 ; i <= hasta.getMonth() + 2; i++) {
-		console.log("en el for");
+	//console.log(hasta.getMonth());
+	for (var i = desde.getMonth() + 1 ; i <= hasta.getMonth() + 1; i++) {
+		console.log(i);
 		Laboratorio.find({})
 		.populate('muestras',null, {fecha: {$gte: "2016-"+i+"-01", $lt: "2016-"+i+"-31"}})
 		.exec(function(err, docs){
@@ -68,9 +48,9 @@ router.get('/Laboratorios/muestras/2/:desde/:hasta', login.checkOperario, functi
 			}
 
 			resultados.push(docs);
-			console.log(resultados);
-
-			if (resultados.length == hasta.getMonth() + 2) {
+			//console.log(resultados);
+			console.log(hasta.getMonth()-desde.getMonth()+1);
+			if (resultados.length == (hasta.getMonth()-desde.getMonth()+1) ) {
 				return res.json(resultados);
 			}
 		});		
