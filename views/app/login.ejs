@@ -16,7 +16,7 @@
       <div class="row center">
         <h5 class="header col s12 light">Bienvenidos</h5>
         <!-- Modal Trigger -->
-        <a class="modal-trigger waves-effect waves-light btn cyan darken-2" href="#modal1">LogIn</a>
+        <a class="modal-trigger waves-effect waves-light btn cyan darken-2" href="#modalLogin">LogIn</a>
       </div>
       <br><br>
     </div>
@@ -25,15 +25,9 @@
 </div>
 
 <!-- Modal Structure -->
-<div id="modal1" class="modal grey">
-  <div class="modal-content">
-    <center>
-      <div class="section"></div>
-
-      <div class="container">
-        <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
-
-          <form class="col s12" action="/login" method="post">
+<div id="modalLogin" class="modal  blue lighten-5">
+  <div class="container blue lighten-5 row center">
+      <form class="col s12" action="/login" method="post">
             <div class='row'>
               <div class='input-field col s12'>
                 <input class='validate' type='email' name='correo' id='correo' />
@@ -58,26 +52,19 @@
                 </select>
               </div>
             </div>
-
-            <br />
             <center>
-              <div class='row'>
-                <button type='submit' name='btn_login' class='col s12 btn cyan darken-2 btn-large waves-effect'>Login</button>
-              </div>              
+              <button type='submit' name='btn_login' class='col s12 btn cyan darken-2 btn-large waves-effect'>Login</button>
             </center>
-          </form>
-        </div>
-      </div>
-    </center>      
-  </div>
+      </form>
+
+  </div>   
 </div>
 
 <div id="modalPcte" class="modal grey">
-    <div class="modal-content" >
         <center>
           <div class="section"></div>
             <div class="container">
-                <div class="z-depth-1 red lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+                <div class="z-depth-1 red lighten-4 row" style="display: inline-block; padding: 32px 20px 0px 48px; border: 1px solid #EEE;">
                     <p>Paciente: Permite ver</p>
                     <p>Centros M&eacute;dicos: Presenta informaci&oacute;n de los centros médicos (Nombre; Direcci&oacute;n; Descripci&oacute;n; Horarios; Galer&iacute;a de im&aacute;genes;	Mapa)</p>
                     <p>Mis ex&aacute;menes: Presenta informaci&oacute;n de los ex&aacute;menes (Fecha; Ex&aacute;menes a realizarse; Estado -Ingresado o Recibido-; pdf con los resultados)</p>
@@ -85,15 +72,13 @@
                 </div>
           </div>
     </center> 
-    </div>
 </div>
 
 <div id="modalOp" class="modal grey">
-    <div class="modal-content" >
         <center>
           <div class="section"></div>
             <div class="container">
-                <div class="z-depth-1 blue lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+                <div class="z-depth-1 blue lighten-4 row" style="display: inline-block; padding: 32px 20px 0px 48px; border: 1px solid #EEE;">
                     <p>Operario: Cuando el usuario que ingresa es un operario puede realizar las siguientes opciones:</p>
                     <p>Registrar Paciente. Permite consultar, crear, modificar y eliminar un paciente donde se ingresa información básica (Nombres; Apellidos; C&eacute;dula; Correo electr&oacute;nico -este es el usuario del paciente-). Se genera la clave del usuario al registrar al paciente, la cual es enviada al correo.</p>
                     <p>Registrar muestra. Permite ingresar, editar y eliminar una muestra médica donde se registra: Paciente del listado del sistema. Si no existe, deberá crear un nuevo paciente. Centro Médico donde se recibió la muestra médica. Laboratorio encargado de analizar la muestra. Tipo de Muestra recibida (sangre, orina, heces) Exámenes a realizar contra la muestra (dependen de la muestra). Código de barras, generado automáticamente.</p>
@@ -101,22 +86,19 @@
                 </div>
           </div>
     </center> 
-    </div>
 </div>
 
 <div id="modalLab" class="modal grey">
-    <div class="modal-content" >
         <center>
           <div class="section"></div>
             <div class="container">
-                <div class="z-depth-1 green lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+                <div class="z-depth-1 green lighten-4 row" style="display: inline-block; padding: 32px 20px 0px 48px; border: 1px solid #EEE;">
                     <p>Laboratorista: Cuando el usuario que ingresa es un laboratorista puede realizar las siguientes opciones</p>
                     <p>Muestras M&eacute;dicas, que permite marcar cuando una muestra m&eacute;dica fue recibida con &eacute;xito en el laboratorio.</p>
                     <p>Ingresar resultados del análisis de una muestra. Visualiza una tabla por cada tipo de examen que se va a realizar contra la muestra. Cada tabla presenta los parámetros del examen realizado de acuerdo al siguiente esquema: Parámetro; Unidades; Resultado; Valores de referencia.</p>
                 </div>
           </div>
     </center> 
-    </div>
 </div>
 
 <div class="section">

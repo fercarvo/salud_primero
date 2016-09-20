@@ -23,21 +23,18 @@ var MuestraSchema = new mongoose.Schema({
 });
 
 MuestraSchema.pre('remove', function(next){
-	console.log("pre");
     this.model('Paciente').update(
         {_id: {$in: this._paciente}}, 
         {$pull: {muestras: this._id}}, 
         {multi: true},
         next
     );
-
     this.model('Laboratorio').update(
         {_id: {$in: this._laboratorio}}, 
         {$pull: {muestras: this._id}}, 
         {multi: true},
         next
     );
-
     this.model('Centro').update(
         {_id: {$in: this._centro}}, 
         {$pull: {muestras: this._id}}, 

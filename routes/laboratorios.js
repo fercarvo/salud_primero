@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Laboratorio = require('../models/Laboratorio.js');
 var mongoose = require('mongoose');
+var login = require('../routes/login.js');
 module.exports = router;
 
 //Get
@@ -11,6 +12,18 @@ router.get('/laboratorios', function(req, res, next){
 			return next(err);
 		}
 		res.json(laboratorio);
+	});
+});
+
+//Retorna los laboratorios con sus respectivas muestras filtradas x fecha {desde: AAAA-MM-DD, hasta:AAAA-MM-DD}
+router.get('/Laboratorios/muestras/:desde/:hasta', login.checkOperario, function(req, res, next){
+	Laboratorio.find({})
+	.populate('muestras',null, {fecha: {$gte: req.params.desde, $lt: req.params.hasta}})
+	.exec(function(err, docs){
+		if(err){
+			return next(err);
+		}
+		res.json(docs);
 	});
 });
 

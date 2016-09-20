@@ -24,6 +24,17 @@ router.get('/muestras', login.checkLaboratorista, function(req, res, next){
 	});
 });
 
+//Retorna las muestras filtradas x fecha {desde: AAAA-MM-DD, hasta:AAAA-MM-DD}
+router.get('/muestras/:desde/:hasta', function(req, res, next){
+	Muestra.find({fecha: {$gte: req.params.desde, $lt: req.params.hasta}})
+	.exec(function(err, muestras){
+		if(err){
+			return next(err);
+		}
+		res.json(muestras);
+	});
+});
+
 router.get('/muestra/:id', login.checkLaboratorista, function(req, res, next){
 	Muestra.find({_id: req.params.id})
 	.populate('_paciente')
