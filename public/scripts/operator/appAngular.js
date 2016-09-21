@@ -286,7 +286,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
 
 
         $scope.putMuestra = function () {
-            console.log($scope.editar_muestra);
+            //console.log($scope.editar_muestra);
             $http.put("/muestra/" + $scope.editar_muestra._id, { 
                 tipo: $scope.editar_muestra.tipo,
                 paciente: $scope.editar_muestra._paciente,
@@ -303,7 +303,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
 
         //Se crea una muestra
         $scope.agregarMuestra = function(muestra) {
-            console.log($scope.nuevo_muestra);
+            //console.log($scope.nuevo_muestra);
 
             $http.post("/muestra", {
                 tipo: $scope.nuevo_muestra.tipo.name,
@@ -312,6 +312,23 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
                 centro: $scope.nuevo_muestra.centro._id
 
             }).success(function(response){
+                console.log("response de la muestra");
+                console.log(response);
+                //Se recorren todos los examenes y se crea cada uno
+                angular.forEach($scope.examenes, function(obj){
+                    console.log("en el for");
+                    console.log(obj);
+                    //Metodo que crea cada examen
+                    $http.post("/examen", {
+                        muestra: response._id,
+                        nombre: obj.examen
+                    }).success( function(response2){
+                        console.log("response de post examen")
+                        console.log(response2);
+                        Materialize.toast("se creo examen de: " + response2.nombre, 3000, 'rounded teal');
+                    } );
+                });
+
                 $scope.muestras.push(response);
                 Materialize.toast('Se Creó una muestra satisfactoriamente', 3000, 'rounded teal');
                 $scope.nuevo_muestra = {};
@@ -330,7 +347,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
 
 
         $scope.linkNuevoPac = function(){
-            console.log("hola");
+            //console.log("hola");
             $('#modalPac').closeModal();
             $('#modalEditarMuestra').closeModal();
             $state.go('pacientes');
@@ -348,7 +365,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
             $scope.nuevo_muestra.paciente = paciente;
             $scope.editar_muestra._paciente = paciente;
             $('#modalPac').closeModal();
-            console.log($scope.nuevo_muestra.tipo);
+            //console.log($scope.nuevo_muestra.tipo);
         }
 
         $scope.cargarCentro = function (centro){
@@ -367,7 +384,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
 
         $scope.setTipo = function(obj){
             var tipo = $scope.tipo[obj];
-            console.log(tipo);
+            //console.log(tipo);
         };
 
         $scope.cerrarModCM = function(){
