@@ -33,6 +33,7 @@ router.get('/paciente/examenes', login.checkPaciente, function(req, res){
 	Examen
 		.find({})
 		.populate( '_muestra', null, { _paciente: { $in: req.session.user._id } } )
+		.populate('resultados')
 		.exec(function(err, docs) {
 
 			docs = docs.filter(function(doc) {

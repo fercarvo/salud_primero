@@ -26,7 +26,6 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
 
         comun.centros_med = [];
         comun.datos = {};
-        comun.examenes = [];
 
         nuevosDatos = {};
         comun.actual = {};
@@ -61,13 +60,6 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
             })
         }
 
-        comun.getExamenes = function(){
-            return $http.get('/paciente/examenes')
-            .success(function(data){
-                angular.copy(data, comun.examenes)
-                return comun.examenes
-            })
-        }
         return comun;
     })
     .controller('ctrlDatos', function($scope, $state, comun) {
@@ -88,10 +80,19 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
         }
 
     })
-    .controller('ctrlExamenes', function($scope, $state, comun) {
-        comun.getExamenes();
-        $scope.examenes = comun.examenes;
-        //console.log($scope.examenes);
+    .controller('ctrlExamenes', function($http, $scope, $state, comun) {
+        $scope.examenes = [];
+
+        $http.get("/paciente/examenes")
+            .then(function (response) {
+                $scope.examenes = response.data;
+            }
+        );
+
+        $('.collapsible').collapsible({
+            accordion : false
+        });
+
     })
     .controller('ctrlCentros', function($scope, $state, comun) {
         comun.getCentros();
@@ -108,36 +109,3 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
               
 
     })
-    .controller('TNTIndexController', function ($scope, $state, comun) {
-        $scope.gridOptions = {
-            enableGridMenu: true
-        }
-        comun.getDatos();
-        $scope.datos = comun.datos;
-
-        console.log(comun.datos.nombre);
-
-        /*
-        $scope.gridOptions.data = [{
-            "nombre": {{nom}},
-            "apellido":comun.datos.apellido,
-            "examenes":comun.datos.examenes
-        }];*/
-        //$scope.datos = comun.datos;
-        /*$scope.gridOptions.data =[{
-            "cliente": "Globalia (Air Europa)",
-            "proyecto": "Metodologías ágiles y soporte al desarrollo",
-            "tags": "agilismo, iOS"
-        },
-        {
-            "cliente": "Tinsa",
-            "proyecto": "Implantación de metodologías ágiles",
-            "tags": "agilismo"
-        },
-        {
-            "cliente": "Casa del Libro",
-            "proyecto": "TAGUS",
-            "tags": "agilismo, plataforma eReader"
-        }];*/
-    })
-
