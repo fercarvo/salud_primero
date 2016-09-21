@@ -98,6 +98,52 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
 	})
 
     .controller('controllerReportesMensuales', function($scope, $state, $http){
+
+        $scope.laboratorios = {};
+        $scope.meses = {}; //Todos los meses tal y como llegan de la BDD
+        $scope.data2 = []; //laboratorios en formato [{key: nombreLaboratorio, y: numeroMuestras},...]
+        //console.log("asdasdasd");
+        //funcion que carga los laboratorios de la BDD
+        $http.get("/laboratorios/muestras/2/"+"2016,01,01"+"/"+"2016,09,03")
+            .then(function (response) {
+                $scope.meses = response.data;
+
+                $http.get("/laboratorios")
+                    .then(function (response) {
+                        $scope.laboratorios = response.data;
+                        $scope.cargarLaboratorios();
+                        $scope.cargarData();
+
+                    }
+                );
+                
+            }
+        );
+
+        
+
+        $scope.cargarLaboratorios = function() {
+            angular.forEach($scope.laboratorios, function(lab){
+                $scope.data2.push({"key": lab.nombre, "values": {} });
+            });
+        };
+
+        $scope.cargarData = function(){
+            angular.forEach($scope.meses , function(mes){
+                console.log("\n");
+                console.log($scope.meses.indexOf(mes));
+                angular.forEach(mes, function(lab){
+
+                    //if ($scope.data2.) {}
+
+
+                    console.log(lab.nombre);
+                    console.log(lab.muestras.length);
+                    
+                });       
+            });
+        }
+
         $scope.options = {
             chart: {
                 type: 'multiBarChart',
@@ -115,9 +161,8 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
                     axisLabel: 'Meses',
                     showMaxMin: false,
                     tickFormat: function(d){
-                        var meses = ["Enero", "Febrero", "Marzo"];
+                        var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
                         return meses[d];
-                        //return d3.format(',f')(d);
                     }
                 },
                 yAxis: {
@@ -142,6 +187,9 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
             }, {
                 "x": 2,
                 "y": 4
+            },{
+                "x": 3,
+                "y": 4
             }]
         }, {
             "key": "Lab2",
@@ -154,6 +202,9 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
             }, {
                 "x": 2,
                 "y": 3
+            },{
+                "x": 3,
+                "y": 4
             }]
         }, {
             "key": "Lab3",
@@ -166,6 +217,9 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
             }, {
                 "x": 2,
                 "y": 0
+            },{
+                "x": 3,
+                "y": 4
             }]
         }];
 
