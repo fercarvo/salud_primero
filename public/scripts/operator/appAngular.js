@@ -58,11 +58,13 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
         }
 
         $scope.cancelar = function(){
-            render('operario');
-            $state.go('pacientes');
+            $state.reload();
         }
+
+        //boton cerrar de Editar Paaciente
         $scope.cerrarMod = function(){
             $('#modalEditarPaciente').closeModal();
+            $state.reload();
         }
 
 
@@ -330,10 +332,12 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
                 });
 
                 $scope.muestras.push(response);
-                Materialize.toast('Se Creó una muestra satisfactoriamente', 3000, 'rounded teal');
+                Materialize.toast("Se Creó la muestra" + response.cod_barras, 3000, 'rounded teal');
                 $scope.nuevo_muestra = {};
-                $scope.$apply();  
+                //$scope.$apply();  
+
             });
+            $state.reload();
         };
 
         $scope.eliminarMuestra = function ( muestra ) {
@@ -345,6 +349,9 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
                 });
         };
 
+        $scope.cancelarMuestra = function(){
+            $state.reload();
+        }
 
         $scope.linkNuevoPac = function(){
             //console.log("hola");
@@ -397,6 +404,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
 
         $scope.cerrarModPac = function(){
             $('#modalPac').closeModal();
+            $state.go('muestras');
         }
 
         $scope.modalPaciente = function(){
