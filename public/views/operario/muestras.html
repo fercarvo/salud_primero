@@ -44,12 +44,12 @@
             <table id="teibol" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>tipo</th>
-                  <th>cod_barras</th>
-                  <th>recibido</th>
-                  <th>fecha</th>
-                  <th>editar</th>
-                  <th>delete</th>
+                  <th>Tipo</th>
+                  <th>Código de Barras</th>
+                  <th>Recibido</th>
+                  <th>Fecha</th>
+                  <th>Editar</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -128,8 +128,8 @@
       </tbody>
     </table>
     <div class="row">
-      <button type="submit" class="btn btn-primary col s4" ng-click="cerrarModPac()">Cerrar</button>
-      <button type="submit" class="btn btn-primary col s4 right" ng-click="linkNuevoPac()">Nuevo Paciente</button>
+      <button type="submit" class="btn btn-primary col s4" ng-click="linkNuevoPac()">Nuevo Paciente</button>
+      <button type="submit" class="btn btn-primary col s4 right" ng-click="cerrarModPac()">Cerrar</button>
     </div>
   </div>
   
@@ -137,35 +137,39 @@
 </div>
 
 <div class="modal" id="modalLab" style="padding-left:20px;padding-right:20px;padding-top:10px;margin-top:-10px">
-  <div class="container-fluid center">
-  <h5 class="text-center teal-text">Laboratorios</h5>
-  <div ><input class="text-center" type="search" name="busqueda" ng-model="busqueda.laboratorio" placeholder="Buscar laboratoio"></div>
-  <table id="teibol" class="table table-bordered table-striped">
-    <tbody>
-      <tr ng-repeat="laboratorio in laboratorios | filter:{nombre:busqueda.laboratorio}">
-        <td > {{ laboratorio.nombre }} </td>
-        <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarLaboratorio(laboratorio)">done</button></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="container-fluid center modal-body">
+    <h5 class="text-center teal-text">Laboratorios</h5>
+    <div ><input class="text-center" type="search" name="busqueda" ng-model="busqueda.laboratorio" placeholder="Buscar laboratoio"></div>
+    <table id="teibol" class="table table-bordered table-striped">
+      <tbody>
+        <tr ng-repeat="laboratorio in laboratorios | filter:{nombre:busqueda.laboratorio}">
+          <td > {{ laboratorio.nombre }} </td>
+          <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarLaboratorio(laboratorio)">done</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="modal-footer">
+       <button type="submit" class="btn btn-primary col s12 center" data-toggle="modal" ng-click="cerrarModLab()">Cerrar</button>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary col s6 center" data-toggle="modal" ng-click="cerrarModLab()">Cerrar</button>
 </div>
 
 <div class="modal" id="modalCentro" style="padding-left:20px;padding-right:20px;padding-top:10px;margin-top:-10px">
   <div class="container-fluid center">
-  <h5 class="text-center teal-text">Centros M&eacute;dicos</h5>
-  <div ><input class="text-center" type="search" name="busqueda" ng-model="busqueda.centro" placeholder="Buscar Centro Medico"></div>
-    <table id="teibol" class="table table-bordered table-striped">
-      <tbody>
-        <tr ng-repeat="centro in centros | filter:{nombre:busqueda.centro}">
-          <td > {{ centro.nombre }} </td>
-          <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarCentro(centro)">done</button></td>
-        </tr>
-      </tbody>
-    </table>
-    </div>
-      <button type="submit" class="btn btn-primary col s6 center" data-toggle="modal" ng-click="cerrarModCM()">Cerrar</button>
+    <h5 class="text-center teal-text">Centros M&eacute;dicos</h5>
+    <div ><input class="text-center" type="search" name="busqueda" ng-model="busqueda.centro" placeholder="Buscar Centro Medico"></div>
+      <table id="teibol" class="table table-bordered table-striped">
+        <tbody>
+          <tr ng-repeat="centro in centros | filter:{nombre:busqueda.centro}">
+            <td > {{ centro.nombre }} </td>
+            <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarCentro(centro)">done</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <button type="submit" class="btn btn-primary col s12 center" data-toggle="modal" ng-click="cerrarModCM()">Cerrar</button>
+      </div>
+  </div>
 </div>  
 
 
