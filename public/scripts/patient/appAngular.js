@@ -48,11 +48,16 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
             })
         }
   
-        comun.updateDatos = function(nuevosDatos){
-            return $http.put('/paciente/datos/', nuevosDatos)
+        comun.updateDatos = function(datos){
+            return $http.put('/paciente/datos/', {
+                nombre : datos.nombre,
+                apellido : datos.apellido,
+                cedula : datos.cedula,
+                direccion : datos.direccion,
+                telefono : datos.telefono
+            })
             .success(function(data){
-                var indice = comun.datos.indexOf(nuevosDatos);
-                comun.datos[indice] = data;
+                Materialize.toast("Datos Actualizados", 3000, 'rounded');
             })
         }
 
@@ -70,6 +75,7 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
         comun.getDatos();
         $scope.datos = comun.datos;
         //$scope.nuevos = comun.nuevosDatos;        
+        console.log($scope.datos);
 
         $scope.actualizar = function() {
            comun.updateDatos($scope.datos);
