@@ -41,7 +41,7 @@ angular.module('appMuestras',['ui.router'])
             $http.put("/muestra/" + $scope.muestra._id + "/observacion", {
                 observacion: $scope.observacion
             }).success(function(response){
-                Materialize.toast(response.message, 3000, 'rounded');
+                Materialize.toast(response.message, 3000, 'rounded teal');
                 $scope.muestra.observacion = $scope.observacion;
                 //$scope.$apply();                    
             });
@@ -88,7 +88,7 @@ angular.module('appMuestras',['ui.router'])
 
             }).success(function(response){
                 $scope.examen.resultados.push(response);
-                Materialize.toast('Se creo un nuevo resultado satisfactoriamente', 3000, 'rounded');
+                Materialize.toast('Se creo un nuevo resultado satisfactoriamente', 3000, 'rounded teal');
                 $scope.nuevo_resultado = {};
                 $scope.$apply();                    
             });
@@ -98,7 +98,7 @@ angular.module('appMuestras',['ui.router'])
             $http.delete("/resultado/"+ resultado._id)
                 .success(function (response) {
                     examen.resultados.splice(resultado, 1);
-                    Materialize.toast(response.message, 3000, 'rounded');
+                    Materialize.toast(response.message, 3000, 'rounded teal');
                 });
         }
 

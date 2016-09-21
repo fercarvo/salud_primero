@@ -115,18 +115,25 @@
 
 <div class="modal" id="modalPac" style="padding-left:20px;padding-right:20px;padding-top:10px;margin-top:-10px">
   <div class="container-fluid center">
-  <h5 class="text-center teal-text">Pacientes</h5>
-  <div ><input class="text-center" type="search" name="busqueda" ng-model="busqueda.paciente" placeholder="Buscar paciente por nombre"></div>
-  <table id="teibol" class="table table-bordered table-striped">
-    <tbody>
-      <tr ng-repeat="paciente in pacientes | filter:busqueda.paciente">
-        <td > {{ paciente.nombre }} {{paciente.apellido}} </td>
-        <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarPaciente(paciente)">done</button></td>
-      </tr>
-    </tbody>
-  </table>
+    <h5 class="text-center teal-text">Pacientes</h5>        
+    <div class="row">
+      <input class="text-center" type="search" name="busqueda" ng-model="busqueda.paciente" placeholder="Buscar paciente por nombre">
+    </div>
+    <table id="teibol" class="table table-bordered table-striped">
+      <tbody>
+        <tr ng-repeat="paciente in pacientes | filter:busqueda.paciente">
+          <td > {{ paciente.nombre }} {{paciente.apellido}} </td>
+          <td ><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarPaciente(paciente)">done</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <button type="submit" class="btn btn-primary col s4" ng-click="cerrarModPac()">Cerrar</button>
+      <button type="submit" class="btn btn-primary col s4 right" ng-click="linkNuevoPac()">Nuevo Paciente</button>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary col s6 center" data-toggle="modal" ng-click="cerrarModPac()">Cerrar</button>
+  
+  
 </div>
 
 <div class="modal" id="modalLab" style="padding-left:20px;padding-right:20px;padding-top:10px;margin-top:-10px">

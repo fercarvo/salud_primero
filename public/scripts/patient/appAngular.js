@@ -57,7 +57,7 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
                 telefono : datos.telefono
             })
             .success(function(data){
-                Materialize.toast("Datos Actualizados", 3000, 'rounded');
+                Materialize.toast("Datos Actualizados", 3000, 'rounded teal');
             })
         }
 
