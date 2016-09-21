@@ -7,14 +7,25 @@
         <form> 
               <div class="modal-body">
 
-                  <ui-select ng-model="nuevo_muestra.tipo.value">
-                      <ui-select-match>
-                          <span ng-bind="$select.nuevo_muestra.tipo"></span>
-                      </ui-select-match>
-                      <ui-select-choices repeat="tipo in tipos track by tipo">
-                          <span ng-bind="tipo"></span>
-                      </ui-select-choices>
-                  </ui-select>
+                  <div class="form-group">
+                    Tipo de muestra <select class="browser-default" ng-options="tipo.name for tipo in tipos" ng-model="nuevo_muestra.tipo" ng-change="hasChangedTipo()">                      
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    Seleccione un examen <select class="browser-default" ng-options="examen for examen in nuevo_muestra.tipo.examenes" ng-change="hasChangedExamen()" ng-model="examen">            
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    Exámenes <md-chips ng-model="examenes" readonly="true" md-removable="true" md-transform-chip="newChip($chip)">
+                      <md-chip-template>
+                        <span>
+                          <strong>{{$chip.examen}}</strong>
+                        </span>
+                      </md-chip-template>
+                    </md-chips>
+                  </div>
                                     
                   <div class="form-group">
                     Paciente <input style="border:none" type="text" class="form-control" value="{{nuevo_muestra.paciente.nombre}} {{nuevo_muestra.paciente.apellido}}" readonly ng-click="modalPaciente()">

@@ -1,4 +1,4 @@
-angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
+angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'ngMaterial'])
 	.config(function($stateProvider, $urlRouterProvider){
 		$stateProvider
 			.state('pacientes',{
@@ -228,9 +228,32 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
         $scope.nuevo_muestra = {};
 
 
-        $scope.tipos = ["sangre","heces","orina"];
+        $scope.tipos = [
+            {
+                name : "sangre",
+                examenes : ["hemograma","bioquimica","serologia"]
+            },{
+                name : "orina",
+                examenes : ["uroanalisis","gota","sangre en la orina"]
+            },{
+                name : "heces",
+                examenes : ["coprocultivo","coproparasitario"]
+            }
+        ];
 
-        $scope.nuevo_muestra.tipo = { value: $scope.tipos[0] };
+        $scope.hasChangedExamen = function(){
+            $scope.examenes.push({examen: $scope.examen});
+            $scope.$apply();
+        }
+
+        $scope.hasChangedTipo = function(){
+            $scope.examenes = [];
+            $scope.$apply();
+        }
+
+        $scope.newChip = function(chip){
+            return {examen: chip};
+        }
 
         $scope.seleccionar = function(obj){
             alert(obj);
@@ -283,7 +306,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
             console.log($scope.nuevo_muestra);
 
             $http.post("/muestra", {
-                tipo: $scope.nuevo_muestra.tipo.value,
+                tipo: $scope.nuevo_muestra.tipo.name,
                 paciente: $scope.nuevo_muestra.paciente._id,
                 laboratorio: $scope.nuevo_muestra.laboratorio._id,
                 centro: $scope.nuevo_muestra.centro._id
