@@ -133,11 +133,25 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
 
         $scope.cargarLaboratorios = function() {
             angular.forEach($scope.laboratorios, function(lab){
-                $scope.data2.push({"key": lab.nombre, "values": {} });
+                $scope.data2.push({"key": lab.nombre, "values": [] });
             });
         };
 
         $scope.cargarData = function(){
+
+            //console.log($scope.data2);
+
+            for (var i = 0 ; i < $scope.meses.length; i++) { //cada mes
+                for (var j = 0; j < $scope.meses[i].length; j++) { //cada laboratorio
+                    $scope.data2[j].values.push({
+                        "x": i,
+                        "y": $scope.meses[i][j].muestras.length
+                    });
+                }
+            }
+            console.log($scope.data2);
+
+            /*
             angular.forEach($scope.meses , function(mes){
                 console.log("\n");
                 console.log($scope.meses.indexOf(mes));
@@ -145,12 +159,14 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
 
                     //if ($scope.data2.) {}
 
-
+                    
                     console.log(lab.nombre);
+                    console.log($scope.data2[$scope.meses.indexOf(mes)].key);
                     console.log(lab.muestras.length);
                     
                 });       
             });
+            */
         }
 
         $scope.options = {
