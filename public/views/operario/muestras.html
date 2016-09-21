@@ -87,37 +87,18 @@
     <h5 class="text-center teal-text">Editar Muestra</h5>
     <div>
       <form> 
-                  <div class="form-group col s12" >
-                    <!--Tipo de muestra <select ng-init="editar_muestra.tipo = tipos[0]" ng-options="tipo for tipo in tipos" ng-model="editar_muestra.tipo">
-                    </select> -->
-                    <div class="select-box" ng-if="ctrl.appendToBodyDemo.present">
-                    <h3>Selectize theme</h3>
-                    <p>Selected: {{sel_tm}}</p>
-                    <ui-select ng-model="sel_tm" theme="selectize" ng-disabled="ctrl.disabled" style="width: 300px;" title="Choose a tipo" append-to-body="true">
-                      <ui-select-match placeholder="Select or search a tipo in the list...">{{$select.selected.name}}</ui-select-match>
-                      <ui-select-choices repeat="tipo in ctrl.countries | filter: $select.search">
-                        <span ng-bind-html="tipo.name | highlight: $select.search"></span>
-                        <small ng-bind-html="tipo.code | highlight: $select.search"></small>
-                      </ui-select-choices>
-                    </ui-select>
-                    <p class="alert alert-info positioned">The select dropdown menu should be displayed above this element.</p>
-                  </div>
-                  </div>
+        <div class="form-group">
+          Paciente <input style="border:none" type="text" class="form-control" value="{{editar_muestra._paciente.nombre}} {{editar_muestra._paciente.apellido}}" readonly ng-click="modalPaciente()">
+        </div>
 
-                  
+        <div class="form-group">
+          Laboratorio <input style="border:none" type="text" class="form-control" value="{{editar_muestra._laboratorio.nombre}}" readonly ng-click="modalLaboratorio()">
+        </div>
 
-                  <div class="form-group">
-                    Paciente <input style="border:none" type="text" class="form-control" value="{{editar_muestra._paciente.nombre}} {{editar_muestra._paciente.apellido}}" readonly ng-click="modalPaciente()">
-                  </div>
-
-                  <div class="form-group">
-                    Laboratorio <input style="border:none" type="text" class="form-control" value="{{editar_muestra._laboratorio.nombre}}" readonly ng-click="modalLaboratorio()">
-                  </div>
-
-                  <div class="form-group">
-                    Centro Medico <input style="border:none" type="text" class="form-control" value="{{editar_muestra._centro.nombre}}" readonly ng-click="modalCentroMed()">
-                  </div>
-        <button type="submit" class="btn btn-primary" ng-disabled="disEditMuestra" ng-click="putMuestra()">Aceptar</button>
+        <div class="form-group">
+          Centro Medico <input style="border:none" type="text" class="form-control" value="{{editar_muestra._centro.nombre}}" readonly ng-click="modalCentroMed()">
+        </div>
+        <button type="submit" class="btn btn-primary" ng-click="putMuestra()">Aceptar</button>
 
     </form>
     </div>

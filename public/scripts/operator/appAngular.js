@@ -297,7 +297,6 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
             }
             ).success(function (response) {
                 $scope.editar_muestra = {}; //se resetea la variable editar paciente para que no se siga editando
-                $scope.disEditMuestra = true; //se desactiva el formulario de editar para evitar caida del servidor
                 $('#modalEditarMuestra').closeModal();
                 Materialize.toast(response.message, 3000, 'rounded teal');
             });
@@ -362,8 +361,6 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
 
         $scope.editarMuestra = function ( muestra ) {
             $scope.editar_muestra = muestra;
-            //$scope.disEditMuestra = false;
-            //$scope.activarInfo();
             $('#modalEditarMuestra').openModal();
         };
 
