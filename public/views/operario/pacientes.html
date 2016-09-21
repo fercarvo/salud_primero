@@ -1,8 +1,8 @@
-<h4 class="text-center">Administrador de Pacientes</h4>
+<h4 class="text-center teal-text">Pacientes</h4>
 <hr>
 <ul class="collapsible popout" data-collapsible="accordion">
     <li>
-      <div class="collapsible-header"><i class="material-icons">add</i>Nuevo Paciente</div>
+      <div id="nuevPac" class="collapsible-header"><i class="material-icons">add</i>Nuevo Paciente</div>
       <div class="collapsible-body" style="padding-left:20px;padding-right:20px">
         <form > 
               <div class="modal-body">
@@ -26,37 +26,37 @@
                   </div>
               </div>
               <div class="row modal-footer">
-                <button type="reset" class="btn btn-default col s4 right">Cancelar</button>
+                <button type="reset" class="btn btn-default col s4 right" ng-click="cancelar()">Cancelar</button>
                 <button type="submit" class="btn btn-primary col s4" ng-click="agregar()">Crear</button>
               </div>
             </form>
       </div>
     </li>
     <li>
-        <div class="collapsible-header large active"><i class="material-icons">label</i>Lista de Pacientes</div>
+        <div id="listPac" class="collapsible-header large active"><i class="material-icons">label</i>Lista de Pacientes</div>
         <div class="collapsible-body" style="padding-left:20px;padding-right:20px">
         <div ><input type="search" name="busqueda" ng-model="busqueda.$" placeholder="Buscar paciente"></div>
           <table class="table table-striped table-bordered">
           <thead>
             <tr>
-              <th>nombre</th>
-              <th>correo</th>
-              <th>cedula</th>
-              <th>direccion</th>
-              <th>telefono</th>
-              <th>editar</th>
-              <th>eliminar</th>
+              <th class="text-center">nombre</th>
+              <th class="text-center">correo</th>
+              <th class="text-center">cedula</th>
+              <th class="text-center">direccion</th>
+              <th class="text-center">telefono</th>
+              <th class="text-center">editar</th>
+              <th class="text-center">eliminar</th>
             </tr>
           </thead>
           <tbody>
               <tr ng-repeat="paciente in pacientes | filter:busqueda">
-                  <td class="nombre"> {{ paciente.nombre }} {{ paciente.apellido }}</td>
-                  <td class="correo"> {{ paciente.correo }} </td>
-                  <td class="cedula" > {{ paciente.cedula }} </td>
-                  <td class="direccion"> {{ paciente.direccion }} </td>
-                  <td class="telefono" > {{ paciente.telefono }} </td>
-                  <td class= "editar"><button type="button" style="border:none;background:none" class="small material-icons" ng-click="editarPaciente(paciente)">mode_edit</button></td>
-                  <td class= "eliminar"><button type="button" style="border:none;background:none" class="small material-icons" ng-click="eliminarPaciente(paciente)">delete</button></td>
+                  <td class="text-center nombre"> {{ paciente.nombre }} {{ paciente.apellido }}</td>
+                  <td class="text-center correo"> {{ paciente.correo }} </td>
+                  <td class="text-center cedula" > {{ paciente.cedula }} </td>
+                  <td class="text-center direccion"> {{ paciente.direccion }} </td>
+                  <td class="text-center telefono" > {{ paciente.telefono }} </td>
+                  <td class="text-center editar"><button type="button" style="border:none;background:none" class="small material-icons" ng-click="editarPaciente(paciente)">mode_edit</button></td>
+                  <td class="text-center eliminar"><button type="button" style="border:none;background:none" class="small material-icons" ng-click="eliminarPaciente(paciente)">delete</button></td>
               </tr>
           </tbody>
         </table>
@@ -66,9 +66,8 @@
 
 <!-- Modal Structure -->
 
-<div id="modalEditarPaciente" class="modal" style="padding-left:20px;padding-right:20px;padding-top:10px;margin-top:-10px">
-  <div class="container-fluid center">
-  <h5 class="text-center indigo-text">Pacientes</h5>
+<div id="modalEditarPaciente" class="modal" style="padding-left:20px;padding-right:20px;padding-top:30px;margin-top:-10px">
+  <h5 class="text-center teal-text">Pacientes</h5>
   <form >
     <div class="container-fluid center">
         <div class="form-group">
@@ -89,10 +88,10 @@
         <div class="form-group">
           <input type="text" class="form-control" name="telefono" ng-model="editar_paciente.telefono" placeholder="Telefono">
         </div>
-        <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="putPaciente()">Editar</button>
+        <div class="row">
+          <button type="submit" class="btn btn-primary col s4" ng-click="putPaciente()">Editar</button>
+          <button type="submit" class="btn btn-primary col s4 right" ng-click="cerrarMod()">Cerrar</button>
+        </div>
     </div>
-
-    
-
   </form>
 </div>

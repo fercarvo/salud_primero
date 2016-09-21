@@ -55,8 +55,17 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
                 $scope.$apply();
                     
             });
-            
         }
+
+        $scope.cancelar = function(){
+            render('operario');
+            $state.go('pacientes');
+        }
+        $scope.cerrarMod = function(){
+            $('#modalEditarPaciente').closeModal();
+        }
+
+
 
         $scope.editarPaciente = function ( paciente ) {
             $scope.editar_paciente = paciente;
@@ -388,6 +397,18 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
             var tipo = $scope.tipo[obj];
             console.log(tipo);
         };
+
+        $scope.cerrarModCM = function(){
+            $('#modalCentro').closeModal();
+        };
+
+        $scope.cerrarModLab = function(){
+            $('#modalLab').closeModal();
+        };
+
+        $scope.cerrarModPac = function(){
+            $('#modalPac').closeModal();
+        }
 
         $scope.modalPaciente = function(){
             $('#modalPac').openModal();

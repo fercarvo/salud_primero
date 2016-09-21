@@ -1,4 +1,4 @@
-<h4 class="text-center">Administrador de Muestras Medicas</h4>
+<h4 class="teal-text text-center">Muestras M&eacute;dicas</h4>
 <hr>
 <ul class="collapsible popout" ng-click="activarSelect()" data-collapsible="accordion">
     <li>
@@ -73,7 +73,7 @@
 <div id="modalEditarMuestra" class="modal" style="padding-left:20px;padding-right:20px;padding-top:10px;margin-top:-10px">
     <!-- Modal de editar muestra-->
     <div class="container-fluid center">
-    <h5 class="text-center indigo-text">Editar Muestra</h5>
+    <h5 class="text-center teal-text">Editar Muestra</h5>
     <div>
       <form> 
                   <div class="form-group col s12" >
@@ -115,7 +115,7 @@
 
 <div class="modal" id="modalPac" style="padding-left:20px;padding-right:20px;padding-top:10px;margin-top:-10px">
   <div class="container-fluid center">
-  <h5 class="text-center indigo-text">Pacientes</h5>
+  <h5 class="text-center teal-text">Pacientes</h5>
   <div ><input class="text-center" type="search" name="busqueda" ng-model="busqueda.paciente" placeholder="Buscar paciente por nombre"></div>
   <table id="teibol" class="table table-bordered table-striped">
     <tbody>
@@ -126,11 +126,12 @@
     </tbody>
   </table>
   </div>
+  <button type="submit" class="btn btn-primary col s6 center" data-toggle="modal" ng-click="cerrarModPac()">Cerrar</button>
 </div>
 
 <div class="modal" id="modalLab" style="padding-left:20px;padding-right:20px;padding-top:10px;margin-top:-10px">
   <div class="container-fluid center">
-  <h5 class="text-center indigo-text">Laboratorios</h5>
+  <h5 class="text-center teal-text">Laboratorios</h5>
   <div ><input class="text-center" type="search" name="busqueda" ng-model="busqueda.laboratorio" placeholder="Buscar laboratoio"></div>
   <table id="teibol" class="table table-bordered table-striped">
     <tbody>
@@ -141,11 +142,12 @@
     </tbody>
   </table>
   </div>
+  <button type="submit" class="btn btn-primary col s6 center" data-toggle="modal" ng-click="cerrarModLab()">Cerrar</button>
 </div>
 
 <div class="modal" id="modalCentro" style="padding-left:20px;padding-right:20px;padding-top:10px;margin-top:-10px">
   <div class="container-fluid center">
-  <h5 class="text-center indigo-text">Centros M&eacute;dicos</h5>
+  <h5 class="text-center teal-text">Centros M&eacute;dicos</h5>
   <div ><input class="text-center" type="search" name="busqueda" ng-model="busqueda.centro" placeholder="Buscar Centro Medico"></div>
     <table id="teibol" class="table table-bordered table-striped">
       <tbody>
@@ -156,6 +158,7 @@
       </tbody>
     </table>
     </div>
+      <button type="submit" class="btn btn-primary col s6 center" data-toggle="modal" ng-click="cerrarModCM()">Cerrar</button>
 </div>  
 
 
