@@ -107,66 +107,40 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
 	})
 
     .controller('controllerReportesMensuales', function($scope, $state, $http){
-
         $scope.laboratorios = {};
         $scope.meses = {}; //Todos los meses tal y como llegan de la BDD
-        $scope.data2 = []; //laboratorios en formato [{key: nombreLaboratorio, y: numeroMuestras},...]
-        //console.log("asdasdasd");
+        $scope.data = []; //laboratorios en formato [{key: nombreLaboratorio, y: numeroMuestras},...]
+
         //funcion que carga los laboratorios de la BDD
         $http.get("/laboratorios/muestras/2/"+"2016,01,01"+"/"+"2016,09,03")
             .then(function (response) {
                 $scope.meses = response.data;
-
                 $http.get("/laboratorios")
                     .then(function (response) {
                         $scope.laboratorios = response.data;
                         $scope.cargarLaboratorios();
                         $scope.cargarData();
-
                     }
                 );
-                
             }
         );
 
-        
-
+        //Funcion que carga todos los laboratorios a los datos
         $scope.cargarLaboratorios = function() {
             angular.forEach($scope.laboratorios, function(lab){
-                $scope.data2.push({"key": lab.nombre, "values": [] });
+                $scope.data.push({"key": lab.nombre, "values": [] });
             });
         };
 
         $scope.cargarData = function(){
-
-            //console.log($scope.data2);
-
             for (var i = 0 ; i < $scope.meses.length; i++) { //cada mes
                 for (var j = 0; j < $scope.meses[i].length; j++) { //cada laboratorio
-                    $scope.data2[j].values.push({
+                    $scope.data[j].values.push({
                         "x": i,
                         "y": $scope.meses[i][j].muestras.length
                     });
                 }
             }
-            console.log($scope.data2);
-
-            /*
-            angular.forEach($scope.meses , function(mes){
-                console.log("\n");
-                console.log($scope.meses.indexOf(mes));
-                angular.forEach(mes, function(lab){
-
-                    //if ($scope.data2.) {}
-
-                    
-                    console.log(lab.nombre);
-                    console.log($scope.data2[$scope.meses.indexOf(mes)].key);
-                    console.log(lab.muestras.length);
-                    
-                });       
-            });
-            */
         }
 
         $scope.options = {
@@ -199,55 +173,6 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
                 }
             }
         };
-
-        $scope.data = [
-        {
-            "key": "Lab1",
-            "values": [{
-                "x": 0,
-                "y": 1
-            }, {
-                "x": 1,
-                "y": 2
-            }, {
-                "x": 2,
-                "y": 4
-            },{
-                "x": 3,
-                "y": 4
-            }]
-        }, {
-            "key": "Lab2",
-            "values": [{
-                "x": 0,
-                "y": 3
-            }, {
-                "x": 1,
-                "y": 2
-            }, {
-                "x": 2,
-                "y": 3
-            },{
-                "x": 3,
-                "y": 4
-            }]
-        }, {
-            "key": "Lab3",
-            "values": [{
-                "x": 0,
-                "y": 3
-            }, {
-                "x": 1,
-                "y": 2
-            }, {
-                "x": 2,
-                "y": 0
-            },{
-                "x": 3,
-                "y": 4
-            }]
-        }];
-
 
     })
     .controller('controllerReportesTotales', function($scope, $state, $http){
