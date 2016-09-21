@@ -154,7 +154,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
                 },
                 clipEdge: true,
                 duration: 500,
-                stacked: true,
+                stacked: false,
                 xAxis: {
                     axisLabel: 'Meses',
                     showMaxMin: false,
@@ -167,7 +167,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
                     axisLabel: 'Muestras',
                     axisLabelDistance: -20,
                     tickFormat: function(d){
-                        return d3.format(',.0f')(d);
+                        return d3.format('d')(d);
                     }
                 }
             }
@@ -204,6 +204,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
                 duration: 500,
                 labelThreshold: 0.01,
                 labelSunbeamLayout: true,
+                labelType: 'percent',
                 legend: {
                     margin: {
                         top: 5,
@@ -324,6 +325,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize'])
             $scope.nuevo_muestra.paciente = paciente;
             $scope.editar_muestra._paciente = paciente;
             $('#modalPac').closeModal();
+            console.log($scope.nuevo_muestra.tipo);
         }
 
         $scope.cargarCentro = function (centro){
