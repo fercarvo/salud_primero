@@ -2,34 +2,34 @@
 <h4 class="col s12 text-center teal-text">Mis Datos</h4><hr>
 
     <div class="row">
-        <form id="formularioActualizarPaciente" class="col s12">
+        <form ng-submit="actualizar()" id="formularioActualizarPaciente" class="col s12">
             
             <div class="input-field col s12">
               <i class="material-icons prefix">account_circle</i>
-              <input id="icon_prefix" type="text" name="nombre" placeholder="Ingrese sus nombres" ng-model="datos.nombre" require/>
+              <input id="icon_prefix" type="text" name="nombre" placeholder="Ingrese sus nombres" ng-model="datos.nombre" required />
               <label class="active" for="icon_prefix">Nombres</label>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">account_circle</i>
-              <input id="icon_prefix" type="text" name="nombre" placeholder="Ingrese sus apellidos" ng-model="datos.apellido" require/>
+              <input id="icon_prefix" type="text" name="nombre" placeholder="Ingrese sus apellidos" ng-model="datos.apellido" required />
               <label class="active" for="icon_prefix">Apellidos</label>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">perm_identity</i>
-              <input id="icon_prefix" type="text" name="cedula" placeholder="Ingrese su c&eacute;dula" ng-model="datos.cedula" require/>
+              <input id="icon_prefix" type="text" pattern="^[0-9]{10}" name="cedula" title="Ingrese un numero de cedula valido" placeholder="Ingrese su c&eacute;dula" ng-model="datos.cedula" required />
               <label class="active" for="icon_prefix">C&eacute;dula</label>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">room</i>
-              <input id="icon_prefix" type="text" name="direccion" placeholder="Ingrese su direcci&oacute;" ng-model="datos.direccion" require/>
+              <input id="icon_prefix" type="text" name="direccion" placeholder="Ingrese su direcci&oacute;" ng-model="datos.direccion" required />
               <label class="active" for="icon_prefix">Direcci&oacute;n</label>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">phone</i>
-              <input id="icon_prefix" type="text" name="telefono" placeholder="Ingrese su tel&eacute;fono"  ng-model="datos.telefono" require/>
-              <label class="active" for="icon_prefix">Tel&eacute;fono</label>
+              <input id="icon_prefix" type="text" pattern="^[0-9]{7,10}" title="Ingrese un numero de telefono/celular valido" name="telefono" placeholder="Ingrese su tel&eacute;fono"  ng-model="datos.telefono" required />
+              <label class="active" for="icon_prefix">Telefono/Celular</label>
             </div>
-            <button type="button" class="btn col s4 left btn-primary" ng-click="actualizar()">Enviar</button>
+            <button type="submit" class="btn col s4 left btn-primary" >Enviar</button>
             <button type="button" class="btn col s4 right btn-primary" ng-click="regresar()">Regresar</button>
         </form>
     </div>

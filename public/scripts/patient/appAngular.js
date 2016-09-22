@@ -118,10 +118,30 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
             angular.forEach(examen.resultados, function(resultado){
                 body.push(
                     [
-                        {text: resultado.parametro},
-                        {text: resultado.unidades},
-                        {text: resultado.resultado},
-                        {text: resultado.valores_referencia}
+                        {text: 
+                            (function(){
+                                if (resultado.parametro) { return resultado.parametro;}
+                                return "";
+                            })()
+
+                        },{text: 
+                            (function(){
+                                if (resultado.unidades) { return resultado.unidades;}
+                                return "";
+                            })()
+
+                        },{text: 
+                            (function(){
+                                if (resultado.resultado) { return resultado.resultado;}
+                                return "";
+                            })()
+
+                        },{text: 
+                            (function(){ 
+                                if (resultado.valores_referencia) { return resultado.valores_referencia;}
+                                return "";
+                            })()
+                        }
                     ]
                 );
             });
