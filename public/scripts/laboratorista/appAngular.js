@@ -137,7 +137,7 @@ angular.module('appMuestras',['ui.router', 'ngMaterial'])
                 $http.put("/muestra/"+ response[0]._examen._muestra +"/estado/finalizado", {})
                 .success(function(response2){
                     $scope.examen.resultados.push(response[0]);
-                    Materialize.toast('Se creo un nuevo resultado satisfactoriamente', 3000, 'rounded teal');
+                    Materialize.toast('Resultado agregado satisfactoriamente', 3000, 'rounded teal');
                     $scope.nuevo_resultado = {};
                     $scope.$apply();
                 });

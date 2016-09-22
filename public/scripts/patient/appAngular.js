@@ -1,5 +1,5 @@
 
-angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.grid.exporter'])
+angular.module('appPatient', ['ui.router', 'ngTable', 'ui.grid', 'ui.grid.selection', 'ui.grid.exporter'])
 
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -216,6 +216,7 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
 
         }
 
+        
     })
     .controller('ctrlCentros', function($scope, $state, comun) {
         comun.getCentros();
