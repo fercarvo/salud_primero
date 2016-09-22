@@ -1,10 +1,35 @@
 <h4 class="text-center teal-text">Gr&aacute;ficos Estad&iacute;sticos</h4>
 <hr>
 <div class="center">
-	<div class="input-group input-daterange">
-    	<input type="text" class="form-control" value="2012-04-05">
-    	<span class="input-group-addon">to</span>
-    	<input type="text" class="form-control" value="2012-04-19">
+	<div >
+    	<form ng-submit="cargarFecha()"> 
+
+			<div class="container-fluid row">
+				<div class="form-group col m6 s12">
+					Mes de inicio <select class="browser-default" required ng-options="mes.numero as mes.nombre for mes in months" ng-model="desde">
+					<option></option>                      
+					</select>
+				</div>
+
+				<div class="form-group col s12 m6">
+					Mes de fin <select class="browser-default" required ng-options="mes.numero as mes.nombre for mes in months" ng-model="hasta">            
+					<option></option>
+					</select>
+				</div>	
+			</div>
+
+			<div class="container-fluid row">
+				<div class="form-group col m6 s12">
+					<button class="btn waves-effect waves-light" type="submit" name="action">Crear
+					</button>
+				</div>
+				<div class="form-group col m6 s12">
+					<button class="btn waves-effect waves-light" type="reset" name="action">Cancelar
+					</button>
+				</div>
+			</div>             
+                
+        </form>
 	</div>
 	<nvd3 options="options" data="data"></nvd3>
 </div>

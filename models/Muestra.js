@@ -22,26 +22,5 @@ var MuestraSchema = new mongoose.Schema({
 	fecha: {type:Date, default:Date.now}
 });
 
-MuestraSchema.pre('remove', function(next){
-    this.model('Paciente').update(
-        {_id: {$in: this._paciente}}, 
-        {$pull: {muestras: this._id}}, 
-        {multi: true},
-        next
-    );
-    this.model('Laboratorio').update(
-        {_id: {$in: this._laboratorio}}, 
-        {$pull: {muestras: this._id}}, 
-        {multi: true},
-        next
-    );
-    this.model('Centro').update(
-        {_id: {$in: this._centro}}, 
-        {$pull: {muestras: this._id}}, 
-        {multi: true},
-        next
-    );
-});
-
 
 module.exports = mongoose.model('Muestra', MuestraSchema);
