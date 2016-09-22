@@ -73,7 +73,7 @@ router.get('/paciente/muestras/examenes', login.checkPaciente, function(req, res
 
 
 router.put('/paciente/datos', login.checkPaciente, function(req, res){
-	Paciente.findOne({ _id: req.session.user._id }, function(err, paciente){
+	Paciente.findOne({ _id: req.session.user._id },  function(err, paciente){
 		paciente.nombre = req.body.nombre;
 		paciente.apellido = req.body.apellido;
 		paciente.cedula = req.body.cedula;
@@ -86,7 +86,7 @@ router.put('/paciente/datos', login.checkPaciente, function(req, res){
 			} else {
 				req.session.user.nombre = paciente.nombre;
 				req.session.user.apellido = paciente.apellido;
-				res.json(paciente);
+				res.json({message: "Datos actalizados"});
 			}
 		});
 	});

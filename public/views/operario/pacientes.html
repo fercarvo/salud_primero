@@ -4,30 +4,30 @@
     <li>
       <div id="nuevPac" class="collapsible-header"><i class="material-icons">add</i>Nuevo Paciente</div>
       <div class="collapsible-body" style="padding-left:20px;padding-right:20px">
-        <form > 
+        <form ng-submit="agregar()"> 
               <div class="modal-body">
                   <div class="form-group">
-                    <input type="text" class="form-control" name="nombre" ng-model="nuevo_paciente.nombre" placeholder="Nombre">
+                    <input type="text" class="form-control" name="nombre" ng-model="nuevo_paciente.nombre" placeholder="Nombre" required>
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" name="apellido" ng-model="nuevo_paciente.apellido" placeholder="Apellido">
+                    <input type="text" class="form-control" name="apellido" ng-model="nuevo_paciente.apellido" placeholder="Apellido" required>
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" name="cedula" ng-model="nuevo_paciente.cedula" placeholder="C&eacute;dula">
+                    <input type="text" pattern="^[0-9]{10}" title="Numero de cedula invalido" class="form-control" name="cedula" ng-model="nuevo_paciente.cedula" placeholder="C&eacute;dula" required>
                   </div>
                   <div class="form-group">
-                    <input type="email" class="form-control" name="correo" ng-model="nuevo_paciente.correo" placeholder="Correo">
+                    <input type="email" class="form-control" name="correo" ng-model="nuevo_paciente.correo" placeholder="Correo" required>
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" name="direccion" ng-model="nuevo_paciente.direccion" placeholder="Direcci&oacute;n">
+                    <input type="text" class="form-control" name="direccion" ng-model="nuevo_paciente.direccion" placeholder="Direcci&oacute;n" required>
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" name="telefono" ng-model="nuevo_paciente.telefono" placeholder="Tel&eacute;fono">
+                    <input type="text" pattern="^[0-9]{7,10}" title="Numero de telefono invalido" class="form-control" name="telefono" ng-model="nuevo_paciente.telefono" placeholder="Tel&eacute;fono" required=>
                   </div>
               </div>
               <div class="row modal-footer">
                 <button type="reset" class="btn btn-default col s4 right" ng-click="cancelar()">Cancelar</button>
-                <button type="submit" class="btn btn-primary col s4" ng-click="agregar()">Crear</button>
+                <button type="submit" class="btn btn-primary col s4">Crear</button>
               </div>
             </form>
       </div>
