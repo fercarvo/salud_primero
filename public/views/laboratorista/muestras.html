@@ -11,23 +11,24 @@
                   <th class="text-center">Tipo</th>
                   <th class="text-center">Cod_barras</th>
                   <th class="text-center">Estado</th>
+                  <th class="text-center">Observaciones</th>
                   <th class="text-center">Fecha</th>
                   <th class="text-center">Exámenes</th>
                 </tr>
               </thead>
               <tbody>
                   <tr ng-repeat="muestra in muestras | filter:busqueda"">
-                      <td class="text-center"> {{ muestra.tipo }} </td>
-                      <td class="text-center"> {{ muestra.cod_barras }} </td>
-                      <td class="text-center"><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="estado(muestra)">comment</button></td>  
-                      <!--
-                      <td >
-                        <input type="checkbox" id="{{muestra._id}}" class="filled-in" ng-model="checked" ng-disabled="checked" />
-                        <label for="{{muestra._id}}"></label> 
+                      <td class="text-center" style="vertical-align:middle;"> {{ muestra.tipo }} </td>
+                      <td class="text-center" style="vertical-align:middle;"> {{ muestra.cod_barras }} </td>
+
+                      <td style="text-align:center;">
+                        <input type="checkbox" name="recibida" value="checked" />
                       </td>
-                      -->
-                      <td class="text-center"> {{ muestra.fecha | date:'MM/dd/yyyy'}} </td>
-                      <td class="text-center"><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarExamenes(muestra)">view_list</button></td>
+
+                      <td class="text-center" style="vertical-align:middle;"><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="obs(muestra)">comment</button></td>  
+
+                      <td class="text-center" style="vertical-align:middle;"> {{ muestra.fecha | date:'MM/dd/yyyy'}} </td>
+                      <td class="text-center" style="vertical-align:middle;"><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarExamenes(muestra)">view_list</button></td>
                   </tr>
               </tbody>
             </table>
@@ -38,33 +39,20 @@
 
 
 
-<div id="modalEstado" class="modal" style="padding-left:20px;padding-right:20px;padding-top:10px;margin-top:-10px">
+<div id="modalEstado" class="modal" style="height:50%;padding-left:30px;padding-right:30px;padding-top:20px;margin-top:-10px">
   <form > 
     <div class="modal-body">
-
-        <p>
-          <input name="group1" type="radio" id="test1" />
-          <label for="test1">Registrada</label>
-        </p>
-        <p>
-          <input name="group1" type="radio" id="test2" />
-          <label for="test2">En proceso</label>
-        </p>
-
-
         <div class="row">
           <div class="input-field col s12">
-            <i class="material-icons prefix">mode_edit</i>
-            <textarea id="address" ng-model="observacion" class="materialize-textarea"></textarea>
-            <label for="address">Observaciones</label>
+            <h4 class="text-center teal-text"><i class="material-icons">mode_edit</i>
+            Observaciones</h4>
+            <textarea id="obs" ng-model="observacion" class="materialize-textarea"></textarea>
           </div>
         </div>
-
     </div>
-
-    <div class="row modal-footer">
+    <div class="row modal-footer" style="padding-left:25px;padding-right:25px;padding-top:20px">
       <button type="submit" class="btn btn-primary col s5 left" ng-click="actualizarObservacion()">Aceptar</button>
-      <button type="reset" class="btn btn-default col s5 right">Cancelar</button>
+      <button type="submit" class="btn btn-default col s5 right" ng-click="cerrarComent()">Cancelar</button>
     </div>
   </form>
 </div>

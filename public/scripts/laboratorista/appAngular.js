@@ -45,13 +45,21 @@ angular.module('appMuestras',['ui.router'])
                 $scope.muestra.observacion = $scope.observacion;
                 //$scope.$apply();                    
             });
+            $('#modalEstado').closeModal();
         }
 
-        $scope.estado = function(muestra){
+        $scope.cerrarComent = function(){
+            $('#modalEstado').closeModal();
+        }
+
+        $scope.obs = function(muestra){
             $scope.observacion = muestra.observacion;
             $scope.muestra = muestra;
             $('#modalEstado').openModal();
         };
+
+        $('#obs').val('New Text');
+        $('#obs').trigger('autoresize');
 
         $('.collapsible').collapsible({
             accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
@@ -77,6 +85,13 @@ angular.module('appMuestras',['ui.router'])
             $scope.examen = examen;
         };
 
+
+        //No agrega un resultado...limpia el formulario
+        $scope.cancelarRes = function(){
+            $('#modalCrearResultado').closeModal();
+        }
+
+
         //Funcion que crea un resultado en la base de daatos y tambien lo carga en el scope
         $scope.agregarResultado = function(){
             $http.post("/resultado", {
@@ -92,6 +107,7 @@ angular.module('appMuestras',['ui.router'])
                 $scope.nuevo_resultado = {};
                 $scope.$apply();                    
             });
+            $('#modalCrearResultado').closeModal();
         };
 
         $scope.eliminarResultado = function(examen, resultado){
