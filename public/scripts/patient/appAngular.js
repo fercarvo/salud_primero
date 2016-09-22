@@ -1,5 +1,5 @@
 
-angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.grid.exporter'])
+angular.module('appPatient', ['ui.router'])
 
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -217,10 +217,14 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
         }
 
     })
-    .controller('ctrlCentros', function($scope, $state, comun) {
+    .controller('ctrlCentros', function($scope, $state, comun, $sce) {
         comun.getCentros();
         $scope.centros = comun.centros_med;
         $scope.actual = {};
+
+        $scope.setUrl = function (centro) {
+          return $sce.trustAsResourceUrl(centro.coordenadas.latitud);
+        }
 
         $scope.procesar = function(actual) {
             $('#modalInfo').openModal();             

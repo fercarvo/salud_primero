@@ -191,3 +191,16 @@ router.get('/horarios', function(req, res, next){
 		res.json(horarios);
 	});
 });
+
+//cambia la latitud del centro medico
+router.put('/centroMed/:id/latitud', function(req, res){
+	CentroMedico.findOne({_id: req.params.id}, function(err, doc){
+		doc.coordenadas.latitud = req.body.latitud;
+		doc.save(function(err){
+			if(err){
+				res.send(err);
+			}
+			res.json(doc);
+		});
+	});
+});
