@@ -67,7 +67,7 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
         comun.getDatos();
         $scope.datos = comun.datos;
         //$scope.nuevos = comun.nuevosDatos;        
-        console.log($scope.datos);
+        //console.log($scope.datos);
 
         $scope.actualizar = function() {
            comun.updateDatos($scope.datos);
@@ -81,6 +81,8 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
 
     })
     .controller('ctrlExamenes', function($http, $scope, $state, comun) {
+        comun.getDatos();
+        $scope.datos = comun.datos;
         $scope.examenes = [];
 
         $http.get("/paciente/examenes")
@@ -92,6 +94,95 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
         $('.collapsible').collapsible({
             accordion : false
         });
+
+        $scope.fecha = function(examen){
+            var f = new Date(examen._muestra.fecha);
+            return f.toDateString();
+        }
+
+        $scope.pdf = function(examen){
+            console.log(examen);
+             //var docDefinition = { content: examen.nombre};
+             var docDefinition2 = { 
+                content: [
+                    {
+                        text: "Salud Primero", 
+                        style: 'header'
+                    },
+                    {
+                        text: "Reporte de examen medico: " + " " + examen.nombre + "\n\n", 
+                        style: 'subheader'
+                    },
+                    {
+                        text: [
+                            {
+                                text: "Paciente: ", 
+                                bold: true
+                            }, $scope.datos.nombre + " " + $scope.datos.apellido
+                        ]
+                    },
+                    {
+                        text: [
+                            {
+                                text: "Fecha: ", 
+                                bold: true
+                            }, {
+                                text: $scope.fecha(examen) + "\n\n"
+                            }
+
+                        ]
+                    },
+                    {
+                      table: {
+                        headerRows: 1,
+                        widths: [ '*', '*', '*', '*' ],
+
+                        body: [
+                            [ 
+                                { 
+                                    text: 'Parametro', bold: true 
+                                }, { 
+                                    text: 'Unidades', bold: true 
+                                }, { 
+                                    text: 'Resultado', bold: true 
+                                }, { 
+                                    text: 'Valores/referencia', bold: true 
+                                } 
+                            ],
+                            [ 'Value 1', 'Value 2', 'Value 3', 'Value 4' ],
+                            [ { text: 'Bold value', bold: true }, 'Val 2', 'Val 3', 'Val 4' ]
+                        ]
+                      }
+                    }
+                ],
+                styles: {
+                    header: {
+                        fontSize: 18,
+                        bold: true,
+                        alignment: 'center',
+                        color: 'blue'
+                    },
+                    subheader: {
+                        fontSize: 14,
+                        bold: true,
+                        alignment: 'center',
+                        color: 'blue'
+                    },
+                    tableExample: {
+                        margin: [0, 5, 0, 15]
+                    },
+                    tableHeader: {
+                        bold: true,
+                        fontSize: 13,
+                        color: 'black'
+                    }
+                }
+            };
+
+              pdfMake.createPdf(docDefinition2).open();
+              //console.log(docDefinition);
+            //pdfMake.createPdf(docDefinition).open();
+        }
 
     })
     .controller('ctrlCentros', function($scope, $state, comun) {
