@@ -105,8 +105,36 @@ router.put('/muestra/:id', login.checkOperario,function(req, res){
 //Se elimina una muestra medica
 router.delete('/muestra/:id', login.checkOperario, function(req, res, next){
 	Muestra.findOne({ _id: req.params.id}, function(err, muestra){
-		muestra.remove();
-		res.json({message: 'la muestra se elimino'});
+		if (muestra) {
+
+			Paciente.update(
+		        {_id: {$in: muestra._paciente}}, 
+		        {$pull: {muestras: muestra._id}}, 
+		        {multi: true}, function(){
+		        	Laboratorio.update(
+				        {_id: {$in: muestra._laboratorio}}, 
+				        {$pull: {muestras: muestra._id}}, 
+				        {multi: true}, function(){
+				        	Centro.update(
+						        {_id: {$in: muestra._centro}}, 
+						        {$pull: {muestras: muestra._id}}, 
+						        {multi: true}, function(){
+						        	muestra.remove();
+									res.json({message: 'la muestra se elimino'});
+
+						        }
+						    );
+
+				        }
+
+				    );
+
+		        }
+		    );
+
+		} else {
+			res.json({message: 'la muestra no existe'});
+		}
 	});
 });
 
@@ -115,8 +143,31 @@ router.delete('/muestras', login.checkOperario, function(req, res, next){
 	Muestra.remove({}, function(err){
 		if(err){
 			res.send(err);
+		} else { //funciones asincronas, por eso la concatenacion
+			
+			Paciente.update(
+		        {}, 
+		        {$set: {muestras: []}}, 
+		        {multi: true}, function(){ //despues de eliminar todas las muestras de paciente, prosigue
+		        	
+		        	Laboratorio.update(
+				        {}, 
+				        {$set: {muestras: []}}, 
+				        {multi: true}, function(){ //Despues de eliminar todas las muestras de Lab...
+				        	
+				        	Centro.update(
+						        {}, 
+						        {$set: {muestras: []}}, 
+						        {multi: true}, function(){ //Despues de eliminar todas las muestras de Cen..
+
+									res.json({message: 'Se eliminaron todas las muestras'});
+						        }
+						    );
+				        }
+				    );
+		        }
+		    );	
 		}
-		res.json({mensagee: 'las muestras se eliminaron'});
 	});
 });
 
