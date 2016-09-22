@@ -113,16 +113,17 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
         $scope.data = []; //laboratorios en formato [{key: nombreLaboratorio, y: numeroMuestras},...]
         $scope.desde = {};
         $scope.hasta = {};
+
         $scope.months = [
-            {nombre: "Enero", numero: 1},
-            {nombre: "Febrero", numero: 2},
-            {nombre: "Marzo", numero: 3},
-            {nombre: "Abril", numero: 4},
-            {nombre: "Mayo", numero: 5},
-            {nombre: "Junio", numero: 6},
-            {nombre: "Julio", numero: 7},
-            {nombre: "Agosto", numero: 8},
-            {nombre: "Septiembre", numero: 9},
+            {nombre: "Enero", numero: 01},
+            {nombre: "Febrero", numero: 02},
+            {nombre: "Marzo", numero: 03},
+            {nombre: "Abril", numero: 04},
+            {nombre: "Mayo", numero: 05},
+            {nombre: "Junio", numero: 06},
+            {nombre: "Julio", numero: 07},
+            {nombre: "Agosto", numero: 08},
+            {nombre: "Septiembre", numero: 09},
             {nombre: "Octubre", numero: 10},
             {nombre: "Noviembre", numero: 11},
             {nombre: "Diciembre", numero: 12},
@@ -169,14 +170,18 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
         };
 
         $scope.cargarData = function(){
-            for (var i = $scope.desde - 1 ; i <= $scope.hasta; i++) { //cada mes
-                for (var j = 0; j < $scope.meses[i].length; j++) { //cada laboratorio
+            var k = 0 //cada mes del arreglo
+            for (var i = $scope.desde - 1 ; i <= $scope.hasta - 1; i++) { //cada mes a ser impreso
+                for (var j = 0; j < $scope.meses[0].length; j++) { //cada laboratorio
                     $scope.data[j].values.push({
                         "x": i,
-                        "y": $scope.meses[i][j].muestras.length
+                        "y": $scope.meses[k][j].muestras.length
                     });
+                    
                 }
+                k++;
             }
+            console.log($scope.data);
         }
 
         $scope.options = {
