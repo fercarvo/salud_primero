@@ -144,7 +144,6 @@ router.delete('/muestras', login.checkOperario, function(req, res, next){
 		if(err){
 			res.send(err);
 		} else { //funciones asincronas, por eso la concatenacion
-			
 			Paciente.update(
 		        {}, 
 		        {$set: {muestras: []}}, 
