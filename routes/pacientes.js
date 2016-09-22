@@ -183,7 +183,7 @@ router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo O
 		clave: hash
 	});
 
-	var transporter = nodemailer.createTransport('smtps://saludprimero.2016%40gmail.com:salud2016@smtp.gmail.com');
+	var transporter = nodemailer.createTransport('smtps://saludprimero.2016%40gmail.com:2016salud@smtp.gmail.com');
 
     var mensaje  = "Ud ha sido agregado como paciente, su usuario es su correo y su clave temporal es: " + clave_temp;
   	

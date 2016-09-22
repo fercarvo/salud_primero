@@ -1,5 +1,5 @@
 
-angular.module('appPatient', ['ui.router'])
+angular.module('appPatient', ['ui.router', 'ngTable'])
 
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -84,6 +84,7 @@ angular.module('appPatient', ['ui.router'])
         comun.getDatos();
         $scope.datos = comun.datos;
         $scope.examenes = [];
+        $scope.actual = {};
 
         $http.get("/paciente/examenes")
             .then(function (response) {
@@ -94,6 +95,12 @@ angular.module('appPatient', ['ui.router'])
         $('.collapsible').collapsible({
             accordion : false
         });
+
+        $scope.verResultados = function(examen){
+            $('#modalRes').openModal();
+            $scope.actual = examen;
+            
+        }
 
         $scope.fecha = function(examen){
             var f = new Date(examen._muestra.fecha);
@@ -216,6 +223,7 @@ angular.module('appPatient', ['ui.router'])
 
         }
 
+        
     })
     .controller('ctrlCentros', function($scope, $state, comun, $sce) {
         comun.getCentros();
