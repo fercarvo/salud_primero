@@ -225,10 +225,14 @@ angular.module('appPatient', ['ui.router', 'ngTable', 'ui.grid', 'ui.grid.select
 
         
     })
-    .controller('ctrlCentros', function($scope, $state, comun) {
+    .controller('ctrlCentros', function($scope, $state, comun, $sce) {
         comun.getCentros();
         $scope.centros = comun.centros_med;
         $scope.actual = {};
+
+        $scope.setUrl = function(centro){
+            return $sce.trustAsResourceUrl(centro.coordenadas.latitud);
+        }
 
         $scope.procesar = function(actual) {
             $('#modalInfo').openModal();             

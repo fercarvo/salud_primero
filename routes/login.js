@@ -15,8 +15,8 @@ router.checkAdmin = function (req, res, next) {
 	Admin.findOne({ _id: req.session.user._id }, function (err, user) { //Solo Admins logoneados pueden usar este metodo
 		if (!user) {
 			console.log("usuario NO autorizado para usar este metodo");
-			next();
-			//return res.send({error: "SOLO ADMINS, usted no esta autorizado"});
+			//next();
+			return res.send({error: "SOLO ADMINS, usted no esta autorizado"});
 
 		} else {
 			console.log("usuario autorizado");
@@ -29,8 +29,8 @@ router.checkLaboratorista = function(req, res, next) {
 	Laboratorista.findOne({ _id: req.session.user._id }, function (err, user) { //
 		if (!user) {
 			console.log("usuario NO autorizado para usar este metodo");
-			next();
-			//return res.send({error: "SOLO LABORATORISTAS, usted no esta autorizado"});
+			//next();
+			return res.send({error: "SOLO LABORATORISTAS, usted no esta autorizado"});
 
 		} else {
 			console.log("usuario autorizado");
@@ -45,8 +45,8 @@ router.checkPaciente = function(req, res, next) {
 		//|| req.params.id!=req.session.user._id
 		) { //se valida que sea paciente y sea el mismo que pretende editar
 			console.log("usuario NO autorizado para usar este metodo");
-			//return res.send({error: "SOLO PACIENTES, usted no esta autorizado"});
-			next();
+			return res.send({error: "SOLO PACIENTES, usted no esta autorizado"});
+			//next();
 		} else {
 			console.log("usuario autorizado");
 			next();
@@ -58,8 +58,8 @@ router.checkOperario = function(req, res, next) {
 	Operario.findOne({ _id: req.session.user._id }, function (err, user) { //Solo Admins logoneados pueden usar este metodo
 		if (!user) {
 			console.log("usuario NO autorizado para usar este metodo");
-			next();
-			//return res.send({error: "SOLO OPERARIOS, usted no esta autorizado"});
+			//next();
+			return res.send({error: "SOLO OPERARIOS, usted no esta autorizado"});
 
 		} else {
 			console.log("usuario autorizado");

@@ -28,47 +28,45 @@
             <div class="modal gray" id="modalInfo">
                     <h5 class="text-center teal-text">{{actual.nombre}}</h5>
                     <div class="container-fluid row">
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                      <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-ng-repeat="i in [0,1,2]" data-slide-to="{{i}}"></li>
-                      </ol>
-                      <div class="carousel-inner" role="listbox">
+
+                    <div id="myCarousel" style="height:400px;" class="carousel slide" data-ride="carousel">
+
+                      <div class="carousel-inner" style="height:400px;" role="listbox">
                         <div class="item active">
-                            <img class="img" src="{{actual.portada}}" alt="portada">
+                            <img class="img" style="height:400px;" src="{{actual.portada}}" alt="portada">
                         </div>
-                        <div class="item" ng-repeat="foto in actual.fotos">
-                          <img src="{{foto.ruta}}" alt="carrusel">
+                        <div class="item"  ng-repeat="foto in actual.fotos">
+                          <img src="{{foto.ruta}}" style="height:400px;" alt="carrusel">
                         </div>
                       </div>
                       
-                      <a class="carousel-control sgt" href="#myCarousel" role="button" data-slide="prev">
+                      <a class="carousel-control sgt" style="left:1%;" href="#myCarousel" role="button" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                       </a>
-                      <a class="carousel-control ant" href="#myCarousel" role="button" data-slide="next">
+                      <a class="carousel-control ant" style="left: 83%" href="#myCarousel" role="button" data-slide="next">
                         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                       </a>
-                    </div>  
+                    </div>
+
                     </div>
                                         
                     <div class="container-fluid row">
                       <div class="panel col s12 m6">
-                        <div class="card">
-                          <div class="panel-body">
-                          <p class="text-center">{{actual.ciudad}}</p>
-                          <p class="text-center">{{actual.direccion}}</p>
-                          <p class="text-center">{{actual.descripcion}}</p>
+                        <div class="card" >
+                          <div class="panel-body" style="height:286px;width:100%;border:0">
+                          <p class="text-center">Ciudad: {{actual.ciudad}}</p>
+                          <p class="text-center">Direccion: {{actual.direccion}}</p>
+                          <p class="text-center">Descripcion:  {{actual.descripcion}}</p>
                         </div>  
                         </div>
                       </div>
                       <div class="panel col s12 m6">
                       <div class="card">
                         <div class="panel-body">
-                          <p class="text-center">{{actual.ciudad}}</p>
-                          <p class="text-center">{{actual.direccion}}</p>
-                          <p class="text-center">{{actual.descripcion}}</p>
-                        </div>  
+                          <iframe src="{{setUrl(actual)}}" frameborder="0" style="height:250px;width:100%;border:0" allowfullscreen></iframe>
+                        </div> 
                       </div>
                         
                       </div>  
