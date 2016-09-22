@@ -148,6 +148,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
 
         
         $scope.cargarFecha = function(){
+            $scope.data = []; //para que no se monte la data
             $http.get("/laboratorios/muestras/2/2016,"+$scope.desde+",01/2016,"+$scope.hasta+",01")
                 .then(function (response) {
                     $scope.meses = response.data;
@@ -182,7 +183,6 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
                 }
                 k++;
             }
-            console.log($scope.data);
         }
 
         $scope.options = {
