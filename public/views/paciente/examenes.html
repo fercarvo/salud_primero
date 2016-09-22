@@ -79,10 +79,15 @@
             
   </table>  
   </div>
-  <div id="modalRes" class="modal gray">
-  <div class="container-fluid">
+  <div id="modalRes" class="modal gray" style="margin-top:-20px">
+  <div class="container-fluid" style="padding-top:30px">
+    <div class="row">
+      <h6 class="text-center teal-text col s12 m9">{{actual.nombre | uppercase}}</h6>
+      <h6 ng-click="pdf(actual)" class="text-center teal-text col s12 m3"><span class="text-center teal-text col s12 m3 glyphicon glyphicon-download-alt" ng-click="pdf(actual)"></span>Descargar</h6>
+    </div>
     
-    <table class="table table-striped table-bordered">
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
         <thead>
           <tr>
             <th class="text-center">Parámetro</th>
@@ -100,7 +105,9 @@
                 <td class="text-center"> {{ resultado.valores_referencia }} </td>
             </tr>
         </tbody>
-      </table>
+      </table>  
+    </div>
+    
   </div>
 </div>
   
