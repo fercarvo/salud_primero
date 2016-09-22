@@ -57,7 +57,6 @@
                 <tr>
                   <th>Tipo</th>
                   <th>Código de Barras</th>
-                  <th>Recibido</th>
                   <th>Fecha</th>
                   <th>Editar</th>
                   <th>Delete</th>
@@ -67,7 +66,6 @@
                   <tr ng-repeat="muestra in muestras | filter:busqueda">
                       <td class="tipo"> {{ muestra.tipo }} </td>
                       <td class="cod_barras"> {{ muestra.cod_barras }} </td>
-                      <td class="recibido"> {{ muestra.recibido }} </td>
                       <td class="fecha"> {{ muestra.fecha | date:'MM/dd/yyyy'}} </td>
 
                       <td ><button type="button" style="border:none;background:none" class="small material-icons" ng-click="editarMuestra(muestra)">mode_edit</button></td>
