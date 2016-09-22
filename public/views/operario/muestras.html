@@ -4,17 +4,19 @@
     <li>
       <div class="collapsible-header"><i class="material-icons">add</i>Crear Muestra</div>
       <div class="collapsible-body" style="padding-left:20px;padding-right:20px">
-        <form> 
+        <form ng-submit="agregarMuestra(nuevo_muestra)"> 
               <div class="modal-body">
 
                   <div class="form-group">
-                    Tipo de muestra <select class="browser-default" ng-options="tipo.name for tipo in tipos" ng-model="nuevo_muestra.tipo" ng-change="hasChangedTipo()">                      
+                    Tipo de muestra <select class="browser-default" required ng-options="tipo.name for tipo in tipos" ng-model="nuevo_muestra.tipo" ng-change="hasChangedTipo()">
+                    <option></option>                      
                     </select>
                   </div>
 
                   <div class="form-group">
-                    Seleccione un examen <select class="browser-default" ng-options="examen for examen in nuevo_muestra.tipo.examenes" ng-change="hasChangedExamen()" ng-model="examen">            
+                    Seleccione un examen <select class="browser-default" required ng-options="examen for examen in nuevo_muestra.tipo.examenes" ng-change="hasChangedExamen()" ng-model="examen">            
                     </select>
+                    <option></option>
                   </div>
 
                   <div class="form-group">
@@ -28,21 +30,21 @@
                   </div>
                                     
                   <div class="form-group">
-                    Paciente <input style="border:none" type="text" class="form-control" value="{{nuevo_muestra.paciente.nombre}} {{nuevo_muestra.paciente.apellido}}" readonly ng-click="modalPaciente()">
+                    Paciente <input style="border:none" type="text" class="form-control" value="{{nuevo_muestra.paciente.nombre}} {{nuevo_muestra.paciente.apellido}}" readonly required ng-click="modalPaciente()">
                   </div>
 
                   <div class="form-group">
-                    Laboratorio <input style="border:none" type="text" class="form-control" value="{{nuevo_muestra.laboratorio.nombre}}" readonly ng-click="modalLaboratorio()">
+                    Laboratorio <input style="border:none" type="text" class="form-control" value="{{nuevo_muestra.laboratorio.nombre}}" readonly required ng-click="modalLaboratorio()">
                   </div>
 
                   <div class="form-group">
-                    Centro Medico <input style="border:none" type="text" class="form-control" value="{{nuevo_muestra.centro.nombre}}" readonly ng-click="modalCentroMed()">
+                    Centro Medico <input style="border:none" type="text" class="form-control" value="{{nuevo_muestra.centro.nombre}}" readonly required ng-click="modalCentroMed()">
                   </div>
 
               </div>
               <div class="modal-footer row">
                 <button type="reset" class="btn btn-default col s4 right" ng-click="cancelarMuestra()">Cancelar</button>
-                <button type="reset" class="btn btn-primary col s4 " ng-click="agregarMuestra(nuevo_muestra)">Crear</button>
+                <button type="submit" class="btn btn-primary col s4" >Crear</button>
               </div>
             </form>
       </div>
@@ -82,7 +84,7 @@
 <div id="modalEditarMuestra" class="modal" style="padding-left:20px;padding-right:20px;padding-top:10px;margin-top:-10px">
     <!-- Modal de editar muestra-->
     <div class="container-fluid center">
-    <h5 class="text-center teal-text">Editar Muestra</h5>
+    <h5 class="text-center teal-text">Editar Muestra: {{editar_muestra.cod_barras}}</h5>
     <div>
       <form> 
         <div class="form-group">
