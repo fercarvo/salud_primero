@@ -97,8 +97,10 @@ angular.module('appMuestras',['ui.router'])
         $scope.eliminarResultado = function(examen, resultado){
             $http.delete("/resultado/"+ resultado._id)
                 .success(function (response) {
-                    examen.resultados.splice(resultado, 1);
+                    //$scope.examenes[$scope.examenes.indexOf(examen)].resultados.splice(resultado, 1);
+                    examen.resultados.splice(examen.resultados.indexOf(resultado), 1);
                     Materialize.toast(response.message, 3000, 'rounded teal');
+                    $scope.$apply(); 
                 });
         }
 

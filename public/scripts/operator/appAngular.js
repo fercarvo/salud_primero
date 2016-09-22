@@ -313,27 +313,22 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
                 centro: $scope.nuevo_muestra.centro._id
 
             }).success(function(response){
-                console.log("response de la muestra");
-                console.log(response);
+
                 //Se recorren todos los examenes y se crea cada uno
                 angular.forEach($scope.examenes, function(obj){
-                    console.log("en el for");
-                    console.log(obj);
+
                     //Metodo que crea cada examen
                     $http.post("/examen", {
                         muestra: response._id,
                         nombre: obj.examen
                     }).success( function(response2){
-                        console.log("response de post examen")
-                        console.log(response2);
                         Materialize.toast("se creo examen de: " + response2.nombre, 3000, 'rounded teal');
                     } );
                 });
 
                 $scope.muestras.push(response);
-                Materialize.toast("Se Creó la muestra" + response.cod_barras, 3000, 'rounded teal');
+                Materialize.toast("Se Creó la muestra: " + response.cod_barras, 5000, 'rounded teal');
                 $scope.nuevo_muestra = {};
-                //$scope.$apply();  
 
             });
             $state.reload();

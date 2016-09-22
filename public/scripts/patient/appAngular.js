@@ -100,24 +100,46 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
             return f.toDateString();
         }
 
+        $scope.cargarResultados = function(examen){
+            var body = [
+                [ 
+                    { 
+                        text: 'Parametro', style: 'subItem' 
+                    }, { 
+                        text: 'Unidades', style: 'subItem' 
+                    }, { 
+                        text: 'Resultado', style: 'subItem' 
+                    }, { 
+                        text: 'Valores/referencia', style: 'subItem' 
+                    } 
+                ]
+            ]
+
+            angular.forEach(examen.resultados, function(resultado){
+                body.push(
+                    [
+                        {text: resultado.parametro},
+                        {text: resultado.unidades},
+                        {text: resultado.resultado},
+                        {text: resultado.valores_referencia}
+                    ]
+                );
+            });
+
+            return body;
+        }
+
         $scope.pdf = function(examen){
-            console.log(examen);
-             //var docDefinition = { content: examen.nombre};
-             var docDefinition2 = { 
+             var examen = {
                 content: [
-                    {
-                        text: "Salud Primero", 
-                        style: 'header'
-                    },
-                    {
-                        text: "Reporte de examen medico: " + " " + examen.nombre + "\n\n", 
-                        style: 'subheader'
-                    },
+
+                    {  text: "Salud Primero", style: 'header' },
+                    {  text: "Reporte de examen medico: " + " " + examen.nombre + "\n\n", style: 'subheader' },
                     {
                         text: [
                             {
                                 text: "Paciente: ", 
-                                bold: true
+                                style: 'subItem'
                             }, $scope.datos.nombre + " " + $scope.datos.apellido
                         ]
                     },
@@ -125,34 +147,24 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
                         text: [
                             {
                                 text: "Fecha: ", 
-                                bold: true
+                                style: 'subItem'
                             }, {
                                 text: $scope.fecha(examen) + "\n\n"
                             }
-
                         ]
                     },
                     {
-                      table: {
-                        headerRows: 1,
-                        widths: [ '*', '*', '*', '*' ],
-
-                        body: [
-                            [ 
-                                { 
-                                    text: 'Parametro', bold: true 
-                                }, { 
-                                    text: 'Unidades', bold: true 
-                                }, { 
-                                    text: 'Resultado', bold: true 
-                                }, { 
-                                    text: 'Valores/referencia', bold: true 
-                                } 
-                            ],
-                            [ 'Value 1', 'Value 2', 'Value 3', 'Value 4' ],
-                            [ { text: 'Bold value', bold: true }, 'Val 2', 'Val 3', 'Val 4' ]
+                        columns : [
+                            { width: '*', text: ''},
+                            {
+                                width: 'auto',
+                                table: {
+                                    widths: [ '*', '*', '*', '*' ],
+                                    body: $scope.cargarResultados(examen)
+                                  }   
+                            },
+                            { width: '*', text: ''}
                         ]
-                      }
                     }
                 ],
                 styles: {
@@ -168,8 +180,9 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
                         alignment: 'center',
                         color: 'blue'
                     },
-                    tableExample: {
-                        margin: [0, 5, 0, 15]
+                    subItem: {
+                        bold: true,
+                        color: 'blue'
                     },
                     tableHeader: {
                         bold: true,
@@ -179,9 +192,8 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
                 }
             };
 
-              pdfMake.createPdf(docDefinition2).open();
-              //console.log(docDefinition);
-            //pdfMake.createPdf(docDefinition).open();
+            pdfMake.createPdf(examen).open();
+
         }
 
     })
