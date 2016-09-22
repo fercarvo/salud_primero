@@ -10,7 +10,7 @@
                 <tr>
                   <th class="text-center">Tipo</th>
                   <th class="text-center">Cod_barras</th>
-                  <th class="text-center">Estado</th>
+                  <th class="text-center">Recibida</th>
                   <th class="text-center">Observaciones</th>
                   <th class="text-center">Fecha</th>
                   <th class="text-center">Exámenes</th>
@@ -22,13 +22,21 @@
                       <td class="text-center" style="vertical-align:middle;"> {{ muestra.cod_barras }} </td>
 
                       <td style="text-align:center;">
-                        <input type="checkbox" name="recibida" value="checked" />
+                        <div class="switch">
+                          <label>
+                            No
+                            <input type="checkbox">
+                            <span class="lever"></span>
+                            Sí
+                          </label>
+                        </div>
                       </td>
 
-                      <td class="text-center" style="vertical-align:middle;"><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="obs(muestra)">comment</button></td>  
+                      <td class="text-center" style="vertical-align:middle;"><span style="vertical-align:middle;" class="material-icons" ng-click="obs(muestra)">comment</button></td>  
 
                       <td class="text-center" style="vertical-align:middle;"> {{ muestra.fecha | date:'MM/dd/yyyy'}} </td>
-                      <td class="text-center" style="vertical-align:middle;"><button type="button" style="border:none;background:none" class="small material-icons" data-toggle="modal" ng-click="cargarExamenes(muestra)">view_list</button></td>
+
+                      <td class="text-center" style="vertical-align:middle;"><span style="vertical-align:middle;" class="material-icons" ng-click="cargarExamenes(muestra)">view_list</span></td>
                   </tr>
               </tbody>
             </table>

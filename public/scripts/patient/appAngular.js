@@ -228,7 +228,11 @@ angular.module('appPatient', ['ui.router', 'ui.grid', 'ui.grid.selection', 'ui.g
             $scope.actual = comun.actual;          
         }
 
-        $('.carousel.carousel-slider').carousel({full_width: true});
+        $(document).ready(function(){
+            $('.carousel').carousel();
+        });
+
+        //$('.carousel.carousel-slider').carousel({full_width: true});
               
 
     })

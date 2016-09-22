@@ -13,9 +13,7 @@
                     {{centro.nombre}}
                   </div>
                   <img src="{{centro.portada}}" alt="imagen"> 
-                  
-                  
-                  
+    
                 </div>  
                 <div class="lado atras panel panel-default">
                     <div class="panel-body horarios text-center">
@@ -29,39 +27,50 @@
             </div>
             <div class="modal gray" id="modalInfo">
                     <h5 class="text-center teal-text">{{actual.nombre}}</h5>
-                    <div class="row">
-                      <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                          <li data-target="#myCarousel" data-ng-repeat="i in [0,1,2]" data-slide-to="{{i}}"></li>
-                        </ol>
-                        <div class="carousel-inner" role="listbox">
-                          <div class="item active">
-                              <img class="img-responsive" src="{{actual.portada}}" alt="portada" width="460" height="345">
-                          </div>
-                          <div class="item" ng-repeat="foto in actual.fotos">
-                            <img src="{{foto.ruta}}" alt="carrusel">
-                          </div>
+                    <div class="container-fluid row">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                      <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-ng-repeat="i in [0,1,2]" data-slide-to="{{i}}"></li>
+                      </ol>
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img class="img" src="{{actual.portada}}" alt="portada">
                         </div>
-
-                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                          <span class="sr-only">Next</span>
-                        </a>
+                        <div class="item" ng-repeat="foto in actual.fotos">
+                          <img src="{{foto.ruta}}" alt="carrusel">
+                        </div>
                       </div>
-
+                      
+                      <a class="carousel-control sgt" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control ant" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </div>  
                     </div>
-                    
-                    <div class="row">
-                      <div class="panel">
+                                        
+                    <div class="container-fluid row">
+                      <div class="panel col s12 m6">
+                        <div class="card">
+                          <div class="panel-body">
+                          <p class="text-center">{{actual.ciudad}}</p>
+                          <p class="text-center">{{actual.direccion}}</p>
+                          <p class="text-center">{{actual.descripcion}}</p>
+                        </div>  
+                        </div>
+                      </div>
+                      <div class="panel col s12 m6">
+                      <div class="card">
                         <div class="panel-body">
                           <p class="text-center">{{actual.ciudad}}</p>
                           <p class="text-center">{{actual.direccion}}</p>
                           <p class="text-center">{{actual.descripcion}}</p>
-                        </div>
+                        </div>  
+                      </div>
+                        
                       </div>  
                     </div> 
                     
@@ -72,3 +81,7 @@
     </div>
 
 </div>
+
+
+
+  
