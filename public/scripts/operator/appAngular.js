@@ -132,6 +132,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
         //funcion que carga los laboratorios de la BDD
         /*
         $http.get("/laboratorios/muestras/2/"+"2016,07,01"+"/"+"2016,10,03")
+
             .then(function (response) {
                 $scope.meses = response.data;
                 $http.get("/laboratorios")
