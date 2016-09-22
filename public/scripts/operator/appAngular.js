@@ -113,7 +113,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
         $scope.data = []; //laboratorios en formato [{key: nombreLaboratorio, y: numeroMuestras},...]
 
         //funcion que carga los laboratorios de la BDD
-        $http.get("/laboratorios/muestras/2/"+"2016,01,01"+"/"+"2016,09,03")
+        $http.get("/laboratorios/muestras/2/"+"2016,01,01"+"/"+"2016,04,03")
             .then(function (response) {
                 $scope.meses = response.data;
                 $http.get("/laboratorios")
