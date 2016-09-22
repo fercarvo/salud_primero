@@ -84,6 +84,7 @@ angular.module('appPatient', ['ui.router', 'ngTable', 'ui.grid', 'ui.grid.select
         comun.getDatos();
         $scope.datos = comun.datos;
         $scope.examenes = [];
+        $scope.actual = {};
 
         $http.get("/paciente/examenes")
             .then(function (response) {
@@ -94,6 +95,12 @@ angular.module('appPatient', ['ui.router', 'ngTable', 'ui.grid', 'ui.grid.select
         $('.collapsible').collapsible({
             accordion : false
         });
+
+        $scope.verResultados = function(examen){
+            $('#modalRes').openModal();
+            $scope.actual = examen;
+            
+        }
 
         $scope.fecha = function(examen){
             var f = new Date(examen._muestra.fecha);
