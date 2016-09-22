@@ -18,7 +18,6 @@
               <th class="text-center">Unidades</th>
               <th class="text-center">Resultado</th>
               <th class="text-center">Valores/Referencia</th>
-              <th class="text-center">Editar</th>
               <th class="text-center">Eliminar</th>
             </tr>
           </thead>
@@ -28,8 +27,6 @@
                   <td class="text-center"> {{ resultado.unidades }} </td>
                   <td class="text-center"> {{ resultado.resultado }} </td>
                   <td class="text-center"> {{ resultado.valores_referencia }} </td>
-
-                  <td class="text-center"><button type="button" style="border:none;background:none" class="small material-icons" href="#modal1" ng-click="editarResultado(resultado)">mode_edit</button></td>
                   <td class="text-center eliminar"><button type="button" style="border:none;background:none" class="small material-icons" ng-click="eliminarResultado(examen, resultado)">delete</button></td>
               </tr>
           </tbody>
@@ -42,7 +39,7 @@
 
 
 <div id="modalCrearResultado" class="modal" style="padding-left:20px;padding-right:20px;padding-top:10px;margin-top:-10px">
-  <form > 
+  <form ng-submit="agregarResultado()"> 
     <div class="modal-body">
         <div class="row">
           <div class="input-field col s12">
@@ -53,7 +50,7 @@
 
         <div class="row">
           <div class="input-field col s12">
-            <input id="unidades" type="text" class="validate" ng-model="nuevo_resultado.unidades" required>
+            <input id="unidades" type="text" class="validate" ng-model="nuevo_resultado.unidades">
             <label for="unidades">Unidades</label>
           </div>
         </div>
@@ -67,13 +64,13 @@
 
         <div class="row">
           <div class="input-field col s12">
-            <input id="valores_referencia" type="text" class="validate" ng-model="nuevo_resultado.valores_referencia" required>
+            <input id="valores_referencia" type="text" class="validate" ng-model="nuevo_resultado.valores_referencia">
             <label for="valores_referencia">Valores de Referencia</label>
           </div>
         </div>
     </div>
     <div class="row modal-footer">
-          <button type="submit" class="btn btn-primary col s5 left" ng-click="agregarResultado()">Crear</button>
+          <button type="submit" class="btn btn-primary col s5 left">Crear</button>
           <button type="reset" class="btn btn-default col s5 right" ng-click="cancelarRes()">Cancelar</button>    
     </div>
   </form>

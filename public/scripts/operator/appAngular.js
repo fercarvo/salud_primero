@@ -128,24 +128,6 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
             {nombre: "Noviembre", numero: 11},
             {nombre: "Diciembre", numero: 12},
         ];
-
-        //funcion que carga los laboratorios de la BDD
-        /*
-        $http.get("/laboratorios/muestras/2/"+"2016,07,01"+"/"+"2016,10,03")
-
-            .then(function (response) {
-                $scope.meses = response.data;
-                $http.get("/laboratorios")
-                    .then(function (response) {
-                        $scope.laboratorios = response.data;
-                        $scope.cargarLaboratorios();
-                        $scope.cargarData();
-                    }
-                );
-            }
-        );
-        */
-
         
         $scope.cargarFecha = function(){
             $scope.data = []; //para que no se monte la data
@@ -283,7 +265,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
                 examenes : ["coprocultivo","coproparasitario"]
             }
         ];
-
+        
         $scope.hasChangedExamen = function(){
             $scope.examenes.push({examen: $scope.examen});
             $scope.$apply();
@@ -294,6 +276,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
             $scope.$apply();
         }
 
+        //Funcion utilizada para darle formato al chip
         $scope.newChip = function(chip){
             return {examen: chip};
         }

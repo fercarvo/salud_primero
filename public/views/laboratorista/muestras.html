@@ -22,14 +22,8 @@
                       <td class="text-center" style="vertical-align:middle;"> {{ muestra.cod_barras }} </td>
 
                       <td style="text-align:center;">
-                        <div class="switch">
-                          <label>
-                            No
-                            <input type="checkbox">
-                            <span class="lever"></span>
-                            Sí
-                          </label>
-                        </div>
+                            <input ng-checked="cargarEstado(muestra)" ng-model="muestra.model" ng-disabled="muestra.model" ng-click="cambiarEstado(muestra)" type="checkbox" id="{{muestra._id}}" />
+                            <label for="{{muestra._id}}">En proceso </label>
                       </td>
 
                       <td class="text-center" style="vertical-align:middle;"><span style="vertical-align:middle;" class="material-icons" ng-click="obs(muestra)">comment</button></td>  

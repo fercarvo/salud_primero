@@ -195,7 +195,7 @@ router.put('/muestra/:id/observacion', login.checkOperario, function(req, res){
 	});
 });
 
-//metodo que cambia el estado de una muestra a "en proceso"
+//metodo que cambia el estado de una muestra a "registrada"
 router.put('/muestra/:id/estado/registrada', login.checkOperario, function(req, res){
 	Muestra.findOne({_id: req.params.id}, function(err, muestra){
 		muestra.estado = "registrada";

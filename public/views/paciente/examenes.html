@@ -11,11 +11,14 @@
 
             <div class="collapsible-header">
                 <div class="container row fila">
-                    <div class="col s6">
+                    <div class="col s3">
                         <i class="material-icons">label</i>Examen medico: {{examen.nombre}}    
                     </div>
-                    <div class="col s6">
+                    <div class="col s3">
                         Fecha: {{examen._muestra.fecha | date: 'dd-MM-yyyy'}}
+                    </div>
+                    <div class="col s3">
+                        Estado: {{examen._muestra.estado}}
                     </div>
                 </div>
             </div>

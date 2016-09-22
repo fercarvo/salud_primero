@@ -1,4 +1,4 @@
-angular.module('appMuestras',['ui.router'])
+angular.module('appMuestras',['ui.router', 'ngMaterial'])
     .config(function($stateProvider, $urlRouterProvider){
         $stateProvider
             .state('muestras',{
@@ -25,12 +25,44 @@ angular.module('appMuestras',['ui.router'])
 
         $scope.muestras = {};
         $scope.muestra = {};
+        //$scope.check = true;
 
         $http.get("/muestras")
             .then(function (response) {
                 $scope.muestras = response.data;
             }
         );
+
+        //Funcion que checkea el icono si este es distinto de registrado
+        $scope.cargarEstado = function(muestra){
+            if (muestra.estado == "registrada") {
+                return false;    
+            } else {
+                muestra.model = true;
+                return true;
+            }
+        }
+
+        //Funcion que bloquea el boton si su estado es distinto de registrado
+        $scope.bloquearCheck = function(muestra){
+            if (muestra.estado == "registrada") {
+                return false;    
+            } else {
+                return true;
+            }
+        }
+
+        //Funcion que cambia el estado de la muestra en la BDD 
+        $scope.cambiarEstado = function(muestra){
+            if (muestra.estado == "registrada") {
+                $http.put("/muestra/"+ muestra._id +"/estado/proceso", {})
+                .success(function(response){
+                    Materialize.toast(response.message, 3000, 'rounded teal');
+                    $scope.muestra.observacion = $scope.observacion;
+                    //$scope.apply();                   
+                });    
+            }
+        }   
 
         $scope.cargarExamenes = function(muestra) {
             comun.muestra = muestra;
@@ -102,10 +134,14 @@ angular.module('appMuestras',['ui.router'])
                 valores_referencia: $scope.nuevo_resultado.valores_referencia
 
             }).success(function(response){
-                $scope.examen.resultados.push(response);
-                Materialize.toast('Se creo un nuevo resultado satisfactoriamente', 3000, 'rounded teal');
-                $scope.nuevo_resultado = {};
-                $scope.$apply();                    
+                $http.put("/muestra/"+ response[0]._examen._muestra +"/estado/finalizado", {})
+                .success(function(response2){
+                    $scope.examen.resultados.push(response[0]);
+                    Materialize.toast('Se creo un nuevo resultado satisfactoriamente', 3000, 'rounded teal');
+                    $scope.nuevo_resultado = {};
+                    $scope.$apply();
+                });
+                       
             });
             $('#modalCrearResultado').closeModal();
         };
@@ -113,7 +149,6 @@ angular.module('appMuestras',['ui.router'])
         $scope.eliminarResultado = function(examen, resultado){
             $http.delete("/resultado/"+ resultado._id)
                 .success(function (response) {
-                    //$scope.examenes[$scope.examenes.indexOf(examen)].resultados.splice(resultado, 1);
                     examen.resultados.splice(examen.resultados.indexOf(resultado), 1);
                     Materialize.toast(response.message, 3000, 'rounded teal');
                     $scope.$apply(); 

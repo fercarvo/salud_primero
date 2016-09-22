@@ -48,7 +48,14 @@ router.post('/resultado', login.checkLaboratorista, function(req, res, next){
 				if (err) {
 					return next(err);
 				} else {
-					res.json(doc);
+					Resultado.find({_id: doc._id})
+						.populate('_examen')
+						.exec(function(err, newDoc){
+							if(err){
+								return next(err);
+							}
+							res.json(newDoc);
+						});
 				}
 			});
 		}		
