@@ -6,7 +6,7 @@ var login = require('../routes/login.js');
 module.exports = router;
 
 //Get
-router.get('/laboratorios', login.checkAdmin, function(req, res, next){
+router.get('/laboratorios', function(req, res, next){
 	Laboratorio.find(function(err, laboratorio){
 		if(err){
 			return next(err);
