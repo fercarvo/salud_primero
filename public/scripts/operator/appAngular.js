@@ -1,4 +1,4 @@
-angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'ngMaterial'])
+angular.module('appOperator',['ui.router', 'nvd3', 'ngMaterial'])
 	.config(function($stateProvider, $urlRouterProvider){
 		$stateProvider
 			.state('pacientes',{
