@@ -6,7 +6,7 @@ var login = require('../routes/login.js');
 module.exports = router;
 
 //Get
-router.get('/laboratorios', function(req, res, next){
+router.get('/laboratorios', login.checkAdmin, function(req, res, next){
 	Laboratorio.find(function(err, laboratorio){
 		if(err){
 			return next(err);
@@ -34,9 +34,9 @@ router.get('/Laboratorios/muestras/2/:desde/:hasta', login.checkOperario, functi
 
 	var resultados = [];
 
-	console.log(desde);
+	//console.log(desde);
 	//console.log(desde.getMonth());
-	console.log(hasta);
+	//console.log(hasta);
 	//console.log(hasta.getMonth());
 	for (var i = desde.getMonth() + 1 ; i <= hasta.getMonth() + 1; i++) {
 		console.log(i);
@@ -55,18 +55,11 @@ router.get('/Laboratorios/muestras/2/:desde/:hasta', login.checkOperario, functi
 			}
 		});		
 	}
-
-	console.log(resultados);
-
+	//console.log(resultados);
 });
 
-
-
-
-
-
 //Post
-router.post('/laboratorio', function(req, res, next){
+router.post('/laboratorio', login.checkAdmin, function(req, res, next){
 	var lab = new Laboratorio({
 		nombre: req.body.nombre,
 		direccion: req.body.direccion
@@ -83,7 +76,7 @@ router.post('/laboratorio', function(req, res, next){
 
 
 //Put
-router.put('/laboratorio/:id', function(req, res){
+router.put('/laboratorio/:id', login.checkAdmin, function(req, res){
 	Laboratorio.findById(req.params.id, function(err, laboratorio){
 		laboratorio.nombre = req.body.nombre;
 		laboratorio.direccion = req.body.direccion;
@@ -98,7 +91,7 @@ router.put('/laboratorio/:id', function(req, res){
 });
 
 //Delete
-router.delete('/laboratorio/:id', function(req, res, next){
+router.delete('/laboratorio/:id', login.checkAdmin, function(req, res, next){
 	Laboratorio.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			res.send(err);
@@ -107,7 +100,7 @@ router.delete('/laboratorio/:id', function(req, res, next){
 	});
 });
 
-router.delete('/laboratorios', function(req, res, next){
+router.delete('/laboratorios', login.checkAdmin, function(req, res, next){
 	Laboratorio.remove({}, function(err){
 		if(err){
 			res.send(err);

@@ -59,7 +59,7 @@ router.checkOperario = function(req, res, next) {
 		if (!user) {
 			console.log("usuario NO autorizado para usar este metodo");
 			next();
-			//return res.send({error: "SOLO ADMINS, usted no esta autorizado"});
+			//return res.send({error: "SOLO OPERARIOS, usted no esta autorizado"});
 
 		} else {
 			console.log("usuario autorizado");
@@ -181,9 +181,6 @@ router.get('/islogin', function(req, res) {
     return res.json({message: "usted no esta logoneado"});
   }
 });
-
-
-
 
 
 router.get('/check/admin', function(req, res, next) {

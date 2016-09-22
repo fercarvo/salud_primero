@@ -11,7 +11,7 @@ module.exports = router;
 
 
 //obtiene todas las muestras del sistema
-router.get('/muestras', login.checkLaboratorista, function(req, res, next){
+router.get('/muestras', function(req, res, next){
 	Muestra.find()
 	.populate('_paciente')
 	.populate('_laboratorio')
@@ -35,7 +35,7 @@ router.get('/muestras/:desde/:hasta', function(req, res, next){
 	});
 });
 
-router.get('/muestra/:id', login.checkLaboratorista, function(req, res, next){
+router.get('/muestra/:id', function(req, res, next){
 	Muestra.find({_id: req.params.id})
 	.populate('_paciente')
 	.populate('_laboratorio')
@@ -86,7 +86,7 @@ router.post('/muestra', login.checkOperario, function(req, res, next){
 });
 
 //Se actualiza una mueestra medica
-router.put('/muestra/:id', login.checkOperario,function(req, res){
+router.put('/muestra/:id', login.checkOperario, function(req, res){
 	Muestra.findOne({ _id: req.params.id}, function(err, muestra){
 		muestra._paciente = req.body.paciente;
 		muestra._laboratorio= req.body.laboratorio;
@@ -183,7 +183,7 @@ router.put('/muestra/:id/fecha', function(req, res){
 });
 
 //metodo que cambia el estado de una muestra a "en proceso"
-router.put('/muestra/:id/observacion', login.checkOperario, function(req, res){
+router.put('/muestra/:id/observacion', login.checkLaboratorista, function(req, res){
 	Muestra.findOne({_id: req.params.id}, function(err, muestra){
 		muestra.observacion = req.body.observacion;
 		muestra.save(function(err){
@@ -196,7 +196,7 @@ router.put('/muestra/:id/observacion', login.checkOperario, function(req, res){
 });
 
 //metodo que cambia el estado de una muestra a "registrada"
-router.put('/muestra/:id/estado/registrada', login.checkOperario, function(req, res){
+router.put('/muestra/:id/estado/registrada', function(req, res){
 	Muestra.findOne({_id: req.params.id}, function(err, muestra){
 		muestra.estado = "registrada";
 		muestra.save(function(err){
@@ -209,7 +209,7 @@ router.put('/muestra/:id/estado/registrada', login.checkOperario, function(req, 
 });
 
 //metodo que cambia el estado de una muestra a "en proceso"
-router.put('/muestra/:id/estado/proceso', login.checkOperario, function(req, res){
+router.put('/muestra/:id/estado/proceso', function(req, res){
 	Muestra.findOne({_id: req.params.id}, function(err, muestra){
 		muestra.estado = "en proceso";
 		muestra.save(function(err){
@@ -222,7 +222,7 @@ router.put('/muestra/:id/estado/proceso', login.checkOperario, function(req, res
 });
 
 //metodo que cambia el estado de una muestra a "finalizado"
-router.put('/muestra/:id/estado/finalizado', login.checkOperario, function(req, res){
+router.put('/muestra/:id/estado/finalizado', function(req, res){
 	Muestra.findOne({_id: req.params.id}, function(err, muestra){
 		muestra.estado = "finalizado";
 		muestra.save(function(err){

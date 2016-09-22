@@ -96,7 +96,7 @@ router.put('/paciente/datos', login.checkPaciente, function(req, res){
 /*
 	API REST metodo, obtiene todos los pacientes
 */
-router.get('/pacientes', login.checkAdmin, function(req, res, next){ 
+router.get('/pacientes', login.checkOperario, function(req, res, next){ 
 	Paciente.find(function(err, pacientes){
 		if(err){
 			return next(err);
@@ -214,7 +214,7 @@ router.post('/paciente', login.checkOperario, function(req, res, next){ //Solo O
 	API REST metodo, actualiza un paciente
 */
 
-router.put('/paciente/:id', login.checkPaciente, function(req, res){ //Solo USUARIOS logoneados pueden usar este metodo para si mismos
+router.put('/paciente/:id', login.checkAdmin, function(req, res){ //Solo USUARIOS logoneados pueden usar este metodo para si mismos
 
 	Paciente.findById(req.params.id, function(err, paciente){
 		paciente.nombre = req.body.nombre;
@@ -238,7 +238,7 @@ router.put('/paciente/:id', login.checkPaciente, function(req, res){ //Solo USUA
 /*
 	API REST metodo, elimina un paciente
 */
-router.delete('/paciente/:id', login.checkAdmin, function(req, res){ //Solo Admins logoneados pueden usar este metodo
+router.delete('/paciente/:id', login.checkOperario, function(req, res){ //Solo Admins logoneados pueden usar este metodo
 	Paciente.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			res.send(err);

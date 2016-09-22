@@ -14,8 +14,6 @@ router.get('/operario', login.checkOperario, function(req, res, next) {
   	});
 });
 
-
-
 router.get('/operarios', login.checkAdmin, function(req, res, next){
 	Operario.find(function(err, operarios){
 		if(err){ 

@@ -35,7 +35,7 @@ router.get('/muestra/:id/examenes', login.checkLaboratorista, function(req, res,
 
 
 //Muestra todos los examenes de un paciente especifico
-router.get('/pacientes/:id/examenes', login.checkPaciente, function(req, res, next){
+router.get('/pacientes/:id/examenes', login.checkAdmin, function(req, res, next){
 	Examen.find({paciente:req.params.id}, function(err, examenes){
 		if (err) {
 			return next(err);
@@ -69,6 +69,7 @@ router.post('/examen', login.checkOperario,function(req, res, next){
 	});
 });
 
+/*
 router.put('/examen/:id', login.checkOperario,function(req, res){
 	Examen.findById(req.params.id, function(err, examen){
 		//examen.paciente = req.body.paciente;
@@ -83,7 +84,9 @@ router.put('/examen/:id', login.checkOperario,function(req, res){
 		});
 	});
 });
+*/
 
+/*
 router.delete('/examen/:id', login.checkOperario,function(req, res){
 	Examen.findByIdAndRemove(req.params.id, function(err){
 		if(err){
@@ -92,3 +95,4 @@ router.delete('/examen/:id', login.checkOperario,function(req, res){
 		res.json({message: 'El examen se ha eliminado'});
 	});
 });
+*/

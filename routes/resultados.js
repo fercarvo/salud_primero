@@ -63,6 +63,7 @@ router.post('/resultado', login.checkLaboratorista, function(req, res, next){
 
 });
 
+/*
 router.put('/resultados/:id', login.checkLaboratorista, function(req, res){
 	Resultado.findById(req.params.id, function(err, resultado){
 		resultado.parametro = req.body.parametro;
@@ -78,6 +79,7 @@ router.put('/resultados/:id', login.checkLaboratorista, function(req, res){
 		});
 	});
 });
+*/
 
 router.delete('/resultado/:id', login.checkLaboratorista, function(req, res){
 	Resultado.findByIdAndRemove(req.params.id, function(err){
@@ -87,6 +89,7 @@ router.delete('/resultado/:id', login.checkLaboratorista, function(req, res){
 		res.json({message: 'El resultado se ha eliminado'});
 	});
 });
+
 
 router.delete('/resultados', login.checkLaboratorista, function(req, res){
 	Resultado.remove({}, function(err){

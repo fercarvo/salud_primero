@@ -57,7 +57,6 @@ app.use(session({
   duration: 60 * 60 * 1000,
   activeDuration: 60 * 60 * 1000,
   httpOnly: true,
-  //secure: true,
   ephemeral: true
 }));
 
@@ -66,13 +65,23 @@ app.use(function(req, res, next) {
     console.log("esta logoneado");
     next();
   } else {
-    if (req.url == "/login" || req.url == "/" || req.url == "/styles/styles.css" || req.url == "/Imagenes/fondo.jpg" ) {
+    if (req.url == "/login" || 
+      req.url == "/" || 
+      req.url == "/styles/materialize.css" ||
+      req.url == "/styles/style.css" ||  
+      req.url == "/imagenes/sans.jpg" ||
+      req.url == "/imagenes/fondo.jpg" ||
+      req.url == "/imagenes/main1.jpg" ||
+      req.url == "/imagenes/main2.jpg" ||
+      req.url == "/imagenes/main3.jpg" ||
+      req.url == "/scripts/materialize.js" ||
+      req.url == "/scripts/init.js") {
       next();
     } else {
       console.log("no esta logoneado");
       //res.json({mensaje: 'no esta logoneado'});
-      //res.redirect("/"); esto si va
-      next();
+      res.redirect("/");
+      //next();
     }
   }
 });
