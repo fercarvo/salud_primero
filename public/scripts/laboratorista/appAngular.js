@@ -1,4 +1,4 @@
-angular.module('appMuestras',['ui.router', 'ngMaterial'])
+angular.module('appMuestras',['ui.router', 'ngTable', 'ngMaterial'])
     .config(function($stateProvider, $urlRouterProvider){
         $stateProvider
             .state('muestras',{

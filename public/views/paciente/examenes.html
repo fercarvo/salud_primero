@@ -67,13 +67,16 @@
           <td class="text-center">Descargar</td>
         </tr>
       </thead>
-            <tr ng-repeat="examen in examenes | filter:search">
-                <td class="text-center">{{examen.nombre}}</td>
-                <td class="text-center">{{examen._muestra.fecha | date: 'dd-MM-yyyy'}}</td>
-                <td class="text-center">{{examen._muestra.estado}}</td>
-                <td class="text-center"><span style="vertical-align:middle;" class="glyphicon glyphicon-eye-open" ng-click="cargarResultados(examen)"></span></td>
-                <td class="text-center"><span style="vertical-align:middle;" class="glyphicon glyphicon-download-alt" ng-click="descargarResultados(examen)"></span></td>
-            </tr>
+      <tbody>
+        <tr ng-repeat="examen in examenes | filter:search">
+          <td class="text-center">{{examen.nombre}}</td>
+          <td class="text-center">{{examen._muestra.fecha | date: 'dd-MM-yyyy'}}</td>
+          <td class="text-center">{{examen._muestra.estado}}</td>
+          <td class="text-center"><span style="vertical-align:middle;" class="glyphicon glyphicon-eye-open" ng-click="cargarResultados(examen)"></span></td>
+          <td class="text-center"><span style="vertical-align:middle;" class="glyphicon glyphicon-download-alt" ng-click="descargarResultados(examen)"></span></td>
+        </tr>
+      </tbody>
+            
   </table>  
   </div>
   
