@@ -111,9 +111,26 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
         $scope.laboratorios = {};
         $scope.meses = {}; //Todos los meses tal y como llegan de la BDD
         $scope.data = []; //laboratorios en formato [{key: nombreLaboratorio, y: numeroMuestras},...]
+        $scope.desde = {};
+        $scope.hasta = {};
+        $scope.months = [
+            {nombre: "Enero", numero: 1},
+            {nombre: "Febrero", numero: 2},
+            {nombre: "Marzo", numero: 3},
+            {nombre: "Abril", numero: 4},
+            {nombre: "Mayo", numero: 5},
+            {nombre: "Junio", numero: 6},
+            {nombre: "Julio", numero: 7},
+            {nombre: "Agosto", numero: 8},
+            {nombre: "Septiembre", numero: 9},
+            {nombre: "Octubre", numero: 10},
+            {nombre: "Noviembre", numero: 11},
+            {nombre: "Diciembre", numero: 12},
+        ];
 
         //funcion que carga los laboratorios de la BDD
-        $http.get("/laboratorios/muestras/2/"+"2016,01,01"+"/"+"2016,09,03")
+        /*
+        $http.get("/laboratorios/muestras/2/"+"2016,07,01"+"/"+"2016,10,03")
             .then(function (response) {
                 $scope.meses = response.data;
                 $http.get("/laboratorios")
@@ -125,6 +142,24 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
                 );
             }
         );
+        */
+
+        
+        $scope.cargarFecha = function(){
+            $http.get("/laboratorios/muestras/2/2016,"+$scope.desde+",01/2016,"+$scope.hasta+",01")
+                .then(function (response) {
+                    $scope.meses = response.data;
+                    $http.get("/laboratorios")
+                        .then(function (response) {
+                            $scope.laboratorios = response.data;
+                            $scope.cargarLaboratorios();
+                            $scope.cargarData();
+                        }
+                    );
+                }
+            );
+        }
+        
 
         //Funcion que carga todos los laboratorios a los datos
         $scope.cargarLaboratorios = function() {
@@ -134,7 +169,7 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ui.select', 'ngSanitize', 'n
         };
 
         $scope.cargarData = function(){
-            for (var i = 0 ; i < $scope.meses.length; i++) { //cada mes
+            for (var i = $scope.desde - 1 ; i <= $scope.hasta; i++) { //cada mes
                 for (var j = 0; j < $scope.meses[i].length; j++) { //cada laboratorio
                     $scope.data[j].values.push({
                         "x": i,

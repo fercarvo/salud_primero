@@ -106,7 +106,6 @@ router.put('/muestra/:id', login.checkOperario,function(req, res){
 router.delete('/muestra/:id', login.checkOperario, function(req, res, next){
 	Muestra.findOne({ _id: req.params.id}, function(err, muestra){
 		if (muestra) {
-
 			Paciente.update(
 		        {_id: {$in: muestra._paciente}}, 
 		        {$pull: {muestras: muestra._id}}, 
