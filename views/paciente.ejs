@@ -5,15 +5,6 @@
         <% include app/scripts %>
         
         <script type="text/javascript" src="scripts/patient/appAngular.js"></script>
-        <!--<script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>-->
-        <script src="https://cdn.rawgit.com/angular-ui/bower-ui-grid/master/ui-grid.min.js"></script>
-        
-        <link rel="stylesheet" href="https://cdn.rawgit.com/angular-ui/bower-ui-grid/master/ui-grid.min.css" type="text/css">
-
-        
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
         <link rel="stylesheet" href="https://cdn.rawgit.com/esvit/ng-table/1.0.0/dist/ng-table.min.css">
         <script src="https://cdn.rawgit.com/esvit/ng-table/1.0.0/dist/ng-table.js"></script>
@@ -26,7 +17,7 @@
     <body ng-app="appPatient">
         <div id="errorLogin" class="alert alert-danger collapse" role="alert"></div>
         <header class="container"  ng-controller="ctrlDatos">
-          <% include user/sidePaciente %>
+          <% include side/sidePaciente %>
         </header>
         <main>
             <% include app/header %>
@@ -40,7 +31,7 @@
         </footer>
         <!--  Scripts-->
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="scripts/materialize.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.js"></script>
         <script src="scripts/init.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         </script>

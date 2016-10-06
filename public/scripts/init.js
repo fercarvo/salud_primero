@@ -1,3 +1,4 @@
+//Funcion que activa el collapsable del menu cuando cambia de tamaño
 (function($){
   $(function(){
 
