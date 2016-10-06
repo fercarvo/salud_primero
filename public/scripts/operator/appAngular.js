@@ -2,26 +2,29 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ngMaterial'])
 	.config(function($stateProvider, $urlRouterProvider){
 		$stateProvider
 			.state('pacientes',{
-				url: '/pacientes',
+				//url: '/pacientes',
 				templateUrl: 'views/operario/pacientes.html',
 				controller:'controllerPacientes'
 			})
 			.state('muestras',{
-				url: '/muestras',
+				//url: '/muestras',
 				templateUrl: 'views/operario/muestras.html',
                 controller:'controllerMuestras'
 			})
             .state('reportesMensuales',{
-                url: '/reportesMensuales',
+                //url: '/reportesMensuales',
                 templateUrl: 'views/operario/muestras-mensuales.html',
                 controller:'controllerReportesMensuales'
             })
             .state('reportesTotales',{
-                url: '/reportesTotales',
+                //url: '/reportesTotales',
                 templateUrl: 'views/operario/muestras-totales.html',
                 controller:'controllerReportesTotales'
             });
-		$urlRouterProvider.otherwise('pacientes');
+		$urlRouterProvider.otherwise(function($injector) {
+            var $state = $injector.get('$state');
+            $state.go('pacientes');
+        });
 	})
 
 	.controller('controllerPacientes', function($scope, $state, $http){
@@ -328,19 +331,15 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ngMaterial'])
 
         //Se crea una muestra
         $scope.agregarMuestra = function(muestra) {
-            //console.log($scope.nuevo_muestra);
-
             $http.post("/muestra", {
                 tipo: $scope.nuevo_muestra.tipo.name,
                 paciente: $scope.nuevo_muestra.paciente._id,
                 laboratorio: $scope.nuevo_muestra.laboratorio._id,
                 centro: $scope.nuevo_muestra.centro._id
-
             }).success(function(response){
-
+                $scope.muestras.push(response);
                 //Se recorren todos los examenes y se crea cada uno
                 angular.forEach($scope.examenes, function(obj){
-
                     //Metodo que crea cada examen
                     $http.post("/examen", {
                         muestra: response._id,
@@ -349,13 +348,14 @@ angular.module('appOperator',['ui.router', 'nvd3', 'ngMaterial'])
                         Materialize.toast("se creo examen de: " + response2.nombre, 3000, 'rounded teal');
                     } );
                 });
-
-                $scope.muestras.push(response);
+                console.log(response);
+                
                 Materialize.toast("Se Creó la muestra: " + response.cod_barras, 5000, 'rounded teal');
                 $scope.nuevo_muestra = {};
+                $scope.apply();
 
             });
-            $state.reload();
+            //$state.reload();
         };
 
         $scope.eliminarMuestra = function ( muestra ) {

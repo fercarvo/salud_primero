@@ -2,16 +2,20 @@ angular.module('appMuestras',['ui.router', 'ngTable', 'ngMaterial'])
     .config(function($stateProvider, $urlRouterProvider){
         $stateProvider
             .state('muestras',{
-                url: '/muestras',
+                //url: '/muestras',
                 templateUrl: 'views/laboratorista/muestras.html',
                 controller: 'controllerMuestras'
             })
             .state('examenes',{
-                url: '/examenes',
+                //url: '/examenes',
                 templateUrl: 'views/laboratorista/examenes.html',
                 controller: 'controllerExamenes'
             })
-        $urlRouterProvider.otherwise('muestras');
+
+        $urlRouterProvider.otherwise(function($injector) {
+            var $state = $injector.get('$state');
+            $state.go('muestras');
+        });
     })
 
     .factory('comun', function($http){

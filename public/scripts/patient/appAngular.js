@@ -4,22 +4,25 @@ angular.module('appPatient', ['ui.router', 'ngTable'])
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('centros', {
-                url: '/centros',
+                //url: '/centros',
                 templateUrl: 'views/paciente/centros.html',
                 controller: 'ctrlCentros'
             })
             .state('datos', {
-                url: '/datos',
+                //url: '/datos',
                 templateUrl: 'views/paciente/datos.html',
                 controller: 'ctrlDatos'
             })
             .state('examenes', {
-                url: '/examenes',
+                //url: '/examenes',
                 templateUrl: 'views/paciente/examenes.html',
                 controller: 'ctrlExamenes'
             });
 
-        $urlRouterProvider.otherwise('centros');
+        $urlRouterProvider.otherwise(function($injector) {
+            var $state = $injector.get('$state');
+            $state.go('centros');
+        });
     })
     .factory('comun', function($http) {
         var comun = {};
